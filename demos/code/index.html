@@ -15,10 +15,61 @@
   <script src="../../lua_compressed.js"></script>
   <script src="../../dart_compressed.js"></script>
   <script src="code.js"></script>
+  <script>
+    Blockly.Blocks['import_turtle'] = {
+      init: function() {
+        this.appendDummyInput().appendField("import turtle");
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(315);
+        this.setTooltip("");
+        this.setHelpUrl("");
+      }
+    };
+  
+    Blockly.Python['import_turtle'] = function(block) {
+      var code = 'import turtle\n';
+      return code;
+    };
+  
+    function copyToClipboard() {
+      var tempInput = document.createElement("textarea");
+      generatedPython = Blockly.Python.workspaceToCode(Code.workspace);
+      tempInput.value = generatedPython;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand("copy");
+      document.body.removeChild(tempInput);
+      alert("Copied the text:\n" + generatedPython);
+    }
+    
+    function saveToFile() {
+      generatedPython = Blockly.Python.workspaceToCode(Code.workspace);
+      var textFileAsBlob = new Blob([ generatedPython ], { type: 'text/plain' })
+      var fileNameToSaveAs = prompt("Enter a file name for your Python file","my_python_program") + ".py";
+      var downloadLink = document.createElement("a");
+      downloadLink.download = fileNameToSaveAs;
+      downloadLink.innerHTML = "Download File";
+      if (window.webkitURL != null) {
+        // Chrome allows the link to be clicked without actually adding it to the DOM.
+        downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+      } else {
+        // Firefox requires the link to be added to the DOM before it can be clicked.
+        downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+        downloadLink.onclick = destroyClickedElement;
+        downloadLink.style.display = "none";
+        document.body.appendChild(downloadLink);
+      }
+      downloadLink.click();
+      if (downloadLink.parentElement!=null){
+        document.body.removeChild(downloadLink);
+      }
+    }
+  </script>
 </head>
 <body>
   <table width="100%" height="100%">
-    <tr>
+    <tr style="display: none;">
       <td>
         <h1><a href="https://developers.google.com/blockly/">Blockly</a>&rlm; &gt;
           <a href="../index.html">Demos</a>&rlm; &gt;
@@ -35,30 +86,36 @@
           <tr id="tabRow" height="1em">
             <td id="tab_blocks" class="tabon">...</td>
             <td class="tabmin tab_collapse">&nbsp;</td>
-            <td id="tab_javascript" class="taboff tab_collapse">JavaScript</td>
-            <td class="tabmin tab_collapse">&nbsp;</td>
+            <td style="display: none;" id="tab_javascript" class="taboff tab_collapse">JavaScript</td>
+            <td style="display: none;" class="tabmin tab_collapse">&nbsp;</td>
             <td id="tab_python" class="taboff tab_collapse">Python</td>
             <td class="tabmin tab_collapse">&nbsp;</td>
-            <td id="tab_php" class="taboff tab_collapse">PHP</td>
-            <td class="tabmin tab_collapse">&nbsp;</td>
-            <td id="tab_lua" class="taboff tab_collapse">Lua</td>
-            <td class="tabmin tab_collapse">&nbsp;</td>
-            <td id="tab_dart" class="taboff tab_collapse">Dart</td>
-            <td class="tabmin tab_collapse">&nbsp;</td>
-            <td id="tab_xml" class="taboff tab_collapse">XML</td>
+            <td style="display: none;" id="tab_php" class="taboff tab_collapse">PHP</td>
+            <td style="display: none;" class="tabmin tab_collapse">&nbsp;</td>
+            <td style="display: none;" id="tab_lua" class="taboff tab_collapse">Lua</td>
+            <td style="display: none;" class="tabmin tab_collapse">&nbsp;</td>
+            <td style="display: none;" id="tab_dart" class="taboff tab_collapse">Dart</td>
+            <td style="display: none;" class="tabmin tab_collapse">&nbsp;</td>
+            <td style="display: none;" id="tab_xml" class="taboff tab_collapse">XML</td>
             <td class="tabmin">&nbsp;</td>
             <td id="tab_code" class="taboff">
               <select id="code_menu"></select>
             </td>
             <td class="tabmax">
-              <button id="trashButton" class="notext" title="...">
+              <button style="display: none;" id="trashButton" class="notext" title="...">
                 <img src='../../media/1x1.gif' class="trash icon21">
               </button>
-              <button id="linkButton" class="notext" title="...">
+              <button style="display: none;" id="linkButton" class="notext" title="...">
                 <img src='../../media/1x1.gif' class="link icon21">
               </button>
-              <button id="runButton" class="notext primary" title="...">
+              <button style="display: none;" id="runButton" class="notext primary" title="...">
                 <img src='../../media/1x1.gif' class="run icon21">
+              </button>
+              <button onclick="copyToClipboard()">
+                Copy to clipboard
+              </button>
+              <button onclick="saveToFile()">
+                Save to file
               </button>
             </td>
           </tr>
@@ -387,6 +444,7 @@
     <sep></sep>
     <category name="%{BKY_CATVARIABLES}" colour="%{BKY_VARIABLES_HUE}" custom="VARIABLE"></category>
     <category name="%{BKY_CATFUNCTIONS}" colour="%{BKY_PROCEDURES_HUE}" custom="PROCEDURE"></category>
+    <category name="Turtle" colour="black" custom="TURTLE"></category>
   </xml>
 
 </body>

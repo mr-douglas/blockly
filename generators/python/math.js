@@ -147,9 +147,13 @@ Blockly.Python['math_constant'] = function(block) {
                      Blockly.Python.ORDER_MULTIPLICATIVE],
     'SQRT2': ['math.sqrt(2)', Blockly.Python.ORDER_MEMBER],
     'SQRT1_2': ['math.sqrt(1.0 / 2)', Blockly.Python.ORDER_MEMBER],
+    'SQRT1_3': ['math.sqrt(1.0 / 3)', Blockly.Python.ORDER_MEMBER],
     'INFINITY': ['float(\'inf\')', Blockly.Python.ORDER_ATOMIC]
   };
   var constant = block.getFieldValue('CONSTANT');
+  if (constant != 'INFINITY') {
+    Blockly.Python.definitions_['import_math'] = 'import math';
+  }
   if (constant != 'INFINITY') {
     Blockly.Python.definitions_['import_math'] = 'import math';
   }

@@ -156,6 +156,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
           ["\u03c6", "GOLDEN_RATIO"],
           ["sqrt(2)", "SQRT2"],
           ["sqrt(\u00bd)", "SQRT1_2"],
+          ["sqrt(\u2153)", "SQRT1_3"],
           ["\u221e", "INFINITY"]
         ]
       }
