@@ -108,13 +108,28 @@ Blockly.Python['math_single'] = function(block) {
       code = 'math.floor(' + arg + ')';
       break;
     case 'SIN':
-      code = 'math.sin(' + arg + ' / 180.0 * math.pi)';
+      if (block.getFieldValue('ANGLE_MEASURE')=='DEGREES'){
+        code = 'math.sin(' + arg + ' / 180.0 * math.pi)';
+      }
+      else {
+        code = 'math.sin(' + arg + ')'; 
+      }        
       break;
     case 'COS':
-      code = 'math.cos(' + arg + ' / 180.0 * math.pi)';
+      if (block.getFieldValue('ANGLE_MEASURE')=='DEGREES'){
+        code = 'math.cos(' + arg + ' / 180.0 * math.pi)';
+      }
+      else {
+        code = 'math.cos(' + arg + ')'; 
+      }
       break;
     case 'TAN':
-      code = 'math.tan(' + arg + ' / 180.0 * math.pi)';
+      if (block.getFieldValue('ANGLE_MEASURE')=='DEGREES'){
+        code = 'math.tan(' + arg + ' / 180.0 * math.pi)';
+      }
+      else {
+        code = 'math.tan(' + arg + ')';
+      }
       break;
   }
   if (code) {
@@ -124,13 +139,28 @@ Blockly.Python['math_single'] = function(block) {
   // wrapping the code.
   switch (operator) {
     case 'ASIN':
-      code = 'math.asin(' + arg + ') / math.pi * 180';
+      if (block.getFieldValue('ANGLE_MEASURE')=='DEGREES'){
+        code = 'math.asin(' + arg + ') / math.pi * 180';
+      }
+      else {
+        code = 'math.asin(' + arg + ')';
+      }
       break;
     case 'ACOS':
-      code = 'math.acos(' + arg + ') / math.pi * 180';
+      if (block.getFieldValue('ANGLE_MEASURE')=='DEGREES'){
+        code = 'math.acos(' + arg + ') / math.pi * 180';
+      }
+      else {
+        code = 'math.acos(' + arg + ')';
+      }
       break;
     case 'ATAN':
-      code = 'math.atan(' + arg + ') / math.pi * 180';
+      if (block.getFieldValue('ANGLE_MEASURE')=='DEGREES'){
+        code = 'math.atan(' + arg + ') / math.pi * 180';
+      }
+      else {
+        code = 'math.atan(' + arg + ')';
+      }
       break;
     default:
       throw Error('Unknown math operator: ' + operator);
@@ -240,6 +270,7 @@ Blockly.Python['math_change'] = function(block) {
 Blockly.Python['math_round'] = Blockly.Python['math_single'];
 // Trigonometry functions have a single operand.
 Blockly.Python['math_trig'] = Blockly.Python['math_single'];
+Blockly.Python['math_inv_trig'] = Blockly.Python['math_single'];
 
 Blockly.Python['math_on_list'] = function(block) {
   // Math functions for lists.

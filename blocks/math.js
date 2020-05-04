@@ -113,10 +113,10 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
     "extensions": ["math_op_tooltip"]
   },
 
-  // Block for trigonometry operators.
+  // Block for trigonometric functions.
   {
     "type": "math_trig",
-    "message0": "%1 %2",
+    "message0": "%1 ( %2 %3 )",
     "args0": [
       {
         "type": "field_dropdown",
@@ -124,7 +124,38 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
         "options": [
           ["%{BKY_MATH_TRIG_SIN}", "SIN"],
           ["%{BKY_MATH_TRIG_COS}", "COS"],
-          ["%{BKY_MATH_TRIG_TAN}", "TAN"],
+          ["%{BKY_MATH_TRIG_TAN}", "TAN"]
+        ]
+      },
+      {
+        "type": "input_value",
+        "name": "NUM",
+        "check": "Number"
+      },
+      {
+        "type": "field_dropdown",
+        "name": "ANGLE_MEASURE",
+        "options": [
+          ["\u00B0", "DEGREES"],
+          ["radians", "RADIANS"]
+        ]
+      }
+    ],
+    "output": "Number",
+    "style": "math_blocks",
+    "helpUrl": "%{BKY_MATH_TRIG_HELPURL}",
+    "extensions": ["math_op_tooltip"]
+  },
+
+  // Block for inverse trigonometric functions.
+  {
+    "type": "math_inv_trig",
+    "message0": "%1 ( %2 ) in %3",
+    "args0": [
+      {
+        "type": "field_dropdown",
+        "name": "OP",
+        "options": [
           ["%{BKY_MATH_TRIG_ASIN}", "ASIN"],
           ["%{BKY_MATH_TRIG_ACOS}", "ACOS"],
           ["%{BKY_MATH_TRIG_ATAN}", "ATAN"]
@@ -134,6 +165,14 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
         "type": "input_value",
         "name": "NUM",
         "check": "Number"
+      },
+      {
+        "type": "field_dropdown",
+        "name": "ANGLE_MEASURE",
+        "options": [
+          ["\u00B0", "DEGREES"],
+          ["radians", "RADIANS"]
+        ]
       }
     ],
     "output": "Number",
