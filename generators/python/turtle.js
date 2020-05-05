@@ -83,6 +83,6 @@ Blockly.Python['turtle_pen_colour'] = function(block) {
 Blockly.Python['turtle_fill_colour'] = function(block) {
   var value_fill_colour = Blockly.Python.valueToCode(block, 'fill_colour', Blockly.Python.ORDER_ATOMIC);
   Blockly.Python.definitions_['import_turtle'] = 'import turtle';
-  var code = 'turtle.fillcolor(' + value_pen_colour + ')\n';
+  var code = 'turtle.fillcolor(' + value_fill_colour + ')\n';
   return code;
 };
