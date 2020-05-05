@@ -76,7 +76,8 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
       {
         "type": "field_angle",
         "name": "ANGLE",
-        "value": 0
+        "value": 0,
+        "round": 1
       }
     ],
     "previousStatement": null,
@@ -93,7 +94,8 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
         "type": "field_angle",
         "name": "ANGLE",
         "value": 0,
-        "clockwise": true
+        "clockwise": true,
+        "round": 1
       }
     ],
     "previousStatement": null,
@@ -158,5 +160,170 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
     "colour": 20,
     "tooltip": "",
     "helpUrl": ""
-  }
+  },
+  {
+    "type": "turtle_begin_fill",
+    "message0": "begin fill",
+    "previousStatement": null,
+    "nextStatement": null,
+    "colour": 20,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "turtle_end_fill",
+    "message0": "end fill",
+    "previousStatement": null,
+    "nextStatement": null,
+    "colour": 20,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "turtle_goto",
+    "message0": "move turtle to coordinate ( %1 , %2 )",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "X",
+        "check": "Number"
+      },
+      {
+        "type": "input_value",
+        "name": "Y",
+        "check": "Number"
+      }
+    ],
+    "previousStatement": null,
+    "nextStatement": null,
+    "colour": 20,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "turtle_set_speed",
+    "message0": "set turtle speed to %1",
+    "args0": [
+      {
+        "type": "field_number",
+        "name": "SPEED",
+        "value": 0,
+        "min": 0,
+        "max": 10,
+        "precision": 1
+      }
+    ],
+    "previousStatement": null,
+    "nextStatement": null,
+    "colour": 20,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "turtle_set_pen_size",
+    "message0": "set turtle's pen width to %1",
+    "args0": [
+      {
+        "type": "field_number",
+        "name": "PEN_SIZE",
+        "value": 1,
+        "min": 0
+      }
+    ],
+    "previousStatement": null,
+    "nextStatement": null,
+    "colour": 20,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "turtle_set_direction_four",
+    "message0": "turn turtle to point %1",
+    "args0": [
+      {
+        "type": "field_dropdown",
+        "name": "DIRECTION",
+        "options": [
+          [
+            "right",
+            "RIGHT"
+          ],
+          [
+            "up",
+            "UP"
+          ],
+          [
+            "left",
+            "LEFT"
+          ],
+          [
+            "down",
+            "DOWN"
+          ]
+        ]
+      }
+    ],
+    "previousStatement": null,
+    "nextStatement": null,
+    "colour": 20,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "turtle_set_direction_angle",
+    "message0": "turn turtle to point in direction %1",
+    "args0": [
+      {
+        "type": "field_angle",
+        "name": "DIRECTION",
+        "angle": 0,
+        "round": 1
+      }
+    ],
+    "previousStatement": null,
+    "nextStatement": null,
+    "colour": 20,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "turtle_set_direction",
+    "message0": "turn turtle to point in direction %1",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "DIRECTION",
+        "check": "Number"
+      }
+    ],
+    "previousStatement": null,
+    "nextStatement": null,
+    "colour": 20,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "turtle_get_coord",
+    "message0": "turtle's %1 coordinate",
+    "args0": [
+      {
+        "type": "field_dropdown",
+        "name": "X_OR_Y",
+        "options": [
+          [
+            "x",
+            "X"
+          ],
+          [
+            "y",
+            "Y"
+          ]
+        ]
+      }
+    ],
+    "output": "Number",
+    "colour": 20,
+    "tooltip": "",
+    "helpUrl": ""
+}
 ]);  // END JSON EXTRACT (Do not delete this comment.)

@@ -7,6 +7,7 @@
 
     <script src="generators/python.js"></script>
     <script src="generators/python/colour.js"></script>
+    <script src="generators/python/custom_code.js"></script>
     <script src="generators/python/lists.js"></script>
     <script src="generators/python/logic.js"></script>
     <script src="generators/python/loops.js"></script>
@@ -16,15 +17,17 @@
     <script src="generators/python/turtle.js"></script>
     <script src="generators/python/variables.js"></script>
     <script src="generators/python/variables_dynamic.js"></script>
+    <script src="blocks/colour.js"></script>
+    <script src="blocks/custom_code.js"></script>
+    <script src="blocks/lists.js"></script>
     <script src="blocks/logic.js"></script>
     <script src="blocks/loops.js"></script>
     <script src="blocks/math.js"></script>
-    <script src="blocks/text.js"></script>
-    <script src="blocks/lists.js"></script>
-    <script src="blocks/colour.js"></script>
-    <script src="blocks/variables.js"></script>
     <script src="blocks/procedures.js"></script>
+    <script src="blocks/text.js"></script>
     <script src="blocks/turtle.js"></script>
+    <script src="blocks/variables.js"></script>
+    <script src="blocks/variables_dynamic.js"></script>
     <script src="msg/js/en.js"></script>
     <script>
       Blockly.HSV_SATURATION = 0.9;
@@ -199,9 +202,16 @@
         <block type="turtle_turn"><value name="ANGLE"><shadow type="math_number"><field name="NUM">45</field></shadow></value></block>
         <block type="turtle_turn_left"></block>
         <block type="turtle_turn_right"></block>
+        <block type="turtle_goto"><value name="X"><shadow type="math_number"><field name="NUM">0</field></shadow></value><value name="Y"><shadow type="math_number"><field name="NUM">0</field></shadow></value></block>
+        <block type="turtle_set_speed"></block>
         <block type="turtle_pen_up_down"></block>
         <block type="turtle_pen_colour"></block>
         <block type="turtle_fill_colour"></block>
+        <block type="turtle_set_pen_size"></block>
+        <block type="turtle_set_direction_four"></block>
+        <block type="turtle_set_direction_angle"></block>
+        <block type="turtle_set_direction"></block>
+        <block type="turtle_get_coord"></block>
         <block type="colour_picker"></block>
         <block type="colour_random"></block>
         <block type="colour_rgb"><value name="RED"><shadow type="math_number"><field name="NUM">100</field></shadow></value><value name="GREEN"><shadow type="math_number"><field name="NUM">50</field></shadow></value><value name="BLUE"><shadow type="math_number"><field name="NUM">0</field></shadow></value></block>
@@ -210,8 +220,12 @@
       <category colour='90' name="EV3" disabled="true">
         <label text="Coming Soon!"></label>
       </category>
-      <category colour='270' name="Raspberry Pi" disabled="true">
+      <category colour='270' name="Raspberry Pi">
         <label text="Coming Soon!"></label>
+      </category>
+      <sep></sep>
+      <category colour='black' name="Insert Your Own Code">
+        <block type="insert_user_code"></block>
       </category>
     </xml>
     <div id="pythonContainer">

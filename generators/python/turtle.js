@@ -86,3 +86,86 @@ Blockly.Python['turtle_fill_colour'] = function(block) {
   var code = 'turtle.fillcolor(' + value_fill_colour + ')\n';
   return code;
 };
+
+Blockly.Python['turtle_begin_fill'] = function(block) {
+  Blockly.Python.definitions_['import_turtle'] = 'import turtle';
+  var code = 'turtle.begin_fill()\n';
+  return code;
+};
+
+Blockly.Python['turtle_end_fill'] = function(block) {
+  Blockly.Python.definitions_['import_turtle'] = 'import turtle';
+  var code = 'turtle.end_fill()\n';
+  return code;
+};
+
+Blockly.Python['turtle_goto'] = function(block) {
+  var value_x = Blockly.Python.valueToCode(block, 'X', Blockly.Python.ORDER_ATOMIC);
+  var value_y = Blockly.Python.valueToCode(block, 'Y', Blockly.Python.ORDER_ATOMIC);  
+  Blockly.Python.definitions_['import_turtle'] = 'import turtle';
+  var code = 'turtle.goto(' + value_x + ',' + value_y + ')\n';
+  return code;
+};
+
+Blockly.Python['turtle_set_speed'] = function(block) {
+  var number_speed = block.getFieldValue('SPEED');  
+  Blockly.Python.definitions_['import_turtle'] = 'import turtle';
+  var code = 'turtle.speed(' + number_speed + ')\n';
+  return code;
+};
+
+Blockly.Python['turtle_set_pen_size'] = function(block) {
+  var number_pen_size = block.getFieldValue('PEN_SIZE');
+  Blockly.Python.definitions_['import_turtle'] = 'import turtle';
+  var code = 'turtle.pensize(' + number_pen_size + ')\n';
+  return code;
+};
+
+Blockly.Python['turtle_set_direction_four'] = function(block) {
+  var dropdown_direction = block.getFieldValue('DIRECTION');
+  Blockly.Python.definitions_['import_turtle'] = 'import turtle';
+  var new_heading = 0;
+  switch (dropdown_direction){
+    case 'RIGHT':
+      new_heading = 0;
+      break;
+    case 'UP':
+      new_heading = 90;
+      break;
+    case 'LEFT':
+      new_heading = 180;
+      break;
+    case 'DOWN':
+      new_heading = 270;
+      break;
+    default:
+      throw Error('Unknown turtle movement operator: ' + operator);  
+  }
+  var code = "turtle.setheading(" + new_heading + ")\n";
+  return code;
+};
+
+Blockly.Python['turtle_set_direction_angle'] = function(block) {
+  var angle_direction = block.getFieldValue('DIRECTION');
+  Blockly.Python.definitions_['import_turtle'] = 'import turtle';
+  var code = "turtle.setheading(" + angle_direction + ")\n";
+  return code;
+};
+
+Blockly.Python['turtle_set_direction'] = function(block) {
+  var value_direction = Blockly.Python.valueToCode(block, 'DIRECTION', Blockly.Python.ORDER_ATOMIC);
+  Blockly.Python.definitions_['import_turtle'] = 'import turtle';
+  var code = "turtle.setheading(" + value_direction + ")\n";
+  return code;
+};
+
+Blockly.Python['turtle_get_coord'] = function(block) {
+  var dropdown_x_or_y = block.getFieldValue('X_OR_Y');
+  Blockly.Python.definitions_['import_turtle'] = 'import turtle';
+  var x_or_y = 0;
+  if (dropdown_x_or_y == 'Y'){
+    x_or_y = 1;
+  }
+  var code = 'turtle.position()[' + x_or_y +']';
+  return [code, Blockly.Python.ORDER_MEMBER];
+};
