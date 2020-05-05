@@ -109,7 +109,7 @@ Blockly.Python['math_single'] = function(block) {
       break;
     case 'SIN':
       if (block.getFieldValue('ANGLE_MEASURE')=='DEGREES'){
-        code = 'math.sin(' + arg + ' / 180.0 * math.pi)';
+        code = 'math.sin(math.radians(' + arg + '))';
       }
       else {
         code = 'math.sin(' + arg + ')'; 
@@ -117,7 +117,7 @@ Blockly.Python['math_single'] = function(block) {
       break;
     case 'COS':
       if (block.getFieldValue('ANGLE_MEASURE')=='DEGREES'){
-        code = 'math.cos(' + arg + ' / 180.0 * math.pi)';
+        code = 'math.cos(math.radians(' + arg + '))';
       }
       else {
         code = 'math.cos(' + arg + ')'; 
@@ -125,22 +125,15 @@ Blockly.Python['math_single'] = function(block) {
       break;
     case 'TAN':
       if (block.getFieldValue('ANGLE_MEASURE')=='DEGREES'){
-        code = 'math.tan(' + arg + ' / 180.0 * math.pi)';
+        code = 'math.tan(math.radians(' + arg + '))';
       }
       else {
         code = 'math.tan(' + arg + ')';
       }
       break;
-  }
-  if (code) {
-    return [code, Blockly.Python.ORDER_FUNCTION_CALL];
-  }
-  // Second, handle cases which generate values that may need parentheses
-  // wrapping the code.
-  switch (operator) {
     case 'ASIN':
       if (block.getFieldValue('ANGLE_MEASURE')=='DEGREES'){
-        code = 'math.asin(' + arg + ') / math.pi * 180';
+        code = 'math.degrees(math.asin(' + arg + '))';
       }
       else {
         code = 'math.asin(' + arg + ')';
@@ -148,7 +141,7 @@ Blockly.Python['math_single'] = function(block) {
       break;
     case 'ACOS':
       if (block.getFieldValue('ANGLE_MEASURE')=='DEGREES'){
-        code = 'math.acos(' + arg + ') / math.pi * 180';
+        code = 'math.degrees(math.acos(' + arg + '))';
       }
       else {
         code = 'math.acos(' + arg + ')';
@@ -156,7 +149,7 @@ Blockly.Python['math_single'] = function(block) {
       break;
     case 'ATAN':
       if (block.getFieldValue('ANGLE_MEASURE')=='DEGREES'){
-        code = 'math.atan(' + arg + ') / math.pi * 180';
+        code = 'math.degrees(math.atan(' + arg + '))';
       }
       else {
         code = 'math.atan(' + arg + ')';
@@ -165,7 +158,7 @@ Blockly.Python['math_single'] = function(block) {
     default:
       throw Error('Unknown math operator: ' + operator);
   }
-  return [code, Blockly.Python.ORDER_MULTIPLICATIVE];
+  return [code, Blockly.Python.ORDER_FUNCTION_CALL];
 };
 
 Blockly.Python['math_constant'] = function(block) {
