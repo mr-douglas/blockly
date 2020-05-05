@@ -60,3 +60,29 @@ Blockly.Python['turtle_turn_right'] = function(block) {
   var code = 'turtle.' + dir + "("+number_angle+")\n";
   return code;
 };
+
+Blockly.Python['turtle_pen_up_down'] = function(block) {
+  var dropdown_pen_state = block.getFieldValue('pen_state');
+  Blockly.Python.definitions_['import_turtle'] = 'import turtle';
+  if(dropdown_pen_state=="UP"){
+    var code = 'turtle.penup()\n';
+  }
+  else{
+    var code = 'turtle.pendown()\n'; 
+  }
+  return code;
+};
+
+Blockly.Python['turtle_pen_colour'] = function(block) {
+  var value_pen_colour = Blockly.Python.valueToCode(block, 'pen_colour', Blockly.Python.ORDER_ATOMIC);
+  Blockly.Python.definitions_['import_turtle'] = 'import turtle';
+  var code = 'turtle.pencolor(' + value_pen_colour + ')\n';
+  return code;
+};
+
+Blockly.Python['turtle_fill_colour'] = function(block) {
+  var value_fill_colour = Blockly.Python.valueToCode(block, 'fill_colour', Blockly.Python.ORDER_ATOMIC);
+  Blockly.Python.definitions_['import_turtle'] = 'import turtle';
+  var code = 'turtle.fillcolor(' + value_pen_colour + ')\n';
+  return code;
+};

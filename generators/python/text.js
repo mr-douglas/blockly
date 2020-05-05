@@ -259,6 +259,11 @@ Blockly.Python['text_prompt_ext'] = function(block) {
   var toNumber = block.getFieldValue('TYPE') == 'NUMBER';
   if (toNumber) {
     code = 'float(' + code + ')';
+  } else {
+    var toInteger = block.getFieldValue('TYPE') == 'INTEGER';
+    if (toInteger) {
+      code = 'int(' + code + ')';
+    }
   }
   return [code, Blockly.Python.ORDER_FUNCTION_CALL];
 };

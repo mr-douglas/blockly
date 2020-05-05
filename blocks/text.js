@@ -412,7 +412,8 @@ Blockly.Blocks['text_prompt_ext'] = {
   init: function() {
     var TYPES = [
       [Blockly.Msg['TEXT_PROMPT_TYPE_TEXT'], 'TEXT'],
-      [Blockly.Msg['TEXT_PROMPT_TYPE_NUMBER'], 'NUMBER']
+      [Blockly.Msg['TEXT_PROMPT_TYPE_NUMBER'], 'NUMBER'],
+      [Blockly.Msg['TEXT_PROMPT_TYPE_INTEGER'], 'INTEGER']
     ];
     this.setHelpUrl(Blockly.Msg['TEXT_PROMPT_HELPURL']);
     this.setStyle('text_blocks');

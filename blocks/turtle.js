@@ -101,5 +101,62 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
     "colour": 20,
     "tooltip": "",
     "helpUrl": ""
+  },
+  {
+    "type": "turtle_pen_up_down",
+    "message0": "pen %1",
+    "args0": [
+      {
+        "type": "field_dropdown",
+        "name": "pen_state",
+        "options": [
+          [
+            "up",
+            "UP"
+          ],
+          [
+            "down",
+            "DOWN"
+          ]
+        ]
+      }
+    ],
+    "previousStatement": null,
+    "nextStatement": null,
+    "colour": 20,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "turtle_pen_colour",
+    "message0": "set pen colour to %1",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "pen_colour",
+        "check": "Colour"
+      }
+    ],
+    "previousStatement": null,
+    "nextStatement": null,
+    "colour": 20,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "turtle_fill_colour",
+    "message0": "set fill colour to %1",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "fill_colour",
+        "check": "Colour"
+      }
+    ],
+    "previousStatement": null,
+    "nextStatement": null,
+    "colour": 20,
+    "tooltip": "",
+    "helpUrl": ""
   }
 ]);  // END JSON EXTRACT (Do not delete this comment.)
