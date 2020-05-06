@@ -8,7 +8,7 @@ Blockly.Python.addReservedWords('turtle');
 Blockly.Python['turtle_move'] = function(block) {
   var dropdown_direction = block.getFieldValue('DIRECTION');
   var dir = "";
-  var value_name = Blockly.Python.valueToCode(block, 'DISTANCE', Blockly.Python.ORDER_ATOMIC) || 0;
+  var value_distance = Blockly.Python.valueToCode(block, 'DISTANCE', Blockly.Python.ORDER_ATOMIC) || 0;
   Blockly.Python.definitions_['import_turtle'] = 'import turtle';
   switch (dropdown_direction) {
     case 'FORWARD':
@@ -20,14 +20,14 @@ Blockly.Python['turtle_move'] = function(block) {
     default:
       throw Error('Unknown turtle movement operator: ' + operator);
   }
-  var code = 'turtle.' + dir + "("+value_name+")\n";
+  var code = 'turtle.' + dir + "("+value_distance+")\n";
   return code;
 };
 
 Blockly.Python['turtle_turn'] = function(block) {
   var dropdown_direction = block.getFieldValue('DIRECTION');
   var dir = "";
-  var value_name = Blockly.Python.valueToCode(block, 'ANGLE', Blockly.Python.ORDER_ATOMIC) || 0;
+  var value_angle = Blockly.Python.valueToCode(block, 'ANGLE', Blockly.Python.ORDER_ATOMIC) || 0;
   Blockly.Python.definitions_['import_turtle'] = 'import turtle';
   switch (dropdown_direction) {
     case 'LEFT':
@@ -39,7 +39,7 @@ Blockly.Python['turtle_turn'] = function(block) {
     default:
       throw Error('Unknown turtle movement operator: ' + operator);
   }
-  var code = 'turtle.' + dir + "("+value_name+")\n";
+  var code = 'turtle.' + dir + "("+value_angle+")\n";
   return code;
 };
 
