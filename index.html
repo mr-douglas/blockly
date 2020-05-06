@@ -2,13 +2,14 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Generate Turtle Python Programs with Blockly</title>
-    <script src="blockly_uncompressed.js"></script>
+    <title>Generate Python Programs with Blockly</title>
+    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
     <!-- TODO: Make the next four local -->
     <link rel=stylesheet href="https://codemirror.net/lib/codemirror.css">
     <link rel=stylesheet href="https://codemirror.net/theme/erlang-dark.css">
     <script src="https://codemirror.net/lib/codemirror.js"></script>
     <script src="https://codemirror.net/mode/python/python.js"></script>
+    <script src="blockly_uncompressed.js"></script>
     <script src="generators/python.js"></script>
     <script src="generators/python/colour.js"></script>
     <script src="generators/python/custom_code.js"></script>
@@ -45,7 +46,7 @@
       function updatePython() {
         if (workspace!=null)
         {
-          //document.getElementById('pythonDiv').innerHTML = Blockly.Python.workspaceToCode(workspace);
+          //document.getElementById('python-div').innerHTML = Blockly.Python.workspaceToCode(workspace);
           codeMirrorEditor.setValue(Blockly.Python.workspaceToCode(workspace));
         }
       }
@@ -59,7 +60,8 @@
         tempInput.select();
         document.execCommand("copy");
         document.body.removeChild(tempInput);
-        alert("Copied the text:\n" + generatedPython);
+        document.getElementById("copied-alert").className = "alert";
+        window.setTimeout(function() {document.getElementById("copied-alert").className = "hidden";}, 2000);
       }
       
       function saveToFile() {
@@ -86,15 +88,19 @@
       }
     </script>
     <style>
-    
-      #pythonContainer
+      #blocklyDiv *, #python-container button, #copied-alert
+      {
+        font-family: 'Varela Round', Arial, sans-serif !important;
+      }
+      
+      #python-container
       {
         float: right;
         height: calc(100vh - 17px);
         width: 25vw;
       }
       
-      #pythonDiv
+      #python-div
       {
         height: calc(100% - 40px);
         background-color: #222;
@@ -108,10 +114,10 @@
         padding: 0px;
       }
       
-      #pythonContainer button
+      #python-container button
       {
         display: inline-block;
-        width: calc(25vw/2 - 4px);
+        width: calc(25vw/2 - 5px);
         height: 35px;
         margin-left: 2px;
       }
@@ -130,6 +136,48 @@
       .CodeMirror
       {
         height: calc(100vh - 55px);
+      }
+      
+      @keyframes alert {
+        0% {opacity: 0;}
+        10% {opacity: 1;}
+        60% {opacity: 1;}
+        100% {opacity: 0;}
+      }
+      
+      #copied-alert
+      {
+        position: absolute;
+        bottom: 30px;
+        right: 13px;
+        width: calc(25vw - 20px);
+        z-index: 99;
+        
+        padding-top: 5px;
+        padding-bottom: 5px;
+        
+        text-align: center;
+        font-weight: 900;
+        font-size: 14pt;
+        
+        color: #40c057;
+        background-color: #ebfbee;
+        border: solid 5px #40c057;
+        border-radius: 30px;
+      }
+      
+      .hidden
+      {
+        opacity: 0;
+        display: none;
+      }
+      
+      .alert
+      {
+        display: block;
+        animation-name: alert;
+        animation-duration: 2s;
+        animation-iteration-count: 1;
       }
     </style>
   </head>
@@ -251,22 +299,30 @@
         <block type="insert_user_code"></block>
       </category>
     </xml>
-    <div id="pythonContainer">
-      <textarea readonly id="pythonDiv">
+    <div id="python-container">
+      <textarea readonly id="python-div">
       </textarea>
       <div id="button-container">
         <button onclick="copyToClipboard()">Copy to clipboard</button> <button onclick="saveToFile()">Save to file</button>
       </div>
     </div>
+    <p id="copied-alert" class="hidden">Copied!</p>
     <div id="blocklyDiv"></div>
     <script>
-      workspace = Blockly.inject('blocklyDiv',{toolbox: document.getElementById('toolbox'),zoom:{controls: true,wheel: true,startScale: 1.0,maxScale: 3,minScale: 0.3,scaleSpeed: 1.025},grid: {spacing: 20, length: 3, colour: '#222', snap: false},trashcan: true,renderer:'thrasos'});
+      workspace = Blockly.inject('blocklyDiv',{
+                                               toolbox: document.getElementById('toolbox'),
+                                               zoom:{controls: true,wheel: true,startScale: 1.0,maxScale: 3,minScale: 0.3,scaleSpeed: 1.025},
+                                               grid: {spacing: 20, length: 3, colour: '#222', snap: false},
+                                               trashcan: true,
+                                               renderer:'thrasos'
+                                              }
+                                );
+      //workspace.setTheme(Blockly.Themes.Custom);
       
-      myTextArea = document.getElementById('pythonDiv')
+      pythonTextArea = document.getElementById('python-div')
       var codeMirrorEditor = CodeMirror(function(elt) {
-        myTextArea.parentNode.replaceChild(elt, document.getElementById('pythonDiv'));
+        pythonTextArea.parentNode.replaceChild(elt, document.getElementById('python-div'));
         }, {
-        //value: myTextArea.value});
           value: "print('Hello, World!')\n",
           mode: "python",
           theme: "erlang-dark",
@@ -276,7 +332,7 @@
       );
       
       workspace.addChangeListener(updatePython);
-      
+      updatePython();
     </script>
   </body>
 </html>
