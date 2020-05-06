@@ -42,6 +42,7 @@
       
       var workspace;
       var codeMirrorEditor;
+      var lastFileName = "my_python_program"
       
       function updatePython() {
         if (workspace!=null)
@@ -65,25 +66,29 @@
       }
       
       function saveToFile() {
-        generatedPython = Blockly.Python.workspaceToCode(workspace);
-        var textFileAsBlob = new Blob([ generatedPython ], { type: 'text/plain' })
-        var fileNameToSaveAs = prompt("Enter a file name for your Python file","my_python_program") + ".py";
-        var downloadLink = document.createElement("a");
-        downloadLink.download = fileNameToSaveAs;
-        downloadLink.innerHTML = "Download File";
-        if (window.webkitURL != null) {
-          // Chrome allows the link to be clicked without actually adding it to the DOM.
-          downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
-        } else {
-          // Firefox requires the link to be added to the DOM before it can be clicked.
-          downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
-          downloadLink.onclick = destroyClickedElement;
-          downloadLink.style.display = "none";
-          document.body.appendChild(downloadLink);
-        }
-        downloadLink.click();
-        if (downloadLink.parentElement!=null){
-          document.body.removeChild(downloadLink);
+        var fileNameToSaveAs = prompt("Enter a file name for your Python file", lastFileName);
+        if (fileNameToSaveAs){
+          lastFileName = fileNameToSaveAs
+          fileNameToSaveAs += ".py"
+          generatedPython = Blockly.Python.workspaceToCode(workspace);
+          var textFileAsBlob = new Blob([ generatedPython ], { type: 'text/plain' })
+          var downloadLink = document.createElement("a");
+          downloadLink.download = fileNameToSaveAs;
+          downloadLink.innerHTML = "Download File";
+          if (window.webkitURL != null) {
+            // Chrome allows the link to be clicked without actually adding it to the DOM.
+            downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+          } else {
+            // Firefox requires the link to be added to the DOM before it can be clicked.
+            downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+            downloadLink.onclick = destroyClickedElement;
+            downloadLink.style.display = "none";
+            document.body.appendChild(downloadLink);
+          }
+          downloadLink.click();
+          if (downloadLink.parentElement!=null){
+            document.body.removeChild(downloadLink);
+          }
         }
       }
     </script>
