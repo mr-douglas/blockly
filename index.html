@@ -4,7 +4,11 @@
     <meta charset="utf-8">
     <title>Generate Turtle Python Programs with Blockly</title>
     <script src="blockly_uncompressed.js"></script>
-
+    <!-- TODO: Make the next four local -->
+    <link rel=stylesheet href="https://codemirror.net/lib/codemirror.css">
+    <link rel=stylesheet href="https://codemirror.net/theme/erlang-dark.css">
+    <script src="https://codemirror.net/lib/codemirror.js"></script>
+    <script src="https://codemirror.net/mode/python/python.js"></script>
     <script src="generators/python.js"></script>
     <script src="generators/python/colour.js"></script>
     <script src="generators/python/custom_code.js"></script>
@@ -36,11 +40,13 @@
       Blockly.HSV_VALUE = 0.7;
       
       var workspace;
+      var codeMirrorEditor;
       
       function updatePython() {
         if (workspace!=null)
         {
-          document.getElementById('pythonDiv').innerHTML = Blockly.Python.workspaceToCode(workspace);
+          //document.getElementById('pythonDiv').innerHTML = Blockly.Python.workspaceToCode(workspace);
+          codeMirrorEditor.setValue(Blockly.Python.workspaceToCode(workspace));
         }
       }
       
@@ -114,6 +120,16 @@
       {
         height: calc(100vh - 17px);
         width: 75%;
+      }
+      
+      #button-container
+      {
+        padding-top: 3px;
+      }
+      
+      .CodeMirror
+      {
+        height: calc(100vh - 55px);
       }
     </style>
   </head>
@@ -238,14 +254,29 @@
     <div id="pythonContainer">
       <textarea readonly id="pythonDiv">
       </textarea>
-      <div>
+      <div id="button-container">
         <button onclick="copyToClipboard()">Copy to clipboard</button> <button onclick="saveToFile()">Save to file</button>
       </div>
     </div>
     <div id="blocklyDiv"></div>
     <script>
       workspace = Blockly.inject('blocklyDiv',{toolbox: document.getElementById('toolbox'),zoom:{controls: true,wheel: true,startScale: 1.0,maxScale: 3,minScale: 0.3,scaleSpeed: 1.025},grid: {spacing: 20, length: 3, colour: '#222', snap: false},trashcan: true,renderer:'thrasos'});
+      
+      myTextArea = document.getElementById('pythonDiv')
+      var codeMirrorEditor = CodeMirror(function(elt) {
+        myTextArea.parentNode.replaceChild(elt, document.getElementById('pythonDiv'));
+        }, {
+        //value: myTextArea.value});
+          value: "print('Hello, World!')\n",
+          mode: "python",
+          theme: "erlang-dark",
+          readOnly: true,
+          lineNumbers: true
+        }
+      );
+      
       workspace.addChangeListener(updatePython);
+      
     </script>
   </body>
 </html>
