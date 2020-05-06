@@ -9,6 +9,7 @@
     <link rel=stylesheet href="https://codemirror.net/theme/erlang-dark.css">
     <script src="https://codemirror.net/lib/codemirror.js"></script>
     <script src="https://codemirror.net/mode/python/python.js"></script>
+    <script src="https://kit.fontawesome.com/7943986573.js" crossorigin="anonymous"></script>
     <script src="blockly_uncompressed.js"></script>
     <script src="generators/python.js"></script>
     <script src="generators/python/colour.js"></script>
@@ -42,7 +43,8 @@
       
       var workspace;
       var codeMirrorEditor;
-      var lastFileName = "my_python_program"
+      var lastPythonFileName = "my_python_program"
+      var lastBlocklyFileName = "my_blockly_program"
       
       function updatePython() {
         if (workspace!=null)
@@ -65,13 +67,24 @@
         window.setTimeout(function() {document.getElementById("copied-alert").className = "hidden";}, 2000);
       }
       
-      function saveToFile() {
+      function saveToFile(contents, extension) {
+        var lastFileName = "";
+        if (extension=='.py'){
+            lastFileName = lastPythonFileName;
+          }
+          else if (extension=='.blockly'){
+            lastFileName = lastBlocklyFileName;
+          }
         var fileNameToSaveAs = prompt("Enter a file name for your Python file", lastFileName);
         if (fileNameToSaveAs){
-          lastFileName = fileNameToSaveAs
-          fileNameToSaveAs += ".py"
-          generatedPython = Blockly.Python.workspaceToCode(workspace);
-          var textFileAsBlob = new Blob([ generatedPython ], { type: 'text/plain' })
+          if (extension=='.py'){
+            lastPythonFileName = fileNameToSaveAs;
+          }
+          else if (extension=='.blockly'){
+            lastBlocklyFileName = fileNameToSaveAs;
+          }
+          fileNameToSaveAs += extension;
+          var textFileAsBlob = new Blob([ contents ], { type: 'text/plain' })
           var downloadLink = document.createElement("a");
           downloadLink.download = fileNameToSaveAs;
           downloadLink.innerHTML = "Download File";
@@ -93,7 +106,18 @@
       }
     </script>
     <style>
-      #python-container button, #copied-alert
+      :root {
+        --load-color: darkgoldenrod;
+        --save-color: indianred;
+        --copy-color: forestgreen;
+      }
+    
+      body
+      {
+        overflow: hidden;
+      }
+    
+      #python-container button, #copied-alert, a.my-button
       {
         font-family: 'Varela Round', Arial, sans-serif !important;
       }
@@ -101,13 +125,13 @@
       #python-container
       {
         float: right;
-        height: calc(100vh - 17px);
+        height: 100vh;
         width: 25vw;
       }
       
       #python-div
       {
-        height: calc(100% - 40px);
+        height: 100%;
         background-color: #222;
         color: lightgreen;      
         font-family: monospace;
@@ -119,56 +143,123 @@
         padding: 0px;
       }
       
-      #python-container button
-      {
-        display: inline-block;
-        width: calc(25vw/2 - 5px);
-        height: 35px;
-        margin-left: 2px;
-      }
-      
       #blocklyDiv
       {
         height: calc(100vh - 17px);
         width: 75%;
       }
       
-      #button-container
-      {
-        padding-top: 3px;
-      }
-      
       .CodeMirror
       {
-        height: calc(100vh - 55px);
+        height: calc(100vh - 15px);
       }
       
       @keyframes alert {
         0% {opacity: 0;}
-        10% {opacity: 1;}
+        1% {opacity: 1;}
         60% {opacity: 1;}
         100% {opacity: 0;}
       }
       
-      #copied-alert
+      a.my-button, #copied-alert
       {
         position: absolute;
-        bottom: 30px;
-        right: 13px;
-        width: calc(25vw - 20px);
         z-index: 99;
-        
-        padding-top: 5px;
-        padding-bottom: 5px;
-        
-        text-align: center;
-        font-weight: 900;
-        font-size: 14pt;
-        
-        color: #40c057;
-        background-color: #ebfbee;
-        border: solid 5px #40c057;
+        border-style: solid;
+        border-width: 5px;
         border-radius: 30px;
+        width: 33px;
+        height: 33px;
+        overflow: hidden;
+        transition: 0.3s;
+      }
+      
+      a.my-button
+      {
+        z-index: 99;
+      }
+      
+      a.my-button:hover, #copied-alert
+      {
+        width: 20vw;
+      }
+      
+      a.my-button > *, #copied-alert > *
+      {
+        color: white;
+        opacity: 0.7;
+      }
+      
+      a.my-button .icon, #copied-alert .icon
+      {
+        display: inline-block;
+        font-size: 16pt;
+        text-align: center;
+        width: 35px;
+        height: 35px;
+        padding-top: 3px;
+        border-radius: 33px;
+        border-width: 5px;
+        position: relative;
+        top: -2px;
+      }
+      
+      a.my-button .icon i, #copied-alert .icon i
+      {
+        position: relative;
+        top: 3px;
+      }
+      
+      a.my-button .text, #copied-alert .text
+      {
+        font-size: 14pt;
+      }
+      
+      #load-blocks-button, #save-blocks-button
+      {
+        right: calc(25vw + 10px);
+      }
+      
+      #save-python-button, #copy-python-button, #copied-alert
+      {
+        right: 10px;
+      }
+      
+      #save-python-button, #save-blocks-button
+      {
+        border-color: var(--save-color);
+        background-color: var(--save-color);
+      }
+      
+      #load-blocks-button
+      {
+        border-color: var(--load-color);
+        background-color: var(--load-color);
+        top: 10px;
+      }
+      
+      #save-blocks-button
+      {
+        top: 55px;
+      }
+      
+      #save-python-button
+      {
+        bottom: 10px;
+      }
+        
+      #copy-python-button, #copied-alert
+      {
+        border-color: var(--copy-color);
+        background-color: var(--copy-color);
+        bottom: 55px;
+      }
+      
+      #copied-alert
+      {
+        z-index: 100;
+        text-align: center;
+        margin: 0px;
       }
       
       .hidden
@@ -183,11 +274,6 @@
         animation-name: alert;
         animation-duration: 2s;
         animation-iteration-count: 1;
-      }
-      
-      .myLabelStyle>.blocklyFlyoutLabelText {
-        font-style: italic;
-        fill: green;
       }
     </style>
   </head>
@@ -312,13 +398,25 @@
     <div id="python-container">
       <textarea readonly id="python-div">
       </textarea>
-      <div id="button-container">
-        <button onclick="copyToClipboard()">Copy to clipboard</button> <button onclick="saveToFile()">Save to file</button>
-      </div>
     </div>
-    <p id="copied-alert" class="hidden">Copied!</p>
+    <p id="copied-alert" class="hidden"><span class="icon"><i class="fas fa-copy"></i></span><span class="text"> Copied!</span></p>
+    <a id="copy-python-button" class="my-button" onclick="copyToClipboard()"><span class="icon"><i class="fas fa-copy"></i></span><span class="text"> Copy Python to Clipboard</span></a>
+    <a id="save-python-button" class="my-button" onclick="saveToFile(Blockly.Python.workspaceToCode(workspace), '.py')"><span class="icon"><i class="fas fa-file-download"></i></span><span class="text"> Save Python Code</span></a>
+    <a id="load-blocks-button" class="my-button" onclick="document.getElementById('inputfile').click()"><span class="icon"><i class="fas fa-file-upload"></i></span><span class="text"> Load Blocks from File</span></a>
+    <a id="save-blocks-button" class="my-button" onclick="saveToFile(Blockly.Xml.domToPrettyText(Blockly.Xml.workspaceToDom(workspace)), '.blockly')"><span class="icon"><i class="fas fa-file-download"></i></span><span class="text"> Save Blocks to File</span></a>
+    <input type="file" name="inputfile" id="inputfile" style="display: none;">
+    
     <div id="blocklyDiv"></div>
     <script>
+      document.getElementById('inputfile').addEventListener('change', function() {
+                                                                                  var fr=new FileReader();
+                                                                                  fr.onload=function(){
+                                                                                                       Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(fr.result), workspace);
+                                                                                                      }
+                                                                                  fr.readAsText(this.files[0]);
+                                                                                 }
+                                                           );
+    
       workspace = Blockly.inject('blocklyDiv',{
                                                toolbox: document.getElementById('toolbox'),
                                                zoom:{controls: true,wheel: true,startScale: 1.0,maxScale: 3,minScale: 0.3,scaleSpeed: 1.025},
