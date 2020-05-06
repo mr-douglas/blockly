@@ -6,7 +6,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
     <!-- TODO: Make the next four local -->
     <link rel=stylesheet href="https://codemirror.net/lib/codemirror.css">
-    <link rel=stylesheet href="https://codemirror.net/theme/erlang-dark.css">
+    <link rel=stylesheet href="https://codemirror.net/theme/cobalt.css">
     <script src="https://codemirror.net/lib/codemirror.js"></script>
     <script src="https://codemirror.net/mode/python/python.js"></script>
     <script src="https://kit.fontawesome.com/7943986573.js" crossorigin="anonymous"></script>
@@ -151,7 +151,7 @@
       
       .CodeMirror
       {
-        height: calc(100vh - 15px);
+        height: calc(100vh - 17px);
       }
       
       @keyframes alert {
@@ -245,14 +245,14 @@
       
       #save-python-button
       {
-        bottom: 10px;
+        bottom: 12px;
       }
         
       #copy-python-button, #copied-alert
       {
         border-color: var(--copy-color);
         background-color: var(--copy-color);
-        bottom: 55px;
+        bottom: 57px;
       }
       
       #copied-alert
@@ -442,7 +442,7 @@
         }, {
           value: "print('Hello, World!')\n",
           mode: "python",
-          theme: "erlang-dark",
+          theme: "cobalt",
           readOnly: true,
           lineNumbers: true
         }
