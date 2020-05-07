@@ -4,11 +4,15 @@
     <meta charset="utf-8">
     <title>Generate Python Programs with Blockly</title>
     <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
-    <!-- TODO: Make the next four local -->
+
+    <!-- TODO: Make the next six local -->
     <link rel=stylesheet href="https://codemirror.net/lib/codemirror.css">
     <link rel=stylesheet href="https://codemirror.net/theme/cobalt.css">
     <script src="https://codemirror.net/lib/codemirror.js"></script>
     <script src="https://codemirror.net/mode/python/python.js"></script>
+    <script src="http://www.skulpt.org/js/skulpt.min.js" type="text/javascript"></script> 
+    <script src="http://www.skulpt.org/js/skulpt-stdlib.js" type="text/javascript"></script> 
+    
     <script src="https://kit.fontawesome.com/7943986573.js" crossorigin="anonymous"></script>
     <script src="blockly_uncompressed.js"></script>
     <script src="generators/python.js"></script>
@@ -38,6 +42,7 @@
     <script src="blocks/variables_dynamic.js"></script>
     <script src="msg/js/en.js"></script>
     <script>
+      //For Blockly
       Blockly.HSV_SATURATION = 0.9;
       Blockly.HSV_VALUE = 0.7;
       
@@ -45,11 +50,13 @@
       var codeMirrorEditor;
       var lastPythonFileName = "my_python_program"
       var lastBlocklyFileName = "my_blockly_program"
+      //For Skulpt
+      var requiredConsoleText = "";
       
+      //Blockly Functions
       function updatePython() {
         if (workspace!=null)
         {
-          //document.getElementById('python-div').innerHTML = Blockly.Python.workspaceToCode(workspace);
           codeMirrorEditor.setValue(Blockly.Python.workspaceToCode(workspace));
         }
       }
@@ -104,9 +111,68 @@
           }
         }
       }
+      
+      //Skulpt Functions
+      function outf(text) { 
+        var consoleTextArea = document.getElementById("skulpt-console"); 
+        consoleTextArea.value = consoleTextArea.value + text;
+        requiredConsoleText = consoleTextArea.value;
+      }
+      
+      function inputf() {
+        consoleTextArea = document.getElementById("skulpt-console")
+        consoleTextArea.readOnly = false;
+        requiredConsoleText = consoleTextArea.value;
+        var inputText = "This shouldn't appear!";
+        inputText = new Promise(
+                                  function (resolve, reject){
+                                                             document.getElementById("skulpt-console").addEventListener("keyup", 
+                                                                                                                                function consoleEnterListener(event){
+                                                                                                                                  if(event.keyCode == 13){
+                                                                                                                                    consoleTextArea = document.getElementById("skulpt-console")
+                                                                                                                                    consoleTextArea.removeEventListener("keyup", consoleEnterListener);
+                                                                                                                                    consoleTextArea.readOnly = true;
+                                                                                                                                    resolve(consoleTextArea.value.substring(requiredConsoleText.length,consoleTextArea.value.length));
+                                                                                                                                  }
+                                                                                                                                }
+                                                                                                                      );
+                                                            }
+                               );
+        return inputText;
+      }
+      
+      function builtinRead(x) {
+        if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
+          throw "File not found: '" + x + "'";
+        return Sk.builtinFiles["files"][x];
+      }
+
+      function runPython() { 
+        document.getElementById("skulpt-container").className = "";
+        document.getElementById("excluder").className = "";
+        var prog = Blockly.Python.workspaceToCode(workspace); 
+        var consoleTextArea = document.getElementById("skulpt-console");
+        consoleTextArea.value = "";
+        Sk.pre = "skulpt-console";
+        Sk.configure({inputfun: inputf,                                           
+                      output:outf,
+                      read:builtinRead}); 
+        (Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = 'skulpt-canvas';
+        var myPromise = Sk.misceval.asyncToPromise(function() {
+          return Sk.importMainWithBody("<stdin>", false, prog, true);
+        });
+        myPromise.then(function(mod) {
+          console.log('success');
+        },
+          function(err) {
+          console.log(err.toString());
+        });
+        consoleTextArea.focus();
+      }
     </script>
     <style>
       :root {
+        --run-color: forestgreen;
         --load-color: darkgoldenrod;
         --save-color: indianred;
         --copy-color: forestgreen;
@@ -216,7 +282,7 @@
         font-size: 14pt;
       }
       
-      #load-blocks-button, #save-blocks-button
+      #load-blocks-button, #save-blocks-button, #run-blocks-button
       {
         right: calc(25vw + 10px);
       }
@@ -232,16 +298,29 @@
         background-color: var(--save-color);
       }
       
+      #run-blocks-button
+      {
+        border-color: var(--run-color);
+        background-color: var(--run-color);
+        top: 10px;
+      }
+      
+      #run-blocks-button .icon i
+      {
+        top: 4px;
+        left: 1px;
+      }
+      
       #load-blocks-button
       {
         border-color: var(--load-color);
         background-color: var(--load-color);
-        top: 10px;
+        top: 55px;
       }
       
       #save-blocks-button
       {
-        top: 55px;
+        top: 100px;
       }
       
       #save-python-button
@@ -261,7 +340,7 @@
         z-index: 100;
         text-align: center;
         margin: 0px;
-        box-shadow: 0px  0px 15px 5px var(--copy-color);  
+        box-shadow: 0px  0px 3px 1px var(--copy-color);  
       }
       
       .hidden
@@ -276,6 +355,89 @@
         animation-name: alert;
         animation-duration: 2s;
         animation-iteration-count: 1;
+      }
+      
+      #excluder
+      {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 100vw;
+        height: 100vh;
+        background-color: black;
+        opacity: 0.5;
+        z-index: 101;
+        transition: 0.3s;
+      }
+      
+      #skulpt-container
+      {
+        position: absolute;
+        z-index: 102;
+        transition: 0.3s;
+        background-color: white;
+        width: 80vw;
+        left: 10vw;
+        height: 80vh;
+        top: 10vh;
+        border-radius: 30px;
+      }
+      
+      #skulpt-close-button
+      {
+        top: 10px;
+        right: 10px;
+        font-size: 43px;
+        color: var(--save-color);
+        background-color: var(--save-color);
+        padding: 0px;
+        margin: 0px;
+      }
+      
+      #skulpt-close-button:hover
+      {
+        width: 80pt;
+      }
+      
+      #skulpt-close-button .icon
+      {
+        font-size: 19pt;
+        top: -16px;
+      }
+      
+      #skulpt-close-button .text
+      {
+        position: relative;
+        top: -16px;
+      }
+      
+      #skulpt-console, #skulpt-canvas
+      {
+      }
+      
+      #skulpt-console
+      {
+        resize: none;
+        position: fixed;
+        height: 70vh;
+        top: 15vh;
+        left: 15vw;
+      }
+      
+      #skulpt-console.turtle
+      {
+        width: 30vw;
+      }
+      
+      #skulpt-canvas.turtle
+      {
+        position: fixed;
+        width: 400px;
+        height: 400px;
+        top: calc(50vh - 200px);
+        right: calc(30vw - 200px);
+        border: solid 1px black;
+        border-radius: 4px;
       }
     </style>
   </head>
@@ -406,10 +568,17 @@
     <p id="copied-alert" class="hidden"><span class="icon"><i class="fas fa-copy"></i></span><span class="text"> Copied!</span></p>
     <a id="copy-python-button" class="my-button" onclick="copyToClipboard()"><span class="icon"><i class="fas fa-copy"></i></span><span class="text"> Copy Python to Clipboard</span></a>
     <a id="save-python-button" class="my-button" onclick="saveToFile(Blockly.Python.workspaceToCode(workspace), '.py')"><span class="icon"><i class="fas fa-file-download"></i></span><span class="text"> Save Python Code</span></a>
+    <a id="run-blocks-button" class="my-button" onclick="runPython()"><span class="icon"><i class="fas fa-play"></i></span><span class="text"> Run Program</span></a>
     <a id="load-blocks-button" class="my-button" onclick="document.getElementById('inputfile').click()"><span class="icon"><i class="fas fa-file-upload"></i></span><span class="text"> Load Blocks from File</span></a>
     <a id="save-blocks-button" class="my-button" onclick="saveToFile(Blockly.Xml.domToPrettyText(Blockly.Xml.workspaceToDom(workspace)), '.blockly')"><span class="icon"><i class="fas fa-file-download"></i></span><span class="text"> Save Blocks to File</span></a>
     <input type="file" name="inputfile" id="inputfile" style="display: none;">
-    
+    <div id="excluder" class="hidden">
+    </div>
+    <div id="skulpt-container" class="hidden">
+      <textarea id="skulpt-console" class="turtle" readonly="true"></textarea> 
+      <div id="skulpt-canvas" class="turtle"></div>
+      <a id="skulpt-close-button" class="my-button" onclick="document.getElementById('excluder').className='hidden'; document.getElementById('skulpt-container').className='hidden';"><span class="icon"><i class="fas fa-times"></i></span><span class="text"> Close</span></a>
+    </div>
     <div id="blocklyDiv"></div>
     <script>
       document.getElementById('inputfile').addEventListener('change', function() {
