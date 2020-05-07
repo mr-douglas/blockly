@@ -168,7 +168,6 @@
         border-style: solid;
         border-width: 5px;
         border-radius: 30px;
-        width: 33px;
         height: 33px;
         overflow: hidden;
         transition: 0.3s;
@@ -176,6 +175,7 @@
       
       a.my-button
       {
+        width: 33px;
         z-index: 99;
       }
       
@@ -202,6 +202,7 @@
         border-width: 5px;
         position: relative;
         top: -2px;
+        left: -1px;
       }
       
       a.my-button .icon i, #copied-alert .icon i
@@ -260,6 +261,7 @@
         z-index: 100;
         text-align: center;
         margin: 0px;
+        box-shadow: 0px  0px 15px 5px var(--copy-color);  
       }
       
       .hidden
@@ -369,6 +371,8 @@
         <block type="turtle_pen_up_down"></block>
         <block type="turtle_pen_colour"></block>
         <block type="turtle_fill_colour"></block>
+        <block type="turtle_begin_fill"></block>
+        <block type="turtle_end_fill"></block>
         <block type="turtle_set_pen_size"></block>
         <block type="turtle_set_direction_four"></block>
         <block type="turtle_set_direction_angle"></block>
