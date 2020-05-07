@@ -147,27 +147,58 @@
         return Sk.builtinFiles["files"][x];
       }
 
-      function runPython() { 
-        document.getElementById("skulpt-container").className = "";
-        document.getElementById("excluder").className = "";
+      function runPython() {
+        var unrunnableStrings = [
+                                 'from pybricks import ev3brick as brick',
+                                 "#You've added your own code"
+                                ]
+        var unrunnable = false;
         var prog = Blockly.Python.workspaceToCode(workspace); 
-        var consoleTextArea = document.getElementById("skulpt-console");
-        consoleTextArea.value = "";
-        Sk.pre = "skulpt-console";
-        Sk.configure({inputfun: inputf,                                           
-                      output:outf,
-                      read:builtinRead}); 
-        (Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = 'skulpt-canvas';
-        var myPromise = Sk.misceval.asyncToPromise(function() {
-          return Sk.importMainWithBody("<stdin>", false, prog, true);
-        });
-        myPromise.then(function(mod) {
-          console.log('success');
-        },
-          function(err) {
-          console.log(err.toString());
-        });
-        consoleTextArea.focus();
+        for(var i = 0;i < unrunnableStrings.length;i++) {
+          unrunnable = unrunnable || prog.includes(unrunnableStrings[i]);
+        }
+        if(unrunnable) {
+          alert("Sadly, you won't be able to run that here. You'll need to copy or download the Python code.");
+        }
+        else
+        {
+          var needsConsole = prog.includes("#This program uses console I/O");
+          var needsTurtle = prog.includes("import turtle");
+          if (needsConsole && needsTurtle) {
+            document.getElementById("skulpt-console").className = "both";
+            document.getElementById("skulpt-canvas").className = "both";
+          }
+          else if(needsConsole){
+            document.getElementById("skulpt-console").className = "console-only";
+            document.getElementById("skulpt-canvas").className = "console-only";
+          } else {
+            document.getElementById("skulpt-console").className = "turtle-only";
+            document.getElementById("skulpt-canvas").className = "turtle-only";
+          }
+          if (needsConsole || needsTurtle){
+            document.getElementById("skulpt-container").className = "";
+            document.getElementById("excluder").className = "";
+          } else {
+            alert("Your program won't produce any output");
+          }
+          var consoleTextArea = document.getElementById("skulpt-console");
+          consoleTextArea.value = "";
+          Sk.pre = "skulpt-console";
+          Sk.configure({inputfun: inputf,                                           
+                        output:outf,
+                        read:builtinRead}); 
+          (Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = 'skulpt-canvas';
+          var myPromise = Sk.misceval.asyncToPromise(function() {
+            return Sk.importMainWithBody("<stdin>", false, prog, true);
+          });
+          myPromise.then(function(mod) {
+            console.log('success');
+          },
+            function(err) {
+            console.log(err.toString());
+          });
+          consoleTextArea.focus();
+        }
       }
     </script>
     <style>
@@ -411,10 +442,6 @@
         top: -16px;
       }
       
-      #skulpt-console, #skulpt-canvas
-      {
-      }
-      
       #skulpt-console
       {
         resize: none;
@@ -424,12 +451,22 @@
         left: 15vw;
       }
       
-      #skulpt-console.turtle
+      #skulpt-console.both
       {
         width: 30vw;
       }
       
-      #skulpt-canvas.turtle
+      #skulpt-console.console-only
+      {
+        width: 70vw;
+      }
+      
+      #skulpt-console.turtle-only
+      {
+        display: none;
+      }
+      
+      #skulpt-canvas
       {
         position: fixed;
         width: 400px;
@@ -438,6 +475,23 @@
         right: calc(30vw - 200px);
         border: solid 1px black;
         border-radius: 4px;
+      }
+      
+      #skulpt-canvas.both
+      {
+        top: calc(50vh - 200px);
+        right: calc(30vw - 200px);
+      }
+      
+      #skulpt-canvas.console-only
+      {
+        display: none;
+      }
+      
+      #skulpt-canvas.turtle-only
+      {
+        top: calc(50vh - 200px);
+        right: calc(50vw - 200px);
       }
     </style>
   </head>
@@ -575,8 +629,8 @@
     <div id="excluder" class="hidden">
     </div>
     <div id="skulpt-container" class="hidden">
-      <textarea id="skulpt-console" class="turtle" readonly="true"></textarea> 
-      <div id="skulpt-canvas" class="turtle"></div>
+      <textarea id="skulpt-console" class="both" readonly="true"></textarea> 
+      <div id="skulpt-canvas" class="both"></div>
       <a id="skulpt-close-button" class="my-button" onclick="document.getElementById('excluder').className='hidden'; document.getElementById('skulpt-container').className='hidden';"><span class="icon"><i class="fas fa-times"></i></span><span class="text"> Close</span></a>
     </div>
     <div id="blocklyDiv"></div>

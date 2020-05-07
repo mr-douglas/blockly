@@ -233,6 +233,7 @@ Blockly.Python['text_trim'] = function(block) {
 
 Blockly.Python['text_print'] = function(block) {
   // Print statement.
+  Blockly.Python.definitions_['requires_console'] = '#This program uses console I/O';
   var msg = Blockly.Python.valueToCode(block, 'TEXT',
       Blockly.Python.ORDER_NONE) || '\'\'';
   return 'print(' + msg + ')\n';
@@ -240,6 +241,7 @@ Blockly.Python['text_print'] = function(block) {
 
 Blockly.Python['text_prompt_ext'] = function(block) {
   // Prompt function.
+  Blockly.Python.definitions_['requires_console'] = '#This program uses console I/O';
   var functionName = Blockly.Python.provideFunction_(
       'text_prompt',
       ['def ' + Blockly.Python.FUNCTION_NAME_PLACEHOLDER_ + '(msg):',
