@@ -438,7 +438,7 @@ Blockly.Blocks['text_prompt_ext'] = {
    * @this {Blockly.Block}
    */
   updateType_: function(newOp) {
-    this.outputConnection.setCheck(newOp == 'NUMBER' ? 'Number' : 'String');
+    this.outputConnection.setCheck(newOp == 'NUMBER' || newOp == 'INTEGER' ? 'Number' : 'String');
   },
   /**
    * Create XML to represent the output type.

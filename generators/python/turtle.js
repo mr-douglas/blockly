@@ -169,3 +169,15 @@ Blockly.Python['turtle_get_coord'] = function(block) {
   var code = 'turtle.position()[' + x_or_y +']';
   return [code, Blockly.Python.ORDER_MEMBER];
 };
+
+Blockly.Python['turtle_show'] = function(block) {
+  Blockly.Python.definitions_['import_turtle'] = 'import turtle';
+  var code = 'turtle.showturtle()\n';
+  return code;
+};
+
+Blockly.Python['turtle_hide'] = function(block) {
+  Blockly.Python.definitions_['import_turtle'] = 'import turtle';
+  var code = 'turtle.hideturtle()\n';
+  return code;
+};

@@ -18,6 +18,7 @@
     <script src="generators/python.js"></script>
     <script src="generators/python/colour.js"></script>
     <script src="generators/python/custom_code.js"></script>
+    <script src="generators/python/data_types.js"></script>
     <script src="generators/python/ev3.js"></script>
     <script src="generators/python/lists.js"></script>
     <script src="generators/python/logic.js"></script>
@@ -30,6 +31,7 @@
     <script src="generators/python/variables_dynamic.js"></script>
     <script src="blocks/colour.js"></script>
     <script src="blocks/custom_code.js"></script>
+    <script src="blocks/data_types.js"></script>
     <script src="blocks/ev3.js"></script>
     <script src="blocks/lists.js"></script>
     <script src="blocks/logic.js"></script>
@@ -195,6 +197,8 @@
             console.log('success');
           },
             function(err) {
+            outf(err.toString());
+            alert(err.toString());
             console.log(err.toString());
           });
           consoleTextArea.focus();
@@ -261,7 +265,7 @@
       a.my-button, #copied-alert
       {
         position: absolute;
-        z-index: 99;
+        z-index: 100000;
         border-style: solid;
         border-width: 5px;
         border-radius: 30px;
@@ -273,7 +277,7 @@
       a.my-button
       {
         width: 33px;
-        z-index: 99;
+        z-index: 100000;
       }
       
       a.my-button:hover, #copied-alert
@@ -368,7 +372,7 @@
       
       #copied-alert
       {
-        z-index: 100;
+        z-index: 100001;
         text-align: center;
         margin: 0px;
         box-shadow: 0px  0px 3px 1px var(--copy-color);  
@@ -397,14 +401,14 @@
         height: 100vh;
         background-color: black;
         opacity: 0.5;
-        z-index: 101;
+        z-index: 100002;
         transition: 0.3s;
       }
       
       #skulpt-container
       {
         position: absolute;
-        z-index: 102;
+        z-index: 100003;
         transition: 0.3s;
         background-color: white;
         width: 80vw;
@@ -560,6 +564,11 @@
         <block type="controls_forEach"></block>
         <block type="controls_flow_statements"></block>
       </category>
+      <category  name="Data Types" colour='%{BKY_VARIABLES_HUE}'>
+        <block type="float"></block>
+        <block type="int"></block>
+        <block type="str"></block>
+      </category>
       <sep></sep>
       <category colour='%{BKY_LISTS_HUE}' name="Lists">
         <block type="lists_create_with"><mutation items="0"></mutation></block>
@@ -594,6 +603,8 @@
         <block type="turtle_set_direction_angle"></block>
         <block type="turtle_set_direction"></block>
         <block type="turtle_get_coord"></block>
+        <block type="turtle_show"></block>
+        <block type="turtle_hide"></block>
         <block type="colour_picker"></block>
         <block type="colour_random"></block>
         <block type="colour_rgb"><value name="RED"><shadow type="math_number"><field name="NUM">100</field></shadow></value><value name="GREEN"><shadow type="math_number"><field name="NUM">50</field></shadow></value><value name="BLUE"><shadow type="math_number"><field name="NUM">0</field></shadow></value></block>

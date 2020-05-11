@@ -325,5 +325,23 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
     "colour": 20,
     "tooltip": "",
     "helpUrl": ""
+},
+{
+  "type": "turtle_show",
+  "message0": "show turtle",
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 20,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "turtle_hide",
+  "message0": "hide turtle",
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 20,
+  "tooltip": "",
+  "helpUrl": ""
 }
 ]);  // END JSON EXTRACT (Do not delete this comment.)
