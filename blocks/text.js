@@ -430,6 +430,14 @@ Blockly.Blocks['text_prompt_ext'] = {
           Blockly.Msg['TEXT_PROMPT_TOOLTIP_TEXT'] :
           Blockly.Msg['TEXT_PROMPT_TOOLTIP_NUMBER'];
     });
+    
+    this.setOnChange(function(changeEvent) {
+        if(dropdown.value_=="TEXT"){
+            this.setColour(Blockly.Msg['TEXTS_HUE']);
+        } else {
+            this.setColour(Blockly.Msg['MATH_HUE']);
+        }
+    });
   },
   /**
    * Modify this block to have the correct output type.

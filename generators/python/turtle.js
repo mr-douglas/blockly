@@ -1,6 +1,7 @@
 'use strict';
 
 goog.require('Blockly.Python');
+goog.require('Blockly.Extensions');
 
 Blockly.Python.addReservedWords('turtle');
 
@@ -87,6 +88,21 @@ Blockly.Python['turtle_fill_colour'] = function(block) {
   return code;
 };
 
+Blockly.Python['turtle_pen_fill_colour'] = function(block) {
+  var dropdown_pen_or_fill = block.getFieldValue('pen_or_fill');
+  var value_colour = Blockly.Python.valueToCode(block, 'colour', Blockly.Python.ORDER_ATOMIC);
+  Blockly.Python.definitions_['import_turtle'] = 'import turtle';
+  var pen_or_fill = "";
+  if(dropdown_pen_or_fill == "PEN"){
+    pen_or_fill = "pen";
+  }
+  else{
+    pen_or_fill = "fill";
+  }
+  var code = 'turtle.' + pen_or_fill + 'color(' + value_colour + ')\n';
+  return code;
+};
+
 Blockly.Python['turtle_begin_fill'] = function(block) {
   Blockly.Python.definitions_['import_turtle'] = 'import turtle';
   var code = 'turtle.begin_fill()\n';
@@ -96,6 +112,18 @@ Blockly.Python['turtle_begin_fill'] = function(block) {
 Blockly.Python['turtle_end_fill'] = function(block) {
   Blockly.Python.definitions_['import_turtle'] = 'import turtle';
   var code = 'turtle.end_fill()\n';
+  return code;
+};
+
+Blockly.Python['turtle_begin_end_fill'] = function(block) {
+  Blockly.Python.definitions_['import_turtle'] = 'import turtle';
+  var dropdown_begin_or_end = block.getFieldValue('begin_or_end');
+  var code = '';
+  if(dropdown_begin_or_end=="BEGIN"){
+    code = 'turtle.begin_fill()\n';
+  } else if(dropdown_begin_or_end=="END"){
+    code = 'turtle.end_fill()\n';  
+  }
   return code;
 };
 

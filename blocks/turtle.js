@@ -162,6 +162,36 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
     "helpUrl": ""
   },
   {
+    "type": "turtle_pen_fill_colour",
+    "message0": "set %1 colour to %2",
+    "args0": [
+      {
+        "type": "field_dropdown",
+        "name": "pen_or_fill",
+        "options": [
+          [
+            "pen",
+            "PEN"
+          ],
+          [
+            "fill",
+            "FILL"
+          ]
+        ]
+      },
+      {
+        "type": "input_value",
+        "name": "colour",
+        "check": "Colour"
+      }
+    ],
+    "previousStatement": null,
+    "nextStatement": null,
+    "colour": 20,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
     "type": "turtle_begin_fill",
     "message0": "begin fill",
     "previousStatement": null,
@@ -173,6 +203,31 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   {
     "type": "turtle_end_fill",
     "message0": "end fill",
+    "previousStatement": null,
+    "nextStatement": null,
+    "colour": 20,
+    "tooltip": "",
+    "helpUrl": ""
+  },
+  {
+    "type": "turtle_begin_end_fill",
+    "message0": "%1 fill",
+    "args0": [
+    {
+      "type": "field_dropdown",
+      "name": "begin_or_end",
+      "options": [
+        [
+          "begin",
+          "BEGIN"
+        ],
+        [
+          "end",
+          "END"
+        ]
+      ]
+    }
+    ],
     "previousStatement": null,
     "nextStatement": null,
     "colour": 20,
