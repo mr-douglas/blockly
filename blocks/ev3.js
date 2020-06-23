@@ -74,11 +74,9 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
       ]
     },
     {
-      "type": "field_number",
+      "type": "input_value",
       "name": "VOLUME",
-      "value": 50,
-      "min": 0,
-      "max": 100
+      "check": "Number"
     }
   ],
   "previousStatement": null,

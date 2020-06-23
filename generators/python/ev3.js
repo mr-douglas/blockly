@@ -22,7 +22,7 @@ Blockly.Python['ev3_beep'] = function(block) {
 Blockly.Python['ev3_set_volume'] = function(block) {
   Blockly.Python.definitions_['import_ev3'] = ev3_imports;
   var dropdown_which = block.getFieldValue('WHICH');
-  var number_volume = block.getFieldValue('VOLUME');
+  var value_volume = Blockly.Python.valueToCode(block, 'VOLUME', Blockly.Python.ORDER_ATOMIC);
   var which = "'_all_'";
   Blockly.Python.definitions_['import_ev3'] = ev3_imports
   if (dropdown_which=='BEEP'){
@@ -30,7 +30,7 @@ Blockly.Python['ev3_set_volume'] = function(block) {
   }else if (dropdown_which=='PCM'){
     which="'PCM'";
   }
-  var code = "ev3.speaker.set_volume("+number_volume+", which="+which+")\n";
+  var code = "ev3.speaker.set_volume("+value_volume+", which="+which+")\n";
   return code;
 };
 
