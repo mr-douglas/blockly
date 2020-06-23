@@ -613,12 +613,12 @@
         <block type="colour_blend"><value name="COLOUR1"><shadow type="colour_picker"><field name="COLOUR">#ff0000</field></shadow></value><value name="COLOUR2"><shadow type="colour_picker"><field name="COLOUR">#3333ff</field></shadow></value><value name="RATIO"><shadow type="math_number"><field name="NUM">0.5</field></shadow></value></block>
       </category>
       <category colour='90' name="EV3">
-        <block type="ev3_beep">
-          <value name="FREQUENCY"><shadow type="math_number"><field name="NUM">500</field></shadow></value>
-          <value name="DURATION"><shadow type="math_number"><field name="NUM">1</field></shadow></value>
-          <value name="VOLUME"><shadow type="math_number"><field name="NUM">30</field></shadow></value>
-        </block>
-        <label text="More Blocks Coming Soon!"></label>
+        <category colour='90' name="Motors" custom="EV3_MOTORS"></category>
+        <category colour='90' name="Sensors" custom="EV3_SENSORS"></category>
+        <block type="ev3_set_up"></block>
+        <block type="ev3_color"></block>
+        <block type="ev3_beep"><value name="FREQUENCY"><shadow type="math_number"><field name="NUM">500</field></shadow></value><value name="DURATION"><shadow type="math_number"><field name="NUM">1</field></shadow></value></block>
+        <block type="ev3_set_volume"></block>
       </category>
       <category colour='270' name="Raspberry Pi">
         <label text="Coming Soon!"></label>
@@ -666,7 +666,84 @@
                                                trashcan: true
                                               }
                                 );
-      
+      //TODO: Find out where this should be put, and put it there
+      workspace.registerToolboxCategoryCallback('EV3_MOTORS', function(workspace){
+                                                                                          var xmlList = [];
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<button text="Add New Motor" callbackKey="addMotorButtonPressed"></button>'));
+                                                                                          var variableModelList = workspace.getVariablesOfType('EV3Motor');
+                                                                                          if(variableModelList.length>0){
+                                                                                            xmlList.push(Blockly.Xml.textToDom('<label text="Motors"></label>'));
+                                                                                            for (var i = 0, variable; (variable = variableModelList[i]); i++) {
+                                                                                              var block = Blockly.utils.xml.createElement('block');
+                                                                                              block.setAttribute('type', 'ev3_variables_get_motor');
+                                                                                              block.setAttribute('gap', 8);
+                                                                                              block.appendChild(Blockly.Variables.generateVariableFieldDom(variable));
+                                                                                              xmlList.push(block);
+                                                                                            }
+                                                                                          }
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<block type="ev3_motor_run"><value name="SPEED"><shadow type="math_number"><field name="NUM">90</field></shadow></value></block>'));
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<block type="ev3_motor_run_time"><value name="SPEED"><shadow type="math_number"><field name="NUM">90</field></shadow></value><value name="TIME"><shadow type="math_number"><field name="NUM">1</field></shadow></value></block>'));
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<block type="ev3_motor_run_angle"><value name="SPEED"><shadow type="math_number"><field name="NUM">90</field></shadow></value><value name="ANGLE"><shadow type="math_number"><field name="NUM">90</field></shadow></value></block>'));
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<block type="ev3_motor_run_until_stalled"><value name="SPEED"><shadow type="math_number"><field name="NUM">90</field></shadow></value><value name="DUTY_LIMIT"><shadow type="math_number"><field name="NUM">50</field></shadow></value></block>'));
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<block type="ev3_motor_speed"></block>'));
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<block type="ev3_motor_angle"></block>'));
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<block type="ev3_motor_reset_angle"><value name="ANGLE"><shadow type="math_number"><field name="NUM">0</field></shadow></value></block>'));
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<block type="ev3_motor_stop_brake_hold"></block>'));
+                                                                                          return xmlList;
+                                                                                         }
+                                               );
+      workspace.registerToolboxCategoryCallback('EV3_SENSORS', function(workspace){
+                                                                                          var xmlList = [];
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<button text="Add New Sensor" callbackKey="addSensorButtonPressed"></button>'));
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<label text="These blocks are for setting up the sensors"></label>'));
+                                                                                          var variableModelList = workspace.getVariablesOfType('EV3Sensor');
+                                                                                          if(variableModelList.length>0){
+                                                                                            for (var i = 0, variable; (variable = variableModelList[i]); i++) {
+                                                                                              var block = Blockly.utils.xml.createElement('block');
+                                                                                              block.setAttribute('type', 'ev3_variables_get_and_set_sensor');
+                                                                                              block.setAttribute('gap', 8);
+                                                                                              block.appendChild(Blockly.Variables.generateVariableFieldDom(variable));
+                                                                                              xmlList.push(block);
+                                                                                            }
+                                                                                          }
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<block type="ev3_touch_sensor"></block>'));
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<block type="ev3_colour_sensor"></block>'));
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<block type="ev3_ultrasonic_sensor"></block>'));
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<block type="ev3_gyro_sensor"></block>'));
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<label text="The rest of the blocks are for use in your program"></label>'));
+                                                                                          if(variableModelList.length>0){
+                                                                                            for (var i = 0, variable; (variable = variableModelList[i]); i++) {
+                                                                                              var block = Blockly.utils.xml.createElement('block');
+                                                                                              block.setAttribute('type', 'ev3_variables_get_sensor');
+                                                                                              block.setAttribute('gap', 8);
+                                                                                              block.appendChild(Blockly.Variables.generateVariableFieldDom(variable));
+                                                                                              xmlList.push(block);
+                                                                                            }
+                                                                                          }
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<label text="Color Sensor"></label>'));
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<block type="ev3_color_sensor_color"></block>'));
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<block type="ev3_color_sensor_ambient"></block>'));
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<block type="ev3_color_sensor_reflection"></block>'));
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<label text="Touch Sensor"></label>'));
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<block type="ev3_touch_sensor_pressed"></block>'));
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<label text="Ultrasonic Sensor"></label>'));
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<block type="ev3_ultrasonic_sensor_distance"></block>'));
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<label text="Gyroscopic Sensor"></label>'));
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<block type="ev3_gyro_sensor_speed"></block>'));
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<block type="ev3_gyro_angle_speed"></block>'));
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<block type="ev3_gyro_sensor_reset_angle"><value name="ANGLE"><shadow type="math_number"><field name="NUM">0</field></shadow></value></block>'));
+                                                                                          return xmlList;
+                                                                                         }
+                                               );
+      workspace.registerButtonCallback('addMotorButtonPressed', function(button){
+                                                                                 Blockly.Variables.createVariableButtonHandler(button.getTargetWorkspace(), null, 'EV3Motor');
+                                                                                }
+                                      );
+      workspace.registerButtonCallback('addSensorButtonPressed', function(button){
+                                                                                 Blockly.Variables.createVariableButtonHandler(button.getTargetWorkspace(), null, 'EV3Sensor');
+                                                                                }
+                                      );
+
       theme = workspace.getTheme();
       var fontStyle = {
                        "family": "'Varela Round', Arial, sans-serif",
