@@ -616,12 +616,22 @@
         <block type="colour_blend"><value name="COLOUR1"><shadow type="colour_picker"><field name="COLOUR">#ff0000</field></shadow></value><value name="COLOUR2"><shadow type="colour_picker"><field name="COLOUR">#3333ff</field></shadow></value><value name="RATIO"><shadow type="math_number"><field name="NUM">0.5</field></shadow></value></block>
       </category>
       <category colour='90' name="EV3">
+        <category colour='90' name="Brick">
+          <block type="ev3_set_up"></block>
+          <block type="ev3_beep"><value name="FREQUENCY"><shadow type="math_number"><field name="NUM">500</field></shadow></value><value name="DURATION"><shadow type="math_number"><field name="NUM">1</field></shadow></value></block>
+          <block type="ev3_set_volume"><value name="VOLUME"><shadow type="math_number"><field name="NUM">50</field></shadow></value></block>
+          <block type="ev3_color"></block>
+          <block type="ev3_brick_light_on"><value name="COLOR"><shadow type="ev3_color"><field name="COLOR">#00cc00</field></shadow></value></block>
+          <block type="ev3_brick_light_off"></block>
+          <block type="ev3_brick_buttons_pressed"></block>
+          <block type="ev3_wait"><value name="TIME"><shadow type="math_number"><field name="NUM">60</field></shadow></value></block>
+          <block type="ev3_screen_font"></block>
+          <block type="ev3_screen_print"></block>
+        </category>
         <category colour='90' name="Motors" custom="EV3_MOTORS"></category>
         <category colour='90' name="Sensors" custom="EV3_SENSORS"></category>
         <block type="ev3_set_up"></block>
         <block type="ev3_color"></block>
-        <block type="ev3_beep"><value name="FREQUENCY"><shadow type="math_number"><field name="NUM">500</field></shadow></value><value name="DURATION"><shadow type="math_number"><field name="NUM">1</field></shadow></value></block>
-        <block type="ev3_set_volume"><value name="VOLUME"><shadow type="math_number"><field name="NUM">50</field></shadow></value></block>
       </category>
       <category colour='270' name="Raspberry Pi">
         <label text="Coming Soon!"></label>

@@ -3,7 +3,7 @@
 goog.require('Blockly.Python');
 
 Blockly.Python.addReservedWords('ev3');
-var ev3_imports = '#!/usr/bin/env pybricks-micropython\nfrom pybricks.hubs import EV3Brick\nfrom pybricks.ev3devices import (Motor, TouchSensor, ColorSensor, InfraredSensor, UltrasonicSensor, GyroSensor)\nfrom pybricks.parameters import Port, Stop, Direction, Button, Color\nfrom pybricks.tools import wait, StopWatch, DataLog\nfrom pybricks.robotics import DriveBase\nfrom pybricks.media.ev3dev import SoundFile, ImageFile\n\nev3 = EV3Brick()\n';
+var ev3_imports = '#!/usr/bin/env pybricks-micropython\nfrom pybricks.hubs import EV3Brick\nfrom pybricks.ev3devices import (Motor, TouchSensor, ColorSensor, InfraredSensor, UltrasonicSensor, GyroSensor)\nfrom pybricks.parameters import Port, Stop, Direction, Button, Color\nfrom pybricks.tools import wait, StopWatch, DataLog\nfrom pybricks.robotics import DriveBase\nfrom pybricks.media.ev3dev import SoundFile, ImageFile, Font\n\nev3 = EV3Brick()\n';
 var motors = ["","","",""];
 
 Blockly.Python['ev3_beep'] = function(block) {
@@ -418,6 +418,7 @@ Blockly.Python['ev3_color'] = function(block) {
 };
 
 Blockly.Python['ev3_rgb'] = function(block) {
+  Blockly.Python.definitions_['import_ev3'] = ev3_imports;
   var dropdown_rgb = block.getFieldValue('RGB');
   var value_color_sensor = Blockly.Python.valueToCode(block, 'COLOR_SENSOR', Blockly.Python.ORDER_ATOMIC);
   var code = "";
@@ -437,4 +438,62 @@ Blockly.Python['ev3_rgb'] = function(block) {
       break;
   }
   return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python['ev3_brick_light_on'] = function(block) {
+  Blockly.Python.definitions_['import_ev3'] = ev3_imports;
+  var value_color = Blockly.Python.valueToCode(block, 'COLOR', Blockly.Python.ORDER_ATOMIC);
+  var code = 'ev3.light.on('+value_color+')\n';
+  return code;
+};
+
+Blockly.Python['ev3_brick_light_off'] = function(block) {
+  Blockly.Python.definitions_['import_ev3'] = ev3_imports;
+  var code = 'ev3.light.off()\n';
+  return code;
+};
+
+Blockly.Python['ev3_brick_buttons_pressed'] = function(block) {
+  Blockly.Python.definitions_['import_ev3'] = ev3_imports;
+  var code = 'ev3.buttons.pressed()';
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python['ev3_screen_clear'] = function(block) {
+  Blockly.Python.definitions_['import_ev3'] = ev3_imports;
+  var code = 'ev3.screen.clear()\n';
+  return code;
+};
+
+Blockly.Python['ev3_wait'] = function(block) {
+  Blockly.Python.definitions_['import_ev3'] = ev3_imports;
+  var value_time = Blockly.Python.valueToCode(block, 'TIME', Blockly.Python.ORDER_ATOMIC);
+  var dropdown_time_units = block.getFieldValue('TIME_UNITS');
+  var code = 'wait(';
+  code = code + value_time;
+  if(dropdown_time_units=="SECONDS") {
+    code = code + '*1000';
+  }
+  code = code +')\n';
+  return code;
+};
+
+Blockly.Python['ev3_screen_font'] = function(block) {
+  Blockly.Python.definitions_['import_ev3'] = ev3_imports;
+  var dropdown_font_size = block.getFieldValue('FONT_SIZE');
+  var font_choice = 'size=6';
+  if (dropdown_font_size=="MEDIUM") {
+    font_choice = 'size=15';
+  } else if (dropdown_font_size=="LARGE") {
+    font_choice = 'size=24, bold=True';
+  }
+  var code = 'ev3.screen.set_font(Font('+font_choice+'))\n';
+  return code;
+};
+
+Blockly.Python['ev3_screen_print'] = function(block) {
+  Blockly.Python.definitions_['import_ev3'] = ev3_imports;
+  var value_text = Blockly.Python.valueToCode(block, 'TEXT', Blockly.Python.ORDER_ATOMIC);
+  var code = 'ev3.screen.print('+value_text+')\n';
+  return code;
 };

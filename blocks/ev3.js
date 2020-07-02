@@ -629,14 +629,104 @@ Blockly.Blocks['ev3_color'] = {
 Blockly.Blocks['ev3_rgb'] = {
   init: function() {
     this.appendValueInput("COLOR_SENSOR")
-        .setCheck("EV3Sensor")
-        .appendField("amount of")
-        .appendField(new Blockly.FieldDropdown([["red","RED"], ["green","GREEN"], ["blue","BLUE"]]), "RGB")
-        .appendField("measured by");
+      .setCheck("EV3Sensor")
+      .appendField("amount of")
+      .appendField(new Blockly.FieldDropdown([["red","RED"], ["green","GREEN"], ["blue","BLUE"]]), "RGB")
+      .appendField("measured by");
     this.setInputsInline(true);
     this.setOutput(true, "EV3Color");
     this.setColour(90);
- this.setTooltip("");
- this.setHelpUrl("");
+    this.setTooltip("");
+    this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['ev3_brick_light_on'] = {
+  init: function() {
+    this.appendValueInput("COLOR")
+      .setCheck("EV3Color")
+      .appendField("set EV3 brick light colour to");
+    this.setColour(90);
+    this.setTooltip("");
+    this.setHelpUrl("");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+  }
+};
+
+Blockly.Blocks['ev3_brick_light_off'] = {
+  init: function() {
+    this.appendDummyInput()
+      .appendField("turn EV3 brick light off");
+    this.setColour(90);
+    this.setTooltip("");
+    this.setHelpUrl("");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+  }
+};
+
+Blockly.Blocks['ev3_brick_buttons_pressed'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("list of EV3 brick buttons pressed ");
+    this.setOutput(true, "Array");
+    this.setColour(90);
+    this.setTooltip("");
+    this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['ev3_screen_clear'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("clear EV3 brick screen");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(90);
+    this.setTooltip("");
+    this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['ev3_wait'] = {
+  init: function() {
+    this.appendValueInput("TIME")
+        .setCheck("Number")
+        .appendField("wait");
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldDropdown([["seconds","SECONDS"], ["milliseconds","MILLISECONDS"]]), "TIME_UNITS");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(90);
+    this.setTooltip("");
+    this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['ev3_screen_font'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("set EV3 brick screen to use")
+        .appendField(new Blockly.FieldDropdown([["small","SMALL"], ["medium","MEDIUM"], ["large","LARGE"]]), "FONT_SIZE")
+        .appendField("font");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(90);
+    this.setTooltip("");
+    this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['ev3_screen_print'] = {
+  init: function() {
+    this.appendValueInput("TEXT")
+        .setCheck("String")
+        .appendField("write text to EV3 screen:");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(90);
+    this.setTooltip("");
+    this.setHelpUrl("");
   }
 };
