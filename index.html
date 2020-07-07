@@ -782,6 +782,15 @@
       
       workspace.addChangeListener(updatePython);
       updatePython();
+      
+      var url = window.location.href;
+      if (url.includes('?file=')){
+        fetch(url.substring(url.indexOf('?file=')+6))
+          .then(response => response.text())
+          .then((data) => {
+        Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(data), workspace);
+        })
+      }
     </script>
   </body>
 </html>
