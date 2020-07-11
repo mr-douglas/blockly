@@ -192,7 +192,8 @@
           Sk.pre = "skulpt-console";
           Sk.configure({inputfun: inputf,                                           
                         output:outf,
-                        read:builtinRead}); 
+                        read:builtinRead,
+                        __future__: Sk.python3}); 
           (Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = 'skulpt-canvas';
           var myPromise = Sk.misceval.asyncToPromise(function() {
             return Sk.importMainWithBody("<stdin>", false, prog, true);
