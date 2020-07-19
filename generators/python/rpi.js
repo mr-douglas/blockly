@@ -71,7 +71,7 @@ Blockly.Python['rpi_led_set_value'] = function(block) {
   Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
   var value_led = Blockly.Python.valueToCode(block, 'LED', Blockly.Python.ORDER_ATOMIC);
   var value_value = Blockly.Python.valueToCode(block, 'VALUE', Blockly.Python.ORDER_ATOMIC);
-  var code = value_led+'.value = value_value\n';
+  var code = value_led+'.value = '+value_value+'\n';
   return code;
 };
 
