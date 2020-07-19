@@ -109,18 +109,19 @@ Blockly.Python['rpi_rgb_led_blink'] = function(block) {
   {
     run_in_background = "False";
   }
-  var code = value_led+'.blink(on_time='+value_on_time
-  +', off_time='+value_off_time
-  +', fade_in_time='+value_fade_in_time
-  +', fade_out_time='+value_fade_out_time
-  +', on_color='+value_on_color
-  +', off_color='+value_off_color
-  +', n='+value_n+', background='+run_in_background
-  +')\n';
+  var code = value_led+'.blink(on_time='+value_on_time+', off_time='+value_off_time+', fade_in_time='+value_fade_in_time+', fade_out_time='+value_fade_out_time+', on_color='+value_on_color+', off_color='+value_off_color+', n='+value_n+', background='+run_in_background+')\n';
   return code;
 };
 
 Blockly.Python['colour_tuple'] = function(block) {
+  var number_red = block.getFieldValue('RED');
+  var number_green = block.getFieldValue('GREEN');
+  var number_blue = block.getFieldValue('BLUE');
+  var code = '('+number_red+','+number_green+','+number_blue+')';
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python['colour_tuple_values'] = function(block) {
   var number_red = block.getFieldValue('RED');
   var number_green = block.getFieldValue('GREEN');
   var number_blue = block.getFieldValue('BLUE');
@@ -142,5 +143,13 @@ Blockly.Python['hex_colour_to_tuple'] = function(block) {
          '      print("Colour error, using black")',
          '      return (0,0,0)']);
   var code = hexColourFunctionName + '('+value_colour+')';
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python['colour_tuple_values'] = function(block) {
+  var value_red = Blockly.Python.valueToCode(block, 'RED', Blockly.Python.ORDER_ATOMIC);
+  var value_green = Blockly.Python.valueToCode(block, 'GREEN', Blockly.Python.ORDER_ATOMIC);
+  var value_blue = Blockly.Python.valueToCode(block, 'BLUE', Blockly.Python.ORDER_ATOMIC);
+  var code = '('+value_red+','+value_green+','+value_blue+')';
   return [code, Blockly.Python.ORDER_ATOMIC];
 };

@@ -369,5 +369,31 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   "colour": 270,
   "tooltip": "",
   "helpUrl": ""
+},
+{
+  "type": "colour_tuple_values",
+  "message0": "colour: red: %1 ; green: %2 ; blue: %3",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "RED",
+      "check": "Number"
+    },
+    {
+      "type": "input_value",
+      "name": "GREEN",
+      "check": "Number"
+    },
+    {
+      "type": "input_value",
+      "name": "BLUE",
+      "check": "Number"
+    }
+  ],
+  "inputsInline": true,
+  "output": "RPi_Colour_Tuple",
+  "colour": 270,
+  "tooltip": "",
+  "helpUrl": ""
 }
 ]);  // END JSON EXTRACT (Do not delete this comment.)
