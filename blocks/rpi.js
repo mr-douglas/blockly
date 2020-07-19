@@ -27,7 +27,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
       "align": "RIGHT"
     }
   ],
-  "output": "RPI_LED",
+  "output": "RPi_LED",
   "colour": 270,
   "tooltip": "",
   "helpUrl": ""
@@ -63,7 +63,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
       "align": "RIGHT"
     }
   ],
-  "output": "RPI_RGB_LED",
+  "output": "RPi_RGB_LED",
   "colour": 270,
   "tooltip": "",
   "helpUrl": ""
@@ -78,12 +78,12 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
     {
       "type": "input_value",
       "name": "LED",
-      "check": "RPI_RGB_LED"
+      "check": "RPi_RGB_LED"
     },
     {
       "type": "input_value",
       "name": "COLOUR",
-      "check": "Colour",
+      "check": "RPi_Colour_Tuple",
       "align": "RIGHT"
     }
   ],
@@ -101,7 +101,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
     {
       "type": "input_value",
       "name": "LED",
-      "check": "RPI_LED"
+      "check": "RPi_LED"
     }
   ],
   "previousStatement": null,
@@ -117,7 +117,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
     {
       "type": "input_value",
       "name": "LED",
-      "check": "RPI_LED"
+      "check": "RPi_LED"
     }
   ],
   "previousStatement": null,
@@ -133,11 +133,239 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
     {
       "type": "input_value",
       "name": "LED",
-      "check": "RPI_LED"
+      "check": ["RPi_LED","RPi_RGB_LED"]
     }
   ],
   "previousStatement": null,
   "nextStatement": null,
+  "colour": 270,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "rpi_led_is_lit",
+  "message0": "is LED %1 lit",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "LED",
+      "check": "RPi_LED"
+    }
+  ],
+  "output": "Boolean",
+  "colour": 270,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "rpi_led_set_value",
+  "message0": "set the value of LED %1 to %2",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "LED",
+      "check": [
+        "LED",
+        "RGB_LED"
+      ]
+    },
+    {
+      "type": "input_value",
+      "name": "VALUE",
+      "check": ["Number", "RPi_Colour_Tuple"]
+    }
+  ],
+  "inputsInline": true,
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 270,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "rpi_led_get_value",
+  "message0": "get the value of LED %1",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "LED",
+      "check": [
+        "RPi_LED",
+        "RPi_RGB_LED"
+      ]
+    }
+  ],
+  "output": "Number",
+  "colour": 270,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "rpi_led_blink",
+  "message0": "make a simple LED blink: %1 LED: %2 number of times to blink: %3 each time stay on for (in seconds): %4 each time stay off for (in seconds): %5 time to turn on (in seconds): %6 time to turn off (in seconds): %7 wait until finished: %8",
+  "args0": [
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_value",
+      "name": "LED",
+      "check": "RPi_LED",
+      "align": "RIGHT"
+    },
+    {
+      "type": "input_value",
+      "name": "N",
+      "check": "Number",
+      "align": "RIGHT"
+    },
+    {
+      "type": "input_value",
+      "name": "ON_TIME",
+      "check": "Number",
+      "align": "RIGHT"
+    },
+    {
+      "type": "input_value",
+      "name": "OFF_TIME",
+      "check": "Number",
+      "align": "RIGHT"
+    },
+    {
+      "type": "input_value",
+      "name": "FADE_IN_TIME",
+      "check": "Number",
+      "align": "RIGHT"
+    },
+    {
+      "type": "input_value",
+      "name": "FADE_OUT_TIME",
+      "check": "Number",
+      "align": "RIGHT"
+    },
+    {
+      "type": "input_value",
+      "name": "NOT_BACKGROUND",
+      "check": "Boolean",
+      "align": "RIGHT"
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 270,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "rpi_rgb_led_blink",
+  "message0": "make an RGB LED blink: %1 LED: %2 number of times to blink: %3 each time stay on for (in seconds): %4 each time stay off for (in seconds): %5 time to turn on (in seconds): %6 time to turn off (in seconds): %7 on color: %8 off color: %9 wait until finished: %10",
+  "args0": [
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_value",
+      "name": "LED",
+      "check": "RPi_LED",
+      "align": "RIGHT"
+    },
+    {
+      "type": "input_value",
+      "name": "N",
+      "check": "Number",
+      "align": "RIGHT"
+    },
+    {
+      "type": "input_value",
+      "name": "ON_TIME",
+      "check": "Number",
+      "align": "RIGHT"
+    },
+    {
+      "type": "input_value",
+      "name": "OFF_TIME",
+      "check": "Number",
+      "align": "RIGHT"
+    },
+    {
+      "type": "input_value",
+      "name": "FADE_IN_TIME",
+      "check": "Number",
+      "align": "RIGHT"
+    },
+    {
+      "type": "input_value",
+      "name": "FADE_OUT_TIME",
+      "check": "Number",
+      "align": "RIGHT"
+    },
+    {
+      "type": "input_value",
+      "name": "ON_COLOR",
+      "check": "RPi_Colour_Tuple",
+      "align": "RIGHT"
+    },
+    {
+      "type": "input_value",
+      "name": "OFF_COLOR",
+      "check": "RPi_Colour_Tuple",
+      "align": "RIGHT"
+    },
+    {
+      "type": "input_value",
+      "name": "NOT_BACKGROUND",
+      "check": "Boolean",
+      "align": "RIGHT"
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 270,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "colour_tuple",
+  "message0": "colour: red: %1 ; green: %2 ; blue: %3",
+  "args0": [
+    {
+      "type": "field_number",
+      "name": "RED",
+      "value": 0,
+      "min": 0,
+      "max": 1
+    },
+    {
+      "type": "field_number",
+      "name": "GREEN",
+      "value": 0,
+      "min": 0,
+      "max": 1
+    },
+    {
+      "type": "field_number",
+      "name": "BLUE",
+      "value": 0,
+      "min": 0,
+      "max": 1
+    }
+  ],
+  "output": "RPi_Colour_Tuple",
+  "colour": 270,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "hex_colour_to_tuple",
+  "message0": "colour %1",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "COLOUR",
+      "check": "Colour"
+    }
+  ],
+  "output": "RPi_Colour_Tuple",
   "colour": 270,
   "tooltip": "",
   "helpUrl": ""
