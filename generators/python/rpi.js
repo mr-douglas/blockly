@@ -25,6 +25,7 @@ Blockly.Python['rpi_new_rgb_led'] = function(block) {
 };
     
 Blockly.Python['rpi_set_rgb_led_colour'] = function(block) {
+  Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
   var value_led = Blockly.Python.valueToCode(block, 'LED', Blockly.Python.ORDER_ATOMIC);
   var value_colour = Blockly.Python.valueToCode(block, 'COLOUR', Blockly.Python.ORDER_ATOMIC);
   var code = value_led + '.color = ' + value_colour + '\n';
@@ -32,36 +33,42 @@ Blockly.Python['rpi_set_rgb_led_colour'] = function(block) {
 };
 
 Blockly.Python['rpi_led_on'] = function(block) {
+  Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
   var value_led = Blockly.Python.valueToCode(block, 'LED', Blockly.Python.ORDER_ATOMIC);
   var code = value_led + '.on()\n';
   return code;
 };
 
 Blockly.Python['rpi_led_off'] = function(block) {
+  Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
   var value_led = Blockly.Python.valueToCode(block, 'LED', Blockly.Python.ORDER_ATOMIC);
   var code = value_led + '.off()\n';
   return code;
 };
 
 Blockly.Python['rpi_led_toggle'] = function(block) {
+  Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
   var value_led = Blockly.Python.valueToCode(block, 'LED', Blockly.Python.ORDER_ATOMIC);
   var code = value_led + '.toggle()\n';
   return code;
 };
 
 Blockly.Python['rpi_led_is_lit'] = function(block) {
+  Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
   var value_led = Blockly.Python.valueToCode(block, 'LED', Blockly.Python.ORDER_ATOMIC);
   var code = value_led+'.is_lit';
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
 Blockly.Python['rpi_led_get_value'] = function(block) {
+  Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
   var value_led = Blockly.Python.valueToCode(block, 'LED', Blockly.Python.ORDER_ATOMIC);
   var code = value_led+'.value';
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
 Blockly.Python['rpi_led_set_value'] = function(block) {
+  Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
   var value_led = Blockly.Python.valueToCode(block, 'LED', Blockly.Python.ORDER_ATOMIC);
   var value_value = Blockly.Python.valueToCode(block, 'VALUE', Blockly.Python.ORDER_ATOMIC);
   var code = value_led+'.value = value_value\n';
@@ -69,6 +76,7 @@ Blockly.Python['rpi_led_set_value'] = function(block) {
 };
 
 Blockly.Python['rpi_led_blink'] = function(block) {
+  Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
   var value_led = Blockly.Python.valueToCode(block, 'LED', Blockly.Python.ORDER_ATOMIC);
   var value_n = Blockly.Python.valueToCode(block, 'N', Blockly.Python.ORDER_ATOMIC);
   var value_on_time = Blockly.Python.valueToCode(block, 'ON_TIME', Blockly.Python.ORDER_ATOMIC);
@@ -86,6 +94,7 @@ Blockly.Python['rpi_led_blink'] = function(block) {
 };
 
 Blockly.Python['rpi_rgb_led_blink'] = function(block) {
+  Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
   var value_led = Blockly.Python.valueToCode(block, 'LED', Blockly.Python.ORDER_ATOMIC);
   var value_n = Blockly.Python.valueToCode(block, 'N', Blockly.Python.ORDER_ATOMIC);
   var value_on_time = Blockly.Python.valueToCode(block, 'ON_TIME', Blockly.Python.ORDER_ATOMIC);
