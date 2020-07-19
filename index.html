@@ -637,7 +637,16 @@
         <block type="ev3_color"></block>
       </category>
       <category colour='270' name="Raspberry Pi">
-        <label text="Coming Soon!"></label>
+        <block type="time_sleep"><value name="SECS"><shadow type="math_number"><field name="NUM">1</field></shadow></value></block>
+        <block type="rpi_new_led"><value name="PIN"><shadow type="math_number"><field name="NUM">4</field></shadow></value></block>
+        <block type="rpi_new_rgb_led"><value name="RED_PIN"><shadow type="math_number"><field name="NUM">4</field></shadow></value><value name="GREEN_PIN"><shadow type="math_number"><field name="NUM">5</field></shadow></value><value name="BLUE_PIN"><shadow type="math_number"><field name="NUM">6</field></shadow></value></block>
+        <block type="rpi_led_on"></block>
+        <block type="rpi_led_off"></block>
+        <block type="rpi_led_toggle"></block>
+        <block type="rpi_set_rgb_led_colour"><value name="COLOUR"><shadow type="colour_picker"><field name="COLOUR">#ff0000</field></shadow></block>
+        <block type="colour_picker"></block>
+        <block type="colour_random"></block>
+        <label text="More Coming Soon!"></label>
       </category>
       <sep></sep>
       <category colour='black' name="Insert Your Own Code">
