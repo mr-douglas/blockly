@@ -15,7 +15,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
     {
       "type": "field_label_serializable",
       "name": "NAME",
-      "text": "RGB LED:"
+      "text": "LED:"
     },
     {
       "type": "input_dummy"
