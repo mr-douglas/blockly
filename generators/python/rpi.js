@@ -85,7 +85,7 @@ Blockly.Python['rpi_led_blink'] = function(block) {
   var value_fade_out_time = Blockly.Python.valueToCode(block, 'FADE_OUT_TIME', Blockly.Python.ORDER_ATOMIC);
   var value_not_background = Blockly.Python.valueToCode(block, 'NOT_BACKGROUND', Blockly.Python.ORDER_ATOMIC);
   var run_in_background = "True";
-  if(value_not_background=="true")
+  if(value_not_background=="True")
   {
     run_in_background = "False";
   } 
@@ -105,7 +105,7 @@ Blockly.Python['rpi_rgb_led_blink'] = function(block) {
   var value_off_color = Blockly.Python.valueToCode(block, 'OFF_COLOR', Blockly.Python.ORDER_ATOMIC);
   var value_not_background = Blockly.Python.valueToCode(block, 'NOT_BACKGROUND', Blockly.Python.ORDER_ATOMIC);
   var run_in_background = "True";
-  if(value_not_background=="true")
+  if(value_not_background=="True")
   {
     run_in_background = "False";
   }
