@@ -89,7 +89,7 @@ Blockly.Python['rpi_led_blink'] = function(block) {
   {
     run_in_background = "False";
   } 
-  var code = value_led+'.blink(on_time='+value_on_time+', off_time='+value_off_time+', fade_in_time='+value_fade_in_time+', fade_out_time='+value_fade_out_time+', n='+value_n+', background='+run_in_background+')';
+  var code = value_led+'.blink(on_time='+value_on_time+', off_time='+value_off_time+', fade_in_time='+value_fade_in_time+', fade_out_time='+value_fade_out_time+', n='+value_n+', background='+run_in_background+')\n';
   return code;
 };
 
@@ -116,7 +116,7 @@ Blockly.Python['rpi_rgb_led_blink'] = function(block) {
   +', on_color='+value_on_color
   +', off_color='+value_off_color
   +', n='+value_n+', background='+run_in_background
-  +')';
+  +')\n';
   return code;
 };
 
