@@ -5,6 +5,7 @@ goog.require('Blockly.Extensions');
 
 Blockly.Python.addReservedWords('RPi');
 Blockly.Python.addReservedWords('gpiozero');
+Blockly.Python.addReservedWords('time');
 
 var rpi_gpio_imports = 'import RPi.GPIO'
 var rpi_gpiozero_imports = 'import gpiozero'
@@ -214,6 +215,8 @@ Blockly.Python['rpi_new_servo'] = function(block) {
 };
 
 Blockly.Python['rpi_servo_turn_to_angle'] = function(block) {
+  Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
+  Blockly.Python.definitions_['import_time'] = 'import time';
   var value_servo = Blockly.Python.valueToCode(block, 'SERVO', Blockly.Python.ORDER_ATOMIC);
   var value_angle = Blockly.Python.valueToCode(block, 'ANGLE', Blockly.Python.ORDER_ATOMIC);
   var turnAndWaitFunctionName = Blockly.Python.provideFunction_(
