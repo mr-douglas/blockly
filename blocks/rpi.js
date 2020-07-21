@@ -588,7 +588,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
       "align": "RIGHT"
     }
   ],
-  "output": "Number",
+  "output": "Boolean",
   "colour": 270,
   "tooltip": "",
   "helpUrl": ""
