@@ -241,3 +241,18 @@ Blockly.Python['rpi_servo_turn_to_angle'] = function(block) {
   }
   return code;
 };
+
+Blockly.Python['rpi_new_usonic_sensor'] = function(block) {
+  Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
+  var value_trig = Blockly.Python.valueToCode(block, 'TRIG', Blockly.Python.ORDER_ATOMIC);
+  var value_echo = Blockly.Python.valueToCode(block, 'ECHO', Blockly.Python.ORDER_ATOMIC);
+  var code = 'gpiozero.DistanceSensor('+value_echo+', '+value_trig+', queue_len=5, max_distance=3, threshold_distance=0.3, partial=False, pin_factory=None)';
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python['rpi_usonic_get_distance'] = function(block) {
+  Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
+  var value_usonic_sensor = Blockly.Python.valueToCode(block, 'USONIC_SENSOR', Blockly.Python.ORDER_ATOMIC);
+  var code = value_usonic_sensor+'.distance';
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};

@@ -517,5 +517,45 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   "colour": 270,
   "tooltip": "",
   "helpUrl": ""
+},
+{
+  "type": "rpi_new_usonic_sensor",
+  "message0": "ultrasonic distance sensor: %1 trigger pin: %2 echo pin: %3",
+  "args0": [
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_value",
+      "name": "TRIG",
+      "check": "Number",
+      "align": "RIGHT"
+    },
+    {
+      "type": "input_value",
+      "name": "ECHO",
+      "check": "Number",
+      "align": "RIGHT"
+    }
+  ],
+  "output": "RPi_USonic_Sensor",
+  "colour": 270,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "rpi_usonic_get_distance",
+  "message0": "get distance from ultrasonic sensor: %1",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "USONIC_SENSOR",
+      "check": "RPi_USonic_Sensor"
+    }
+  ],
+  "output": "Number",
+  "colour": 270,
+  "tooltip": "",
+  "helpUrl": ""
 }
 ]);  // END JSON EXTRACT (Do not delete this comment.)

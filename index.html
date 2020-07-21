@@ -697,6 +697,10 @@
           <block type="rpi_new_servo"><value name="PIN"><shadow type="math_number"><field name="NUM">4</field></shadow></value></block>
           <block type="rpi_servo_turn_to_angle"><value name="ANGLE"><shadow type="math_number"><field name="NUM">90</field></shadow></value></block>
         </category>
+        <category colour='270' name='Ultrasonic Distance Sensor'>
+          <block type="rpi_new_usonic_sensor"><value name="TRIG"><shadow type="math_number"><field name="NUM">4</field></shadow></value><value name="ECHO"><shadow type="math_number"><field name="NUM">5</field></shadow></value></block>
+          <block type="rpi_usonic_get_distance"></block>
+        </category>
         <label text="More Coming Soon!"></label>
       </category>
       <sep></sep>
