@@ -260,7 +260,7 @@ Blockly.Python['rpi_usonic_get_distance'] = function(block) {
 Blockly.Python['rpi_new_motion_sensor'] = function(block) {
   Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
   var value_pin = Blockly.Python.valueToCode(block, 'PIN', Blockly.Python.ORDER_ATOMIC);
-  var code = 'gpiozero.MotionSensor('+value_pin+', *, queue_len=1, sample_rate=10, threshold=0.5, partial=False, pin_factory=None)';
+  var code = 'gpiozero.MotionSensor('+value_pin+', queue_len=1, sample_rate=10, threshold=0.5, partial=False, pin_factory=None)';
   return [code, Blockly.Python.ORDER_NONE];
 };
 
