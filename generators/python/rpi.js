@@ -4,6 +4,7 @@ goog.require('Blockly.Python');
 goog.require('Blockly.Extensions');
 
 Blockly.Python.addReservedWords('RPi');
+Blockly.Python.addReservedWords('gpiozero');
 
 var rpi_gpio_imports = 'import RPi.GPIO'
 var rpi_gpiozero_imports = 'import gpiozero'
@@ -29,27 +30,43 @@ Blockly.Python['rpi_set_rgb_led_colour'] = function(block) {
   var value_led = Blockly.Python.valueToCode(block, 'LED', Blockly.Python.ORDER_ATOMIC);
   var value_colour = Blockly.Python.valueToCode(block, 'COLOUR', Blockly.Python.ORDER_ATOMIC);
   var code = value_led + '.color = ' + value_colour + '\n';
+  if(value_led=="")
+  {
+    return "#"+code;
+  }
   return code;
 };
 
-Blockly.Python['rpi_led_on'] = function(block) {
+Blockly.Python['rpi_on'] = function(block) {
   Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
-  var value_led = Blockly.Python.valueToCode(block, 'LED', Blockly.Python.ORDER_ATOMIC);
-  var code = value_led + '.on()\n';
+  var value_component = Blockly.Python.valueToCode(block, 'COMPONENT', Blockly.Python.ORDER_ATOMIC);
+  var code = value_component + '.on()\n';
+  if(value_component=="")
+  {
+    return "#"+code;
+  }
   return code;
 };
 
-Blockly.Python['rpi_led_off'] = function(block) {
+Blockly.Python['rpi_off'] = function(block) {
   Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
-  var value_led = Blockly.Python.valueToCode(block, 'LED', Blockly.Python.ORDER_ATOMIC);
-  var code = value_led + '.off()\n';
+  var value_component = Blockly.Python.valueToCode(block, 'COMPONENT', Blockly.Python.ORDER_ATOMIC);
+  var code = value_component + '.off()\n';
+  if(value_component=="")
+  {
+    return "#"+code;
+  }
   return code;
 };
 
-Blockly.Python['rpi_led_toggle'] = function(block) {
+Blockly.Python['rpi_toggle'] = function(block) {
   Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
-  var value_led = Blockly.Python.valueToCode(block, 'LED', Blockly.Python.ORDER_ATOMIC);
-  var code = value_led + '.toggle()\n';
+  var value_component = Blockly.Python.valueToCode(block, 'COMPONENT', Blockly.Python.ORDER_ATOMIC);
+  var code = value_component + '.toggle()\n';
+  if(value_component=="")
+  {
+    return "#"+code;
+  }
   return code;
 };
 
@@ -72,6 +89,10 @@ Blockly.Python['rpi_led_set_value'] = function(block) {
   var value_led = Blockly.Python.valueToCode(block, 'LED', Blockly.Python.ORDER_ATOMIC);
   var value_value = Blockly.Python.valueToCode(block, 'VALUE', Blockly.Python.ORDER_ATOMIC);
   var code = value_led+'.value = '+value_value+'\n';
+  if(value_led=="")
+  {
+    return "#"+code;
+  }
   return code;
 };
 
@@ -88,8 +109,12 @@ Blockly.Python['rpi_led_blink'] = function(block) {
   if(value_not_background=="True")
   {
     run_in_background = "False";
-  } 
+  }
   var code = value_led+'.blink(on_time='+value_on_time+', off_time='+value_off_time+', fade_in_time='+value_fade_in_time+', fade_out_time='+value_fade_out_time+', n='+value_n+', background='+run_in_background+')\n';
+  if(value_led=="")
+  {
+    return "#"+code;
+  }
   return code;
 };
 
@@ -110,6 +135,10 @@ Blockly.Python['rpi_rgb_led_blink'] = function(block) {
     run_in_background = "False";
   }
   var code = value_led+'.blink(on_time='+value_on_time+', off_time='+value_off_time+', fade_in_time='+value_fade_in_time+', fade_out_time='+value_fade_out_time+', on_color='+value_on_color+', off_color='+value_off_color+', n='+value_n+', background='+run_in_background+')\n';
+  if(value_led=="")
+  {
+    return "#"+code;
+  }
   return code;
 };
 
@@ -122,10 +151,10 @@ Blockly.Python['colour_tuple'] = function(block) {
 };
 
 Blockly.Python['colour_tuple_values'] = function(block) {
-  var number_red = block.getFieldValue('RED');
-  var number_green = block.getFieldValue('GREEN');
-  var number_blue = block.getFieldValue('BLUE');
-  var code = '('+number_red+','+number_green+','+number_blue+')';
+  var value_red = Blockly.Python.valueToCode(block, 'RED', Blockly.Python.ORDER_ATOMIC);
+  var value_green = Blockly.Python.valueToCode(block, 'GREEN', Blockly.Python.ORDER_ATOMIC);
+  var value_blue = Blockly.Python.valueToCode(block, 'BLUE', Blockly.Python.ORDER_ATOMIC);
+  var code = '('+value_red+','+value_green+','+value_blue+')';
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
@@ -146,10 +175,35 @@ Blockly.Python['hex_colour_to_tuple'] = function(block) {
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python['colour_tuple_values'] = function(block) {
-  var value_red = Blockly.Python.valueToCode(block, 'RED', Blockly.Python.ORDER_ATOMIC);
-  var value_green = Blockly.Python.valueToCode(block, 'GREEN', Blockly.Python.ORDER_ATOMIC);
-  var value_blue = Blockly.Python.valueToCode(block, 'BLUE', Blockly.Python.ORDER_ATOMIC);
-  var code = '('+value_red+','+value_green+','+value_blue+')';
+
+Blockly.Python['rpi_new_buzzer'] = function(block) {
+  Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
+  var value_pin = Blockly.Python.valueToCode(block, 'PIN', Blockly.Python.ORDER_ATOMIC);
+  var code = 'gpiozero.Buzzer('+value_pin+', active_high=True, initial_value=False, pin_factory=None)';
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python['rpi_buzzer_beep'] = function(block) {
+  var value_buzzer = Blockly.Python.valueToCode(block, 'BUZZER', Blockly.Python.ORDER_ATOMIC);
+  var value_n = Blockly.Python.valueToCode(block, 'N', Blockly.Python.ORDER_ATOMIC);
+  var value_on_time = Blockly.Python.valueToCode(block, 'ON_TIME', Blockly.Python.ORDER_ATOMIC);
+  var value_off_time = Blockly.Python.valueToCode(block, 'OFF_TIME', Blockly.Python.ORDER_ATOMIC);
+  var value_not_background = Blockly.Python.valueToCode(block, 'NOT_BACKGROUND', Blockly.Python.ORDER_ATOMIC);
+  var run_in_background = "True";
+  if(value_not_background=="True")
+  {
+    run_in_background = "False";
+  } 
+  var code = value_buzzer+'.beep(on_time='+value_on_time+', off_time='+value_off_time+', n='+value_n+', background='+run_in_background+')\n';
+  if(value_buzzer="")
+  {
+    return "#"+code;
+  }
+  return code;
+};
+
+Blockly.Python['rpi_buzzer_is_active'] = function(block) {
+  var value_buzzer = Blockly.Python.valueToCode(block, 'BUZZER', Blockly.Python.ORDER_ATOMIC);
+  var code = value_buzzer + '.is_active';
   return [code, Blockly.Python.ORDER_ATOMIC];
 };

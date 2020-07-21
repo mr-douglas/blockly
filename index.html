@@ -640,9 +640,9 @@
         <block type="time_sleep"><value name="SECS"><shadow type="math_number"><field name="NUM">1</field></shadow></value></block>
         <category colour='270' name="LED">
           <block type="rpi_new_led"><value name="PIN"><shadow type="math_number"><field name="NUM">4</field></shadow></value></block>
-          <block type="rpi_led_on"></block>
-          <block type="rpi_led_off"></block>
-          <block type="rpi_led_toggle"></block>
+          <block type="rpi_on"></block>
+          <block type="rpi_off"></block>
+          <block type="rpi_toggle"></block>
           <block type="rpi_led_is_lit"></block>
           <block type="rpi_led_get_value"></block>
           <block type="rpi_led_set_value"><value name="VALUE"><shadow type="math_number"><field name="NUM">0.9</field></shadow></value></block>
@@ -652,14 +652,14 @@
             <value name="OFF_TIME"><shadow type="math_number"><field name="NUM">3</field></shadow></value>
             <value name="FADE_IN_TIME"><shadow type="math_number"><field name="NUM">2</field></shadow></value>
             <value name="FADE_OUT_TIME"><shadow type="math_number"><field name="NUM">1</field></shadow></value>
-            <value name="NOT_BACKGROUND"><shadow type="logic_boolean"><field name="BOOL">FALSE</field></shadow></value>
+            <value name="NOT_BACKGROUND"><shadow type="logic_boolean"><field name="BOOL">TRUE</field></shadow></value>
           </block>
         </category>
         <category colour='270' name="RGB LED">
           <block type="rpi_new_rgb_led"><value name="RED_PIN"><shadow type="math_number"><field name="NUM">4</field></shadow></value><value name="GREEN_PIN"><shadow type="math_number"><field name="NUM">5</field></shadow></value><value name="BLUE_PIN"><shadow type="math_number"><field name="NUM">6</field></shadow></value></block>
-          <block type="rpi_led_on"></block>
-          <block type="rpi_led_off"></block>
-          <block type="rpi_led_toggle"></block>
+          <block type="rpi_on"></block>
+          <block type="rpi_off"></block>
+          <block type="rpi_toggle"></block>
           <block type="rpi_set_rgb_led_colour"><value name="COLOUR"><shadow type="hex_colour_to_tuple"><value name="COLOUR"><shadow type="colour_picker"><field name="COLOUR">#abcdef</field></shadow></value></shadow></value></block>
           <block type="rpi_led_is_lit"></block>
           <block type="rpi_led_get_value"></block>
@@ -672,7 +672,7 @@
             <value name="FADE_OUT_TIME"><shadow type="math_number"><field name="NUM">1</field></shadow></value>
             <value name="ON_COLOR"><shadow type="hex_colour_to_tuple"><value name="COLOUR"><shadow type="colour_picker"><field name="COLOUR">#ffffff</field></shadow></value></shadow></value>
             <value name="OFF_COLOR"><shadow type="hex_colour_to_tuple"><value name="COLOUR"><shadow type="colour_picker"><field name="COLOUR">#000000</field></shadow></value></shadow></value>
-            <value name="NOT_BACKGROUND"><shadow type="logic_boolean"><field name="BOOL">FALSE</field></shadow></value>
+            <value name="NOT_BACKGROUND"><shadow type="logic_boolean"><field name="BOOL">TRUE</field></shadow></value>
           </block>
           <block type="colour_tuple_values">
             <value name="RED"><shadow type="math_number"><field name="NUM">0.5</field></shadow></value>
@@ -682,6 +682,19 @@
           <block type="colour_tuple"></block>
           <block type="hex_colour_to_tuple"><value name="COLOUR"><shadow type="colour_picker"><field name="COLOUR">#abcdef</field></shadow></value></block>
           <block type="colour_random"></block>
+        </category>
+        <category colour='270' name="Buzzer">
+          <block type="rpi_new_buzzer"></block>
+          <block type="rpi_buzzer_beep">
+            <value name="N"><shadow type="math_number"><field name="NUM">5</field></shadow></value>
+            <value name="ON_TIME"><shadow type="math_number"><field name="NUM">4</field></shadow></value>
+            <value name="OFF_TIME"><shadow type="math_number"><field name="NUM">3</field></shadow></value>
+            <value name="NOT_BACKGROUND"><shadow type="logic_boolean"><field name="BOOL">TRUE</field></shadow></value>
+          </block>
+          <block type="rpi_on"></block>
+          <block type="rpi_off"></block>
+          <block type="rpi_toggle"></block>
+          <block type="rpi_buzzer_is_active"></block>
         </category>
         <label text="More Coming Soon!"></label>
       </category>

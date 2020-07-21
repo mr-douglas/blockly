@@ -95,13 +95,13 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   "helpUrl": ""
 },
 {
-  "type": "rpi_led_on",
-  "message0": "turn LED: %1 on",
+  "type": "rpi_on",
+  "message0": "turn on component: %1",
   "args0": [
     {
       "type": "input_value",
-      "name": "LED",
-      "check": "RPi_LED"
+      "name": "COMPONENT",
+      "check": ["RPi_LED","RPi__RGB_LED","RPi_Buzzer"]
     }
   ],
   "previousStatement": null,
@@ -111,13 +111,13 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   "helpUrl": ""
 },
 {
-  "type": "rpi_led_off",
-  "message0": "turn LED: %1 off",
+  "type": "rpi_off",
+  "message0": "turn off component: %1",
   "args0": [
     {
       "type": "input_value",
-      "name": "LED",
-      "check": "RPi_LED"
+      "name": "COMPONENT",
+      "check": ["RPi_LED","RPi__RGB_LED","RPi_Buzzer"]
     }
   ],
   "previousStatement": null,
@@ -127,13 +127,13 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   "helpUrl": ""
 },
 {
-  "type": "rpi_led_toggle",
-  "message0": "toggle/invert LED: %1",
+  "type": "rpi_toggle",
+  "message0": "toggle/invert component: %1",
   "args0": [
     {
       "type": "input_value",
-      "name": "LED",
-      "check": ["RPi_LED","RPi_RGB_LED"]
+      "name": "COMPONENT",
+      "check": ["RPi_LED","RPi__RGB_LED","RPi_Buzzer"]
     }
   ],
   "previousStatement": null,
@@ -144,7 +144,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
 },
 {
   "type": "rpi_led_is_lit",
-  "message0": "is LED %1 lit",
+  "message0": "is LED %1 lit?",
   "args0": [
     {
       "type": "input_value",
@@ -392,6 +392,87 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   ],
   "inputsInline": true,
   "output": "RPi_Colour_Tuple",
+  "colour": 270,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "rpi_new_buzzer",
+  "message0": "buzzer: %1 pin: %2",
+  "args0": [
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_value",
+      "name": "PIN",
+      "check": "Number"
+    }
+  ],
+  "inputsInline": false,
+  "output": "RPi_Buzzer",
+  "colour": 270,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "rpi_buzzer_beep",
+  "message0": "make buzzer beep: %1 buzzer: %2 number of times to beep: %3 each time beep for (in seconds): %4 times between beeps (in seconds): %5 wait until finished: %6",
+  "args0": [
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_value",
+      "name": "BUZZER",
+      "check": "Number",
+      "align": "RIGHT"
+    },
+    {
+      "type": "input_value",
+      "name": "N",
+      "check": "Number",
+      "align": "RIGHT"
+    },
+    {
+      "type": "input_value",
+      "name": "ON_TIME",
+      "check": "Number",
+      "align": "RIGHT"
+    },
+    {
+      "type": "input_value",
+      "name": "OFF_TIME",
+      "check": "Number",
+      "align": "RIGHT"
+    },
+    {
+      "type": "input_value",
+      "name": "NOT_BACKGROUND",
+      "check": "Boolean",
+      "align": "RIGHT"
+    }
+  ],
+  "inputsInline": false,
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 270,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "rpi_buzzer_is_active",
+  "message0": "is buzzer %1 active?",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "BUZZER",
+      "check": "Number",
+      "align": "RIGHT"
+    }
+  ],
+  "inputsInline": true,
+  "output": "Boolean",
   "colour": 270,
   "tooltip": "",
   "helpUrl": ""
