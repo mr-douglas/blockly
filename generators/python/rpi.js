@@ -37,21 +37,17 @@ Blockly.Python['rpi_set_rgb_led_colour'] = function(block) {
   return code;
 };
 
-Blockly.Python['rpi_on'] = function(block) {
+Blockly.Python['rpi_on_off'] = function(block) {
   Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
   var value_component = Blockly.Python.valueToCode(block, 'COMPONENT', Blockly.Python.ORDER_ATOMIC);
-  var code = value_component + '.on()\n';
-  if(value_component=="")
+  var dropdown_on_off = block.getFieldValue('ON_OFF');
+  var code = "";
+  if (dropdown_on_off == "ON")
   {
-    return "#"+code;
+    code = value_component + '.on()\n';
+  } else {
+    code = value_component + '.off()\n';
   }
-  return code;
-};
-
-Blockly.Python['rpi_off'] = function(block) {
-  Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
-  var value_component = Blockly.Python.valueToCode(block, 'COMPONENT', Blockly.Python.ORDER_ATOMIC);
-  var code = value_component + '.off()\n';
   if(value_component=="")
   {
     return "#"+code;
@@ -184,6 +180,7 @@ Blockly.Python['rpi_new_buzzer'] = function(block) {
 };
 
 Blockly.Python['rpi_buzzer_beep'] = function(block) {
+  Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
   var value_buzzer = Blockly.Python.valueToCode(block, 'BUZZER', Blockly.Python.ORDER_ATOMIC);
   var value_n = Blockly.Python.valueToCode(block, 'N', Blockly.Python.ORDER_ATOMIC);
   var value_on_time = Blockly.Python.valueToCode(block, 'ON_TIME', Blockly.Python.ORDER_ATOMIC);
@@ -203,7 +200,41 @@ Blockly.Python['rpi_buzzer_beep'] = function(block) {
 };
 
 Blockly.Python['rpi_buzzer_is_active'] = function(block) {
+  Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
   var value_buzzer = Blockly.Python.valueToCode(block, 'BUZZER', Blockly.Python.ORDER_ATOMIC);
   var code = value_buzzer + '.is_active';
   return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python['rpi_new_servo'] = function(block) {
+  Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
+  var value_pin = Blockly.Python.valueToCode(block, 'PIN', Blockly.Python.ORDER_ATOMIC);
+  var code = 'gpiozero.AngularServo('+value_pin+', min_angle=0, max_angle=180, min_pulse_width=1/2000, max_pulse_width=11/5000, frame_width=1/50, pin_factory=None)';
+  return [code, Blockly.Python.ORDER_NONE];
+};
+
+Blockly.Python['rpi_servo_turn_to_angle'] = function(block) {
+  var value_servo = Blockly.Python.valueToCode(block, 'SERVO', Blockly.Python.ORDER_ATOMIC);
+  var value_angle = Blockly.Python.valueToCode(block, 'ANGLE', Blockly.Python.ORDER_ATOMIC);
+  var turnAndWaitFunctionName = Blockly.Python.provideFunction_(
+        'turn_to_angle_and_wait',
+        ['def ' + Blockly.Python.FUNCTION_NAME_PLACEHOLDER_ + '(s,a):',
+         '  try:',
+         '      if 0<=a and a<=180:',
+         '          s.angle = a',
+         '          time.sleep(0.4)',
+         '          s.angle = None',
+         '          return',
+         '      else:',
+         '          s.angle = None',
+         '          return',
+         '  except:',
+         '      print("Error turning servo")',
+         '      return']);
+  var code = turnAndWaitFunctionName+'('+value_servo+','+value_angle+')\n';
+  if (value_servo=="")
+  {
+    return "#"+code;
+  }
+  return code;
 };

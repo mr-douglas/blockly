@@ -95,25 +95,23 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   "helpUrl": ""
 },
 {
-  "type": "rpi_on",
-  "message0": "turn on component: %1",
+  "type": "rpi_on_off",
+  "message0": "turn %1 component: %2",
   "args0": [
     {
-      "type": "input_value",
-      "name": "COMPONENT",
-      "check": ["RPi_LED","RPi__RGB_LED","RPi_Buzzer"]
-    }
-  ],
-  "previousStatement": null,
-  "nextStatement": null,
-  "colour": 270,
-  "tooltip": "",
-  "helpUrl": ""
-},
-{
-  "type": "rpi_off",
-  "message0": "turn off component: %1",
-  "args0": [
+      "type": "field_dropdown",
+      "name": "ON_OFF",
+      "options": [
+        [
+          "on",
+          "ON"
+        ],
+        [
+          "off",
+          "OFF"
+        ]
+      ]
+    },
     {
       "type": "input_value",
       "name": "COMPONENT",
@@ -473,6 +471,49 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   ],
   "inputsInline": true,
   "output": "Boolean",
+  "colour": 270,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "rpi_new_servo",
+  "message0": "servo: %1 pin: %2",
+  "args0": [
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_value",
+      "name": "PIN",
+      "check": "Number",
+      "align": "RIGHT"
+    }
+  ],
+  "output": "RPi_Servo",
+  "colour": 270,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "rpi_servo_turn_to_angle",
+  "message0": "turn servo: %1 to angle: %2",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "SERVO",
+      "check": "RPi_Servo",
+      "align": "RIGHT"
+    },
+    {
+      "type": "input_value",
+      "name": "ANGLE",
+      "check": "Number",
+      "align": "RIGHT"
+    }
+  ],
+  "inputsInline": true,
+  "previousStatement": null,
+  "nextStatement": null,
   "colour": 270,
   "tooltip": "",
   "helpUrl": ""
