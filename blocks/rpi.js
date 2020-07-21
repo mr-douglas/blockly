@@ -557,5 +557,40 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   "colour": 270,
   "tooltip": "",
   "helpUrl": ""
+},
+{
+  "type": "rpi_new_motion_sensor",
+  "message0": "motion sensor: %1 pin: %2",
+  "args0": [
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_value",
+      "name": "PIN",
+      "check": "Number",
+      "align": "RIGHT"
+    }
+  ],
+  "output": "RPi_Motion_Sensor",
+  "colour": 270,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "rpi_motion_detected",
+  "message0": "has motion sensor: %1 detected motion?",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "MOTION_SENSOR",
+      "check": "RPi_Motion_Sensor",
+      "align": "RIGHT"
+    }
+  ],
+  "output": "Number",
+  "colour": 270,
+  "tooltip": "",
+  "helpUrl": ""
 }
 ]);  // END JSON EXTRACT (Do not delete this comment.)
