@@ -58,6 +58,7 @@
       var lastBlocklyFileName = "my_blockly_program"
       //For Skulpt
       var requiredConsoleText = "";
+      var skulptIsRunning = false;
       
       //Blockly Functions
       function updatePython() {
@@ -196,10 +197,12 @@
                         __future__: Sk.python3}); 
           (Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = 'skulpt-canvas';
           var myPromise = Sk.misceval.asyncToPromise(function() {
+            skulptIsRunning  = true;
             return Sk.importMainWithBody("<stdin>", false, prog, true);
           });
           myPromise.then(function(mod) {
-            console.log('success');
+            console.log('Finished running');
+            skulptIsRunning = false;
           },
             function(err) {
             outf(err.toString());
@@ -728,7 +731,7 @@
     <div id="skulpt-container" class="hidden">
       <textarea id="skulpt-console" class="both" readonly="true"></textarea> 
       <div id="skulpt-canvas" class="both"></div>
-      <a id="skulpt-close-button" class="my-button" onclick="document.getElementById('excluder').className='hidden'; document.getElementById('skulpt-container').className='hidden';"><span class="icon"><i class="fas fa-times"></i></span><span class="text"> Close</span></a>
+      <a id="skulpt-close-button" class="my-button" onclick="stopPython(); document.getElementById('excluder').className='hidden'; document.getElementById('skulpt-container').className='hidden';"><span class="icon"><i class="fas fa-times"></i></span><span class="text"> Close</span></a>
     </div>
     <div id="blocklyDiv"></div>
     <script>
@@ -860,6 +863,18 @@
         Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(data), workspace);
         })
       }
+      
+      function stopPython() {
+        if (skulptIsRunning)
+        {
+          var defaultTimeLimit = Sk.execLimit;
+          Sk.execLimit = 1;
+          Sk.timeoutMsg = function() {
+            Sk.execLimit = defaultTimeLimit;
+            return "You exited while your Python program was still running";
+          }
+        }
+}
     </script>
   </body>
 </html>
