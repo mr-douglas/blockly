@@ -270,3 +270,81 @@ Blockly.Python['rpi_motion_detected'] = function(block) {
   var code = value_motion_sensor + '.motion_detected';
   return [code, Blockly.Python.ORDER_NONE];
 };
+
+Blockly.Python['rpi_variables_get_led'] = function(block) {
+  Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
+  var code = Blockly.Python.variableDB_.getName(block.getFieldValue('VAR'),Blockly.VARIABLE_CATEGORY_NAME);
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python['rpi_variables_set_led'] = function(block) {
+  Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
+  var value_component = Blockly.Python.valueToCode(block, 'COMPONENT', Blockly.Python.ORDER_ATOMIC);
+  var code = Blockly.Python.variableDB_.getName(block.getFieldValue('VAR'),Blockly.VARIABLE_CATEGORY_NAME) + " = " + value_component + "\n";
+  return code;
+};
+
+Blockly.Python['rpi_variables_get_rgb_led'] = function(block) {
+  Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
+  var code = Blockly.Python.variableDB_.getName(block.getFieldValue('VAR'),Blockly.VARIABLE_CATEGORY_NAME);
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python['rpi_variables_set_rgb_led'] = function(block) {
+  Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
+  var value_component = Blockly.Python.valueToCode(block, 'COMPONENT', Blockly.Python.ORDER_ATOMIC);
+  var code = Blockly.Python.variableDB_.getName(block.getFieldValue('VAR'),Blockly.VARIABLE_CATEGORY_NAME) + " = " + value_component + "\n";
+  return code;
+};
+
+Blockly.Python['rpi_variables_get_buzzer'] = function(block) {
+  Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
+  var code = Blockly.Python.variableDB_.getName(block.getFieldValue('VAR'),Blockly.VARIABLE_CATEGORY_NAME);
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python['rpi_variables_set_buzzer'] = function(block) {
+  Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
+  var value_component = Blockly.Python.valueToCode(block, 'COMPONENT', Blockly.Python.ORDER_ATOMIC);
+  var code = Blockly.Python.variableDB_.getName(block.getFieldValue('VAR'),Blockly.VARIABLE_CATEGORY_NAME) + " = " + value_component + "\n";
+  return code;
+};
+
+Blockly.Python['rpi_variables_get_servo'] = function(block) {
+  Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
+  var code = Blockly.Python.variableDB_.getName(block.getFieldValue('VAR'),Blockly.VARIABLE_CATEGORY_NAME);
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python['rpi_variables_set_servo'] = function(block) {
+  Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
+  var value_component = Blockly.Python.valueToCode(block, 'COMPONENT', Blockly.Python.ORDER_ATOMIC);
+  var code = Blockly.Python.variableDB_.getName(block.getFieldValue('VAR'),Blockly.VARIABLE_CATEGORY_NAME) + " = " + value_component + "\n";
+  return code;
+};
+
+Blockly.Python['rpi_variables_get_usonic_sensor'] = function(block) {
+  Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
+  var code = Blockly.Python.variableDB_.getName(block.getFieldValue('VAR'),Blockly.VARIABLE_CATEGORY_NAME);
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python['rpi_variables_set_usonic_sensor'] = function(block) {
+  Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
+  var value_component = Blockly.Python.valueToCode(block, 'COMPONENT', Blockly.Python.ORDER_ATOMIC);
+  var code = Blockly.Python.variableDB_.getName(block.getFieldValue('VAR'),Blockly.VARIABLE_CATEGORY_NAME) + " = " + value_component + "\n";
+  return code;
+};
+
+Blockly.Python['rpi_variables_get_motion_sensor'] = function(block) {
+  Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
+  var code = Blockly.Python.variableDB_.getName(block.getFieldValue('VAR'),Blockly.VARIABLE_CATEGORY_NAME);
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python['rpi_variables_set_motion_sensor'] = function(block) {
+  Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
+  var value_component = Blockly.Python.valueToCode(block, 'COMPONENT', Blockly.Python.ORDER_ATOMIC);
+  var code = Blockly.Python.variableDB_.getName(block.getFieldValue('VAR'),Blockly.VARIABLE_CATEGORY_NAME) + " = " + value_component + "\n";
+  return code;
+};

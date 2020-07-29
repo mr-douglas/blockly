@@ -641,74 +641,15 @@
       </category>
       <category colour='270' name="Raspberry Pi">
         <block type="time_sleep"><value name="SECS"><shadow type="math_number"><field name="NUM">1</field></shadow></value></block>
-        <category colour='270' name="LED">
-          <block type="rpi_new_led"><value name="PIN"><shadow type="math_number"><field name="NUM">4</field></shadow></value></block>
-          <block type="rpi_on_off"></block>
-          <block type="rpi_toggle"></block>
-          <block type="rpi_led_is_lit"></block>
-          <block type="rpi_led_get_value"></block>
-          <block type="rpi_led_set_value"><value name="VALUE"><shadow type="math_number"><field name="NUM">0.9</field></shadow></value></block>
-          <block type="rpi_led_blink">
-            <value name="N"><shadow type="math_number"><field name="NUM">5</field></shadow></value>
-            <value name="ON_TIME"><shadow type="math_number"><field name="NUM">4</field></shadow></value>
-            <value name="OFF_TIME"><shadow type="math_number"><field name="NUM">3</field></shadow></value>
-            <value name="FADE_IN_TIME"><shadow type="math_number"><field name="NUM">2</field></shadow></value>
-            <value name="FADE_OUT_TIME"><shadow type="math_number"><field name="NUM">1</field></shadow></value>
-            <value name="NOT_BACKGROUND"><shadow type="logic_boolean"><field name="BOOL">TRUE</field></shadow></value>
-          </block>
+        <category colour='270' name="LED" custom="RPi_LED"></category>
+        <category colour='270' name="RGB LED" custom="RPi_RGB_LED"></category>
+        <category colour='270' name="Buzzer" custom="RPi_Buzzer"></category>
+        <category colour='270' name='Servo' custom="RPi_Servo">
         </category>
-        <category colour='270' name="RGB LED">
-          <block type="rpi_new_rgb_led"><value name="RED_PIN"><shadow type="math_number"><field name="NUM">4</field></shadow></value><value name="GREEN_PIN"><shadow type="math_number"><field name="NUM">5</field></shadow></value><value name="BLUE_PIN"><shadow type="math_number"><field name="NUM">6</field></shadow></value></block>
-          <block type="rpi_on_off"></block>
-          <block type="rpi_toggle"></block>
-          <block type="rpi_set_rgb_led_colour"><value name="COLOUR"><shadow type="hex_colour_to_tuple"><value name="COLOUR"><shadow type="colour_picker"><field name="COLOUR">#abcdef</field></shadow></value></shadow></value></block>
-          <block type="rpi_led_is_lit"></block>
-          <block type="rpi_led_get_value"></block>
-          <block type="rpi_led_set_value"><value name="VALUE"><shadow type="hex_colour_to_tuple"><value name="COLOUR"><shadow type="colour_picker"><field name="COLOUR">#abcdef</field></shadow></value></shadow></value></block>
-          <block type="rpi_rgb_led_blink">
-            <value name="N"><shadow type="math_number"><field name="NUM">5</field></shadow></value>
-            <value name="ON_TIME"><shadow type="math_number"><field name="NUM">4</field></shadow></value>
-            <value name="OFF_TIME"><shadow type="math_number"><field name="NUM">3</field></shadow></value>
-            <value name="FADE_IN_TIME"><shadow type="math_number"><field name="NUM">2</field></shadow></value>
-            <value name="FADE_OUT_TIME"><shadow type="math_number"><field name="NUM">1</field></shadow></value>
-            <value name="ON_COLOR"><shadow type="hex_colour_to_tuple"><value name="COLOUR"><shadow type="colour_picker"><field name="COLOUR">#ffffff</field></shadow></value></shadow></value>
-            <value name="OFF_COLOR"><shadow type="hex_colour_to_tuple"><value name="COLOUR"><shadow type="colour_picker"><field name="COLOUR">#000000</field></shadow></value></shadow></value>
-            <value name="NOT_BACKGROUND"><shadow type="logic_boolean"><field name="BOOL">TRUE</field></shadow></value>
-          </block>
-          <block type="colour_tuple_values">
-            <value name="RED"><shadow type="math_number"><field name="NUM">0.5</field></shadow></value>
-            <value name="GREEN"><shadow type="math_number"><field name="NUM">0.5</field></shadow></value>
-            <value name="BLUE"><shadow type="math_number"><field name="NUM">0.5</field></shadow></value>
-          </block>
-          <block type="colour_tuple"></block>
-          <block type="hex_colour_to_tuple"><value name="COLOUR"><shadow type="colour_picker"><field name="COLOUR">#abcdef</field></shadow></value></block>
-          <block type="colour_random"></block>
+        <category colour='270' name='Ultrasonic Distance Sensor' custom="RPi_USonic_Sensor">
         </category>
-        <category colour='270' name="Buzzer">
-          <block type="rpi_new_buzzer"><value name="PIN"><shadow type="math_number"><field name="NUM">4</field></shadow></value></block>
-          <block type="rpi_buzzer_beep">
-            <value name="N"><shadow type="math_number"><field name="NUM">5</field></shadow></value>
-            <value name="ON_TIME"><shadow type="math_number"><field name="NUM">4</field></shadow></value>
-            <value name="OFF_TIME"><shadow type="math_number"><field name="NUM">3</field></shadow></value>
-            <value name="NOT_BACKGROUND"><shadow type="logic_boolean"><field name="BOOL">TRUE</field></shadow></value>
-          </block>
-          <block type="rpi_on_off"></block>
-          <block type="rpi_toggle"></block>
-          <block type="rpi_buzzer_is_active"></block>
+        <category colour='270' name='Motion Sensor' custom="RPi_Motion_Sensor">
         </category>
-        <category colour='270' name='Servo'>
-          <block type="rpi_new_servo"><value name="PIN"><shadow type="math_number"><field name="NUM">4</field></shadow></value></block>
-          <block type="rpi_servo_turn_to_angle"><value name="ANGLE"><shadow type="math_number"><field name="NUM">90</field></shadow></value></block>
-        </category>
-        <category colour='270' name='Ultrasonic Distance Sensor'>
-          <block type="rpi_new_usonic_sensor"><value name="TRIG"><shadow type="math_number"><field name="NUM">4</field></shadow></value><value name="ECHO"><shadow type="math_number"><field name="NUM">5</field></shadow></value></block>
-          <block type="rpi_usonic_get_distance"></block>
-        </category>
-        <category colour='270' name='Motion Sensor'>
-          <block type="rpi_new_motion_sensor"><value name="PIN"><shadow type="math_number"><field name="NUM">4</field></shadow></value></block>
-          <block type="rpi_motion_detected"></block>
-        </category>
-        <label text="More Coming Soon!"></label>
       </category>
       <sep></sep>
       <category colour='black' name="Insert Your Own Code">
@@ -828,6 +769,228 @@
                                       );
       workspace.registerButtonCallback('addSensorButtonPressed', function(button){
                                                                                  Blockly.Variables.createVariableButtonHandler(button.getTargetWorkspace(), null, 'EV3Sensor');
+                                                                                }
+                                      );
+
+      workspace.registerToolboxCategoryCallback('RPi_LED', function(workspace){
+                                                                                          var xmlList = [];
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<button text="Add New LED" callbackKey="addRPiLEDButtonPressed"></button>'));
+                                                                                          var variableModelList = workspace.getVariablesOfType('RPi_LED');
+                                                                                          if(variableModelList.length>0){
+                                                                                            for (var i = 0, variable; (variable = variableModelList[i]); i++) {
+                                                                                              var block = Blockly.utils.xml.createElement('block');
+                                                                                              block.setAttribute('type', 'rpi_variables_set_led');
+                                                                                              block.setAttribute('gap', 8);
+                                                                                              block.appendChild(Blockly.Variables.generateVariableFieldDom(variable));
+                                                                                              xmlList.push(block);
+                                                                                            }
+                                                                                          }
+                                                                                          if(variableModelList.length>0){
+                                                                                            for (var i = 0, variable; (variable = variableModelList[i]); i++) {
+                                                                                              var block = Blockly.utils.xml.createElement('block');
+                                                                                              block.setAttribute('type', 'rpi_variables_get_led');
+                                                                                              block.setAttribute('gap', 8);
+                                                                                              block.appendChild(Blockly.Variables.generateVariableFieldDom(variable));
+                                                                                              xmlList.push(block);
+                                                                                            }
+                                                                                          }
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<block type="rpi_new_led"><value name="PIN"><shadow type="math_number"><field name="NUM">4</field></shadow></value></block>'));
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<block type="rpi_on_off"></block>'));
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<block type="rpi_toggle"></block>'));
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<block type="rpi_led_is_lit"></block>'));
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<block type="rpi_led_get_value"></block>'));
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<block type="rpi_led_set_value"><value name="VALUE"><shadow type="math_number"><field name="NUM">0.9</field></shadow></value></block>'));
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<block type="rpi_led_blink"><value name="N"><shadow type="math_number"><field name="NUM">5</field></shadow></value><value name="ON_TIME"><shadow type="math_number"><field name="NUM">4</field></shadow></value><value name="OFF_TIME"><shadow type="math_number"><field name="NUM">3</field></shadow></value><value name="FADE_IN_TIME"><shadow type="math_number"><field name="NUM">2</field></shadow></value><value name="FADE_OUT_TIME"><shadow type="math_number"><field name="NUM">1</field></shadow></value><value name="NOT_BACKGROUND"><shadow type="logic_boolean"><field name="BOOL">TRUE</field></shadow></value></block>'));
+                                                                                          return xmlList;
+                                                                                         }
+                                               );
+                                               
+      workspace.registerButtonCallback('addRPiLEDButtonPressed', function(button){
+                                                                                 Blockly.Variables.createVariableButtonHandler(button.getTargetWorkspace(), null, 'RPi_LED');
+                                                                                }
+                                      );
+
+      workspace.registerToolboxCategoryCallback('RPi_RGB_LED', function(workspace){
+                                                                                          var xmlList = [];
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<button text="Add New RGB LED" callbackKey="addRPiRGBLEDButtonPressed"></button>'));
+                                                                                          var variableModelList = workspace.getVariablesOfType('RPi_RGB_LED');
+                                                                                          if(variableModelList.length>0){
+                                                                                            for (var i = 0, variable; (variable = variableModelList[i]); i++) {
+                                                                                              var block = Blockly.utils.xml.createElement('block');
+                                                                                              block.setAttribute('type', 'rpi_variables_set_rgb_led');
+                                                                                              block.setAttribute('gap', 8);
+                                                                                              block.appendChild(Blockly.Variables.generateVariableFieldDom(variable));
+                                                                                              xmlList.push(block);
+                                                                                            }
+                                                                                          }
+                                                                                          if(variableModelList.length>0){
+                                                                                            for (var i = 0, variable; (variable = variableModelList[i]); i++) {
+                                                                                              var block = Blockly.utils.xml.createElement('block');
+                                                                                              block.setAttribute('type', 'rpi_variables_get_rgb_led');
+                                                                                              block.setAttribute('gap', 8);
+                                                                                              block.appendChild(Blockly.Variables.generateVariableFieldDom(variable));
+                                                                                              xmlList.push(block);
+                                                                                            }
+                                                                                          }
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<block type="rpi_new_rgb_led"><value name="RED_PIN"><shadow type="math_number"><field name="NUM">4</field></shadow></value><value name="GREEN_PIN"><shadow type="math_number"><field name="NUM">5</field></shadow></value><value name="BLUE_PIN"><shadow type="math_number"><field name="NUM">6</field></shadow></value></block>'));
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<block type="rpi_on_off"></block>'));
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<block type="rpi_toggle"></block>'));
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<block type="rpi_set_rgb_led_colour"><value name="COLOUR"><shadow type="hex_colour_to_tuple"><value name="COLOUR"><shadow type="colour_picker"><field name="COLOUR">#abcdef</field></shadow></value></shadow></value></block>'));
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<block type="rpi_led_is_lit"></block>'));
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<block type="rpi_led_get_value"></block>'));
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<block type="rpi_led_set_value"><value name="VALUE"><shadow type="hex_colour_to_tuple"><value name="COLOUR"><shadow type="colour_picker"><field name="COLOUR">#abcdef</field></shadow></value></shadow></value></block>'));
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<block type="rpi_rgb_led_blink"><value name="N"><shadow type="math_number"><field name="NUM">5</field></shadow></value><value name="ON_TIME"><shadow type="math_number"><field name="NUM">4</field></shadow></value><value name="OFF_TIME"><shadow type="math_number"><field name="NUM">3</field></shadow></value><value name="FADE_IN_TIME"><shadow type="math_number"><field name="NUM">2</field></shadow></value><value name="FADE_OUT_TIME"><shadow type="math_number"><field name="NUM">1</field></shadow></value><value name="ON_COLOR"><shadow type="hex_colour_to_tuple"><value name="COLOUR"><shadow type="colour_picker"><field name="COLOUR">#ffffff</field></shadow></value></shadow></value><value name="OFF_COLOR"><shadow type="hex_colour_to_tuple"><value name="COLOUR"><shadow type="colour_picker"><field name="COLOUR">#000000</field></shadow></value></shadow></value><value name="NOT_BACKGROUND"><shadow type="logic_boolean"><field name="BOOL">TRUE</field></shadow></value></block>'));
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<block type="colour_tuple_values"><value name="RED"><shadow type="math_number"><field name="NUM">0.5</field></shadow></value><value name="GREEN"><shadow type="math_number"><field name="NUM">0.5</field></shadow></value><value name="BLUE"><shadow type="math_number"><field name="NUM">0.5</field></shadow></value></block>'));
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<block type="colour_tuple"></block>'));
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<block type="hex_colour_to_tuple"><value name="COLOUR"><shadow type="colour_picker"><field name="COLOUR">#abcdef</field></shadow></value></block>'));
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<block type="colour_random"></block>'));
+
+          
+                                                                                          return xmlList;
+                                                                                         }
+                                               );
+                                               
+      workspace.registerButtonCallback('addRPiRGBLEDButtonPressed', function(button){
+                                                                                 Blockly.Variables.createVariableButtonHandler(button.getTargetWorkspace(), null, 'RPi_RGB_LED');
+                                                                                }
+                                      );
+
+      workspace.registerToolboxCategoryCallback('RPi_Buzzer', function(workspace){
+                                                                                          var xmlList = [];
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<button text="Add New Buzzer" callbackKey="addRPiBuzzerButtonPressed"></button>'));
+                                                                                          var variableModelList = workspace.getVariablesOfType('RPi_Buzzer');
+                                                                                          if(variableModelList.length>0){
+                                                                                            for (var i = 0, variable; (variable = variableModelList[i]); i++) {
+                                                                                              var block = Blockly.utils.xml.createElement('block');
+                                                                                              block.setAttribute('type', 'rpi_variables_set_buzzer');
+                                                                                              block.setAttribute('gap', 8);
+                                                                                              block.appendChild(Blockly.Variables.generateVariableFieldDom(variable));
+                                                                                              xmlList.push(block);
+                                                                                            }
+                                                                                          }
+                                                                                          if(variableModelList.length>0){
+                                                                                            for (var i = 0, variable; (variable = variableModelList[i]); i++) {
+                                                                                              var block = Blockly.utils.xml.createElement('block');
+                                                                                              block.setAttribute('type', 'rpi_variables_get_buzzer');
+                                                                                              block.setAttribute('gap', 8);
+                                                                                              block.appendChild(Blockly.Variables.generateVariableFieldDom(variable));
+                                                                                              xmlList.push(block);
+                                                                                            }
+                                                                                          }
+                                                                                          
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<block type="rpi_new_buzzer"><value name="PIN"><shadow type="math_number"><field name="NUM">4</field></shadow></value></block>'));
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<block type="rpi_buzzer_beep"><value name="N"><shadow type="math_number"><field name="NUM">5</field></shadow></value><value name="ON_TIME"><shadow type="math_number"><field name="NUM">4</field></shadow></value><value name="OFF_TIME"><shadow type="math_number"><field name="NUM">3</field></shadow></value><value name="NOT_BACKGROUND"><shadow type="logic_boolean"><field name="BOOL">TRUE</field></shadow></value></block>'));
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<block type="rpi_on_off"></block>'));
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<block type="rpi_toggle"></block>'));
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<block type="rpi_buzzer_is_active"></block>'));
+                                                                                          return xmlList;
+                                                                                         }
+                                               );
+                                               
+      workspace.registerButtonCallback('addRPiBuzzerButtonPressed', function(button){
+                                                                                 Blockly.Variables.createVariableButtonHandler(button.getTargetWorkspace(), null, 'RPi_Buzzer');
+                                                                                }
+                                      );
+
+      workspace.registerToolboxCategoryCallback('RPi_Servo', function(workspace){
+                                                                                          var xmlList = [];
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<button text="Add New Servo" callbackKey="addRPiServoPressed"></button>'));
+                                                                                          var variableModelList = workspace.getVariablesOfType('RPi_Servo');
+                                                                                          if(variableModelList.length>0){
+                                                                                            for (var i = 0, variable; (variable = variableModelList[i]); i++) {
+                                                                                              var block = Blockly.utils.xml.createElement('block');
+                                                                                              block.setAttribute('type', 'rpi_variables_set_servo');
+                                                                                              block.setAttribute('gap', 8);
+                                                                                              block.appendChild(Blockly.Variables.generateVariableFieldDom(variable));
+                                                                                              xmlList.push(block);
+                                                                                            }
+                                                                                          }
+                                                                                          if(variableModelList.length>0){
+                                                                                            for (var i = 0, variable; (variable = variableModelList[i]); i++) {
+                                                                                              var block = Blockly.utils.xml.createElement('block');
+                                                                                              block.setAttribute('type', 'rpi_variables_get_servo');
+                                                                                              block.setAttribute('gap', 8);
+                                                                                              block.appendChild(Blockly.Variables.generateVariableFieldDom(variable));
+                                                                                              xmlList.push(block);
+                                                                                            }
+                                                                                          }
+                                                                                          
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<block type="rpi_new_servo"><value name="PIN"><shadow type="math_number"><field name="NUM">4</field></shadow></value></block>'));
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<block type="rpi_servo_turn_to_angle"><value name="ANGLE"><shadow type="math_number"><field name="NUM">90</field></shadow></value></block>'));
+                                                                                          return xmlList;
+                                                                                         }
+                                               );
+                                               
+      workspace.registerButtonCallback('addRPiServoPressed', function(button){
+                                                                                 Blockly.Variables.createVariableButtonHandler(button.getTargetWorkspace(), null, 'RPi_Servo');
+                                                                                }
+                                      );
+
+      workspace.registerToolboxCategoryCallback('RPi_USonic_Sensor', function(workspace){
+                                                                                          var xmlList = [];
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<button text="Add New Ultrasonic Distance Sensor" callbackKey="addRPiUSonicSensorPressed"></button>'));
+                                                                                          var variableModelList = workspace.getVariablesOfType('RPi_USonic_Sensor');
+                                                                                          if(variableModelList.length>0){
+                                                                                            for (var i = 0, variable; (variable = variableModelList[i]); i++) {
+                                                                                              var block = Blockly.utils.xml.createElement('block');
+                                                                                              block.setAttribute('type', 'rpi_variables_set_usonic_sensor');
+                                                                                              block.setAttribute('gap', 8);
+                                                                                              block.appendChild(Blockly.Variables.generateVariableFieldDom(variable));
+                                                                                              xmlList.push(block);
+                                                                                            }
+                                                                                          }
+                                                                                          if(variableModelList.length>0){
+                                                                                            for (var i = 0, variable; (variable = variableModelList[i]); i++) {
+                                                                                              var block = Blockly.utils.xml.createElement('block');
+                                                                                              block.setAttribute('type', 'rpi_variables_get_usonic_sensor');
+                                                                                              block.setAttribute('gap', 8);
+                                                                                              block.appendChild(Blockly.Variables.generateVariableFieldDom(variable));
+                                                                                              xmlList.push(block);
+                                                                                            }
+                                                                                          }
+                                                                                          
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<block type="rpi_new_usonic_sensor"><value name="TRIG"><shadow type="math_number"><field name="NUM">4</field></shadow></value><value name="ECHO"><shadow type="math_number"><field name="NUM">5</field></shadow></value></block>'));
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<block type="rpi_usonic_get_distance"></block>'));
+                                                                                          return xmlList;
+                                                                                         }
+                                               );
+                                               
+      workspace.registerButtonCallback('addRPiUSonicSensorPressed', function(button){
+                                                                                 Blockly.Variables.createVariableButtonHandler(button.getTargetWorkspace(), null, 'RPi_USonic_Sensor');
+                                                                                }
+                                      );
+
+      workspace.registerToolboxCategoryCallback('RPi_Motion_Sensor', function(workspace){
+                                                                                          var xmlList = [];
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<button text="Add New Motion Sensor" callbackKey="addRPiMotionSensorPressed"></button>'));
+                                                                                          var variableModelList = workspace.getVariablesOfType('RPi_Motion_Sensor');
+                                                                                          if(variableModelList.length>0){
+                                                                                            for (var i = 0, variable; (variable = variableModelList[i]); i++) {
+                                                                                              var block = Blockly.utils.xml.createElement('block');
+                                                                                              block.setAttribute('type', 'rpi_variables_set_motion_sensor');
+                                                                                              block.setAttribute('gap', 8);
+                                                                                              block.appendChild(Blockly.Variables.generateVariableFieldDom(variable));
+                                                                                              xmlList.push(block);
+                                                                                            }
+                                                                                          }
+                                                                                          if(variableModelList.length>0){
+                                                                                            for (var i = 0, variable; (variable = variableModelList[i]); i++) {
+                                                                                              var block = Blockly.utils.xml.createElement('block');
+                                                                                              block.setAttribute('type', 'rpi_variables_get_led');
+                                                                                              block.setAttribute('gap', 8);
+                                                                                              block.appendChild(Blockly.Variables.generateVariableFieldDom(variable));
+                                                                                              xmlList.push(block);
+                                                                                            }
+                                                                                          }
+                                                                                          
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<block type="rpi_new_motion_sensor"><value name="PIN"><shadow type="math_number"><field name="NUM">4</field></shadow></value></block>'));
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<block type="rpi_motion_detected"></block>'));
+                                                                                          return xmlList;
+                                                                                         }
+                                               );
+                                               
+      workspace.registerButtonCallback('addRPiMotionSensorPressed', function(button){
+                                                                                 Blockly.Variables.createVariableButtonHandler(button.getTargetWorkspace(), null, 'RPi_Motion_Sensor');
                                                                                 }
                                       );
 

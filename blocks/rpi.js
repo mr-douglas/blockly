@@ -115,7 +115,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
     {
       "type": "input_value",
       "name": "COMPONENT",
-      "check": ["RPi_LED","RPi__RGB_LED","RPi_Buzzer"]
+      "check": ["RPi_LED","RPi_RGB_LED","RPi_Buzzer"]
     }
   ],
   "previousStatement": null,
@@ -131,7 +131,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
     {
       "type": "input_value",
       "name": "COMPONENT",
-      "check": ["RPi_LED","RPi__RGB_LED","RPi_Buzzer"]
+      "check": ["RPi_LED","RPi_RGB_LED","RPi_Buzzer"]
     }
   ],
   "previousStatement": null,
@@ -592,5 +592,245 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   "colour": 270,
   "tooltip": "",
   "helpUrl": ""
+},
+// Blocks for RPi_LED variable getter.
+{
+  "type": "rpi_variables_get_led",
+  "message0": "%1",
+  "args0": [
+    {
+      "type": "field_variable",
+      "name": "VAR",
+      "variable": "%{BKY_VARIABLES_DEFAULT_NAME}",
+      "variableTypes": ["RPi_LED"],    // Specifies what types to put in the dropdown
+      "defaultType": "RPi_LED"
+    }
+  ],
+  "colour": 270,
+  "inputsInline": true,
+  "output": "RPi_LED"    // Returns a value of "RPi_LED"
+},
+{
+  "type": "rpi_variables_set_led",
+  "message0": "%1 %2",
+  "args0": [
+    {
+      "type": "field_variable",
+      "name": "VAR",
+      "variable": "%{BKY_VARIABLES_DEFAULT_NAME}",
+      "variableTypes": ["RPi_LED"],    // Specifies what types to put in the dropdown
+      "defaultType": "RPi_LED"
+    },
+    {
+      "type": "input_value",
+      "name": "COMPONENT",
+      "check": [
+        "RPi_LED"
+      ]
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 270
+},
+// Blocks for RPi_RGB_LED variable getter.
+{
+  "type": "rpi_variables_get_rgb_led",
+  "message0": "%1",
+  "args0": [
+    {
+      "type": "field_variable",
+      "name": "VAR",
+      "variable": "%{BKY_VARIABLES_DEFAULT_NAME}",
+      "variableTypes": ["RPi_RGB_LED"],    // Specifies what types to put in the dropdown
+      "defaultType": "RPi_RGB_LED"
+    }
+  ],
+  "colour": 270,
+  "inputsInline": true,
+  "output": "RPi_RGB_LED"    // Returns a value of "RPi_RGB_LED"
+},
+{
+  "type": "rpi_variables_set_rgb_led",
+  "message0": "%1 %2",
+  "args0": [
+    {
+      "type": "field_variable",
+      "name": "VAR",
+      "variable": "%{BKY_VARIABLES_DEFAULT_NAME}",
+      "variableTypes": ["RPi_RGB_LED"],    // Specifies what types to put in the dropdown
+      "defaultType": "RPi_RGB_LED"
+    },
+    {
+      "type": "input_value",
+      "name": "COMPONENT",
+      "check": [
+        "RPi_RGB_LED"
+      ]
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 270
+},
+// Blocks for RPi_Buzzer variable getter.
+{
+  "type": "rpi_variables_get_buzzer",
+  "message0": "%1",
+  "args0": [
+    {
+      "type": "field_variable",
+      "name": "VAR",
+      "variable": "%{BKY_VARIABLES_DEFAULT_NAME}",
+      "variableTypes": ["RPi_Buzzer"],    // Specifies what types to put in the dropdown
+      "defaultType": "RPi_Buzzer"
+    }
+  ],
+  "colour": 270,
+  "inputsInline": true,
+  "output": "RPi_Buzzer"    // Returns a value of "RPi_Buzzer"
+},
+{
+  "type": "rpi_variables_set_buzzer",
+  "message0": "%1 %2",
+  "args0": [
+    {
+      "type": "field_variable",
+      "name": "VAR",
+      "variable": "%{BKY_VARIABLES_DEFAULT_NAME}",
+      "variableTypes": ["RPi_Buzzer"],    // Specifies what types to put in the dropdown
+      "defaultType": "RPi_Buzzer"
+    },
+    {
+      "type": "input_value",
+      "name": "COMPONENT",
+      "check": [
+        "RPi_Buzzer"
+      ]
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 270
+},
+// Blocks for RPi_Servo variable getter.
+{
+  "type": "rpi_variables_get_servo",
+  "message0": "%1",
+  "args0": [
+    {
+      "type": "field_variable",
+      "name": "VAR",
+      "variable": "%{BKY_VARIABLES_DEFAULT_NAME}",
+      "variableTypes": ["RPi_Servo"],    // Specifies what types to put in the dropdown
+      "defaultType": "RPi_Servo"
+    }
+  ],
+  "colour": 270,
+  "inputsInline": true,
+  "output": "RPi_Servo"    // Returns a value of "RPi_Servo"
+},
+{
+  "type": "rpi_variables_set_servo",
+  "message0": "%1 %2",
+  "args0": [
+    {
+      "type": "field_variable",
+      "name": "VAR",
+      "variable": "%{BKY_VARIABLES_DEFAULT_NAME}",
+      "variableTypes": ["RPi_Servo"],    // Specifies what types to put in the dropdown
+      "defaultType": "RPi_Servo"
+    },
+    {
+      "type": "input_value",
+      "name": "COMPONENT",
+      "check": [
+        "RPi_Servo"
+      ]
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 270
+},
+// Blocks for RPi_USonic_Sensor variable getter.
+{
+  "type": "rpi_variables_get_usonic_sensor",
+  "message0": "%1",
+  "args0": [
+    {
+      "type": "field_variable",
+      "name": "VAR",
+      "variable": "%{BKY_VARIABLES_DEFAULT_NAME}",
+      "variableTypes": ["RPi_USonic_Sensor"],    // Specifies what types to put in the dropdown
+      "defaultType": "RPi_USonic_Sensor"
+    }
+  ],
+  "colour": 270,
+  "inputsInline": true,
+  "output": "RPi_USonic_Sensor"    // Returns a value of "RPi_USonic_Sensor"
+},
+{
+  "type": "rpi_variables_set_usonic_sensor",
+  "message0": "%1 %2",
+  "args0": [
+    {
+      "type": "field_variable",
+      "name": "VAR",
+      "variable": "%{BKY_VARIABLES_DEFAULT_NAME}",
+      "variableTypes": ["RPi_USonic_Sensor"],    // Specifies what types to put in the dropdown
+      "defaultType": "RPi_USonic_Sensor"
+    },
+    {
+      "type": "input_value",
+      "name": "COMPONENT",
+      "check": [
+        "RPi_USonic_Sensor"
+      ]
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 270
+},
+// Blocks for RPi_Motion_Sensor variable getter.
+ {
+  "type": "rpi_variables_get_motion_sensor",
+  "message0": "%1",
+  "args0": [
+    {
+      "type": "field_variable",
+      "name": "VAR",
+      "variable": "%{BKY_VARIABLES_DEFAULT_NAME}",
+      "variableTypes": ["RPi_Motion_Sensor"],    // Specifies what types to put in the dropdown
+      "defaultType": "RPi_Motion_Sensor"
+    }
+  ],
+  "colour": 270,
+  "inputsInline": true,
+  "output": "RPi_Motion_Sensor"    // Returns a value of "RPi_Motion_Sensor"
+},
+ {
+  "type": "rpi_variables_set_motion_sensor",
+  "message0": "%1 %2",
+  "args0": [
+    {
+      "type": "field_variable",
+      "name": "VAR",
+      "variable": "%{BKY_VARIABLES_DEFAULT_NAME}",
+      "variableTypes": ["RPi_Motion_Sensor"],    // Specifies what types to put in the dropdown
+      "defaultType": "RPi_Motion_Sensor"
+    },
+    {
+      "type": "input_value",
+      "name": "COMPONENT",
+      "check": [
+        "RPi_Motion_Sensor"
+      ]
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 270
 }
 ]);  // END JSON EXTRACT (Do not delete this comment.)
