@@ -264,7 +264,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
     {
       "type": "input_value",
       "name": "LED",
-      "check": "RPi_LED",
+      "check": "RPi_RGB_LED",
       "align": "RIGHT"
     },
     {
