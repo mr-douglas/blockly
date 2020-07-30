@@ -423,7 +423,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
     {
       "type": "input_value",
       "name": "BUZZER",
-      "check": "Number",
+      "check": "RPi_Buzzer",
       "align": "RIGHT"
     },
     {
