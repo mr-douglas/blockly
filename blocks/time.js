@@ -23,5 +23,13 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   "colour": 230,
   "tooltip": "",
   "helpUrl": ""
-}    
+},
+{
+  "type": "time_get_current_time",
+  "message0": "current time",
+  "output": null,
+  "colour": 230,
+  "tooltip": "",
+  "helpUrl": ""
+}
 ]);  // END JSON EXTRACT (Do not delete this comment.)
