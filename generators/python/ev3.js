@@ -138,7 +138,7 @@ Blockly.Python['ev3_ultrasonic_sensor'] = function(block) {
 Blockly.Python['ev3_gyro_sensor'] = function(block) {
   Blockly.Python.definitions_['import_ev3'] = ev3_imports;
   var dropdown_direction = block.getFieldValue('DIRECTION');
-  var code = '#GyroSensor(port, positive_direction=Direction.'+dropdown_direction+')';
+  var code = '#GyroSensor(port)';
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
