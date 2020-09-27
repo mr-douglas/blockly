@@ -76,8 +76,7 @@
         if (generatedPython.includes(ev3String))
         {
           generatedPython = generatedPython.substring(generatedPython.indexOf(ev3String)+ev3String.length);
-        }  
-        console.log(generatedPython)
+        }
         tempInput.value = generatedPython;
         document.body.appendChild(tempInput);
         tempInput.select();
