@@ -348,3 +348,53 @@ Blockly.Python['rpi_variables_set_motion_sensor'] = function(block) {
   var code = Blockly.Python.variableDB_.getName(block.getFieldValue('VAR'),Blockly.VARIABLE_CATEGORY_NAME) + " = " + value_component + "\n";
   return code;
 };
+
+Blockly.Python['rpi_new_button'] = function(block) {
+  Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
+  var value_pin = Blockly.Python.valueToCode(block, 'PIN', Blockly.Python.ORDER_ATOMIC);
+  var value_pull_up = Blockly.Python.valueToCode(block, 'PULL_UP', Blockly.Python.ORDER_ATOMIC);
+  var code = 'gpiozero.Button(' + value_pin + ', pull_up=' + value_pull_up + ')';
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python['rpi_variables_get_button'] = function(block) {
+  Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
+  var code = Blockly.Python.variableDB_.getName(block.getFieldValue('VAR'),Blockly.VARIABLE_CATEGORY_NAME);
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python['rpi_variables_set_button'] = function(block) {
+  Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
+  var value_component = Blockly.Python.valueToCode(block, 'COMPONENT', Blockly.Python.ORDER_ATOMIC);
+  var code = Blockly.Python.variableDB_.getName(block.getFieldValue('VAR'),Blockly.VARIABLE_CATEGORY_NAME) + " = " + value_component + "\n";
+  return code;
+};
+
+Blockly.Python['rpi_button_wait'] = function(block) {
+  Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
+  var value_button = Blockly.Python.valueToCode(block, 'BUTTON', Blockly.Python.ORDER_ATOMIC);
+  var dropdown_press_release = block.getFieldValue('PRESS_RELEASE');
+  var checkbox_timeout = block.getFieldValue('TIMEOUT') == 'TRUE';
+  var value_secs = Blockly.Python.valueToCode(block, 'TIMEOUT_SECS', Blockly.Python.ORDER_ATOMIC);
+  var code = value_button+'.';
+  if (dropdown_press_release=="PRESSED") {
+    code = code + 'wait_for_press(';
+  } else {
+    code = code + 'wait_for_release(';    
+  }
+  code = code+'timeout=';
+  if (checkbox_timeout && value_secs!=""){
+    code = code+value_secs;
+  } else {
+    code = code+'None';
+  }
+  code = code+')\n';
+  return code;
+};
+
+Blockly.Python['rpi_button_is_pressed'] = function(block) {
+  Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
+  var value_button = Blockly.Python.valueToCode(block, 'BUTTON', Blockly.Python.ORDER_ATOMIC);
+  var code = value_button+'.is_pressed';
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};

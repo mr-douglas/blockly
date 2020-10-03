@@ -7,6 +7,11 @@ goog.require('Blockly.FieldLabel');
 goog.require('Blockly.FieldNumber');
 goog.require('Blockly.FieldVariable');
 
+goog.provide('Blockly.RPI');
+
+Blockly.Msg.RPI_HUE = '270';
+
+
 Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
 {
   "type": "rpi_new_led",
@@ -28,7 +33,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
     }
   ],
   "output": "RPi_LED",
-  "colour": 270,
+  "colour": Blockly.Msg.RPI_HUE,
   "tooltip": "",
   "helpUrl": ""
 },
@@ -64,7 +69,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
     }
   ],
   "output": "RPi_RGB_LED",
-  "colour": 270,
+  "colour": Blockly.Msg.RPI_HUE,
   "tooltip": "",
   "helpUrl": ""
 },
@@ -90,7 +95,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   "inputsInline": true,
   "previousStatement": null,
   "nextStatement": null,
-  "colour": 270,
+  "colour": Blockly.Msg.RPI_HUE,
   "tooltip": "",
   "helpUrl": ""
 },
@@ -120,7 +125,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   ],
   "previousStatement": null,
   "nextStatement": null,
-  "colour": 270,
+  "colour": Blockly.Msg.RPI_HUE,
   "tooltip": "",
   "helpUrl": ""
 },
@@ -136,7 +141,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   ],
   "previousStatement": null,
   "nextStatement": null,
-  "colour": 270,
+  "colour": Blockly.Msg.RPI_HUE,
   "tooltip": "",
   "helpUrl": ""
 },
@@ -151,7 +156,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
     }
   ],
   "output": "Boolean",
-  "colour": 270,
+  "colour": Blockly.Msg.RPI_HUE,
   "tooltip": "",
   "helpUrl": ""
 },
@@ -176,7 +181,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   "inputsInline": true,
   "previousStatement": null,
   "nextStatement": null,
-  "colour": 270,
+  "colour": Blockly.Msg.RPI_HUE,
   "tooltip": "",
   "helpUrl": ""
 },
@@ -194,7 +199,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
     }
   ],
   "output": "Number",
-  "colour": 270,
+  "colour": Blockly.Msg.RPI_HUE,
   "tooltip": "",
   "helpUrl": ""
 },
@@ -250,7 +255,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   ],
   "previousStatement": null,
   "nextStatement": null,
-  "colour": 270,
+  "colour": Blockly.Msg.RPI_HUE,
   "tooltip": "",
   "helpUrl": ""
 },
@@ -318,7 +323,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   ],
   "previousStatement": null,
   "nextStatement": null,
-  "colour": 270,
+  "colour": Blockly.Msg.RPI_HUE,
   "tooltip": "",
   "helpUrl": ""
 },
@@ -349,7 +354,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
     }
   ],
   "output": "RPi_Colour_Tuple",
-  "colour": 270,
+  "colour": Blockly.Msg.RPI_HUE,
   "tooltip": "",
   "helpUrl": ""
 },
@@ -364,7 +369,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
     }
   ],
   "output": "RPi_Colour_Tuple",
-  "colour": 270,
+  "colour": Blockly.Msg.RPI_HUE,
   "tooltip": "",
   "helpUrl": ""
 },
@@ -390,7 +395,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   ],
   "inputsInline": true,
   "output": "RPi_Colour_Tuple",
-  "colour": 270,
+  "colour": Blockly.Msg.RPI_HUE,
   "tooltip": "",
   "helpUrl": ""
 },
@@ -409,7 +414,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   ],
   "inputsInline": false,
   "output": "RPi_Buzzer",
-  "colour": 270,
+  "colour": Blockly.Msg.RPI_HUE,
   "tooltip": "",
   "helpUrl": ""
 },
@@ -454,7 +459,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   "inputsInline": false,
   "previousStatement": null,
   "nextStatement": null,
-  "colour": 270,
+  "colour": Blockly.Msg.RPI_HUE,
   "tooltip": "",
   "helpUrl": ""
 },
@@ -471,7 +476,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   ],
   "inputsInline": true,
   "output": "Boolean",
-  "colour": 270,
+  "colour": Blockly.Msg.RPI_HUE,
   "tooltip": "",
   "helpUrl": ""
 },
@@ -490,7 +495,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
     }
   ],
   "output": "RPi_Servo",
-  "colour": 270,
+  "colour": Blockly.Msg.RPI_HUE,
   "tooltip": "",
   "helpUrl": ""
 },
@@ -514,7 +519,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   "inputsInline": true,
   "previousStatement": null,
   "nextStatement": null,
-  "colour": 270,
+  "colour": Blockly.Msg.RPI_HUE,
   "tooltip": "",
   "helpUrl": ""
 },
@@ -539,7 +544,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
     }
   ],
   "output": "RPi_USonic_Sensor",
-  "colour": 270,
+  "colour": Blockly.Msg.RPI_HUE,
   "tooltip": "",
   "helpUrl": ""
 },
@@ -554,7 +559,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
     }
   ],
   "output": "Number",
-  "colour": 270,
+  "colour": Blockly.Msg.RPI_HUE,
   "tooltip": "",
   "helpUrl": ""
 },
@@ -573,7 +578,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
     }
   ],
   "output": "RPi_Motion_Sensor",
-  "colour": 270,
+  "colour": Blockly.Msg.RPI_HUE,
   "tooltip": "",
   "helpUrl": ""
 },
@@ -589,7 +594,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
     }
   ],
   "output": "Boolean",
-  "colour": 270,
+  "colour": Blockly.Msg.RPI_HUE,
   "tooltip": "",
   "helpUrl": ""
 },
@@ -606,7 +611,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
       "defaultType": "RPi_LED"
     }
   ],
-  "colour": 270,
+  "colour": Blockly.Msg.RPI_HUE,
   "inputsInline": true,
   "output": "RPi_LED"    // Returns a value of "RPi_LED"
 },
@@ -646,7 +651,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
       "defaultType": "RPi_RGB_LED"
     }
   ],
-  "colour": 270,
+  "colour": Blockly.Msg.RPI_HUE,
   "inputsInline": true,
   "output": "RPi_RGB_LED"    // Returns a value of "RPi_RGB_LED"
 },
@@ -686,7 +691,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
       "defaultType": "RPi_Buzzer"
     }
   ],
-  "colour": 270,
+  "colour": Blockly.Msg.RPI_HUE,
   "inputsInline": true,
   "output": "RPi_Buzzer"    // Returns a value of "RPi_Buzzer"
 },
@@ -726,7 +731,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
       "defaultType": "RPi_Servo"
     }
   ],
-  "colour": 270,
+  "colour": Blockly.Msg.RPI_HUE,
   "inputsInline": true,
   "output": "RPi_Servo"    // Returns a value of "RPi_Servo"
 },
@@ -766,7 +771,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
       "defaultType": "RPi_USonic_Sensor"
     }
   ],
-  "colour": 270,
+  "colour": Blockly.Msg.RPI_HUE,
   "inputsInline": true,
   "output": "RPi_USonic_Sensor"    // Returns a value of "RPi_USonic_Sensor"
 },
@@ -794,7 +799,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   "colour": 270
 },
 // Blocks for RPi_Motion_Sensor variable getter.
- {
+{
   "type": "rpi_variables_get_motion_sensor",
   "message0": "%1",
   "args0": [
@@ -806,7 +811,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
       "defaultType": "RPi_Motion_Sensor"
     }
   ],
-  "colour": 270,
+  "colour": Blockly.Msg.RPI_HUE,
   "inputsInline": true,
   "output": "RPi_Motion_Sensor"    // Returns a value of "RPi_Motion_Sensor"
 },
@@ -832,5 +837,185 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   "previousStatement": null,
   "nextStatement": null,
   "colour": 270
+},
+// Blocks for RPi_Button variable getter.
+{
+  "type": "rpi_variables_get_button",
+  "message0": "%1",
+  "args0": [
+    {
+      "type": "field_variable",
+      "name": "VAR",
+      "variable": "%{BKY_VARIABLES_DEFAULT_NAME}",
+      "variableTypes": ["RPi_Button"],    // Specifies what types to put in the dropdown
+      "defaultType": "RPi_Button"
+    }
+  ],
+  "colour": Blockly.Msg.RPI_HUE,
+  "inputsInline": true,
+  "output": "RPi_Button"    // Returns a value of "RPi_Button"
+},
+ {
+  "type": "rpi_variables_set_button",
+  "message0": "%1 %2",
+  "args0": [
+    {
+      "type": "field_variable",
+      "name": "VAR",
+      "variable": "%{BKY_VARIABLES_DEFAULT_NAME}",
+      "variableTypes": ["RPi_Button"],    // Specifies what types to put in the dropdown
+      "defaultType": "RPi_Button"
+    },
+    {
+      "type": "input_value",
+      "name": "COMPONENT",
+      "check": [
+        "RPi_Button"
+      ]
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 270
+},
+{
+  "type": "rpi_new_button",
+  "message0": "Button: %1 pin: %2 pull up: %3",
+  "args0": [
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_value",
+      "name": "PIN",
+      "check": "Number",
+      "align": "RIGHT"
+    },
+    {
+      "type": "input_value",
+      "name": "PULL_UP",
+      "check": "Boolean",
+      "align": "RIGHT"
+    }
+  ],
+  "output": "RPi_Button",
+  "colour": Blockly.Msg.RPI_HUE,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "rpi_button_wait",
+  "message0": "wait until button  %1 is %2 ( %3 %4 or  %5 seconds have passed) %6  %7",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "BUTTON",
+      "check": "RPi_Button"
+    },
+    {
+      "type": "field_dropdown",
+      "name": "PRESS_RELEASE",
+      "options": [
+        [
+          "pressed",
+          "PRESSED"
+        ],
+        [
+          "released",
+          "RELEASED"
+        ]
+      ]
+    },
+    {
+      "type": "field_checkbox",
+      "name": "TIMEOUT",
+      "checked": true
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_value",
+      "name": "TIMEOUT_SECS",
+      "check": "Number"
+    },
+    {
+      "type": "input_dummy",
+      "name": "HAVE_PASSED"
+    },
+    {
+      "type": "input_dummy",
+      "name": "END"
+    }
+  ],
+  "inputsInline": true,
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 270,
+  "tooltip": "",
+  "helpUrl": "",
+  "mutator": 'rpi_timeout_mutator'
+},
+{
+  "type": "rpi_button_is_pressed",
+  "message0": "button %1 is pressed",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "BUTTON",
+      "check": "RPi_Button"
+    }
+  ],
+  "inputsInline": true,
+  "output": "Boolean",
+  "colour": 270,
+  "tooltip": "",
+  "helpUrl": ""
 }
 ]);  // END JSON EXTRACT (Do not delete this comment.)
+
+
+Blockly.RPI.WAIT_TIMEOUT_MUTATOR_MIXIN = {
+  mutationToDom: function() {
+    var container = Blockly.utils.xml.createElement('mutation');
+    var timeoutSecsIsNone = this.getFieldValue('TIMEOUT')=='FALSE';
+    container.setAttribute('timeout_secs_is_none',timeoutSecsIsNone);
+    return container;
+  },
+  domToMutation: function(xmlElement) {
+    var timeoutSecsIsNone = xmlElement.getAttribute('timeout_secs_is_none')=='true';
+    this.updateShape_(timeoutSecsIsNone);
+  },
+  updateShape_: function(timeoutSecsIsNone) {
+    var timeoutSecsNumberInput = this.getInput('TIMEOUT_SECS');
+    if(timeoutSecsIsNone) {
+      if (timeoutSecsNumberInput) {
+        this.removeInput("TIMEOUT_SECS",true);
+        this.removeInput("HAVE_PASSED",true);
+        this.removeInput("END",true);
+        this.appendDummyInput("END")
+          .appendField(")");
+      }
+    } else if(!timeoutSecsNumberInput) {
+      this.removeInput("END",true);
+      this.appendValueInput("TIMEOUT_SECS")
+        .setCheck("Number")
+        .appendField("or ");
+      this.appendDummyInput("HAVE_PASSED")
+        .appendField("seconds have passed)");
+      this.appendDummyInput("END")
+        .appendField("");
+    }
+  }
+};
+
+Blockly.RPI.WAIT_TIMEOUT_MUTATOR_EXTENSION = function() {
+  this.getField('TIMEOUT').setValidator(function(option) {
+    var timeoutSecsIsNone = (option == 'FALSE');
+    this.getSourceBlock().updateShape_(timeoutSecsIsNone);
+  });
+};
+
+Blockly.Extensions.registerMutator('rpi_timeout_mutator',
+  Blockly.RPI.WAIT_TIMEOUT_MUTATOR_MIXIN,
+  Blockly.RPI.WAIT_TIMEOUT_MUTATOR_EXTENSION);
