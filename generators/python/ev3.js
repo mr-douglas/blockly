@@ -345,7 +345,7 @@ Blockly.Python['ev3_gyro_sensor_reset_angle'] = function(block) {
   if(value_gyro_sensor==""){
     code = "#";
   }
-  code = code + value_gyro_sensor + ".reset_angle("+value_angle+")";
+  code = code + value_gyro_sensor + ".reset_angle("+value_angle+")\n";
   return code;
 };
 
