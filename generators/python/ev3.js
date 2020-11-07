@@ -389,28 +389,28 @@ Blockly.Python['ev3_color'] = function(block) {
   if(colour_color=='#7f7f7f') {
     code = 'None';
   } else {
-    code = 'COLOR';
+    code = 'Color';
     switch (colour_color) {
       case '#000000':
-        code = code + '.Black';
+        code = code + '.BLACK';
         break;
       case '#0000ff':
-        code = code + '.Blue';
+        code = code + '.BLUE';
         break;
       case '#00cc00':
-        code = code + '.Green';
+        code = code + '.GREEN';
         break;
       case '#ffff00':
-        code = code + '.Yellow';
+        code = code + '.YELLOW';
         break;
       case '#ff0000':
-        code = code + '.Red';
+        code = code + '.RED';
         break;
       case '#ffffff':
-        code = code + '.White';
+        code = code + '.WHITE';
         break;
       case '#d2691e':
-        code = code + '.Brown';
+        code = code + '.BROWN';
         break;
       }
     }
