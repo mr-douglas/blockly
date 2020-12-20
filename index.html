@@ -651,6 +651,7 @@
         <category colour='270' name="LED" custom="RPi_LED"></category>
         <category colour='270' name="RGB LED" custom="RPi_RGB_LED"></category>
         <category colour='270' name="Button" custom="RPi_Button"></category>
+        <category colour='270' name="Light Sensor" custom="RPi_Light_Sensor"></category>
         <category colour='270' name="Buzzer" custom="RPi_Buzzer"></category>
         <category colour='270' name='Servo' custom="RPi_Servo">
         </category>
@@ -997,6 +998,7 @@
                                                                                          }
                                                );
                                                
+                                               
       workspace.registerButtonCallback('addRPiMotionSensorPressed', function(button){
                                                                                  Blockly.Variables.createVariableButtonHandler(button.getTargetWorkspace(), null, 'RPi_Motion_Sensor');
                                                                                 }
@@ -1034,6 +1036,41 @@
                                                
       workspace.registerButtonCallback('addRPiButtonPressed', function(button){
                                                                                  Blockly.Variables.createVariableButtonHandler(button.getTargetWorkspace(), null, 'RPi_Button');
+                                                                                }
+                                      );
+
+      workspace.registerToolboxCategoryCallback('RPi_Light_Sensor', function(workspace){
+                                                                                          var xmlList = [];
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<button text="Add New Light Sensor" callbackKey="addRPiLightSensorPressed"></button>'));
+                                                                                          var variableModelList = workspace.getVariablesOfType('RPi_Light_Sensor');
+                                                                                          if(variableModelList.length>0){
+                                                                                            for (var i = 0, variable; (variable = variableModelList[i]); i++) {
+                                                                                              var block = Blockly.utils.xml.createElement('block');
+                                                                                              block.setAttribute('type', 'rpi_variables_set_light_sensor');
+                                                                                              block.setAttribute('gap', 8);
+                                                                                              block.appendChild(Blockly.Variables.generateVariableFieldDom(variable));
+                                                                                              xmlList.push(block);
+                                                                                            }
+                                                                                          }
+                                                                                          if(variableModelList.length>0){
+                                                                                            for (var i = 0, variable; (variable = variableModelList[i]); i++) {
+                                                                                              var block = Blockly.utils.xml.createElement('block');
+                                                                                              block.setAttribute('type', 'rpi_variables_get_light_sensor');
+                                                                                              block.setAttribute('gap', 8);
+                                                                                              block.appendChild(Blockly.Variables.generateVariableFieldDom(variable));
+                                                                                              xmlList.push(block);
+                                                                                            }
+                                                                                          }
+                                                                                          
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<block type="rpi_new_light_sensor"><value name="PIN"><shadow type="math_number"><field name="NUM">4</field></shadow></value></block>'));
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<block type="rpi_light_detected"></block>'));
+                                                                                          xmlList.push(Blockly.Xml.textToDom('<block type="rpi_light_wait_until_light_dark"></block>'));
+                                                                                          return xmlList;
+                                                                                         }
+                                               );
+                                               
+      workspace.registerButtonCallback('addRPiLightSensorPressed', function(button){
+                                                                                 Blockly.Variables.createVariableButtonHandler(button.getTargetWorkspace(), null, 'RPi_Light_Sensor');
                                                                                 }
                                       );
 

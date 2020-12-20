@@ -971,6 +971,112 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   "colour": 270,
   "tooltip": "",
   "helpUrl": ""
+},
+// Blocks for RPi_Light_Sensor variable getter.
+{
+  "type": "rpi_variables_get_light_sensor",
+  "message0": "%1",
+  "args0": [
+    {
+      "type": "field_variable",
+      "name": "VAR",
+      "variable": "%{BKY_VARIABLES_DEFAULT_NAME}",
+      "variableTypes": ["RPi_Light_Sensor"],    // Specifies what types to put in the dropdown
+      "defaultType": "RPi_Light_Sensor"
+    }
+  ],
+  "colour": Blockly.Msg.RPI_HUE,
+  "inputsInline": true,
+  "output": "RPi_Light_Sensor"    // Returns a value of "RPi_Light_Sensor"
+},
+ {
+  "type": "rpi_variables_set_light_sensor",
+  "message0": "%1 %2",
+  "args0": [
+    {
+      "type": "field_variable",
+      "name": "VAR",
+      "variable": "%{BKY_VARIABLES_DEFAULT_NAME}",
+      "variableTypes": ["RPi_Light_Sensor"],    // Specifies what types to put in the dropdown
+      "defaultType": "RPi_Light_Sensor"
+    },
+    {
+      "type": "input_value",
+      "name": "COMPONENT",
+      "check": [
+        "RPi_Light_Sensor"
+      ]
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 270
+},
+{
+  "type": "rpi_new_light_sensor",
+  "message0": "Light Sensor: %1 pin: %2",
+  "args0": [
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_value",
+      "name": "PIN",
+      "check": "Number",
+      "align": "RIGHT"
+    }
+  ],
+  "output": null,
+  "colour": 270,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "rpi_light_detected",
+  "message0": "light sensor %1 has detected light",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "LIGHT_SENSOR",
+      "check": "RPi_Light_Sensor",
+      "align": "RIGHT"
+    }
+  ],
+  "output": "Boolean",
+  "colour": 270,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "rpi_light_wait_until_light_dark",
+  "message0": "wait until light sensor %1 %2 light",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "LIGHT_SENSOR",
+      "check": "RPi_Light_Sensor",
+      "align": "RIGHT"
+    },
+    {
+      "type": "field_dropdown",
+      "name": "LIGHT_OR_DARK",
+      "options": [
+        [
+          "detects",
+          "LIGHT"
+        ],
+        [
+          "doesn't detect",
+          "DARK"
+        ]
+      ]
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 270,
+  "tooltip": "",
+  "helpUrl": ""
 }
 ]);  // END JSON EXTRACT (Do not delete this comment.)
 
