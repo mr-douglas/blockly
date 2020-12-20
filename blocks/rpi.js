@@ -168,8 +168,8 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
       "type": "input_value",
       "name": "LED",
       "check": [
-        "LED",
-        "RGB_LED"
+        "RPi_LED",
+        "RPi_RGB_LED"
       ]
     },
     {
