@@ -435,3 +435,133 @@ Blockly.Python['rpi_light_wait_until_light_dark'] = function(block) {
   code = code + 'active()\n';
   return code;
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Blockly.Python['rpi_new_digital_input'] = function(block) {
+  Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
+  var value_pin = Blockly.Python.valueToCode(block, 'PIN', Blockly.Python.ORDER_ATOMIC);
+  var code = 'gpiozero.DigitalInputDevice(' + value_pin + ')';
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python['rpi_variables_get_digital_input'] = function(block) {
+  Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
+  var code = Blockly.Python.variableDB_.getName(block.getFieldValue('VAR'),Blockly.VARIABLE_CATEGORY_NAME);
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python['rpi_variables_set_digital_input'] = function(block) {
+  Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
+  var value_component = Blockly.Python.valueToCode(block, 'COMPONENT', Blockly.Python.ORDER_ATOMIC);
+  var code = Blockly.Python.variableDB_.getName(block.getFieldValue('VAR'),Blockly.VARIABLE_CATEGORY_NAME) + " = " + value_component + "\n";
+  return code;
+};
+
+Blockly.Python['rpi_digital_input_is_active'] = function(block) {
+  var value_digital_input = Blockly.Python.valueToCode(block, 'DIGITAL_INPUT', Blockly.Python.ORDER_ATOMIC);
+  var code = value_digital_input + '.is_active';
+  return [code, Blockly.Python.ORDER_NONE];
+};
+
+Blockly.Python['rpi_digital_input_wait_until_active_inactive'] = function(block) {
+  var value_digital_input = Blockly.Python.valueToCode(block, 'DIGITAL_INPUT', Blockly.Python.ORDER_ATOMIC);
+  var dropdown_active_or_inactive = block.getFieldValue('ACTIVE_OR_INACTIVE');
+  var code = value_digital_input + '.wait_for_';
+  if(dropdown_active_or_inactive=="INACTIVE"){
+    code = code + 'in';
+  }
+  code = code + 'active()\n';
+  return code;
+};
+
+
+
+
+Blockly.Python['rpi_new_digital_output'] = function(block) {
+  Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
+  var value_pin = Blockly.Python.valueToCode(block, 'PIN', Blockly.Python.ORDER_ATOMIC);
+  var code = 'gpiozero.DigitalOutputDevice(' + value_pin + ')';
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python['rpi_variables_get_digital_output'] = function(block) {
+  Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
+  var code = Blockly.Python.variableDB_.getName(block.getFieldValue('VAR'),Blockly.VARIABLE_CATEGORY_NAME);
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python['rpi_variables_set_digital_output'] = function(block) {
+  Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
+  var value_component = Blockly.Python.valueToCode(block, 'COMPONENT', Blockly.Python.ORDER_ATOMIC);
+  var code = Blockly.Python.variableDB_.getName(block.getFieldValue('VAR'),Blockly.VARIABLE_CATEGORY_NAME) + " = " + value_component + "\n";
+  return code;
+};
+
+
+
+
+
+
+Blockly.Python['rpi_new_pwm_output'] = function(block) {
+  Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
+  var value_pin = Blockly.Python.valueToCode(block, 'PIN', Blockly.Python.ORDER_ATOMIC);
+  var value_frequency = Blockly.Python.valueToCode(block, 'FREQUENCY', Blockly.Python.ORDER_ATOMIC);
+  var code = 'gpiozero.PWMOutputDevice(' + value_pin + ', frequency=' + value_frequency + ')';
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python['rpi_variables_get_pwm_output'] = function(block) {
+  Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
+  var code = Blockly.Python.variableDB_.getName(block.getFieldValue('VAR'),Blockly.VARIABLE_CATEGORY_NAME);
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python['rpi_variables_set_pwm_output'] = function(block) {
+  Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
+  var value_component = Blockly.Python.valueToCode(block, 'COMPONENT', Blockly.Python.ORDER_ATOMIC);
+  var code = Blockly.Python.variableDB_.getName(block.getFieldValue('VAR'),Blockly.VARIABLE_CATEGORY_NAME) + " = " + value_component + "\n";
+  return code;
+};
+
+Blockly.Python['rpi_pwm_output_set_frequency'] = function(block) {
+  var value_pwm_output = Blockly.Python.valueToCode(block, 'PWM_OUTPUT', Blockly.Python.ORDER_ATOMIC);
+  var value_frequency = Blockly.Python.valueToCode(block, 'FREQUENCY', Blockly.Python.ORDER_ATOMIC);
+  var code = value_pwm_output + '.frequency = ' + value_frequency + '\n';
+  return code;
+};
+
+Blockly.Python['rpi_pwm_output_set_duty'] = function(block) {
+  var value_pwm_output = Blockly.Python.valueToCode(block, 'PWM_OUTPUT', Blockly.Python.ORDER_ATOMIC);
+  var value_duty = Blockly.Python.valueToCode(block, 'DUTY', Blockly.Python.ORDER_ATOMIC);
+  var code = value_pwm_output + '.value = ' + value_duty + '\n';
+  return code;
+};

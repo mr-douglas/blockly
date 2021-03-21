@@ -120,7 +120,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
     {
       "type": "input_value",
       "name": "COMPONENT",
-      "check": ["RPi_LED","RPi_RGB_LED","RPi_Buzzer"]
+      "check": ["RPi_LED","RPi_RGB_LED","RPi_Buzzer","RPi_Digital_Output","RPi_PWM_Output"]
     }
   ],
   "previousStatement": null,
@@ -136,7 +136,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
     {
       "type": "input_value",
       "name": "COMPONENT",
-      "check": ["RPi_LED","RPi_RGB_LED","RPi_Buzzer"]
+      "check": ["RPi_LED","RPi_RGB_LED","RPi_Buzzer","RPi_Digital_Output","RPi_PWM_Output"]
     }
   ],
   "previousStatement": null,
@@ -636,7 +636,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   ],
   "previousStatement": null,
   "nextStatement": null,
-  "colour": 270
+  "colour": Blockly.Msg.RPI_HUE
 },
 // Blocks for RPi_RGB_LED variable getter.
 {
@@ -676,7 +676,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   ],
   "previousStatement": null,
   "nextStatement": null,
-  "colour": 270
+  "colour": Blockly.Msg.RPI_HUE
 },
 // Blocks for RPi_Buzzer variable getter.
 {
@@ -716,7 +716,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   ],
   "previousStatement": null,
   "nextStatement": null,
-  "colour": 270
+  "colour": Blockly.Msg.RPI_HUE
 },
 // Blocks for RPi_Servo variable getter.
 {
@@ -756,7 +756,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   ],
   "previousStatement": null,
   "nextStatement": null,
-  "colour": 270
+  "colour": Blockly.Msg.RPI_HUE
 },
 // Blocks for RPi_USonic_Sensor variable getter.
 {
@@ -796,7 +796,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   ],
   "previousStatement": null,
   "nextStatement": null,
-  "colour": 270
+  "colour": Blockly.Msg.RPI_HUE
 },
 // Blocks for RPi_Motion_Sensor variable getter.
 {
@@ -836,7 +836,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   ],
   "previousStatement": null,
   "nextStatement": null,
-  "colour": 270
+  "colour": Blockly.Msg.RPI_HUE
 },
 // Blocks for RPi_Button variable getter.
 {
@@ -876,7 +876,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   ],
   "previousStatement": null,
   "nextStatement": null,
-  "colour": 270
+  "colour": Blockly.Msg.RPI_HUE
 },
 {
   "type": "rpi_new_button",
@@ -951,7 +951,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   "inputsInline": true,
   "previousStatement": null,
   "nextStatement": null,
-  "colour": 270,
+  "colour": Blockly.Msg.RPI_HUE,
   "tooltip": "",
   "helpUrl": "",
   "mutator": 'rpi_timeout_mutator'
@@ -968,7 +968,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   ],
   "inputsInline": true,
   "output": "Boolean",
-  "colour": 270,
+  "colour": Blockly.Msg.RPI_HUE,
   "tooltip": "",
   "helpUrl": ""
 },
@@ -1010,7 +1010,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   ],
   "previousStatement": null,
   "nextStatement": null,
-  "colour": 270
+  "colour": Blockly.Msg.RPI_HUE
 },
 {
   "type": "rpi_new_light_sensor",
@@ -1027,7 +1027,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
     }
   ],
   "output": null,
-  "colour": 270,
+  "colour": Blockly.Msg.RPI_HUE,
   "tooltip": "",
   "helpUrl": ""
 },
@@ -1043,7 +1043,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
     }
   ],
   "output": "Boolean",
-  "colour": 270,
+  "colour": Blockly.Msg.RPI_HUE,
   "tooltip": "",
   "helpUrl": ""
 },
@@ -1074,7 +1074,284 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   ],
   "previousStatement": null,
   "nextStatement": null,
-  "colour": 270,
+  "colour": Blockly.Msg.RPI_HUE,
+  "tooltip": "",
+  "helpUrl": ""
+},
+// Blocks for RPi_Digital_Input variable getter.
+{
+  "type": "rpi_variables_get_digital_input",
+  "message0": "%1",
+  "args0": [
+    {
+      "type": "field_variable",
+      "name": "VAR",
+      "variable": "%{BKY_VARIABLES_DEFAULT_NAME}",
+      "variableTypes": ["RPi_Digital_Input"],    // Specifies what types to put in the dropdown
+      "defaultType": "RPi_Digital_Input"
+    }
+  ],
+  "colour": Blockly.Msg.RPI_HUE,
+  "inputsInline": true,
+  "output": "RPi_Digital_Input"    // Returns a value of "RPi_Digital_Input"
+},
+ {
+  "type": "rpi_variables_set_digital_input",
+  "message0": "%1 %2",
+  "args0": [
+    {
+      "type": "field_variable",
+      "name": "VAR",
+      "variable": "%{BKY_VARIABLES_DEFAULT_NAME}",
+      "variableTypes": ["RPi_Digital_Input"],    // Specifies what types to put in the dropdown
+      "defaultType": "RPi_Digital_Input"
+    },
+    {
+      "type": "input_value",
+      "name": "COMPONENT",
+      "check": [
+        "RPi_Digital_Input"
+      ]
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": Blockly.Msg.RPI_HUE
+},
+{
+  "type": "rpi_new_digital_input",
+  "message0": "Digital Input: %1 pin: %2",
+  "args0": [
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_value",
+      "name": "PIN",
+      "check": "Number",
+      "align": "RIGHT"
+    }
+  ],
+  "output": null,
+  "colour": Blockly.Msg.RPI_HUE,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "rpi_digital_input_is_active",
+  "message0": "sensor %1 is active",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "DIGITAL_INPUT",
+      "check": "RPi_Digital_Input",
+      "align": "RIGHT"
+    }
+  ],
+  "output": "Boolean",
+  "colour": Blockly.Msg.RPI_HUE,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "rpi_digital_input_wait_until_active_inactive",
+  "message0": "wait until sensor %1 is %2",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "DIGITAL_INPUT",
+      "check": "RPi_Digital_Input",
+      "align": "RIGHT"
+    },
+    {
+      "type": "field_dropdown",
+      "name": "ACTIVE_OR_INACTIVE",
+      "options": [
+        [
+          "active",
+          "ACTIVE"
+        ],
+        [
+          "inactive",
+          "INACTIVE"
+        ]
+      ]
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": Blockly.Msg.RPI_HUE,
+  "tooltip": "",
+  "helpUrl": ""
+},
+// Blocks for RPi_Digital_Output variable getter.
+{
+  "type": "rpi_variables_get_digital_output",
+  "message0": "%1",
+  "args0": [
+    {
+      "type": "field_variable",
+      "name": "VAR",
+      "variable": "%{BKY_VARIABLES_DEFAULT_NAME}",
+      "variableTypes": ["RPi_Digital_Output"],    // Specifies what types to put in the dropdown
+      "defaultType": "RPi_Digital_Output"
+    }
+  ],
+  "colour": Blockly.Msg.RPI_HUE,
+  "inputsInline": true,
+  "output": "RPi_Digital_Output"    // Returns a value of "RPi_Digital_Output"
+},
+ {
+  "type": "rpi_variables_set_digital_output",
+  "message0": "%1 %2",
+  "args0": [
+    {
+      "type": "field_variable",
+      "name": "VAR",
+      "variable": "%{BKY_VARIABLES_DEFAULT_NAME}",
+      "variableTypes": ["RPi_Digital_Output"],    // Specifies what types to put in the dropdown
+      "defaultType": "RPi_Digital_Output"
+    },
+    {
+      "type": "input_value",
+      "name": "COMPONENT",
+      "check": [
+        "RPi_Digital_Output"
+      ]
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": Blockly.Msg.RPI_HUE
+},
+{
+  "type": "rpi_new_digital_output",
+  "message0": "Digital Output: %1 pin: %2",
+  "args0": [
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_value",
+      "name": "PIN",
+      "check": "Number",
+      "align": "RIGHT"
+    }
+  ],
+  "output": null,
+  "colour": Blockly.Msg.RPI_HUE,
+  "tooltip": "",
+  "helpUrl": ""
+},
+// Blocks for RPi_PWM_Output variable getter.
+{
+  "type": "rpi_variables_get_pwm_output",
+  "message0": "%1",
+  "args0": [
+    {
+      "type": "field_variable",
+      "name": "VAR",
+      "variable": "%{BKY_VARIABLES_DEFAULT_NAME}",
+      "variableTypes": ["RPi_PWM_Output"],    // Specifies what types to put in the dropdown
+      "defaultType": "RPi_PWM_Output"
+    }
+  ],
+  "colour": Blockly.Msg.RPI_HUE,
+  "inputsInline": true,
+  "output": "RPi_PWM_Output"    // Returns a value of "RPi_PWM_Output"
+},
+ {
+  "type": "rpi_variables_set_pwm_output",
+  "message0": "%1 %2",
+  "args0": [
+    {
+      "type": "field_variable",
+      "name": "VAR",
+      "variable": "%{BKY_VARIABLES_DEFAULT_NAME}",
+      "variableTypes": ["RPi_PWM_Output"],    // Specifies what types to put in the dropdown
+      "defaultType": "RPi_PWM_Output"
+    },
+    {
+      "type": "input_value",
+      "name": "COMPONENT",
+      "check": [
+        "RPi_PWM_Output"
+      ]
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": Blockly.Msg.RPI_HUE
+},
+{
+  "type": "rpi_new_pwm_output",
+  "message0": "PWM (Pulse-Width Modulation) Output: %1 pin: %2 frequency: %3",
+  "args0": [
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_value",
+      "name": "PIN",
+      "check": "Number",
+      "align": "RIGHT"
+    },
+    {
+      "type": "input_value",
+      "name": "FREQUENCY",
+      "check": "Number",
+      "align": "RIGHT"
+    }
+  ],
+  "output": null,
+  "colour": Blockly.Msg.RPI_HUE,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "rpi_pwm_output_set_frequency",
+  "message0": "set the frequency of  %1 to %2 Hz",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "PWM_OUTPUT",
+      "check": "RPi_PWM_Output",
+      "align": "RIGHT"
+    },
+    {
+      "type": "input_value",
+      "name": "FREQUENCY",
+      "check": "Number",
+      "align": "RIGHT"
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": Blockly.Msg.RPI_HUE,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "rpi_pwm_output_set_duty",
+  "message0": "set the duty of  %1 to %2",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "PWM_OUTPUT",
+      "check": "RPi_PWM_Output",
+      "align": "RIGHT"
+    },
+    {
+      "type": "input_value",
+      "name": "DUTY",
+      "check": "Number",
+      "align": "RIGHT"
+    }
+  ],
+  "inputsInline": true,
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": Blockly.Msg.RPI_HUE,
   "tooltip": "",
   "helpUrl": ""
 }
