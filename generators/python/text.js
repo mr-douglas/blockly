@@ -246,9 +246,9 @@ Blockly.Python['text_prompt_ext'] = function(block) {
       'text_prompt',
       ['def ' + Blockly.Python.FUNCTION_NAME_PLACEHOLDER_ + '(msg):',
        '  try:',
-       '    return raw_input(msg)',
+       '    return raw_input(msg).strip()',
        '  except NameError:',
-       '    return input(msg)']);
+       '    return input(msg).strip()']);
   if (block.getField('TEXT')) {
     // Internal message.
     var msg = Blockly.Python.quote_(block.getFieldValue('TEXT'));
