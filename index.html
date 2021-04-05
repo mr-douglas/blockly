@@ -48,6 +48,11 @@
     <script src="blocks/variables_dynamic.js"></script>
     <script src="msg/js/en.js"></script>
     <script>
+	  //To prevent accidentally leaving the page
+	  window.addEventListener('beforeunload', (event) => {
+		event.returnValue = `Are you sure you want to leave?`;
+      });
+	
       //For Blockly
       Blockly.HSV_SATURATION = 0.9;
       Blockly.HSV_VALUE = 0.7;
