@@ -99,7 +99,12 @@
           else if (extension=='.blockly'){
             lastFileName = lastBlocklyFileName;
           }
-        var fileNameToSaveAs = prompt("Enter a file name for your Python file", lastFileName);
+		var programType = 'Blockly';
+		if extension=='.py'
+		{
+			programType = 'Python';
+		}
+		var fileNameToSaveAs = prompt("Enter a file name for your "+programType+" file", lastFileName);
         if (fileNameToSaveAs){
           if (extension=='.py'){
             lastPythonFileName = fileNameToSaveAs;
