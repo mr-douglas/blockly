@@ -1065,15 +1065,20 @@ Blockly.Msg.TEXT_PROMPT_HELPURL = 'https://github.com/google/blockly/wiki/Text#g
 /// dropdown - Specifies that a piece of text should be requested from the user with
 /// the following message.  See [https://github.com/google/blockly/wiki/Text#printing-text
 /// https://github.com/google/blockly/wiki/Text#printing-text].
-Blockly.Msg.TEXT_PROMPT_TYPE_TEXT = 'prompt for text with message';
+Blockly.Msg.TEXT_PROMPT_TYPE_TEXT = 'get text input from user with message';
 /** @type {string} */
 /// dropdown - Specifies that a number should be requested from the user with the
 /// following message.  See [https://github.com/google/blockly/wiki/Text#printing-text
 /// https://github.com/google/blockly/wiki/Text#printing-text].
-Blockly.Msg.TEXT_PROMPT_TYPE_NUMBER = 'prompt for number with message';
+Blockly.Msg.TEXT_PROMPT_TYPE_NUMBER = 'get number input from user with message';
 /** @type {string} */
 /// dropdown - Precedes the message with which the user should be prompted for
 /// a number.  See [https://github.com/google/blockly/wiki/Text#printing-text
+/// https://github.com/google/blockly/wiki/Text#printing-text].
+Blockly.Msg.TEXT_PROMPT_TYPE_INTEGER = 'get integer input from user with message';
+/** @type {string} */
+/// dropdown - Precedes the message with which the user should be prompted for
+/// an integer.  See [https://github.com/google/blockly/wiki/Text#printing-text
 /// https://github.com/google/blockly/wiki/Text#printing-text].
 Blockly.Msg.TEXT_PROMPT_TOOLTIP_NUMBER = 'Prompt for user for a number.';
 /** @type {string} */
