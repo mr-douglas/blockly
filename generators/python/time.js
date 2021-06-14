@@ -1,7 +1,6 @@
 'use strict';
 
 goog.require('Blockly.Python');
-goog.require('Blockly.Extensions');
 
 Blockly.Python.addReservedWords('time');
 
