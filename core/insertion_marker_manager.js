@@ -13,7 +13,15 @@
 goog.provide('Blockly.InsertionMarkerManager');
 
 goog.require('Blockly.blockAnimations');
+goog.require('Blockly.connectionTypes');
+/** @suppress {extraRequire} */
+goog.require('Blockly.constants');
 goog.require('Blockly.Events');
+
+goog.requireType('Blockly.BlockSvg');
+goog.requireType('Blockly.RenderedConnection');
+goog.requireType('Blockly.utils.Coordinate');
+goog.requireType('Blockly.WorkspaceSvg');
 
 
 /**
@@ -161,6 +169,15 @@ Blockly.InsertionMarkerManager.prototype.dispose = function() {
 };
 
 /**
+ * Update the available connections for the top block. These connections can
+ * change if a block is unplugged and the stack is healed.
+ * @package
+ */
+Blockly.InsertionMarkerManager.prototype.updateAvailableConnections = function() {
+  this.availableConnections_ = this.initAvailableConnections_();
+};
+
+/**
  * Return whether the block would be deleted if dropped immediately, based on
  * information from the most recent move event.
  * @return {boolean} True if the block would be deleted if dropped immediately.
@@ -253,22 +270,24 @@ Blockly.InsertionMarkerManager.prototype.createMarkerBlock_ = function(sourceBlo
         result.domToMutation(oldMutationDom);
       }
     }
-    result.setCollapsed(sourceBlock.isCollapsed());
-    result.setInputsInline(sourceBlock.getInputsInline());
-    // Copy visible field values from the other block.  These values may impact
-    // the rendered size of the insertion marker.  Note that we do not care
-    // about child blocks here.
+    // Copy field values from the other block.  These values may impact the
+    // rendered size of the insertion marker.  Note that we do not care about
+    // child blocks here.
     for (var i = 0; i < sourceBlock.inputList.length; i++) {
       var sourceInput = sourceBlock.inputList[i];
-      if (sourceInput.isVisible()) {
-        var resultInput = result.inputList[i];
-        for (var j = 0; j < sourceInput.fieldRow.length; j++) {
-          var sourceField = sourceInput.fieldRow[j];
-          var resultField = resultInput.fieldRow[j];
-          resultField.setValue(sourceField.getValue());
-        }
+      if (sourceInput.name == Blockly.constants.COLLAPSED_INPUT_NAME) {
+        continue;  // Ignore the collapsed input.
+      }
+      var resultInput = result.inputList[i];
+      for (var j = 0; j < sourceInput.fieldRow.length; j++) {
+        var sourceField = sourceInput.fieldRow[j];
+        var resultField = resultInput.fieldRow[j];
+        resultField.setValue(sourceField.getValue());
       }
     }
+
+    result.setCollapsed(sourceBlock.isCollapsed());
+    result.setInputsInline(sourceBlock.getInputsInline());
 
     result.initSvg();
     result.getSvgRoot().setAttribute('visibility', 'hidden');
@@ -295,6 +314,14 @@ Blockly.InsertionMarkerManager.prototype.initAvailableConnections_ = function() 
   if (lastOnStack && lastOnStack != this.topBlock_.nextConnection) {
     available.push(lastOnStack);
     this.lastOnStack_ = lastOnStack;
+    if (this.lastMarker_) {
+      Blockly.Events.disable();
+      try {
+        this.lastMarker_.dispose();
+      } finally {
+        Blockly.Events.enable();
+      }
+    }
     this.lastMarker_ = this.createMarkerBlock_(lastOnStack.getSourceBlock());
   }
   return available;
@@ -592,7 +619,8 @@ Blockly.InsertionMarkerManager.prototype.hideInsertionMarker_ = function() {
   var isFirstInStatementStack =
       (imConn == markerNext && !(markerPrev && markerPrev.targetConnection));
 
-  var isFirstInOutputStack = imConn.type == Blockly.INPUT_VALUE &&
+  var isFirstInOutputStack =
+      imConn.type == Blockly.connectionTypes.INPUT_VALUE &&
       !(markerOutput && markerOutput.targetConnection);
   // The insertion marker is the first block in a stack.  Unplug won't do
   // anything in that case.  Instead, unplug the following block.
@@ -600,7 +628,8 @@ Blockly.InsertionMarkerManager.prototype.hideInsertionMarker_ = function() {
     imConn.targetBlock().unplug(false);
   }
   // Inside of a C-block, first statement connection.
-  else if (imConn.type == Blockly.NEXT_STATEMENT && imConn != markerNext) {
+  else if (imConn.type == Blockly.connectionTypes.NEXT_STATEMENT &&
+      imConn != markerNext) {
     var innerConnection = imConn.targetConnection;
     innerConnection.getSourceBlock().unplug(false);
 

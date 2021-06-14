@@ -17,8 +17,10 @@
 goog.provide('Blockly.Procedures');
 
 goog.require('Blockly.Blocks');
+/** @suppress {extraRequire} */
 goog.require('Blockly.constants');
 goog.require('Blockly.Events');
+/** @suppress {extraRequire} */
 goog.require('Blockly.Events.BlockChange');
 goog.require('Blockly.Field');
 goog.require('Blockly.Msg');
@@ -26,6 +28,10 @@ goog.require('Blockly.Names');
 goog.require('Blockly.utils.xml');
 goog.require('Blockly.Workspace');
 goog.require('Blockly.Xml');
+
+goog.requireType('Blockly.Block');
+goog.requireType('Blockly.Events.Abstract');
+goog.requireType('Blockly.WorkspaceSvg');
 
 
 /**
@@ -60,23 +66,13 @@ Blockly.Procedures.ProcedureBlock;
  *     list, and return value boolean.
  */
 Blockly.Procedures.allProcedures = function(root) {
-  var blocks = root.getAllBlocks(false);
-  var proceduresReturn = [];
-  var proceduresNoReturn = [];
-  for (var i = 0; i < blocks.length; i++) {
-    if (blocks[i].getProcedureDef) {
-      var procedureBlock = /** @type {!Blockly.Procedures.ProcedureBlock} */ (
-        blocks[i]);
-      var tuple = procedureBlock.getProcedureDef();
-      if (tuple) {
-        if (tuple[2]) {
-          proceduresReturn.push(tuple);
-        } else {
-          proceduresNoReturn.push(tuple);
-        }
-      }
-    }
-  }
+  var proceduresNoReturn = root.getBlocksByType('procedures_defnoreturn', false)
+      .map(function(block) {
+        return /** @type {!Blockly.Procedures.ProcedureBlock} */ (block).getProcedureDef();
+      });
+  var proceduresReturn = root.getBlocksByType('procedures_defreturn', false).map(function(block) {
+    return /** @type {!Blockly.Procedures.ProcedureBlock} */ (block).getProcedureDef();
+  });
   proceduresNoReturn.sort(Blockly.Procedures.procTupleComparator_);
   proceduresReturn.sort(Blockly.Procedures.procTupleComparator_);
   return [proceduresNoReturn, proceduresReturn];
@@ -303,8 +299,8 @@ Blockly.Procedures.updateMutatorFlyout_ = function(workspace) {
  * @package
  */
 Blockly.Procedures.mutatorOpenListener = function(e) {
-  if (e.type != Blockly.Events.UI || e.element != 'mutatorOpen' ||
-      !e.newValue) {
+  if (!(e.type == Blockly.Events.BUBBLE_OPEN && e.bubbleType === 'mutator' &&
+      e.isOpen)) {
     return;
   }
   var workspaceId = /** @type {string} */ (e.workspaceId);
@@ -384,7 +380,7 @@ Blockly.Procedures.mutateCallers = function(defBlock) {
       // undo action since it is deterministically tied to the procedure's
       // definition mutation.
       Blockly.Events.recordUndo = false;
-      Blockly.Events.fire(new Blockly.Events.BlockChange(
+      Blockly.Events.fire(new (Blockly.Events.get(Blockly.Events.BLOCK_CHANGE))(
           caller, 'mutation', null, oldMutation, newMutation));
       Blockly.Events.recordUndo = oldRecordUndo;
     }

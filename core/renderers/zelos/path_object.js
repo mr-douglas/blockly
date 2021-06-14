@@ -14,9 +14,12 @@
 goog.provide('Blockly.zelos.PathObject');
 
 goog.require('Blockly.blockRendering.PathObject');
-goog.require('Blockly.zelos.ConstantProvider');
 goog.require('Blockly.utils.dom');
 goog.require('Blockly.utils.object');
+goog.require('Blockly.utils.Svg');
+goog.require('Blockly.zelos.ConstantProvider');
+
+goog.requireType('Blockly.Theme');
 
 
 /**
@@ -218,12 +221,13 @@ Blockly.zelos.PathObject.prototype.setOutlinePath = function(name, pathString) {
  */
 Blockly.zelos.PathObject.prototype.getOutlinePath_ = function(name) {
   if (!this.outlines_[name]) {
-    this.outlines_[name] = Blockly.utils.dom.createSvgElement('path', {
-      'class': 'blocklyOutlinePath',
-      // IE doesn't like paths without the data definition, set empty default
-      'd': ''
-    },
-    this.svgRoot);
+    this.outlines_[name] = Blockly.utils.dom.createSvgElement(
+        Blockly.utils.Svg.PATH, {
+          'class': 'blocklyOutlinePath',
+          // IE doesn't like paths without the data definition, set empty default
+          'd': ''
+        },
+        this.svgRoot);
   }
   if (this.remainingOutlines_) {
     delete this.remainingOutlines_[name];

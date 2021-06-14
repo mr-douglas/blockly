@@ -17,6 +17,8 @@ goog.require('Blockly.ASTNode');
 goog.require('Blockly.BasicCursor');
 goog.require('Blockly.utils.object');
 
+goog.requireType('Blockly.Field');
+
 
 /**
  * A cursor for navigating between tab navigable fields.
@@ -38,10 +40,9 @@ Blockly.TabNavigateCursor.prototype.validNode_ = function(node) {
   var isValid = false;
   var type = node && node.getType();
   if (node) {
-    var location = node.getLocation();
+    var location = /** @type {Blockly.Field} */ (node.getLocation());
     if (type == Blockly.ASTNode.types.FIELD &&
-        location && location.isTabNavigable() &&
-        (/** @type {!Blockly.Field} */ (location)).isClickable()) {
+        location && location.isTabNavigable() && location.isClickable()) {
       isValid = true;
     }
   }

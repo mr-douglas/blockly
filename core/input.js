@@ -13,7 +13,17 @@
 goog.provide('Blockly.Input');
 
 goog.require('Blockly.Connection');
+/** @suppress {extraRequire} */
+goog.require('Blockly.constants');
+goog.require('Blockly.fieldRegistry');
+/** @suppress {extraRequire} */
 goog.require('Blockly.FieldLabel');
+goog.require('Blockly.inputTypes');
+
+goog.requireType('Blockly.Block');
+goog.requireType('Blockly.BlockSvg');
+goog.requireType('Blockly.Field');
+goog.requireType('Blockly.RenderedConnection');
 
 
 /**
@@ -26,7 +36,7 @@ goog.require('Blockly.FieldLabel');
  * @constructor
  */
 Blockly.Input = function(type, name, block, connection) {
-  if (type != Blockly.DUMMY_INPUT && !name) {
+  if (type != Blockly.inputTypes.DUMMY && !name) {
     throw Error('Value inputs and statement inputs must have non-empty name.');
   }
   /** @type {number} */
@@ -48,7 +58,7 @@ Blockly.Input = function(type, name, block, connection) {
  * Alignment of input's fields (left, right or centre).
  * @type {number}
  */
-Blockly.Input.prototype.align = Blockly.ALIGN_LEFT;
+Blockly.Input.prototype.align = Blockly.constants.ALIGN.LEFT;
 
 /**
  * Is the input visible?
@@ -91,21 +101,27 @@ Blockly.Input.prototype.insertFieldAt = function(index, field, opt_name) {
   if (index < 0 || index > this.fieldRow.length) {
     throw Error('index ' + index + ' out of bounds.');
   }
-
   // Falsy field values don't generate a field, unless the field is an empty
   // string and named.
   if (!field && !(field == '' && opt_name)) {
     return index;
   }
+
   // Generate a FieldLabel when given a plain text field.
   if (typeof field == 'string') {
-    field = new Blockly.FieldLabel(/** @type {string} */ (field));
+    field = /** @type {!Blockly.Field} **/ (Blockly.fieldRegistry.fromJson({
+      'type': 'field_label',
+      'text': field,
+    }));
   }
+
   field.setSourceBlock(this.sourceBlock_);
   if (this.sourceBlock_.rendered) {
     field.init();
+    field.applyColour();
   }
   field.name = opt_name;
+  field.setVisible(this.isVisible());
 
   if (field.prefixField) {
     // Add any prefix.
@@ -120,6 +136,7 @@ Blockly.Input.prototype.insertFieldAt = function(index, field, opt_name) {
   }
 
   if (this.sourceBlock_.rendered) {
+    this.sourceBlock_ = /** @type {!Blockly.BlockSvg} */ (this.sourceBlock_);
     this.sourceBlock_.render();
     // Adding a field will cause the block to change shape.
     this.sourceBlock_.bumpNeighbours();
@@ -130,22 +147,30 @@ Blockly.Input.prototype.insertFieldAt = function(index, field, opt_name) {
 /**
  * Remove a field from this input.
  * @param {string} name The name of the field.
- * @throws {Error} if the field is not present.
+ * @param {boolean=} opt_quiet True to prevent an error if field is not present.
+ * @return {boolean} True if operation succeeds, false if field is not present
+ *     and opt_quiet is true.
+ * @throws {Error} if the field is not present and opt_quiet is false.
  */
-Blockly.Input.prototype.removeField = function(name) {
+Blockly.Input.prototype.removeField = function(name, opt_quiet) {
   for (var i = 0, field; (field = this.fieldRow[i]); i++) {
     if (field.name === name) {
       field.dispose();
       this.fieldRow.splice(i, 1);
       if (this.sourceBlock_.rendered) {
+        this.sourceBlock_ = /** @type {!Blockly.BlockSvg} */ (this.sourceBlock_);
         this.sourceBlock_.render();
         // Removing a field will cause the block to change shape.
         this.sourceBlock_.bumpNeighbours();
       }
-      return;
+      return true;
     }
   }
-  throw Error('Field "%s" not found.', name);
+  if (opt_quiet) {
+    return false;
+  } else {
+    throw Error('Field "' + name + '" not found.');
+  }
 };
 
 /**
@@ -160,7 +185,7 @@ Blockly.Input.prototype.isVisible = function() {
  * Sets whether this input is visible or not.
  * Should only be used to collapse/uncollapse a block.
  * @param {boolean} visible True if visible.
- * @return {!Array.<!Blockly.Block>} List of blocks to render.
+ * @return {!Array.<!Blockly.BlockSvg>} List of blocks to render.
  * @package
  */
 Blockly.Input.prototype.setVisible = function(visible) {
@@ -173,11 +198,12 @@ Blockly.Input.prototype.setVisible = function(visible) {
   }
   this.visible_ = visible;
 
-  var display = visible ? 'block' : 'none';
   for (var y = 0, field; (field = this.fieldRow[y]); y++) {
     field.setVisible(visible);
   }
   if (this.connection) {
+    this.connection =
+      /** @type {!Blockly.RenderedConnection} */ (this.connection);
     // Has a connection.
     if (visible) {
       renderList = this.connection.startTrackingAll();
@@ -186,10 +212,7 @@ Blockly.Input.prototype.setVisible = function(visible) {
     }
     var child = this.connection.targetBlock();
     if (child) {
-      child.getSvgRoot().style.display = display;
-      if (!visible) {
-        child.rendered = false;
-      }
+      child.getSvgRoot().style.display = visible ? 'block' : 'none';
     }
   }
   return renderList;
@@ -221,16 +244,41 @@ Blockly.Input.prototype.setCheck = function(check) {
 
 /**
  * Change the alignment of the connection's field(s).
- * @param {number} align One of Blockly.ALIGN_LEFT, ALIGN_CENTRE, ALIGN_RIGHT.
- *   In RTL mode directions are reversed, and ALIGN_RIGHT aligns to the left.
+ * @param {number} align One of the values of Blockly.constants.ALIGN.
+ *   In RTL mode directions are reversed, and ALIGN.RIGHT aligns to the left.
  * @return {!Blockly.Input} The input being modified (to allow chaining).
  */
 Blockly.Input.prototype.setAlign = function(align) {
   this.align = align;
   if (this.sourceBlock_.rendered) {
+    this.sourceBlock_ = /** @type {!Blockly.BlockSvg} */ (this.sourceBlock_);
     this.sourceBlock_.render();
   }
   return this;
+};
+
+/**
+ * Changes the connection's shadow block.
+ * @param {Element} shadow DOM representation of a block or null.
+ * @return {Blockly.Input} The input being modified (to allow chaining).
+ */
+Blockly.Input.prototype.setShadowDom = function(shadow) {
+  if (!this.connection) {
+    throw Error('This input does not have a connection.');
+  }
+  this.connection.setShadowDom(shadow);
+  return this;
+};
+
+/**
+ * Returns the xml representation of the connection's shadow block.
+ * @return {Element} Shadow DOM representation of a block or null.
+ */
+Blockly.Input.prototype.getShadowDom = function() {
+  if (!this.connection) {
+    throw Error('This input does not have a connection.');
+  }
+  return this.connection.getShadowDom();
 };
 
 /**

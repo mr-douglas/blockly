@@ -14,7 +14,8 @@
 goog.provide('Blockly.Marker');
 
 goog.require('Blockly.ASTNode');
-goog.require('Blockly.navigation');
+
+goog.requireType('Blockly.blockRendering.MarkerSvg');
 
 
 /**
@@ -23,7 +24,6 @@ goog.require('Blockly.navigation');
  * @constructor
  */
 Blockly.Marker = function() {
-  
   /**
    * The colour of the marker.
    * @type {?string}
@@ -119,4 +119,3 @@ Blockly.Marker.prototype.dispose = function() {
     this.getDrawer().dispose();
   }
 };
-

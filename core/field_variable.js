@@ -12,7 +12,10 @@
 
 goog.provide('Blockly.FieldVariable');
 
-goog.require('Blockly.Events');
+/** @suppress {extraRequire} */
+/** @suppress {extraRequire} */
+goog.require('Blockly.constants');
+/** @suppress {extraRequire} */
 goog.require('Blockly.Events.BlockChange');
 goog.require('Blockly.FieldDropdown');
 goog.require('Blockly.fieldRegistry');
@@ -24,6 +27,9 @@ goog.require('Blockly.VariableModel');
 goog.require('Blockly.Variables');
 goog.require('Blockly.Xml');
 
+goog.requireType('Blockly.Block');
+goog.requireType('Blockly.Menu');
+goog.requireType('Blockly.MenuItem');
 
 
 /**
@@ -64,7 +70,7 @@ Blockly.FieldVariable = function(varName, opt_validator, opt_variableTypes,
    * variable.
    * @type {string}
    */
-  this.defaultVariableName = varName || '';
+  this.defaultVariableName = typeof varName === 'string' ? varName : '';
 
   /**
    * The size of the area rendered by the field.
@@ -97,13 +103,6 @@ Blockly.FieldVariable.fromJson = function(options) {
   return new Blockly.FieldVariable(
       varName, undefined, undefined, undefined, options);
 };
-
-/**
- * The workspace that this variable field belongs to.
- * @type {?Blockly.Workspace}
- * @private
- */
-Blockly.FieldVariable.prototype.workspace_ = null;
 
 /**
  * Serializable fields are saved by the XML renderer, non-serializable fields

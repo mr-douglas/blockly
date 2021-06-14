@@ -12,11 +12,22 @@
 
 goog.provide('Blockly.Workspace');
 
+/** @suppress {extraRequire} */
+goog.require('Blockly.ConnectionChecker');
 goog.require('Blockly.Events');
 goog.require('Blockly.Options');
+goog.require('Blockly.registry');
 goog.require('Blockly.utils');
 goog.require('Blockly.utils.math');
 goog.require('Blockly.VariableMap');
+
+goog.requireType('Blockly.Block');
+goog.requireType('Blockly.ConnectionDB');
+goog.requireType('Blockly.Events.Abstract');
+goog.requireType('Blockly.IASTNodeLocation');
+goog.requireType('Blockly.IConnectionChecker');
+goog.requireType('Blockly.utils.toolbox');
+goog.requireType('Blockly.VariableModel');
 
 
 /**
@@ -24,6 +35,7 @@ goog.require('Blockly.VariableMap');
  * There is no UI, and can be created headlessly.
  * @param {!Blockly.Options=} opt_options Dictionary of options.
  * @constructor
+ * @implements {Blockly.IASTNodeLocation}
  */
 Blockly.Workspace = function(opt_options) {
   /** @type {string} */
@@ -36,8 +48,16 @@ Blockly.Workspace = function(opt_options) {
   this.RTL = !!this.options.RTL;
   /** @type {boolean} */
   this.horizontalLayout = !!this.options.horizontalLayout;
-  /** @type {number} */
+  /** @type {Blockly.utils.toolbox.Position} */
   this.toolboxPosition = this.options.toolboxPosition;
+
+  var connectionCheckerClass = Blockly.registry.getClassFromOptions(
+      Blockly.registry.Type.CONNECTION_CHECKER, this.options, true);
+  /**
+   * An object that encapsulates logic for safety, type, and dragging checks.
+   * @type {!Blockly.IConnectionChecker}
+   */
+  this.connectionChecker = new connectionCheckerClass(this);
 
   /**
    * @type {!Array.<!Blockly.Block>}
@@ -167,7 +187,7 @@ Blockly.Workspace.prototype.sortObjects_ = function(a, b) {
 };
 
 /**
- * Add a block to the list of top blocks.
+ * Adds a block to the list of top blocks.
  * @param {!Blockly.Block} block Block to add.
  */
 Blockly.Workspace.prototype.addTopBlock = function(block) {
@@ -175,7 +195,7 @@ Blockly.Workspace.prototype.addTopBlock = function(block) {
 };
 
 /**
- * Remove a block from the list of top blocks.
+ * Removes a block from the list of top blocks.
  * @param {!Blockly.Block} block Block to remove.
  */
 Blockly.Workspace.prototype.removeTopBlock = function(block) {
@@ -251,7 +271,7 @@ Blockly.Workspace.prototype.getBlocksByType = function(type, ordered) {
 };
 
 /**
- * Add a comment to the list of top comments.
+ * Adds a comment to the list of top comments.
  * @param {!Blockly.WorkspaceComment} comment comment to add.
  * @package
  */
@@ -268,7 +288,7 @@ Blockly.Workspace.prototype.addTopComment = function(comment) {
 };
 
 /**
- * Remove a comment from the list of top comments.
+ * Removes a comment from the list of top comments.
  * @param {!Blockly.WorkspaceComment} comment comment to remove.
  * @package
  */
@@ -407,32 +427,6 @@ Blockly.Workspace.prototype.deleteVariableById = function(id) {
 };
 
 /**
- * Deletes a variable and all of its uses from this workspace without asking
- * the user for confirmation.
- * @param {!Blockly.VariableModel} variable Variable to delete.
- * @param {!Array.<!Blockly.Block>} uses An array of uses of the variable.
- * @private
- */
-Blockly.Workspace.prototype.deleteVariableInternal_ = function(variable, uses) {
-  this.variableMap_.deleteVariableInternal(variable, uses);
-};
-
-/**
- * Check whether a variable exists with the given name.  The check is
- * case-insensitive.
- * @param {string} _name The name to check for.
- * @return {number} The index of the name in the variable list, or -1 if it is
- *     not present.
- * @deprecated April 2017
- */
-
-Blockly.Workspace.prototype.variableIndexOf = function(_name) {
-  console.warn(
-      'Deprecated call to Blockly.Workspace.prototype.variableIndexOf');
-  return -1;
-};
-
-/**
  * Find the variable by the given name and return it. Return null if it is not
  *     found.
  * @param {string} name The name to check for.
@@ -485,7 +479,7 @@ Blockly.Workspace.prototype.getAllVariables = function() {
 
 /**
  * Returns all variable names of all types.
- * @return {!Array<string>} List of all variable names of all types.
+ * @return {!Array.<string>} List of all variable names of all types.
  */
 Blockly.Workspace.prototype.getAllVariableNames = function() {
   return this.variableMap_.getAllVariableNames();
@@ -505,7 +499,7 @@ Blockly.Workspace.prototype.getWidth = function() {
 
 /**
  * Obtain a newly created block.
- * @param {?string} prototypeName Name of the language object containing
+ * @param {!string} prototypeName Name of the language object containing
  *     type-specific functions for this block.
  * @param {string=} opt_id Optional ID.  Use this ID if provided, otherwise
  *     create a new ID.
@@ -538,8 +532,11 @@ Blockly.Workspace.prototype.remainingCapacityOfType = function(type) {
   if (!this.options.maxInstances) {
     return Infinity;
   }
-  return (this.options.maxInstances[type] || Infinity) -
-      this.getBlocksByType(type, false).length;
+
+  var maxInstanceOfType = (this.options.maxInstances[type] !== undefined) ?
+      this.options.maxInstances[type] : Infinity;
+
+  return maxInstanceOfType - this.getBlocksByType(type, false).length;
 };
 
 /**
@@ -576,6 +573,24 @@ Blockly.Workspace.prototype.isCapacityAvailable = function(typeCountsMap) {
  */
 Blockly.Workspace.prototype.hasBlockLimits = function() {
   return this.options.maxBlocks != Infinity || !!this.options.maxInstances;
+};
+
+/**
+ * Gets the undo stack for workplace.
+ * @return {!Array.<!Blockly.Events.Abstract>} undo stack
+ * @package
+ */
+Blockly.Workspace.prototype.getUndoStack = function() {
+  return this.undoStack_;
+};
+
+/**
+ * Gets the redo stack for workplace.
+ * @return {!Array.<!Blockly.Events.Abstract>} redo stack
+ * @package
+ */
+Blockly.Workspace.prototype.getRedoStack = function() {
+  return this.redoStack_;
 };
 
 /**

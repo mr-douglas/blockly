@@ -14,6 +14,7 @@
 goog.provide('Blockly.Lua');
 
 goog.require('Blockly.Generator');
+goog.require('Blockly.inputTypes');
 goog.require('Blockly.utils.string');
 
 
@@ -80,6 +81,12 @@ Blockly.Lua.ORDER_NONE = 99;
  */
 
 /**
+ * Whether the init method has been called.
+ * @type {?boolean}
+ */
+Blockly.Lua.isInitialized = false;
+
+/**
  * Initialise the database of variable names.
  * @param {!Blockly.Workspace} workspace Workspace to generate code from.
  */
@@ -97,6 +104,7 @@ Blockly.Lua.init = function(workspace) {
     Blockly.Lua.variableDB_.reset();
   }
   Blockly.Lua.variableDB_.setVariableMap(workspace.getVariableMap());
+  this.isInitialized = true;
 };
 
 /**
@@ -134,7 +142,7 @@ Blockly.Lua.scrubNakedValue = function(line) {
  * quotes.
  * @param {string} string Text to encode.
  * @return {string} Lua string.
- * @private
+ * @protected
  */
 Blockly.Lua.quote_ = function(string) {
   string = string.replace(/\\/g, '\\\\')
@@ -148,13 +156,13 @@ Blockly.Lua.quote_ = function(string) {
  * quotes.
  * @param {string} string Text to encode.
  * @return {string} Lua string.
- * @private
+ * @protected
  */
 Blockly.Lua.multiline_quote_ = function(string) {
-  string = string.replace(/\\/g, '\\\\')
-                 .replace(/\n/g, '\\\n')
-                 .replace(/'/g, '\\\'');
-  return '[===' + string + '===]';
+  var lines = string.split(/\n/g).map(Blockly.Lua.quote_);
+  // Join with the following, plus a newline:
+  // .. '\n' ..
+  return lines.join(' .. \'\\n\' ..\n');
 };
 
 /**
@@ -165,7 +173,7 @@ Blockly.Lua.multiline_quote_ = function(string) {
  * @param {string} code The Lua code created for this block.
  * @param {boolean=} opt_thisOnly True to generate code for only this statement.
  * @return {string} Lua code with comments and subsequent blocks added.
- * @private
+ * @protected
  */
 Blockly.Lua.scrub_ = function(block, code, opt_thisOnly) {
   var commentCode = '';
@@ -181,7 +189,7 @@ Blockly.Lua.scrub_ = function(block, code, opt_thisOnly) {
     // Collect comments for all value arguments.
     // Don't collect comments for nested statements.
     for (var i = 0; i < block.inputList.length; i++) {
-      if (block.inputList[i].type == Blockly.INPUT_VALUE) {
+      if (block.inputList[i].type == Blockly.inputTypes.VALUE) {
         var childBlock = block.inputList[i].connection.targetBlock();
         if (childBlock) {
           comment = Blockly.Lua.allNestedComments(childBlock);

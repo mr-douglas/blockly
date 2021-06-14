@@ -16,15 +16,11 @@
  */
 goog.provide('Blockly.blockRendering');
 
-goog.require('Blockly.utils.object');
+goog.require('Blockly.registry');
 
+goog.requireType('Blockly.blockRendering.Renderer');
+goog.requireType('Blockly.Theme');
 
-/**
- * The set of all registered renderers, keyed by their name.
- * @type {!Object<string, !Function>}
- * @private
- */
-Blockly.blockRendering.rendererMap_ = {};
 
 /**
  * Whether or not the debugger is turned on.
@@ -41,10 +37,8 @@ Blockly.blockRendering.useDebugger = false;
  * @throws {Error} if a renderer with the same name has already been registered.
  */
 Blockly.blockRendering.register = function(name, rendererClass) {
-  if (Blockly.blockRendering.rendererMap_[name]) {
-    throw Error('Renderer has already been registered.');
-  }
-  Blockly.blockRendering.rendererMap_[name] = rendererClass;
+  Blockly.registry.register(Blockly.registry.Type.RENDERER, name,
+      rendererClass);
 };
 
 /**
@@ -52,14 +46,8 @@ Blockly.blockRendering.register = function(name, rendererClass) {
  * @param {string} name The name of the renderer.
  */
 Blockly.blockRendering.unregister = function(name) {
-  if (Blockly.blockRendering.rendererMap_[name]) {
-    delete Blockly.blockRendering.rendererMap_[name];
-  } else {
-    console.warn('No renderer mapping for name "' + name +
-        '" found to unregister');
-  }
+  Blockly.registry.unregister(Blockly.registry.Type.RENDERER, name);
 };
-
 /**
  * Turn on the blocks debugger.
  * @package
@@ -85,12 +73,11 @@ Blockly.blockRendering.stopDebugger = function() {
  *     Already initialized.
  * @package
  */
+
 Blockly.blockRendering.init = function(name, theme, opt_rendererOverrides) {
-  if (!Blockly.blockRendering.rendererMap_[name]) {
-    throw Error('Renderer not registered: ', name);
-  }
-  var renderer = (/** @type {!Blockly.blockRendering.Renderer} */ (
-    new Blockly.blockRendering.rendererMap_[name](name)));
+  var rendererClass = Blockly.registry.getClass(
+      Blockly.registry.Type.RENDERER, name);
+  var renderer = new rendererClass(name);
   renderer.init(theme, opt_rendererOverrides);
   return renderer;
 };

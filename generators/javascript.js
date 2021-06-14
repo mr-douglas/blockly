@@ -13,6 +13,7 @@
 goog.provide('Blockly.JavaScript');
 
 goog.require('Blockly.Generator');
+goog.require('Blockly.inputTypes');
 goog.require('Blockly.utils.global');
 goog.require('Blockly.utils.string');
 
@@ -114,6 +115,12 @@ Blockly.JavaScript.ORDER_OVERRIDES = [
 ];
 
 /**
+ * Whether the init method has been called.
+ * @type {?boolean}
+ */
+Blockly.JavaScript.isInitialized = false;
+
+/**
  * Initialise the database of variable names.
  * @param {!Blockly.Workspace} workspace Workspace to generate code from.
  */
@@ -153,6 +160,7 @@ Blockly.JavaScript.init = function(workspace) {
     Blockly.JavaScript.definitions_['variables'] =
         'var ' + defvars.join(', ') + ';';
   }
+  this.isInitialized = true;
 };
 
 /**
@@ -188,7 +196,7 @@ Blockly.JavaScript.scrubNakedValue = function(line) {
  * quotes.
  * @param {string} string Text to encode.
  * @return {string} JavaScript string.
- * @private
+ * @protected
  */
 Blockly.JavaScript.quote_ = function(string) {
   // Can't use goog.string.quote since Google's style guide recommends
@@ -204,7 +212,7 @@ Blockly.JavaScript.quote_ = function(string) {
  * with quotes.
  * @param {string} string Text to encode.
  * @return {string} JavaScript string.
- * @private
+ * @protected
  */
 Blockly.JavaScript.multiline_quote_ = function(string) {
   // Can't use goog.string.quote since Google's style guide recommends
@@ -221,7 +229,7 @@ Blockly.JavaScript.multiline_quote_ = function(string) {
  * @param {string} code The JavaScript code created for this block.
  * @param {boolean=} opt_thisOnly True to generate code for only this statement.
  * @return {string} JavaScript code with comments and subsequent blocks added.
- * @private
+ * @protected
  */
 Blockly.JavaScript.scrub_ = function(block, code, opt_thisOnly) {
   var commentCode = '';
@@ -237,7 +245,7 @@ Blockly.JavaScript.scrub_ = function(block, code, opt_thisOnly) {
     // Collect comments for all value arguments.
     // Don't collect comments for nested statements.
     for (var i = 0; i < block.inputList.length; i++) {
-      if (block.inputList[i].type == Blockly.INPUT_VALUE) {
+      if (block.inputList[i].type == Blockly.inputTypes.VALUE) {
         var childBlock = block.inputList[i].connection.targetBlock();
         if (childBlock) {
           comment = Blockly.JavaScript.allNestedComments(childBlock);

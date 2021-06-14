@@ -15,6 +15,8 @@ goog.provide('Blockly.MarkerManager');
 goog.require('Blockly.Cursor');
 goog.require('Blockly.Marker');
 
+goog.requireType('Blockly.WorkspaceSvg');
+
 
 /**
  * Class to manage the multiple markers and the cursor on a workspace.
@@ -51,6 +53,13 @@ Blockly.MarkerManager = function(workspace){
    */
   this.workspace_ = workspace;
 };
+
+/**
+ * The name of the local marker.
+ * @type {string}
+ * @const
+ */
+Blockly.MarkerManager.LOCAL_MARKER = 'local_marker_1';
 
 /**
  * Register the marker by adding it to the map of markers.
@@ -176,6 +185,8 @@ Blockly.MarkerManager.prototype.dispose = function() {
     this.unregisterMarker(markerId);
   }
   this.markers_ = null;
-  this.cursor_.dispose();
-  this.cursor_ = null;
+  if (this.cursor_) {
+    this.cursor_.dispose();
+    this.cursor_ = null;
+  }
 };

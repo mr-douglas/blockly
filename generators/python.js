@@ -13,6 +13,7 @@
 goog.provide('Blockly.Python');
 
 goog.require('Blockly.Generator');
+goog.require('Blockly.inputTypes');
 goog.require('Blockly.utils.string');
 
 
@@ -126,6 +127,12 @@ Blockly.Python.ORDER_OVERRIDES = [
 ];
 
 /**
+ * Whether the init method has been called.
+ * @type {?boolean}
+ */
+Blockly.Python.isInitialized = false;
+
+/**
  * Initialise the database of variable names.
  * @param {!Blockly.Workspace} workspace Workspace to generate code from.
  * @this {Blockly.Generator}
@@ -166,6 +173,7 @@ Blockly.Python.init = function(workspace) {
   }
 
   Blockly.Python.definitions_['variables'] = defvars.join('\n');
+  this.isInitialized = true;
 };
 
 /**
@@ -207,7 +215,7 @@ Blockly.Python.scrubNakedValue = function(line) {
  * Encode a string as a properly escaped Python string, complete with quotes.
  * @param {string} string Text to encode.
  * @return {string} Python string.
- * @private
+ * @protected
  */
 Blockly.Python.quote_ = function(string) {
   // Can't use goog.string.quote since % must also be escaped.
@@ -222,7 +230,7 @@ Blockly.Python.quote_ = function(string) {
     } else {
       string = string.replace(/'/g, '\\\'');
     }
-  };
+  }
   return quote + string + quote;
 };
 
@@ -231,12 +239,13 @@ Blockly.Python.quote_ = function(string) {
  * with quotes.
  * @param {string} string Text to encode.
  * @return {string} Python string.
- * @private
+ * @protected
  */
 Blockly.Python.multiline_quote_ = function(string) {
-  // Can't use goog.string.quote since % must also be escaped.
-  string = string.replace(/'''/g, '\\\'\\\'\\\'');
-  return '\'\'\'' + string + '\'\'\'';
+  var lines = string.split(/\n/g).map(Blockly.Python.quote_);
+  // Join with the following, plus a newline:
+  // + '\n' +
+  return lines.join(' + \'\\n\' + \n');
 };
 
 /**
@@ -247,7 +256,7 @@ Blockly.Python.multiline_quote_ = function(string) {
  * @param {string} code The Python code created for this block.
  * @param {boolean=} opt_thisOnly True to generate code for only this statement.
  * @return {string} Python code with comments and subsequent blocks added.
- * @private
+ * @protected
  */
 Blockly.Python.scrub_ = function(block, code, opt_thisOnly) {
   var commentCode = '';
@@ -263,7 +272,7 @@ Blockly.Python.scrub_ = function(block, code, opt_thisOnly) {
     // Collect comments for all value arguments.
     // Don't collect comments for nested statements.
     for (var i = 0; i < block.inputList.length; i++) {
-      if (block.inputList[i].type == Blockly.INPUT_VALUE) {
+      if (block.inputList[i].type == Blockly.inputTypes.VALUE) {
         var childBlock = block.inputList[i].connection.targetBlock();
         if (childBlock) {
           comment = Blockly.Python.allNestedComments(childBlock);

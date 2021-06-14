@@ -8,6 +8,7 @@
  * @fileoverview Default Blockly entry point. Use this to pick and choose which
  * fields and renderers to include in your Blockly bundle.
  * @author samelh@google.com (Sam El-Husseini)
+ * @suppress {extraRequire}
  */
 'use strict';
 
@@ -45,6 +46,10 @@ goog.require('Blockly.VariablesDynamic');
 // If zoom controls aren't required, then Blockly.inject's
 // "zoom"/"controls" configuration must be false.
 goog.require('Blockly.ZoomControls');
+// This registers default keyboard shortcuts.
+goog.require('Blockly.ShortcutItems');
+// This registers default contextmenu options.
+goog.require('Blockly.ContextMenuItems');
 
 
 // Block dependencies.
@@ -62,13 +67,6 @@ goog.require('Blockly.FieldTextInput');
 goog.require('Blockly.FieldMultilineInput');
 goog.require('Blockly.FieldNumber');
 goog.require('Blockly.FieldVariable');
-
-// If you'd like to include the date field in your build, you will also need to
-// include the Closure library as a build dependency.  You can do so by running:
-//     gulp build-compressed --closure-library
-// Be sure to also include "google-closure-library" to your list of
-// devDependencies.
-// goog.require('Blockly.FieldDate');
 
 
 // Blockly Renderers.
