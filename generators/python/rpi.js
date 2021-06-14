@@ -192,7 +192,7 @@ Blockly.Python['rpi_buzzer_beep'] = function(block) {
     run_in_background = "False";
   } 
   var code = value_buzzer+'.beep(on_time='+value_on_time+', off_time='+value_off_time+', n='+value_n+', background='+run_in_background+')\n';
-  if(value_buzzer="")
+  if(value_buzzer=="")
   {
     return "#"+code;
   }
