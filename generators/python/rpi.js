@@ -564,3 +564,53 @@ Blockly.Python['rpi_pwm_output_set_duty'] = function(block) {
   var code = value_pwm_output + '.value = ' + value_duty + '\n';
   return code;
 };
+
+
+
+
+
+
+Blockly.Python['rpi_new_rotary_encoder'] = function(block) {
+  Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
+  var value_clk_pin = Blockly.Python.valueToCode(block, 'CLK_PIN', Blockly.Python.ORDER_ATOMIC);
+  var value_dt_pin = Blockly.Python.valueToCode(block, 'DT_PIN', Blockly.Python.ORDER_ATOMIC);
+  var code = 'gpiozero.RotaryEncoder(' + value_clk_pin + ',' + value_dt_pin + ',max_steps=0)';
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python['rpi_variables_get_rotary_encoder'] = function(block) {
+  Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
+  var code = Blockly.Python.variableDB_.getName(block.getFieldValue('VAR'),Blockly.VARIABLE_CATEGORY_NAME);
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python['rpi_variables_set_rotary_encoder'] = function(block) {
+  Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
+  var value_component = Blockly.Python.valueToCode(block, 'COMPONENT', Blockly.Python.ORDER_ATOMIC);
+  var code = Blockly.Python.variableDB_.getName(block.getFieldValue('VAR'),Blockly.VARIABLE_CATEGORY_NAME) + " = " + value_component + "\n";
+  return code;
+};
+
+Blockly.Python['rpi_rotary_encoder_wait'] = function(block) {
+  Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
+  var value_rotary_encoder = Blockly.Python.valueToCode(block, 'ROTARY_ENCODER', Blockly.Python.ORDER_ATOMIC);
+  var dropdown_press_release = block.getFieldValue('PRESS_RELEASE');
+  var checkbox_timeout = block.getFieldValue('TIMEOUT') == 'TRUE';
+  var value_secs = Blockly.Python.valueToCode(block, 'TIMEOUT_SECS', Blockly.Python.ORDER_ATOMIC);
+  var code = value_rotary_encoder+'.';
+  if (dropdown_press_release=="ROTATES_CLOCKWISE") {
+    code = code + 'wait_for_rotate_clockwise(';
+  } else if (dropdown_press_release=="ROTATES_COUNTERCLOCKWISE") {
+    code = code + 'wait_for_rotate_counter_clockwise(';
+  } else {
+    code = code + 'wait_for_rotate(';    
+  }
+  code = code+'timeout=';
+  if (checkbox_timeout && value_secs!=""){
+    code = code+value_secs;
+  } else {
+    code = code+'None';
+  }
+  code = code+')\n';
+  return code;
+};

@@ -954,7 +954,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   "colour": Blockly.Msg.RPI_HUE,
   "tooltip": "",
   "helpUrl": "",
-  "mutator": 'rpi_timeout_mutator'
+  "mutator": 'rpi_button_timeout_mutator'
 },
 {
   "type": "rpi_button_is_pressed",
@@ -1354,11 +1354,133 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   "colour": Blockly.Msg.RPI_HUE,
   "tooltip": "",
   "helpUrl": ""
+},
+// Blocks for RPi_Rotary_Encoder variable getter.
+{
+  "type": "rpi_variables_get_rotary_encoder",
+  "message0": "%1",
+  "args0": [
+    {
+      "type": "field_variable",
+      "name": "VAR",
+      "variable": "%{BKY_VARIABLES_DEFAULT_NAME}",
+      "variableTypes": ["RPi_Rotary_Encoder"],    // Specifies what types to put in the dropdown
+      "defaultType": "RPi_Rotary_Encoder"
+    }
+  ],
+  "colour": Blockly.Msg.RPI_HUE,
+  "inputsInline": true,
+  "output": "RPi_Rotary_Encoder"    // Returns a value of "RPi_PWM_Output"
+},
+ {
+  "type": "rpi_variables_set_rotary_encoder",
+  "message0": "%1 %2",
+  "args0": [
+    {
+      "type": "field_variable",
+      "name": "VAR",
+      "variable": "%{BKY_VARIABLES_DEFAULT_NAME}",
+      "variableTypes": ["RPi_Rotary_Encoder"],    // Specifies what types to put in the dropdown
+      "defaultType": "RPi_Rotary_Encoder"
+    },
+    {
+      "type": "input_value",
+      "name": "COMPONENT",
+      "check": [
+        "RPi_Rotary_Encoder"
+      ]
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": Blockly.Msg.RPI_HUE
+},
+{
+  "type": "rpi_new_rotary_encoder",
+  "message0": "Rotary Encoder: %1 CLK pin: %2 DT pin: %3",
+  "args0": [
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_value",
+      "name": "CLK_PIN",
+      "check": "Number",
+      "align": "RIGHT"
+    },
+    {
+      "type": "input_value",
+      "name": "DT_PIN",
+      "check": "Number",
+      "align": "RIGHT"
+    }
+  ],
+  "output": null,
+  "colour": Blockly.Msg.RPI_HUE,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "rpi_rotary_encoder_wait",
+  "message0": "wait until rotary encoder  %1 %2 ( %3 %4 or  %5 seconds have passed) %6  %7",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "ROTARY_ENCODER",
+      "check": "RPi_Rotary_Encoder"
+    },
+    {
+      "type": "field_dropdown",
+      "name": "ROTATE_CLOCKWISE_COUNTERCLOCKWISE",
+      "options": [
+        [
+          "rotates",
+          "ROTATES"
+        ],
+        [
+          "rotates clockwise",
+          "ROTATES_CLOCKWISE"
+        ],
+        [
+          "rotates counter-clockwise",
+          "ROTATES_COUNTERCLOCKWISE"
+        ]
+      ]
+    },
+    {
+      "type": "field_checkbox",
+      "name": "TIMEOUT",
+      "checked": true
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_value",
+      "name": "TIMEOUT_SECS",
+      "check": "Number"
+    },
+    {
+      "type": "input_dummy",
+      "name": "HAVE_PASSED"
+    },
+    {
+      "type": "input_dummy",
+      "name": "END"
+    }
+  ],
+  "inputsInline": true,
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": Blockly.Msg.RPI_HUE,
+  "tooltip": "",
+  "helpUrl": "",
+  "mutator": 'rpi_rotary_encoder_timeout_mutator'
 }
 ]);  // END JSON EXTRACT (Do not delete this comment.)
 
 
-Blockly.RPI.WAIT_TIMEOUT_MUTATOR_MIXIN = {
+Blockly.RPI.WAIT_BUTTON_TIMEOUT_MUTATOR_MIXIN = {
   mutationToDom: function() {
     var container = Blockly.utils.xml.createElement('mutation');
     var timeoutSecsIsNone = this.getFieldValue('TIMEOUT')=='FALSE';
@@ -1392,13 +1514,59 @@ Blockly.RPI.WAIT_TIMEOUT_MUTATOR_MIXIN = {
   }
 };
 
-Blockly.RPI.WAIT_TIMEOUT_MUTATOR_EXTENSION = function() {
+Blockly.RPI.WAIT_BUTTON_TIMEOUT_MUTATOR_EXTENSION = function() {
   this.getField('TIMEOUT').setValidator(function(option) {
     var timeoutSecsIsNone = (option == 'FALSE');
     this.getSourceBlock().updateShape_(timeoutSecsIsNone);
   });
 };
 
-Blockly.Extensions.registerMutator('rpi_timeout_mutator',
-  Blockly.RPI.WAIT_TIMEOUT_MUTATOR_MIXIN,
-  Blockly.RPI.WAIT_TIMEOUT_MUTATOR_EXTENSION);
+Blockly.Extensions.registerMutator('rpi_button_timeout_mutator',
+  Blockly.RPI.WAIT_BUTTON_TIMEOUT_MUTATOR_MIXIN,
+  Blockly.RPI.WAIT_BUTTON_TIMEOUT_MUTATOR_EXTENSION);
+
+
+Blockly.RPI.WAIT_ROTARY_ENCODER_TIMEOUT_MUTATOR_MIXIN = {
+  mutationToDom: function() {
+    var container = Blockly.utils.xml.createElement('mutation');
+    var timeoutSecsIsNone = this.getFieldValue('TIMEOUT')=='FALSE';
+    container.setAttribute('timeout_secs_is_none',timeoutSecsIsNone);
+    return container;
+  },
+  domToMutation: function(xmlElement) {
+    var timeoutSecsIsNone = xmlElement.getAttribute('timeout_secs_is_none')=='true';
+    this.updateShape_(timeoutSecsIsNone);
+  },
+  updateShape_: function(timeoutSecsIsNone) {
+    var timeoutSecsNumberInput = this.getInput('TIMEOUT_SECS');
+    if(timeoutSecsIsNone) {
+      if (timeoutSecsNumberInput) {
+        this.removeInput("TIMEOUT_SECS",true);
+        this.removeInput("HAVE_PASSED",true);
+        this.removeInput("END",true);
+        this.appendDummyInput("END")
+          .appendField(")");
+      }
+    } else if(!timeoutSecsNumberInput) {
+      this.removeInput("END",true);
+      this.appendValueInput("TIMEOUT_SECS")
+        .setCheck("Number")
+        .appendField("or ");
+      this.appendDummyInput("HAVE_PASSED")
+        .appendField("seconds have passed)");
+      this.appendDummyInput("END")
+        .appendField("");
+    }
+  }
+};
+
+Blockly.RPI.WAIT_ROTARY_ENCODER_TIMEOUT_MUTATOR_EXTENSION = function() {
+  this.getField('TIMEOUT').setValidator(function(option) {
+    var timeoutSecsIsNone = (option == 'FALSE');
+    this.getSourceBlock().updateShape_(timeoutSecsIsNone);
+  });
+};
+
+Blockly.Extensions.registerMutator('rpi_rotary_encoder_timeout_mutator',
+  Blockly.RPI.WAIT_ROTARY_ENCODER_TIMEOUT_MUTATOR_MIXIN,
+  Blockly.RPI.WAIT_ROTARY_ENCODER_TIMEOUT_MUTATOR_EXTENSION);

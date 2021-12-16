@@ -148,6 +148,7 @@ toolboxString += '<category colour="270" name="Button" custom="RPi_Button"></cat
 toolboxString += '<category colour="270" name="Light Sensor" custom="RPi_Light_Sensor"></category>'; 
 toolboxString += '<category colour="270" name="Buzzer" custom="RPi_Buzzer"></category>'; 
 toolboxString += '<category colour="270" name="Servo" custom="RPi_Servo"></category>'; 
+toolboxString += '<category colour="270" name="Rotary Encoder" custom="RPi_Rotary_Encoder"></category>';
 toolboxString += '<category colour="270" name="Ultrasonic Distance Sensor" custom="RPi_USonic_Sensor"></category>'; 
 toolboxString += '<category colour="270" name="Motion Sensor" custom="RPi_Motion_Sensor"></category>'; 
 toolboxString += '<category colour="270" name="Digital Input" custom="RPi_Digital_Input"></category>'; 
@@ -649,6 +650,41 @@ workspace.registerToolboxCategoryCallback('RPi_PWM_Output', function(workspace){
                                          
 workspace.registerButtonCallback('addRPiPWMOutputPressed', function(button){
                                                                            Blockly.Variables.createVariableButtonHandler(button.getTargetWorkspace(), null, 'RPi_PWM_Output');
+                                                                          }
+                                );
+
+
+workspace.registerToolboxCategoryCallback('RPi_Rotary_Encoder', function(workspace){
+                                                                                    var xmlList = [];
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<button text="Add New Rotary Encoder" callbackKey="addRPiRotaryEncoderPressed"></button>'));
+                                                                                    var variableModelList = workspace.getVariablesOfType('RPi_Rotary_Encoder');
+                                                                                    if(variableModelList.length>0){
+                                                                                      for (var i = 0, variable; (variable = variableModelList[i]); i++) {
+                                                                                        var block = Blockly.utils.xml.createElement('block');
+                                                                                        block.setAttribute('type', 'rpi_variables_set_rotary_encoder');
+                                                                                        block.setAttribute('gap', 8);
+                                                                                        block.appendChild(Blockly.Variables.generateVariableFieldDom(variable));
+                                                                                        xmlList.push(block);
+                                                                                      }
+                                                                                    }
+                                                                                    if(variableModelList.length>0){
+                                                                                      for (var i = 0, variable; (variable = variableModelList[i]); i++) {
+                                                                                        var block = Blockly.utils.xml.createElement('block');
+                                                                                        block.setAttribute('type', 'rpi_variables_get_rotary_encoder');
+                                                                                        block.setAttribute('gap', 8);
+                                                                                        block.appendChild(Blockly.Variables.generateVariableFieldDom(variable));
+                                                                                        xmlList.push(block);
+                                                                                      }
+                                                                                    }
+                                                                                    
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="rpi_new_rotary_encoder"><value name="CLK_PIN"><shadow type="math_number"><field name="NUM">4</field></shadow></value><value name="DT_PIN"><shadow type="math_number"><field name="NUM">5</field></shadow></value></block>'));
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="rpi_rotary_encoder_wait"><value name="TIMEOUT_SECS"><shadow type="math_number"><field name="NUM">5</field></shadow></value></block>'));
+                                                                                    return xmlList;
+                                                                                   }
+                                         );
+                                         
+workspace.registerButtonCallback('addRPiRotaryEncoderPressed', function(button){
+                                                                           Blockly.Variables.createVariableButtonHandler(button.getTargetWorkspace(), null, 'RPi_Rotary_Encoder');
                                                                           }
                                 );
 
