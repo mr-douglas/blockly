@@ -594,13 +594,13 @@ Blockly.Python['rpi_variables_set_rotary_encoder'] = function(block) {
 Blockly.Python['rpi_rotary_encoder_wait'] = function(block) {
   Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
   var value_rotary_encoder = Blockly.Python.valueToCode(block, 'ROTARY_ENCODER', Blockly.Python.ORDER_ATOMIC);
-  var dropdown_press_release = block.getFieldValue('PRESS_RELEASE');
+  var dropdown_rotate_clockwise_counterclockwise = block.getFieldValue('ROTATE_CLOCKWISE_COUNTERCLOCKWISE');
   var checkbox_timeout = block.getFieldValue('TIMEOUT') == 'TRUE';
   var value_secs = Blockly.Python.valueToCode(block, 'TIMEOUT_SECS', Blockly.Python.ORDER_ATOMIC);
   var code = value_rotary_encoder+'.';
-  if (dropdown_press_release=="ROTATES_CLOCKWISE") {
+  if (dropdown_rotate_clockwise_counterclockwise=="ROTATES_CLOCKWISE") {
     code = code + 'wait_for_rotate_clockwise(';
-  } else if (dropdown_press_release=="ROTATES_COUNTERCLOCKWISE") {
+  } else if (dropdown_rotate_clockwise_counterclockwise=="ROTATES_COUNTERCLOCKWISE") {
     code = code + 'wait_for_rotate_counter_clockwise(';
   } else {
     code = code + 'wait_for_rotate(';    
@@ -613,4 +613,10 @@ Blockly.Python['rpi_rotary_encoder_wait'] = function(block) {
   }
   code = code+')\n';
   return code;
+};
+
+Blockly.Python['rpi_rotary_encoder_steps'] = function(block) {
+  var value_rotary_encoder = Blockly.Python.valueToCode(block, 'ROTARY_ENCODER', Blockly.Python.ORDER_ATOMIC);
+  var code = value_rotary_encoder + '.steps';
+  return [code, Blockly.Python.ORDER_ATOMIC];
 };

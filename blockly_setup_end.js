@@ -679,6 +679,7 @@ workspace.registerToolboxCategoryCallback('RPi_Rotary_Encoder', function(workspa
                                                                                     
                                                                                     xmlList.push(Blockly.Xml.textToDom('<block type="rpi_new_rotary_encoder"><value name="CLK_PIN"><shadow type="math_number"><field name="NUM">4</field></shadow></value><value name="DT_PIN"><shadow type="math_number"><field name="NUM">5</field></shadow></value></block>'));
                                                                                     xmlList.push(Blockly.Xml.textToDom('<block type="rpi_rotary_encoder_wait"><value name="TIMEOUT_SECS"><shadow type="math_number"><field name="NUM">5</field></shadow></value></block>'));
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="rpi_rotary_encoder_steps"></block>'));
                                                                                     return xmlList;
                                                                                    }
                                          );

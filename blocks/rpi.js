@@ -1476,6 +1476,21 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   "tooltip": "",
   "helpUrl": "",
   "mutator": 'rpi_rotary_encoder_timeout_mutator'
+},
+{
+  "type": "rpi_rotary_encoder_steps",
+  "message0": "steps rotary encoder %1 has turned",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "ROTARY_ENCODER",
+      "check": "RPi_Rotary_Encoder"
+    }
+  ],
+  "output": "Number",
+  "colour": Blockly.Msg.RPI_HUE,
+  "tooltip": "",
+  "helpUrl": ""
 }
 ]);  // END JSON EXTRACT (Do not delete this comment.)
 
