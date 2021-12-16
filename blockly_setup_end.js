@@ -68,7 +68,7 @@ toolboxString += '<block type="logic_null"></block>';
 toolboxString += '</category>';
 toolboxString += '<category name="Iteration (Loops)" colour="%{BKY_LOOPS_HUE}">'; 
 toolboxString += '<block type="controls_repeat_ext"><value name="TIMES"><shadow type="math_number"><field name="NUM">10</field></shadow></value></block>'; 
-toolboxString += '<block type="controls_whileUntil"></block>'; 
+toolboxString += '<block type="controls_whileUntil"><value name="BOOL"><shadow type="logic_boolean"><field name="BOOL">TRUE</field></shadow></value></block>'; 
 toolboxString += '<block type="controls_for"><value name="FROM"><shadow type="math_number"><field name="NUM">1</field></shadow></value><value name="TO"><shadow type="math_number"><field name="NUM">10</field></shadow></value><value name="BY"><shadow type="math_number"><field name="NUM">1</field></shadow></value></block>'; 
 toolboxString += '<block type="controls_forEach"></block>'; 
 toolboxString += '<block type="controls_flow_statements"></block>';
