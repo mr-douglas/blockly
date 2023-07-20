@@ -401,7 +401,7 @@ Blockly.Python['rpi_button_is_pressed'] = function(block) {
 Blockly.Python['rpi_new_light_sensor'] = function(block) {
   Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
   var value_pin = Blockly.Python.valueToCode(block, 'PIN', Blockly.Python.ORDER_ATOMIC);
-  var code = 'gpiozero.DigitalInputDevice(' + value_pin + ')';
+  var code = 'gpiozero.LightSensor(' + value_pin + ')';
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
@@ -420,7 +420,7 @@ Blockly.Python['rpi_variables_set_light_sensor'] = function(block) {
 
 Blockly.Python['rpi_light_detected'] = function(block) {
   var value_light_sensor = Blockly.Python.valueToCode(block, 'LIGHT_SENSOR', Blockly.Python.ORDER_ATOMIC);
-  var code = 'not ' + value_light_sensor + '.is_active';
+  var code = value_light_sensor + '.light_detected';
   return [code, Blockly.Python.ORDER_NONE];
 };
 
@@ -429,9 +429,11 @@ Blockly.Python['rpi_light_wait_until_light_dark'] = function(block) {
   var dropdown_light_or_dark = block.getFieldValue('LIGHT_OR_DARK');
   var code = value_light_sensor + '.wait_for_';
   if(dropdown_light_or_dark=="LIGHT"){
-    code = code + 'in';
+    code = code + 'light';
+  } else {
+    code = code + 'dark';
   }
-  code = code + 'active()\n';
+  code = code + '(timeout=None)\n';
   return code;
 };
 
