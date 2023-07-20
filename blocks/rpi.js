@@ -1014,7 +1014,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
 },
 {
   "type": "rpi_new_light_sensor",
-  "message0": "Light Sensor: %1 pin: %2",
+  "message0": "Light Sensor: %1 pin: %2 threshold: %3",
   "args0": [
     {
       "type": "input_dummy"
@@ -1024,11 +1024,17 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
       "name": "PIN",
       "check": "Number",
       "align": "RIGHT"
+    },
+    {
+      "type": "input_value",
+      "name": "THRESHOLD",
+      "check": "Number",
+      "align": "RIGHT"
     }
   ],
   "output": null,
   "colour": Blockly.Msg.RPI_HUE,
-  "tooltip": "",
+  "tooltip": "What amount of light, from 0 to 1, is considered to mean there is light",
   "helpUrl": ""
 },
 {

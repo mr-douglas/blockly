@@ -401,7 +401,8 @@ Blockly.Python['rpi_button_is_pressed'] = function(block) {
 Blockly.Python['rpi_new_light_sensor'] = function(block) {
   Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
   var value_pin = Blockly.Python.valueToCode(block, 'PIN', Blockly.Python.ORDER_ATOMIC);
-  var code = 'gpiozero.LightSensor(' + value_pin + ')';
+  var value_threshold = Blockly.Python.valueToCode(block, 'THRESHOLD', Blockly.Python.ORDER_ATOMIC);
+  var code = 'gpiozero.LightSensor(' + value_pin + ', threshold=' + value_threshold + ')';
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 

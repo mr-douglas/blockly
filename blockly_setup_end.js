@@ -531,7 +531,7 @@ workspace.registerToolboxCategoryCallback('RPi_Light_Sensor', function(workspace
                                                                                       }
                                                                                     }
                                                                                     
-                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="rpi_new_light_sensor"><value name="PIN"><shadow type="math_number"><field name="NUM">4</field></shadow></value></block>'));
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="rpi_new_light_sensor"><value name="PIN"><shadow type="math_number"><field name="NUM">4</field></shadow></value><value name="THRESHOLD"><shadow type="math_number"><field name="NUM">0.1</field></shadow></value></block>'));
                                                                                     xmlList.push(Blockly.Xml.textToDom('<block type="rpi_light_detected"></block>'));
                                                                                     xmlList.push(Blockly.Xml.textToDom('<block type="rpi_light_wait_until_light_dark"></block>'));
                                                                                     xmlList.push(Blockly.Xml.textToDom('<block type="rpi_light_sensor_get_value"></block>'));
