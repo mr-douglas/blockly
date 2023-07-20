@@ -1078,6 +1078,21 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   "tooltip": "",
   "helpUrl": ""
 },
+{
+  "type": "rpi_light_sensor_get_value",
+  "message0": "get the value of light sensor %1",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "LIGHT_SENSOR",
+      "check": "RPi_Light_Sensor"
+    }
+  ],
+  "output": "Number",
+  "colour": Blockly.Msg.RPI_HUE,
+  "tooltip": "",
+  "helpUrl": ""
+},
 // Blocks for RPi_Digital_Input variable getter.
 {
   "type": "rpi_variables_get_digital_input",

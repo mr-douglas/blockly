@@ -437,32 +437,12 @@ Blockly.Python['rpi_light_wait_until_light_dark'] = function(block) {
   return code;
 };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Blockly.Python['rpi_light_sensor_get_value'] = function(block) {
+  Blockly.Python.definitions_['import_gpiozero'] = rpi_gpiozero_imports;
+  var value_light_sensor = Blockly.Python.valueToCode(block, 'LIGHT_SENSOR', Blockly.Python.ORDER_ATOMIC);
+  var code = value_light_sensor+'.value';
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};
 
 
 
