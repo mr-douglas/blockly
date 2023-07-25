@@ -142,6 +142,21 @@ toolboxString += '<category colour="90" name="Sensors" custom="EV3_SENSORS"></ca
 toolboxString += '<block type="ev3_set_up"></block>'; 
 toolboxString += '<block type="ev3_color"></block>';
 toolboxString += '</category>';
+toolboxString += '<category colour="55" name="BuildHAT">'; 
+toolboxString += '<category colour="55" name="Motors" custom="BHT_Motors"></category>';
+toolboxString += '<category colour="55" name="Sensors">';
+toolboxString += '<category colour="55" name="Color Sensor" custom="BHT_Color_Sensors"></category>';
+toolboxString += '<category colour="55" name="Color Distance Sensor" custom="BHT_Color_Distance_Sensors"></category>';
+toolboxString += '<category colour="55" name="Distance Sensor" custom="BHT_Distance_Sensors"></category>';
+toolboxString += '<category colour="55" name="Force Sensor" custom="BHT_Force_Sensors"></category>';
+toolboxString += '<category colour="55" name="Motion Sensor" custom="BHT_Motion_Sensors"></category>';
+toolboxString += '<category colour="55" name="Tilt Sensor" custom="BHT_Tilt_Sensors"></category>';
+toolboxString += '</category>';
+toolboxString += '<category colour="55" name="Lights">';
+toolboxString += '<category colour="55" name="Light" custom="BHT_Lights"></category>';
+toolboxString += '<category colour="55" name="Matrix" custom="BHT_Matrices"></category>';
+toolboxString += '</category>';
+toolboxString += '</category>';
 toolboxString += '<category colour="270" name="Raspberry Pi">'; 
 toolboxString += '<category colour="270" name="LED" custom="RPi_LED"></category>'; 
 toolboxString += '<category colour="270" name="RGB LED" custom="RPi_RGB_LED"></category>'; 
@@ -250,6 +265,351 @@ workspace.registerButtonCallback('addSensorButtonPressed', function(button){
                                                                            Blockly.Variables.createVariableButtonHandler(button.getTargetWorkspace(), null, 'EV3Sensor');
                                                                           }
                                 );
+
+workspace.registerToolboxCategoryCallback('BHT_Motors', function(workspace){
+                                                                                    var xmlList = [];
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<button text="Add New Motor" callbackKey="addBHTMotorButtonPressed"></button>'));
+                                                                                    var variableModelList = workspace.getVariablesOfType('BHT_Motor');
+                                                                                    if(variableModelList.length>0){
+                                                                                      for (var i = 0, variable; (variable = variableModelList[i]); i++) {
+                                                                                        var block = Blockly.utils.xml.createElement('block');
+                                                                                        block.setAttribute('type', 'bht_variables_set_motor');
+                                                                                        block.setAttribute('gap', 8);
+                                                                                        block.appendChild(Blockly.Variables.generateVariableFieldDom(variable));
+                                                                                        xmlList.push(block);
+                                                                                      }
+                                                                                    }
+                                                                                    if(variableModelList.length>0){
+                                                                                      for (var i = 0, variable; (variable = variableModelList[i]); i++) {
+                                                                                        var block = Blockly.utils.xml.createElement('block');
+                                                                                        block.setAttribute('type', 'bht_variables_get_motor');
+                                                                                        block.setAttribute('gap', 8);
+                                                                                        block.appendChild(Blockly.Variables.generateVariableFieldDom(variable));
+                                                                                        xmlList.push(block);
+                                                                                      }
+                                                                                    }
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="bht_new_motor"></block>'));
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="bht_motor_start"><value name="SPEED"><shadow type="math_number"><field name="NUM">100</field></shadow></value></block>'));
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="bht_motor_stop"></block>'));
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="bht_motor_get_aposition"></block>'));
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="bht_motor_get_speed"></block>'));
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="bht_motor_run_for_seconds"><value name="SPEED"><shadow type="math_number"><field name="NUM">100</field></shadow></value><value name="TIME"><shadow type="math_number"><field name="NUM">1</field></shadow></value></block>'));
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="bht_motor_run_for_rotations"><value name="SPEED"><shadow type="math_number"><field name="NUM">100</field></shadow></value><value name="ROTATIONS"><shadow type="math_number"><field name="NUM">1</field></shadow></value></block>'));
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="bht_motor_run_for_degrees"><value name="SPEED"><shadow type="math_number"><field name="NUM">100</field></shadow></value><value name="DEGREES"><shadow type="math_number"><field name="NUM">180</field></shadow></value></block>'));
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="bht_motor_run_to_position_angle"><value name="SPEED"><shadow type="math_number"><field name="NUM">100</field></shadow></value></block>'));
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="bht_motor_run_to_position"><value name="SPEED"><shadow type="math_number"><field name="NUM">100</field></shadow></value><value name="POSITION"><shadow type="math_number"><field name="NUM">0</field></shadow></value></block>'));
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<button text="Add New Motor Pair" callbackKey="addBHTMotorPairButtonPressed"></button>'));
+                                                                                    var variableModelList = workspace.getVariablesOfType('BHT_Motor_Pair');
+                                                                                    if(variableModelList.length>0){
+                                                                                      for (var i = 0, variable; (variable = variableModelList[i]); i++) {
+                                                                                        var block = Blockly.utils.xml.createElement('block');
+                                                                                        block.setAttribute('type', 'bht_variables_set_motor_pair');
+                                                                                        block.setAttribute('gap', 8);
+                                                                                        block.appendChild(Blockly.Variables.generateVariableFieldDom(variable));
+                                                                                        xmlList.push(block);
+                                                                                      }
+                                                                                    }
+                                                                                    if(variableModelList.length>0){
+                                                                                      for (var i = 0, variable; (variable = variableModelList[i]); i++) {
+                                                                                        var block = Blockly.utils.xml.createElement('block');
+                                                                                        block.setAttribute('type', 'bht_variables_get_motor_pair');
+                                                                                        block.setAttribute('gap', 8);
+                                                                                        block.appendChild(Blockly.Variables.generateVariableFieldDom(variable));
+                                                                                        xmlList.push(block);
+                                                                                      }
+                                                                                    }
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="bht_new_motor_pair"></block>'));
+                                                                                    return xmlList;
+                                                                                   }
+                                         );
+                                         
+workspace.registerButtonCallback('addBHTMotorButtonPressed', function(button){
+                                                                           Blockly.Variables.createVariableButtonHandler(button.getTargetWorkspace(), null, 'BHT_Motor');
+                                                                          }
+                                );
+
+workspace.registerButtonCallback('addBHTMotorPairButtonPressed', function(button){
+                                                                           Blockly.Variables.createVariableButtonHandler(button.getTargetWorkspace(), null, 'BHT_Motor_Pair');
+                                                                          }
+                                );
+
+workspace.registerToolboxCategoryCallback('BHT_Color_Sensors', function(workspace){
+                                                                                    var xmlList = [];
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<button text="Add New Colour Sensor" callbackKey="addBHTColorSensorButtonPressed"></button>'));
+                                                                                    var variableModelList = workspace.getVariablesOfType('BHT_Color_Sensor');
+                                                                                    if(variableModelList.length>0){
+                                                                                      for (var i = 0, variable; (variable = variableModelList[i]); i++) {
+                                                                                        var block = Blockly.utils.xml.createElement('block');
+                                                                                        block.setAttribute('type', 'bht_variables_set_color_sensor');
+                                                                                        block.setAttribute('gap', 8);
+                                                                                        block.appendChild(Blockly.Variables.generateVariableFieldDom(variable));
+                                                                                        xmlList.push(block);
+                                                                                      }
+                                                                                    }
+                                                                                    if(variableModelList.length>0){
+                                                                                      for (var i = 0, variable; (variable = variableModelList[i]); i++) {
+                                                                                        var block = Blockly.utils.xml.createElement('block');
+                                                                                        block.setAttribute('type', 'bht_variables_get_color_sensor');
+                                                                                        block.setAttribute('gap', 8);
+                                                                                        block.appendChild(Blockly.Variables.generateVariableFieldDom(variable));
+                                                                                        xmlList.push(block);
+                                                                                      }
+                                                                                    }
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="bht_new_color_sensor"></block>'));
+                                                                                    return xmlList;
+                                                                                   }
+                                         );
+                                         
+workspace.registerButtonCallback('addBHTColorSensorButtonPressed', function(button){
+                                                                           Blockly.Variables.createVariableButtonHandler(button.getTargetWorkspace(), null, 'BHT_Color_Sensor');
+                                                                          }
+                                );
+
+
+
+
+workspace.registerToolboxCategoryCallback('BHT_Color_Distance_Sensors', function(workspace){
+                                                                                    var xmlList = [];
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<button text="Add New Colour Distance Sensor" callbackKey="addBHTColorDistanceSensorButtonPressed"></button>'));
+                                                                                    var variableModelList = workspace.getVariablesOfType('BHT_Color_Distance_Sensor');
+                                                                                    if(variableModelList.length>0){
+                                                                                      for (var i = 0, variable; (variable = variableModelList[i]); i++) {
+                                                                                        var block = Blockly.utils.xml.createElement('block');
+                                                                                        block.setAttribute('type', 'bht_variables_set_color_distance_sensor');
+                                                                                        block.setAttribute('gap', 8);
+                                                                                        block.appendChild(Blockly.Variables.generateVariableFieldDom(variable));
+                                                                                        xmlList.push(block);
+                                                                                      }
+                                                                                    }
+                                                                                    if(variableModelList.length>0){
+                                                                                      for (var i = 0, variable; (variable = variableModelList[i]); i++) {
+                                                                                        var block = Blockly.utils.xml.createElement('block');
+                                                                                        block.setAttribute('type', 'bht_variables_get_color_distance_sensor');
+                                                                                        block.setAttribute('gap', 8);
+                                                                                        block.appendChild(Blockly.Variables.generateVariableFieldDom(variable));
+                                                                                        xmlList.push(block);
+                                                                                      }
+                                                                                    }
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="bht_new_color_distance_sensor"></block>'));
+                                                                                    return xmlList;
+                                                                                   }
+                                         );
+                                         
+workspace.registerButtonCallback('addBHTColorDistanceSensorButtonPressed', function(button){
+                                                                           Blockly.Variables.createVariableButtonHandler(button.getTargetWorkspace(), null, 'BHT_Color_Distance_Sensor');
+                                                                          }
+                                );
+
+
+
+
+workspace.registerToolboxCategoryCallback('BHT_Distance_Sensors', function(workspace){
+                                                                                    var xmlList = [];
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<button text="Add New Distance Sensor" callbackKey="addBHTDistanceSensorButtonPressed"></button>'));
+                                                                                    var variableModelList = workspace.getVariablesOfType('BHT_Distance_Sensor');
+                                                                                    if(variableModelList.length>0){
+                                                                                      for (var i = 0, variable; (variable = variableModelList[i]); i++) {
+                                                                                        var block = Blockly.utils.xml.createElement('block');
+                                                                                        block.setAttribute('type', 'bht_variables_set_distance_sensor');
+                                                                                        block.setAttribute('gap', 8);
+                                                                                        block.appendChild(Blockly.Variables.generateVariableFieldDom(variable));
+                                                                                        xmlList.push(block);
+                                                                                      }
+                                                                                    }
+                                                                                    if(variableModelList.length>0){
+                                                                                      for (var i = 0, variable; (variable = variableModelList[i]); i++) {
+                                                                                        var block = Blockly.utils.xml.createElement('block');
+                                                                                        block.setAttribute('type', 'bht_variables_get_distance_sensor');
+                                                                                        block.setAttribute('gap', 8);
+                                                                                        block.appendChild(Blockly.Variables.generateVariableFieldDom(variable));
+                                                                                        xmlList.push(block);
+                                                                                      }
+                                                                                    }
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="bht_new_distance_sensor"></block>'));
+                                                                                    return xmlList;
+                                                                                   }
+                                         );
+                                         
+workspace.registerButtonCallback('addBHTDistanceSensorButtonPressed', function(button){
+                                                                           Blockly.Variables.createVariableButtonHandler(button.getTargetWorkspace(), null, 'BHT_Distance_Sensor');
+                                                                          }
+                                );
+
+
+
+workspace.registerToolboxCategoryCallback('BHT_Force_Sensors', function(workspace){
+                                                                                    var xmlList = [];
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<button text="Add New Force Sensor" callbackKey="addBHTForceSensorButtonPressed"></button>'));
+                                                                                    var variableModelList = workspace.getVariablesOfType('BHT_Force_Sensor');
+                                                                                    if(variableModelList.length>0){
+                                                                                      for (var i = 0, variable; (variable = variableModelList[i]); i++) {
+                                                                                        var block = Blockly.utils.xml.createElement('block');
+                                                                                        block.setAttribute('type', 'bht_variables_set_force_sensor');
+                                                                                        block.setAttribute('gap', 8);
+                                                                                        block.appendChild(Blockly.Variables.generateVariableFieldDom(variable));
+                                                                                        xmlList.push(block);
+                                                                                      }
+                                                                                    }
+                                                                                    if(variableModelList.length>0){
+                                                                                      for (var i = 0, variable; (variable = variableModelList[i]); i++) {
+                                                                                        var block = Blockly.utils.xml.createElement('block');
+                                                                                        block.setAttribute('type', 'bht_variables_get_force_sensor');
+                                                                                        block.setAttribute('gap', 8);
+                                                                                        block.appendChild(Blockly.Variables.generateVariableFieldDom(variable));
+                                                                                        xmlList.push(block);
+                                                                                      }
+                                                                                    }
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="bht_new_force_sensor"></block>'));
+                                                                                    return xmlList;
+                                                                                   }
+                                         );
+                                         
+workspace.registerButtonCallback('addBHTForceSensorButtonPressed', function(button){
+                                                                           Blockly.Variables.createVariableButtonHandler(button.getTargetWorkspace(), null, 'BHT_Force_Sensor');
+                                                                          }
+                                );
+
+
+
+workspace.registerToolboxCategoryCallback('BHT_Motion_Sensors', function(workspace){
+                                                                                    var xmlList = [];
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<button text="Add New Motion Sensor" callbackKey="addBHTMotionSensorButtonPressed"></button>'));
+                                                                                    var variableModelList = workspace.getVariablesOfType('BHT_Motion_Sensor');
+                                                                                    if(variableModelList.length>0){
+                                                                                      for (var i = 0, variable; (variable = variableModelList[i]); i++) {
+                                                                                        var block = Blockly.utils.xml.createElement('block');
+                                                                                        block.setAttribute('type', 'bht_variables_set_motion_sensor');
+                                                                                        block.setAttribute('gap', 8);
+                                                                                        block.appendChild(Blockly.Variables.generateVariableFieldDom(variable));
+                                                                                        xmlList.push(block);
+                                                                                      }
+                                                                                    }
+                                                                                    if(variableModelList.length>0){
+                                                                                      for (var i = 0, variable; (variable = variableModelList[i]); i++) {
+                                                                                        var block = Blockly.utils.xml.createElement('block');
+                                                                                        block.setAttribute('type', 'bht_variables_get_motion_sensor');
+                                                                                        block.setAttribute('gap', 8);
+                                                                                        block.appendChild(Blockly.Variables.generateVariableFieldDom(variable));
+                                                                                        xmlList.push(block);
+                                                                                      }
+                                                                                    }
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="bht_new_motion_sensor"></block>'));
+                                                                                    return xmlList;
+                                                                                   }
+                                         );
+                                         
+workspace.registerButtonCallback('addBHTMotionSensorButtonPressed', function(button){
+                                                                           Blockly.Variables.createVariableButtonHandler(button.getTargetWorkspace(), null, 'BHT_Motion_Sensor');
+                                                                          }
+                                );
+
+
+
+workspace.registerToolboxCategoryCallback('BHT_Tilt_Sensors', function(workspace){
+                                                                                    var xmlList = [];
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<button text="Add New Tilt Sensor" callbackKey="addBHTTiltSensorButtonPressed"></button>'));
+                                                                                    var variableModelList = workspace.getVariablesOfType('BHT_Tilt_Sensor');
+                                                                                    if(variableModelList.length>0){
+                                                                                      for (var i = 0, variable; (variable = variableModelList[i]); i++) {
+                                                                                        var block = Blockly.utils.xml.createElement('block');
+                                                                                        block.setAttribute('type', 'bht_variables_set_tilt_sensor');
+                                                                                        block.setAttribute('gap', 8);
+                                                                                        block.appendChild(Blockly.Variables.generateVariableFieldDom(variable));
+                                                                                        xmlList.push(block);
+                                                                                      }
+                                                                                    }
+                                                                                    if(variableModelList.length>0){
+                                                                                      for (var i = 0, variable; (variable = variableModelList[i]); i++) {
+                                                                                        var block = Blockly.utils.xml.createElement('block');
+                                                                                        block.setAttribute('type', 'bht_variables_get_tilt_sensor');
+                                                                                        block.setAttribute('gap', 8);
+                                                                                        block.appendChild(Blockly.Variables.generateVariableFieldDom(variable));
+                                                                                        xmlList.push(block);
+                                                                                      }
+                                                                                    }
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="bht_new_tilt_sensor"></block>'));
+                                                                                    return xmlList;
+                                                                                   }
+                                         );
+                                         
+workspace.registerButtonCallback('addBHTTiltSensorButtonPressed', function(button){
+                                                                           Blockly.Variables.createVariableButtonHandler(button.getTargetWorkspace(), null, 'BHT_Tilt_Sensor');
+                                                                          }
+                                );
+
+
+
+
+workspace.registerToolboxCategoryCallback('BHT_Lights', function(workspace){
+                                                                                    var xmlList = [];
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<button text="Add New Light" callbackKey="addBHTLightButtonPressed"></button>'));
+                                                                                    var variableModelList = workspace.getVariablesOfType('BHT_Light');
+                                                                                    if(variableModelList.length>0){
+                                                                                      for (var i = 0, variable; (variable = variableModelList[i]); i++) {
+                                                                                        var block = Blockly.utils.xml.createElement('block');
+                                                                                        block.setAttribute('type', 'bht_variables_set_light');
+                                                                                        block.setAttribute('gap', 8);
+                                                                                        block.appendChild(Blockly.Variables.generateVariableFieldDom(variable));
+                                                                                        xmlList.push(block);
+                                                                                      }
+                                                                                    }
+                                                                                    if(variableModelList.length>0){
+                                                                                      for (var i = 0, variable; (variable = variableModelList[i]); i++) {
+                                                                                        var block = Blockly.utils.xml.createElement('block');
+                                                                                        block.setAttribute('type', 'bht_variables_get_light');
+                                                                                        block.setAttribute('gap', 8);
+                                                                                        block.appendChild(Blockly.Variables.generateVariableFieldDom(variable));
+                                                                                        xmlList.push(block);
+                                                                                      }
+                                                                                    }
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="bht_new_light"></block>'));
+                                                                                    return xmlList;
+                                                                                   }
+                                         );
+                                         
+workspace.registerButtonCallback('addBHTLightButtonPressed', function(button){
+                                                                           Blockly.Variables.createVariableButtonHandler(button.getTargetWorkspace(), null, 'BHT_Light');
+                                                                          }
+                                );
+
+
+
+
+workspace.registerToolboxCategoryCallback('BHT_Matrices', function(workspace){
+                                                                                    var xmlList = [];
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<button text="Add New Matrix" callbackKey="addBHTMatrixButtonPressed"></button>'));
+                                                                                    var variableModelList = workspace.getVariablesOfType('BHT_Matrix');
+                                                                                    if(variableModelList.length>0){
+                                                                                      for (var i = 0, variable; (variable = variableModelList[i]); i++) {
+                                                                                        var block = Blockly.utils.xml.createElement('block');
+                                                                                        block.setAttribute('type', 'bht_variables_set_matrix');
+                                                                                        block.setAttribute('gap', 8);
+                                                                                        block.appendChild(Blockly.Variables.generateVariableFieldDom(variable));
+                                                                                        xmlList.push(block);
+                                                                                      }
+                                                                                    }
+                                                                                    if(variableModelList.length>0){
+                                                                                      for (var i = 0, variable; (variable = variableModelList[i]); i++) {
+                                                                                        var block = Blockly.utils.xml.createElement('block');
+                                                                                        block.setAttribute('type', 'bht_variables_get_matrix');
+                                                                                        block.setAttribute('gap', 8);
+                                                                                        block.appendChild(Blockly.Variables.generateVariableFieldDom(variable));
+                                                                                        xmlList.push(block);
+                                                                                      }
+                                                                                    }
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="bht_new_matrix"></block>'));
+                                                                                    return xmlList;
+                                                                                   }
+                                         );
+                                         
+workspace.registerButtonCallback('addBHTMatrixButtonPressed', function(button){
+                                                                           Blockly.Variables.createVariableButtonHandler(button.getTargetWorkspace(), null, 'BHT_Matrix');
+                                                                          }
+                                );
+
+
+
+
 
 workspace.registerToolboxCategoryCallback('RPi_LED', function(workspace){
                                                                                     var xmlList = [];
