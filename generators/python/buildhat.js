@@ -218,9 +218,82 @@ Blockly.Python['bht_variables_set_motor_pair'] = function(block) {
   return code;
 };
 
+Blockly.Python['bht_motor_pair_run_for_degrees'] = function(block) {
+  Blockly.Python.definitions_['import_buildhat'] = bht_imports;
+  var value_motor_pair = Blockly.Python.valueToCode(block, 'MOTOR_PAIR', Blockly.Python.ORDER_ATOMIC);
+  var value_speed_l = Blockly.Python.valueToCode(block, 'SPEED_L', Blockly.Python.ORDER_ATOMIC);
+  var value_speed_r = Blockly.Python.valueToCode(block, 'SPEED_R', Blockly.Python.ORDER_ATOMIC);
+  var value_degrees = Blockly.Python.valueToCode(block, 'DEGREES', Blockly.Python.ORDER_ATOMIC);
+  var code = '';
+  if(value_motor_pair==""){
+    code = code + "#";
+  } else {
+    code = code + value_motor_pair;
+  }
+  code = code + ".run_for_degrees("+value_degrees+", speedl="+value_speed_l+", speedr="+value_speed_r+")\n";
+  return code;
+};
 
+Blockly.Python['bht_motor_pair_run_for_rotations'] = function(block) {
+  Blockly.Python.definitions_['import_buildhat'] = bht_imports;
+  var value_motor_pair = Blockly.Python.valueToCode(block, 'MOTOR_PAIR', Blockly.Python.ORDER_ATOMIC);
+  var value_speed_l = Blockly.Python.valueToCode(block, 'SPEED_L', Blockly.Python.ORDER_ATOMIC);
+  var value_speed_r = Blockly.Python.valueToCode(block, 'SPEED_R', Blockly.Python.ORDER_ATOMIC);
+  var value_rotations = Blockly.Python.valueToCode(block, 'ROTATIONS', Blockly.Python.ORDER_ATOMIC);
+  var code = '';
+  if(value_motor_pair==""){
+    code = code + "#";
+  } else {
+    code = code + value_motor_pair;
+  }
+  code = code + ".run_for_rotations("+value_rotations+", speedl="+value_speed_l+", speedr="+value_speed_r+")\n";
+  return code;
+};
 
+Blockly.Python['bht_motor_pair_run_to_position'] = function(block) {
+  Blockly.Python.definitions_['import_buildhat'] = bht_imports;
+  var value_motor_pair = Blockly.Python.valueToCode(block, 'MOTOR_PAIR', Blockly.Python.ORDER_ATOMIC);
+  var value_degrees_l = Blockly.Python.valueToCode(block, 'DEGREES_L', Blockly.Python.ORDER_ATOMIC);
+  var value_degrees_r = Blockly.Python.valueToCode(block, 'DEGREES_R', Blockly.Python.ORDER_ATOMIC);
+  var value_speed = Blockly.Python.valueToCode(block, 'SPEED', Blockly.Python.ORDER_ATOMIC);
+  var dropdown_direction = block.getFieldValue('DIRECTION');
+  var code = '';
+  if(value_motor_pair==""){
+    code = code + "#";
+  } else {
+    code = code + value_motor_pair;
+  }
+  code = code + ".run_to_position("+value_degrees_l+", "+value_degrees_r+", speed="+value_speed+", direction='"+dropdown_direction.toLowerCase()+"')\n";
+  return code;
+};
 
+Blockly.Python['bht_motor_pair_start'] = function(block) {
+  Blockly.Python.definitions_['import_buildhat'] = bht_imports;
+  var value_motor_pair = Blockly.Python.valueToCode(block, 'MOTOR_PAIR', Blockly.Python.ORDER_ATOMIC);
+  var value_speed_l = Blockly.Python.valueToCode(block, 'SPEED_L', Blockly.Python.ORDER_ATOMIC);
+  var value_speed_r = Blockly.Python.valueToCode(block, 'SPEED_R', Blockly.Python.ORDER_ATOMIC);
+  var code = '';
+  if(value_motor_pair==""){
+    code = code + "#";
+  } else {
+    code = code + value_motor_pair;
+  }
+  code = code + ".start(speedl="+value_speed_l+", speedr="+value_speed_r+")\n";
+  return code;
+};
+
+Blockly.Python['bht_motor_pair_stop'] = function(block) {
+  Blockly.Python.definitions_['import_buildhat'] = bht_imports;
+  var value_motor_pair = Blockly.Python.valueToCode(block, 'MOTOR_PAIR', Blockly.Python.ORDER_ATOMIC);
+  var code = '';
+  if(value_motor_pair==""){
+    code = code + "#";
+  } else {
+    code = code + value_motor_pair;
+  }
+  code = code + ".stop()\n";
+  return code;
+};
 
 
 
@@ -246,6 +319,39 @@ Blockly.Python['bht_variables_set_color_sensor'] = function(block) {
   var value_component = Blockly.Python.valueToCode(block, 'COMPONENT', Blockly.Python.ORDER_ATOMIC);
   var code = Blockly.Python.variableDB_.getName(block.getFieldValue('VAR'),Blockly.VARIABLE_CATEGORY_NAME) + " = " + value_component + "\n";
   return code;
+};
+
+Blockly.Python['bht_color_sensor_get_colour'] = function(block) {
+  Blockly.Python.definitions_['import_buildhat'] = bht_imports;
+  var value_sensor = Blockly.Python.valueToCode(block, 'SENSOR', Blockly.Python.ORDER_ATOMIC);
+  var code = "";
+  if(value_sensor==""){
+    code = "#";
+  }
+  code = code + value_sensor + ".get_color()";
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python['bht_color_sensor_get_ambient_light'] = function(block) {
+  Blockly.Python.definitions_['import_buildhat'] = bht_imports;
+  var value_sensor = Blockly.Python.valueToCode(block, 'SENSOR', Blockly.Python.ORDER_ATOMIC);
+  var code = "";
+  if(value_sensor==""){
+    code = "#";
+  }
+  code = code + value_sensor + ".get_ambient_light()";
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python['bht_color_sensor_get_reflected_light'] = function(block) {
+  Blockly.Python.definitions_['import_buildhat'] = bht_imports;
+  var value_sensor = Blockly.Python.valueToCode(block, 'SENSOR', Blockly.Python.ORDER_ATOMIC);
+  var code = "";
+  if(value_sensor==""){
+    code = "#";
+  }
+  code = code + value_sensor + ".get_reflected_light()";
+  return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
 
@@ -278,6 +384,49 @@ Blockly.Python['bht_variables_set_color_distance_sensor'] = function(block) {
   return code;
 };
 
+Blockly.Python['bht_color_distance_sensor_get_colour'] = function(block) {
+  Blockly.Python.definitions_['import_buildhat'] = bht_imports;
+  var value_sensor = Blockly.Python.valueToCode(block, 'SENSOR', Blockly.Python.ORDER_ATOMIC);
+  var code = "";
+  if(value_sensor==""){
+    code = "#";
+  }
+  code = code + value_sensor + ".get_color()";
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};
+Blockly.Python['bht_color_distance_sensor_get_distance'] = function(block) {
+  Blockly.Python.definitions_['import_buildhat'] = bht_imports;
+  var value_sensor = Blockly.Python.valueToCode(block, 'SENSOR', Blockly.Python.ORDER_ATOMIC);
+  var code = "";
+  if(value_sensor==""){
+    code = "#";
+  }
+  code = code + value_sensor + ".get_distance()";
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python['bht_color_distance_sensor_get_ambient_light'] = function(block) {
+  Blockly.Python.definitions_['import_buildhat'] = bht_imports;
+  var value_sensor = Blockly.Python.valueToCode(block, 'SENSOR', Blockly.Python.ORDER_ATOMIC);
+  var code = "";
+  if(value_sensor==""){
+    code = "#";
+  }
+  code = code + value_sensor + ".get_ambient_light()";
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python['bht_color_distance_sensor_get_reflected_light'] = function(block) {
+  Blockly.Python.definitions_['import_buildhat'] = bht_imports;
+  var value_sensor = Blockly.Python.valueToCode(block, 'SENSOR', Blockly.Python.ORDER_ATOMIC);
+  var code = "";
+  if(value_sensor==""){
+    code = "#";
+  }
+  code = code + value_sensor + ".get_reflected_light()";
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
 
 
 
@@ -308,6 +457,17 @@ Blockly.Python['bht_variables_set_distance_sensor'] = function(block) {
   return code;
 };
 
+Blockly.Python['bht_distance_sensor_get_distance'] = function(block) {
+  Blockly.Python.definitions_['import_buildhat'] = bht_imports;
+  var value_sensor = Blockly.Python.valueToCode(block, 'SENSOR', Blockly.Python.ORDER_ATOMIC);
+  var code = "";
+  if(value_sensor==""){
+    code = "#";
+  }
+  code = code + value_sensor + ".get_distance()";
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
 
 
 
@@ -336,6 +496,17 @@ Blockly.Python['bht_variables_set_force_sensor'] = function(block) {
   var value_component = Blockly.Python.valueToCode(block, 'COMPONENT', Blockly.Python.ORDER_ATOMIC);
   var code = Blockly.Python.variableDB_.getName(block.getFieldValue('VAR'),Blockly.VARIABLE_CATEGORY_NAME) + " = " + value_component + "\n";
   return code;
+};
+
+Blockly.Python['bht_force_sensor_get_force'] = function(block) {
+  Blockly.Python.definitions_['import_buildhat'] = bht_imports;
+  var value_sensor = Blockly.Python.valueToCode(block, 'SENSOR', Blockly.Python.ORDER_ATOMIC);
+  var code = "";
+  if(value_sensor==""){
+    code = "#";
+  }
+  code = code + value_sensor + ".get_force()";
+  return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
 
@@ -428,6 +599,17 @@ Blockly.Python['bht_variables_set_motion_sensor'] = function(block) {
   return code;
 };
 
+Blockly.Python['bht_motion_sensor_get_distance'] = function(block) {
+  Blockly.Python.definitions_['import_buildhat'] = bht_imports;
+  var value_sensor = Blockly.Python.valueToCode(block, 'SENSOR', Blockly.Python.ORDER_ATOMIC);
+  var code = "";
+  if(value_sensor==""){
+    code = "#";
+  }
+  code = code + value_sensor + ".get_distance()";
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
 
 
 
@@ -456,4 +638,15 @@ Blockly.Python['bht_variables_set_tilt_sensor'] = function(block) {
   var value_component = Blockly.Python.valueToCode(block, 'COMPONENT', Blockly.Python.ORDER_ATOMIC);
   var code = Blockly.Python.variableDB_.getName(block.getFieldValue('VAR'),Blockly.VARIABLE_CATEGORY_NAME) + " = " + value_component + "\n";
   return code;
+};
+
+Blockly.Python['bht_tilt_sensor_get_tilt'] = function(block) {
+  Blockly.Python.definitions_['import_buildhat'] = bht_imports;
+  var value_sensor = Blockly.Python.valueToCode(block, 'SENSOR', Blockly.Python.ORDER_ATOMIC);
+  var code = "";
+  if(value_sensor==""){
+    code = "#";
+  }
+  code = code + value_sensor + ".get_tilt()";
+  return [code, Blockly.Python.ORDER_ATOMIC];
 };

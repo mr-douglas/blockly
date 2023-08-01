@@ -306,7 +306,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
 {
   "type": "bht_new_color_distance_sensor",
   "lastDummyAlign0": "RIGHT",
-  "message0": "Color Distance Sensor: %1 Port: %2",
+  "message0": "Colour/Distance Sensor: %1 Port: %2",
   "args0": [
     {
       "type": "input_dummy"
@@ -859,6 +859,226 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   "colour": Blockly.Msg.BHT_HUE,
   "tooltip": "",
   "helpUrl": ""
+},
+{
+  "type": "bht_motor_pair_start",
+  "message0": "start motor pair %1 running, left motor at speed %2 , right motor at speed %3 ",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "MOTOR_PAIR",
+      "check": "BHT_Motor_Pair"
+    },
+    {
+      "type": "input_value",
+      "name": "SPEED_L",
+      "check": "Number"
+    },
+    {
+      "type": "input_value",
+      "name": "SPEED_R",
+      "check": "Number"
+    }
+  ],
+  "inputsInline": true,
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": Blockly.Msg.BHT_HUE,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "bht_motor_pair_stop",
+  "message0": "stop motor pair %1",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "MOTOR_PAIR",
+      "check": "BHT_Motor_Pair"
+    }
+  ],
+  "inputsInline": true,
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": Blockly.Msg.BHT_HUE,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "bht_color_sensor_get_colour",
+  "message0": "get colour from colour sensor %1",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "SENSOR",
+      "check": "BHT_Color_Sensor"
+    }
+  ],
+  "inputsInline": true,
+  "output": "String",
+  "colour": Blockly.Msg.BHT_HUE,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "bht_color_sensor_get_ambient_light",
+  "message0": "get ambient light from colour sensor %1",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "SENSOR",
+      "check": "BHT_Color_Sensor"
+    }
+  ],
+  "inputsInline": true,
+  "output": "Number",
+  "colour": Blockly.Msg.BHT_HUE,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "bht_color_sensor_get_reflected_light",
+  "message0": "get reflected light from colour sensor %1",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "SENSOR",
+      "check": "BHT_Color_Sensor"
+    }
+  ],
+  "inputsInline": true,
+  "output": "Number",
+  "colour": Blockly.Msg.BHT_HUE,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "bht_color_distance_sensor_get_colour",
+  "message0": "get colour from colour/distance sensor %1",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "SENSOR",
+      "check": "BHT_Color_Distance_Sensor"
+    }
+  ],
+  "inputsInline": true,
+  "output": "String",
+  "colour": Blockly.Msg.BHT_HUE,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "bht_color_distance_sensor_get_distance",
+  "message0": "get distance from colour/distance sensor %1",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "SENSOR",
+      "check": "BHT_Color_Distance_Sensor"
+    }
+  ],
+  "inputsInline": true,
+  "output": "Number",
+  "colour": Blockly.Msg.BHT_HUE,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "bht_color_distance_sensor_get_ambient_light",
+  "message0": "get ambient light from colour/distance sensor %1",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "SENSOR",
+      "check": "BHT_Color_Distance_Sensor"
+    }
+  ],
+  "inputsInline": true,
+  "output": "Number",
+  "colour": Blockly.Msg.BHT_HUE,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "bht_color_distance_sensor_get_reflected_light",
+  "message0": "get reflected light from colour/distance sensor %1",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "SENSOR",
+      "check": "BHT_Color_Distance_Sensor"
+    }
+  ],
+  "inputsInline": true,
+  "output": "Number",
+  "colour": Blockly.Msg.BHT_HUE,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "bht_distance_sensor_get_distance",
+  "message0": "get distance from distance sensor %1",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "SENSOR",
+      "check": "BHT_Distance_Sensor"
+    }
+  ],
+  "inputsInline": true,
+  "output": "Number",
+  "colour": Blockly.Msg.BHT_HUE,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "bht_force_sensor_get_force",
+  "message0": "get force from force sensor %1",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "SENSOR",
+      "check": "BHT_Force_Sensor"
+    }
+  ],
+  "inputsInline": true,
+  "output": "Number",
+  "colour": Blockly.Msg.BHT_HUE,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "bht_motion_sensor_get_distance",
+  "message0": "get distance from motion sensor %1",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "SENSOR",
+      "check": "BHT_Motion_Sensor"
+    }
+  ],
+  "inputsInline": true,
+  "output": "Number",
+  "colour": Blockly.Msg.BHT_HUE,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "bht_tilt_sensor_get_tilt",
+  "message0": "get tilt from tilt sensor %1",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "SENSOR",
+      "check": "BHT_Tilt_Sensor"
+    }
+  ],
+  "inputsInline": true,
+  "output": "Number",
+  "colour": Blockly.Msg.BHT_HUE,
+  "tooltip": "",
+  "helpUrl": ""
 }
 ]);  // END JSON EXTRACT (Do not delete this comment.)
 
@@ -874,7 +1094,7 @@ Blockly.Blocks['bht_motor_run_for_seconds'] = {
         .setCheck("Number")
         .appendField(" for ");
     this.appendDummyInput()
-        .appendField(" seconds (")
+        .appendField(" second(s) (")
         .appendField(new Blockly.FieldCheckbox("TRUE"), "BLOCKING")
         .appendField("finish before running next instruction)");
     this.setInputsInline(true);    
@@ -922,7 +1142,7 @@ Blockly.Blocks['bht_motor_run_for_degrees'] = {
         .setCheck("Number")
         .appendField(" for ");
     this.appendDummyInput()
-        .appendField(" degrees (")
+        .appendField("\u00B0 (")
         .appendField(new Blockly.FieldCheckbox("TRUE"), "BLOCKING")
         .appendField("finish before running next instruction)");
     this.setInputsInline(true);    
@@ -976,6 +1196,132 @@ Blockly.Blocks['bht_motor_run_to_position_angle'] = {
         .appendField(new Blockly.FieldCheckbox("TRUE"), "BLOCKING")
         .appendField("finish before running next instruction)");
     this.setInputsInline(true);    
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(55);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['bht_motor_pair_run_for_degrees'] = {
+  init: function() {
+    this.appendValueInput("MOTOR_PAIR")
+        .setCheck("BHT_Motor_Pair")
+        .appendField("run motor pair");
+    this.appendValueInput("DEGREES")
+        .setCheck("Number")
+        .appendField("for");
+    this.appendValueInput("SPEED_L")
+        .setCheck("Number")
+        .appendField("\u00B0 with left motor at speed");
+    this.appendValueInput("SPEED_R")
+        .setCheck("Number")
+        .appendField("and right motor at speed");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(55);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['bht_motor_pair_run_to_position'] = {
+  init: function() {
+    this.appendValueInput("MOTOR_PAIR")
+        .setCheck("BHT_Motor_Pair")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("turn motor pair");
+    this.appendValueInput("DEGREES_L")
+        .setCheck("Number")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField(", left motor to position");
+    this.appendValueInput("DEGREES_R")
+        .setCheck("Number")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField(", right motor to position");
+    this.appendValueInput("SPEED")
+        .setCheck("Number")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("at speed");
+    this.appendDummyInput()
+        .appendField(",")
+        .appendField(new Blockly.FieldDropdown([["clockwise","CLOCKWISE"], ["anticlockwise","ANTICLOCKWISE"], ["whichever is shortest","SHORTEST"]]), "DIRECTION");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(55);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['bht_motor_pair_run_to_position_angle'] = {
+  init: function() {
+    this.appendValueInput("MOTOR_PAIR")
+        .setCheck("BHT_Motor_Pair")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("turn motor pair");
+    this.appendDummyInput()
+        .appendField(", left motor to position")
+        .appendField(new Blockly.FieldAngle(0, function(newValue) {if (newValue < -180 || newValue > 180) {return null;}return newValue;}, {precision: 1,round:1,clockwise: true,wrap: 180,offset: 90}), "DEGREES_L");
+    this.appendDummyInput()
+        .appendField(", right motor to position")
+        .appendField(new Blockly.FieldAngle(0, function(newValue) {if (newValue < -180 || newValue > 180) {return null;}return newValue;}, {precision: 1,round:1,clockwise: true,wrap: 180,offset: 90}), "DEGREES_R");
+    this.appendValueInput("SPEED")
+        .setCheck("Number")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("at speed");
+    this.appendDummyInput()
+        .appendField(",")
+        .appendField(new Blockly.FieldDropdown([["clockwise","CLOCKWISE"], ["anticlockwise","ANTICLOCKWISE"], ["whichever is shortest","SHORTEST"]]), "DIRECTION");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(55);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['bht_motor_pair_run_for_rotations'] = {
+  init: function() {
+    this.appendValueInput("MOTOR_PAIR")
+        .setCheck("BHT_Motor_Pair")
+        .appendField("run motor pair");
+    this.appendValueInput("ROTATIONS")
+        .setCheck("Number")
+        .appendField("for");
+    this.appendValueInput("SPEED_L")
+        .setCheck("Number")
+        .appendField("rotations with left motor at speed");
+    this.appendValueInput("SPEED_R")
+        .setCheck("Number")
+        .appendField("and right motor at speed");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(55);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['bht_motor_pair_run_for_seconds'] = {
+  init: function() {
+    this.appendValueInput("MOTOR_PAIR")
+        .setCheck("BHT_Motor_Pair")
+        .appendField("run motor pair");
+    this.appendValueInput("TIME")
+        .setCheck("Number")
+        .appendField("for");
+    this.appendValueInput("SPEED_L")
+        .setCheck("Number")
+        .appendField("second(s) with left motor at speed");
+    this.appendValueInput("SPEED_R")
+        .setCheck("Number")
+        .appendField("and right motor at speed");
+    this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(55);
