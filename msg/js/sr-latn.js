@@ -372,6 +372,7 @@ Blockly.Msg["TEXT_PRINT_TOOLTIP"] = "Prikažite određeni tekst, broj ili drugu 
 Blockly.Msg["TEXT_PROMPT_HELPURL"] = "https://github.com/google/blockly/wiki/Text#getting-input-from-the-user";  // untranslated
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_NUMBER"] = "Pitajte korisnika za broj.";
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_TEXT"] = "Pitajte korisnika za unos teksta.";
+Blockly.Msg["TEXT_PROMPT_TYPE_INTEGER"] = "get integer input from user with message";  // untranslated
 Blockly.Msg["TEXT_PROMPT_TYPE_NUMBER"] = "pitaj za broj sa porukom";
 Blockly.Msg["TEXT_PROMPT_TYPE_TEXT"] = "pitaj za tekst sa porukom";
 Blockly.Msg["TEXT_REPLACE_HELPURL"] = "https://github.com/google/blockly/wiki/Text#replacing-substrings";

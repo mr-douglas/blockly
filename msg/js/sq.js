@@ -372,6 +372,7 @@ Blockly.Msg["TEXT_PRINT_TOOLTIP"] = "Printo tekstin e caktuar, numer ose vlere t
 Blockly.Msg["TEXT_PROMPT_HELPURL"] = "https://github.com/google/blockly/wiki/Text#getting-input-from-the-user";  // untranslated
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_NUMBER"] = "Kerkoji perdoruesit nje numer.";
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_TEXT"] = "Kerkoji perdoruesit ca tekst.";
+Blockly.Msg["TEXT_PROMPT_TYPE_INTEGER"] = "get integer input from user with message";  // untranslated
 Blockly.Msg["TEXT_PROMPT_TYPE_NUMBER"] = "kerko nje numer me njoftim";
 Blockly.Msg["TEXT_PROMPT_TYPE_TEXT"] = "kerko tekst me njoftim";
 Blockly.Msg["TEXT_REPLACE_HELPURL"] = "https://github.com/google/blockly/wiki/Text#replacing-substrings";  // untranslated

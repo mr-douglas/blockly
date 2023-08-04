@@ -372,6 +372,7 @@ Blockly.Msg["TEXT_PRINT_TOOLTIP"] = "Տպում է նշված տեքստը, թի
 Blockly.Msg["TEXT_PROMPT_HELPURL"] = "https://github.com/google/blockly/wiki/Text#getting-input-from-the-user";  // untranslated
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_NUMBER"] = "Հարցնել թիվ օգտատիրոջից։";
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_TEXT"] = "Հարցնել տեքստ օգտատիրոջից։";
+Blockly.Msg["TEXT_PROMPT_TYPE_INTEGER"] = "get integer input from user with message";  // untranslated
 Blockly.Msg["TEXT_PROMPT_TYPE_NUMBER"] = "հացնել թիվ, հուշումով";
 Blockly.Msg["TEXT_PROMPT_TYPE_TEXT"] = "հարցնել տեքստ, հուշումով";
 Blockly.Msg["TEXT_REPLACE_HELPURL"] = "https://github.com/google/blockly/wiki/Text#replacing-substrings";  // untranslated

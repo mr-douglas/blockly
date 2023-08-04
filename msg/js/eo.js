@@ -372,6 +372,7 @@ Blockly.Msg["TEXT_PRINT_TOOLTIP"] = "Presi la specifitan tekston, nombron aŭ al
 Blockly.Msg["TEXT_PROMPT_HELPURL"] = "https://github.com/google/blockly/wiki/Text#getting-input-from-the-user";  // untranslated
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_NUMBER"] = "Peti nombron al uzanto.";
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_TEXT"] = "Peti tekston al uzanto.";
+Blockly.Msg["TEXT_PROMPT_TYPE_INTEGER"] = "get integer input from user with message";  // untranslated
 Blockly.Msg["TEXT_PROMPT_TYPE_NUMBER"] = "ricevi nombron per mesaĝo";
 Blockly.Msg["TEXT_PROMPT_TYPE_TEXT"] = "ricevi tekston per mesaĝo";
 Blockly.Msg["TEXT_REPLACE_HELPURL"] = "https://github.com/google/blockly/wiki/Text#replacing-substrings";  // untranslated

@@ -372,6 +372,7 @@ Blockly.Msg["TEXT_PRINT_TOOLTIP"] = "Belirtilen metni, sayıyı veya başka bir 
 Blockly.Msg["TEXT_PROMPT_HELPURL"] = "https://github.com/google/blockly/wiki/Text#getting-input-from-the-user";  // untranslated
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_NUMBER"] = "Bir numara için kullanıcı sor.";
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_TEXT"] = "Bazı metinler için kullanıcı sor.";
+Blockly.Msg["TEXT_PROMPT_TYPE_INTEGER"] = "get integer input from user with message";  // untranslated
 Blockly.Msg["TEXT_PROMPT_TYPE_NUMBER"] = "mesaj içeren numara istemi";
 Blockly.Msg["TEXT_PROMPT_TYPE_TEXT"] = "mesaj içeren metin istemi";
 Blockly.Msg["TEXT_REPLACE_HELPURL"] = "https://github.com/google/blockly/wiki/Text#replacing-substrings";  // untranslated

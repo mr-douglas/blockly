@@ -372,6 +372,7 @@ Blockly.Msg["TEXT_PRINT_TOOLTIP"] = "ನಿರ್ದಿಷ್ಟಪಡಿಸಿ�
 Blockly.Msg["TEXT_PROMPT_HELPURL"] = "https://github.com/google/blockly/wiki/Text#getting-input-from-the-user";  // untranslated
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_NUMBER"] = "ಬಳಕೆದಾರರಿಗೆ  ಸಂಖ್ಯೆಗಾಗಿ ಜ್ಞಾಪಿಸಿ.";
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_TEXT"] = "ಬಳಕೆದಾರರಿಗೆ  ಕೆಲವು ಪಠ್ಯಕ್ಕಾಗಿ ಜ್ಞಾಪಿಸಿ.";
+Blockly.Msg["TEXT_PROMPT_TYPE_INTEGER"] = "get integer input from user with message";  // untranslated
 Blockly.Msg["TEXT_PROMPT_TYPE_NUMBER"] = "ಸಂದೇಶದೊಂದಿಗೆ ಸಂಖ್ಯೆಗಾಗಿ ಜ್ಞಾಪಿಸಿ";
 Blockly.Msg["TEXT_PROMPT_TYPE_TEXT"] = "ಸಂದೇಶದೊಂದಿಗೆ ಪಠ್ಯಕ್ಕಾಗಿ ಜ್ಞಾಪಿಸಿ";
 Blockly.Msg["TEXT_REPLACE_HELPURL"] = "https://github.com/google/blockly/wiki/Text#replacing-substrings";  // untranslated

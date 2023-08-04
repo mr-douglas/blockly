@@ -372,6 +372,7 @@ Blockly.Msg["TEXT_PRINT_TOOLTIP"] = "Sken aḍris, amḍan neɣ azal-nniḍen d-
 Blockly.Msg["TEXT_PROMPT_HELPURL"] = "https://github.com/google/blockly/wiki/Text#getting-input-from-the-user";  // untranslated
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_NUMBER"] = "Suter amḍan i useqdac.";
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_TEXT"] = "Suter aḍris i useqdac.";
+Blockly.Msg["TEXT_PROMPT_TYPE_INTEGER"] = "get integer input from user with message";  // untranslated
 Blockly.Msg["TEXT_PROMPT_TYPE_NUMBER"] = "aneftaɣ i umḍan s yizen";
 Blockly.Msg["TEXT_PROMPT_TYPE_TEXT"] = "aneftaɣ i uḍris s yizen";
 Blockly.Msg["TEXT_REPLACE_HELPURL"] = "https://github.com/google/blockly/wiki/Text#replacing-substrings";  // untranslated

@@ -372,6 +372,7 @@ Blockly.Msg["TEXT_PRINT_TOOLTIP"] = "ನಿರ್ದಿಷ್ಟ ಪಟ್ಯೊ
 Blockly.Msg["TEXT_PROMPT_HELPURL"] = "https://github.com/google/blockly/wiki/Text#getting-input-from-the-user";  // untranslated
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_NUMBER"] = "ಒಂಜಿ ಸಂಖ್ಯೆಗ್ ಸದಸ್ಯೆರೆನ್ ಕೇನ್";
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_TEXT"] = "ಕೆಲವು ಪಟ್ಯೊಗು ಸದಸ್ಯೆರೆನ್ ಕೇನ್.";
+Blockly.Msg["TEXT_PROMPT_TYPE_INTEGER"] = "get integer input from user with message";  // untranslated
 Blockly.Msg["TEXT_PROMPT_TYPE_NUMBER"] = "ಸಂದೇಶೊದೊಟ್ಟುಗು ಸಂಕ್ಯೆನ್ ಕೇನ್";
 Blockly.Msg["TEXT_PROMPT_TYPE_TEXT"] = "ಸಂದೇಶೊದೊಟ್ಟುಗು ಪಟ್ಯೊಗು ಕೇನ್.";
 Blockly.Msg["TEXT_REPLACE_HELPURL"] = "https://github.com/google/blockly/wiki/Text#replacing-substrings";  // untranslated

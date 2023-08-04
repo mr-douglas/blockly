@@ -372,6 +372,7 @@ Blockly.Msg["TEXT_PRINT_TOOLTIP"] = "输出指定的文字、数字或其他值�
 Blockly.Msg["TEXT_PROMPT_HELPURL"] = "https://github.com/google/blockly/wiki/Text#getting-input-from-the-user";  // untranslated
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_NUMBER"] = "要求用户输入数字。";
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_TEXT"] = "要求用户输入一些文本。";
+Blockly.Msg["TEXT_PROMPT_TYPE_INTEGER"] = "get integer input from user with message";  // untranslated
 Blockly.Msg["TEXT_PROMPT_TYPE_NUMBER"] = "要求输入数字，并显示提示消息";
 Blockly.Msg["TEXT_PROMPT_TYPE_TEXT"] = "要求输入文本，并显示提示消息";
 Blockly.Msg["TEXT_REPLACE_HELPURL"] = "https://github.com/google/blockly/wiki/Text#replacing-substrings";

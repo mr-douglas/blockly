@@ -372,6 +372,7 @@ Blockly.Msg["TEXT_PRINT_TOOLTIP"] = "Megejelníti a megadott kaakterláncot üze
 Blockly.Msg["TEXT_PROMPT_HELPURL"] = "https://github.com/google/blockly/wiki/Text#getting-input-from-the-user";  // untranslated
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_NUMBER"] = "Számot kér be a felhasználótól.";
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_TEXT"] = "Szöveget kér be a felhasználótól.";
+Blockly.Msg["TEXT_PROMPT_TYPE_INTEGER"] = "get integer input from user with message";  // untranslated
 Blockly.Msg["TEXT_PROMPT_TYPE_NUMBER"] = "Kérj be számot";
 Blockly.Msg["TEXT_PROMPT_TYPE_TEXT"] = "Kérj be szöveget";
 Blockly.Msg["TEXT_REPLACE_HELPURL"] = "https://github.com/google/blockly/wiki/Text#replacing-substrings";  // untranslated

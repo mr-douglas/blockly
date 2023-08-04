@@ -372,6 +372,7 @@ Blockly.Msg["TEXT_PRINT_TOOLTIP"] = "Надрукаваць пазначаны �
 Blockly.Msg["TEXT_PROMPT_HELPURL"] = "https://github.com/google/blockly/wiki/Text#getting-input-from-the-user";  // untranslated
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_NUMBER"] = "Запытаць у карыстальніка лічбу.";
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_TEXT"] = "Запытаць у карыстальніка тэкст.";
+Blockly.Msg["TEXT_PROMPT_TYPE_INTEGER"] = "get integer input from user with message";  // untranslated
 Blockly.Msg["TEXT_PROMPT_TYPE_NUMBER"] = "запытаць лічбу з падказкай";
 Blockly.Msg["TEXT_PROMPT_TYPE_TEXT"] = "запытаць тэкст з падказкай";
 Blockly.Msg["TEXT_REPLACE_HELPURL"] = "https://github.com/google/blockly/wiki/Text#replacing-substrings";

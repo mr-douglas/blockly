@@ -372,6 +372,7 @@ Blockly.Msg["TEXT_PRINT_TOOLTIP"] = "چاپ متن، عدد یا هر مقدار
 Blockly.Msg["TEXT_PROMPT_HELPURL"] = "https://github.com/google/blockly/wiki/Text#getting-input-from-the-user";  // untranslated
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_NUMBER"] = "اعلان برای کاربر با یک عدد.";
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_TEXT"] = "اعلان برای کاربر برای یک متن.";
+Blockly.Msg["TEXT_PROMPT_TYPE_INTEGER"] = "get integer input from user with message";  // untranslated
 Blockly.Msg["TEXT_PROMPT_TYPE_NUMBER"] = "اعلان برای عدد با پیام";
 Blockly.Msg["TEXT_PROMPT_TYPE_TEXT"] = "اعلان برای متن با پیام";
 Blockly.Msg["TEXT_REPLACE_HELPURL"] = "https://github.com/google/blockly/wiki/Text#replacing-substrings";  // untranslated

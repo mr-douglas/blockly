@@ -372,6 +372,7 @@ Blockly.Msg["TEXT_PRINT_TOOLTIP"] = "Drukt de opgegeven tekst, getal of een ande
 Blockly.Msg["TEXT_PROMPT_HELPURL"] = "https://github.com/google/blockly/wiki/Text#getting-input-from-the-user";
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_NUMBER"] = "Vraagt de gebruiker om een getal in te voeren.";
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_TEXT"] = "Vraagt de gebruiker om invoer.";
+Blockly.Msg["TEXT_PROMPT_TYPE_INTEGER"] = "get integer input from user with message";  // untranslated
 Blockly.Msg["TEXT_PROMPT_TYPE_NUMBER"] = "vraagt de gebruiker om een getal met de tekst";
 Blockly.Msg["TEXT_PROMPT_TYPE_TEXT"] = "vraagt om invoer met bericht";
 Blockly.Msg["TEXT_REPLACE_HELPURL"] = "https://github.com/google/blockly/wiki/Text#replacing-substrings";  // untranslated

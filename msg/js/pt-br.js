@@ -372,6 +372,7 @@ Blockly.Msg["TEXT_PRINT_TOOLTIP"] = "Imprime o texto, número ou valor especific
 Blockly.Msg["TEXT_PROMPT_HELPURL"] = "https://github.com/google/blockly/wiki/Text#getting-input-from-the-user";
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_NUMBER"] = "Pede ao usuário um número.";
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_TEXT"] = "Pede ao usuário um texto.";
+Blockly.Msg["TEXT_PROMPT_TYPE_INTEGER"] = "get integer input from user with message";  // untranslated
 Blockly.Msg["TEXT_PROMPT_TYPE_NUMBER"] = "Pede um número com uma mensagem";
 Blockly.Msg["TEXT_PROMPT_TYPE_TEXT"] = "Pede um texto com uma mensagem";
 Blockly.Msg["TEXT_REPLACE_HELPURL"] = "https://github.com/google/blockly/wiki/Texto#substituindo-substrings";

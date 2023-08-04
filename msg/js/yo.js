@@ -372,6 +372,7 @@ Blockly.Msg["TEXT_PRINT_TOOLTIP"] = "Tẹ ọrọ kan pato, nọmba tabi iye awo
 Blockly.Msg["TEXT_PROMPT_HELPURL"] = "https://github.com/google/blockly/wiki/Text#getting-input-from-the-user";  // untranslated
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_NUMBER"] = "Kiakia fun olumulo fun nọmba.";
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_TEXT"] = "Kiakia fun olumulo fun awon ifiranṣẹ.";
+Blockly.Msg["TEXT_PROMPT_TYPE_INTEGER"] = "get integer input from user with message";  // untranslated
 Blockly.Msg["TEXT_PROMPT_TYPE_NUMBER"] = "kiakia fun nọmba pẹlu ifiranṣẹ";
 Blockly.Msg["TEXT_PROMPT_TYPE_TEXT"] = "kiakia fun ọrọ pẹlu ifiranṣẹ";
 Blockly.Msg["TEXT_REPLACE_HELPURL"] = "https://github.com/google/blockly/wiki/Text#replacing-substrings";  // untranslated

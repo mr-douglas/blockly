@@ -372,6 +372,7 @@ Blockly.Msg["TEXT_PRINT_TOOLTIP"] = "Smon-e ël test, ël nùmer o n'àutr valor
 Blockly.Msg["TEXT_PROMPT_HELPURL"] = "https://github.com/google/blockly/wiki/Text#getting-input-from-the-user";  // untranslated
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_NUMBER"] = "Ciamé un nùmer a l'utent.";
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_TEXT"] = "Ciamé un test a l'utent.";
+Blockly.Msg["TEXT_PROMPT_TYPE_INTEGER"] = "get integer input from user with message";  // untranslated
 Blockly.Msg["TEXT_PROMPT_TYPE_NUMBER"] = "anvit për un nùmer con un mëssagi";
 Blockly.Msg["TEXT_PROMPT_TYPE_TEXT"] = "anvit për un test con un mëssagi";
 Blockly.Msg["TEXT_REPLACE_HELPURL"] = "https://github.com/google/blockly/wiki/Text#replacing-substrings";

@@ -372,6 +372,7 @@ Blockly.Msg["TEXT_PRINT_TOOLTIP"] = "Tisk zadaného textu, čísla nebo jiné ho
 Blockly.Msg["TEXT_PROMPT_HELPURL"] = "https://github.com/google/blockly/wiki/Text#getting-input-from-the-user";  // untranslated
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_NUMBER"] = "Výzva pro uživatele k zadání čísla.";
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_TEXT"] = "Výzva pro uživatele k zadání nějakého textu.";
+Blockly.Msg["TEXT_PROMPT_TYPE_INTEGER"] = "get integer input from user with message";  // untranslated
 Blockly.Msg["TEXT_PROMPT_TYPE_NUMBER"] = "výzva k zadání čísla se zprávou";
 Blockly.Msg["TEXT_PROMPT_TYPE_TEXT"] = "výzva k zadání textu se zprávou";
 Blockly.Msg["TEXT_REPLACE_HELPURL"] = "https://github.com/google/blockly/wiki/Text#replacing-substrings";  // untranslated

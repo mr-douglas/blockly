@@ -372,6 +372,7 @@ Blockly.Msg["TEXT_PRINT_TOOLTIP"] = "Moullañ an destenn, an niverenn pe un dalv
 Blockly.Msg["TEXT_PROMPT_HELPURL"] = "https://github.com/google/blockly/wiki/Text#getting-input-from-the-user";  // untranslated
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_NUMBER"] = "Goulenn un niver gant an implijer.";
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_TEXT"] = "Goulenn un destenn gant an implijer.";
+Blockly.Msg["TEXT_PROMPT_TYPE_INTEGER"] = "get integer input from user with message";  // untranslated
 Blockly.Msg["TEXT_PROMPT_TYPE_NUMBER"] = "pedadenn evit un niver gant ur c'hemennad";
 Blockly.Msg["TEXT_PROMPT_TYPE_TEXT"] = "goulenn un destenn gant ur gemennadenn";
 Blockly.Msg["TEXT_REPLACE_HELPURL"] = "https://github.com/google/blockly/wiki/Text#replacing-substrings";

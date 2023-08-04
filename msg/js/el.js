@@ -372,6 +372,7 @@ Blockly.Msg["TEXT_PRINT_TOOLTIP"] = "Εκτυπώνει το καθορισμέ�
 Blockly.Msg["TEXT_PROMPT_HELPURL"] = "https://github.com/google/blockly/wiki/Text#getting-input-from-the-user";  // untranslated
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_NUMBER"] = "Δημιουργεί προτροπή για τον χρήστη για να δώσει ένα αριθμό.";
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_TEXT"] = "Δημιουργεί προτροπή για το χρήστη για να δώσει κάποιο κείμενο.";
+Blockly.Msg["TEXT_PROMPT_TYPE_INTEGER"] = "get integer input from user with message";  // untranslated
 Blockly.Msg["TEXT_PROMPT_TYPE_NUMBER"] = "πρότρεψε με μήνυμα για να δοθεί αριθμός";
 Blockly.Msg["TEXT_PROMPT_TYPE_TEXT"] = "πρότρεψε με μήνυμα για να δοθεί κείμενο";
 Blockly.Msg["TEXT_REPLACE_HELPURL"] = "https://github.com/google/blockly/wiki/Text#replacing-substrings";  // untranslated

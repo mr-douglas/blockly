@@ -372,6 +372,7 @@ Blockly.Msg["TEXT_PRINT_TOOLTIP"] = "Cetak teks yang ditentukan, nombor atau nil
 Blockly.Msg["TEXT_PROMPT_HELPURL"] = "https://github.com/google/blockly/wiki/Text#getting-input-from-the-user";  // untranslated
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_NUMBER"] = "Peringatan kepada pengguna untuk nombor.";
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_TEXT"] = "Peringatkan pengguna untuk sebahagian teks.";
+Blockly.Msg["TEXT_PROMPT_TYPE_INTEGER"] = "get integer input from user with message";  // untranslated
 Blockly.Msg["TEXT_PROMPT_TYPE_NUMBER"] = "Prom untuk nombor dengan mesej";
 Blockly.Msg["TEXT_PROMPT_TYPE_TEXT"] = "Prom untuk teks dengan mesej";
 Blockly.Msg["TEXT_REPLACE_HELPURL"] = "https://github.com/google/blockly/wiki/Text#replacing-substrings";  // untranslated

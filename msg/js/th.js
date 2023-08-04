@@ -372,6 +372,7 @@ Blockly.Msg["TEXT_PRINT_TOOLTIP"] = "พิมพ์ข้อความ ตั
 Blockly.Msg["TEXT_PROMPT_HELPURL"] = "https://github.com/google/blockly/wiki/Text#getting-input-from-the-user";  // untranslated
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_NUMBER"] = "แสดงหน้าต่างให้ผู้ใช้ใส่ตัวเลข";
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_TEXT"] = "แสดงหน้าต่างให้ผู้ใช้ใส่ข้อความ";
+Blockly.Msg["TEXT_PROMPT_TYPE_INTEGER"] = "get integer input from user with message";  // untranslated
 Blockly.Msg["TEXT_PROMPT_TYPE_NUMBER"] = "แสดงหน้าต่างตัวเลข";
 Blockly.Msg["TEXT_PROMPT_TYPE_TEXT"] = "แสดงหน้าต่างข้อความ";
 Blockly.Msg["TEXT_REPLACE_HELPURL"] = "https://github.com/google/blockly/wiki/Text#replacing-substrings";  // untranslated

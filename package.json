@@ -73,6 +73,7 @@
     "google-closure-compiler": "^20210302.0.0",
     "google-closure-deps": "^20210202.0.0",
     "gulp": "^4.0.2",
+    "gulp-cli": "^2.3.0",
     "gulp-concat": "^2.6.1",
     "gulp-insert": "^0.5.0",
     "gulp-rename": "^2.0.0",

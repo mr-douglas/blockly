@@ -372,6 +372,7 @@ Blockly.Msg["TEXT_PRINT_TOOLTIP"] = "指定したテキスト、番号または�
 Blockly.Msg["TEXT_PROMPT_HELPURL"] = "https://github.com/google/blockly/wiki/Text#getting-input-from-the-user";  // untranslated
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_NUMBER"] = "ユーザーに数値のインプットを求める。";
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_TEXT"] = "ユーザーにテキスト入力を求める。";
+Blockly.Msg["TEXT_PROMPT_TYPE_INTEGER"] = "get integer input from user with message";  // untranslated
 Blockly.Msg["TEXT_PROMPT_TYPE_NUMBER"] = "メッセージで番号の入力を求める";
 Blockly.Msg["TEXT_PROMPT_TYPE_TEXT"] = "メッセージでテキスト入力を求める";
 Blockly.Msg["TEXT_REPLACE_HELPURL"] = "https://github.com/google/blockly/wiki/Text#replacing-substrings";

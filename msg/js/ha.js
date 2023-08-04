@@ -372,6 +372,7 @@ Blockly.Msg["TEXT_PRINT_TOOLTIP"] = "Buga rubutun da aka fayyace, lamba ko wata 
 Blockly.Msg["TEXT_PROMPT_HELPURL"] = "https://github.com/google/blockly/wiki/Text#getting-input-from-the-user";  // untranslated
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_NUMBER"] = "Samo wani mai amfani domin wata lamba.";
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_TEXT"] = "Samo wani mai amfani domin wani rubutu.";
+Blockly.Msg["TEXT_PROMPT_TYPE_INTEGER"] = "get integer input from user with message";  // untranslated
 Blockly.Msg["TEXT_PROMPT_TYPE_NUMBER"] = "samo lamba tare da saƙo";
 Blockly.Msg["TEXT_PROMPT_TYPE_TEXT"] = "samo rubutu tare da saƙo";
 Blockly.Msg["TEXT_REPLACE_HELPURL"] = "https://github.com/google/blockly/wiki/Text#replacing-substrings";  // untranslated

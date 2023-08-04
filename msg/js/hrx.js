@@ -372,6 +372,7 @@ Blockly.Msg["TEXT_PRINT_TOOLTIP"] = "Geb den Inhalt von en Variable aus.";
 Blockly.Msg["TEXT_PROMPT_HELPURL"] = "https://github.com/google/blockly/wiki/Text#getting-input-from-the-user";  // untranslated
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_NUMBER"] = "Frocht den Benutzer noh en Zoohl.";
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_TEXT"] = "Frocht den Benutzer noh enem Text.";
+Blockly.Msg["TEXT_PROMPT_TYPE_INTEGER"] = "get integer input from user with message";  // untranslated
 Blockly.Msg["TEXT_PROMPT_TYPE_NUMBER"] = "Frächt noh Zoohl mit Hinweis";
 Blockly.Msg["TEXT_PROMPT_TYPE_TEXT"] = "Frocht noh Text mit Hinweis";
 Blockly.Msg["TEXT_REPLACE_HELPURL"] = "https://github.com/google/blockly/wiki/Text#replacing-substrings";  // untranslated

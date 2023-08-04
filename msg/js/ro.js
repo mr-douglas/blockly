@@ -372,6 +372,7 @@ Blockly.Msg["TEXT_PRINT_TOOLTIP"] = "Afișează textul specificat, numărul sau 
 Blockly.Msg["TEXT_PROMPT_HELPURL"] = "https://github.com/google/blockly/wiki/Text#getting-input-from-the-user";  // untranslated
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_NUMBER"] = "Solicită utilizatorul pentru un număr.";
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_TEXT"] = "Solicită utilizatorul pentru text.";
+Blockly.Msg["TEXT_PROMPT_TYPE_INTEGER"] = "get integer input from user with message";  // untranslated
 Blockly.Msg["TEXT_PROMPT_TYPE_NUMBER"] = "solicită pentru număr cu mesaj";
 Blockly.Msg["TEXT_PROMPT_TYPE_TEXT"] = "solicită pentru text cu mesaj";
 Blockly.Msg["TEXT_REPLACE_HELPURL"] = "https://github.com/google/blockly/wiki/Text#replacing-substrings";  // untranslated

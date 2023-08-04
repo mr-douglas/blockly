@@ -372,6 +372,7 @@ Blockly.Msg["TEXT_PRINT_TOOLTIP"] = "원하는 문장, 수, 값 등을 출력합
 Blockly.Msg["TEXT_PROMPT_HELPURL"] = "https://github.com/google/blockly/wiki/Text#getting-input-from-the-user";
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_NUMBER"] = "수에 대해 사용자의 입력을 받습니다.";
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_TEXT"] = "문장에 대해 사용자의 입력을 받습니다.";
+Blockly.Msg["TEXT_PROMPT_TYPE_INTEGER"] = "get integer input from user with message";  // untranslated
 Blockly.Msg["TEXT_PROMPT_TYPE_NUMBER"] = "메시지를 활용해 수 입력";
 Blockly.Msg["TEXT_PROMPT_TYPE_TEXT"] = "메시지를 활용해 문장 입력";
 Blockly.Msg["TEXT_REPLACE_HELPURL"] = "https://github.com/google/blockly/wiki/Text#replacing-substrings";

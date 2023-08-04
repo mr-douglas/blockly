@@ -372,6 +372,7 @@ Blockly.Msg["TEXT_PRINT_TOOLTIP"] = "Parādīt norādīto tekstu vai skaitli.";
 Blockly.Msg["TEXT_PROMPT_HELPURL"] = "https://github.com/google/blockly/wiki/Text#getting-input-from-the-user";  // untranslated
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_NUMBER"] = "Palūgt lietotāju ievadīt skaitli.";
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_TEXT"] = "Palūgt lietotāju ievadīt tekstu.";
+Blockly.Msg["TEXT_PROMPT_TYPE_INTEGER"] = "get integer input from user with message";  // untranslated
 Blockly.Msg["TEXT_PROMPT_TYPE_NUMBER"] = "palūgt ievadīt skaitli ar ziņu";
 Blockly.Msg["TEXT_PROMPT_TYPE_TEXT"] = "palūgt ievadīt tekstu ar ziņu";
 Blockly.Msg["TEXT_REPLACE_HELPURL"] = "https://github.com/google/blockly/wiki/Text#replacing-substrings";  // untranslated

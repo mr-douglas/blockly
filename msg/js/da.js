@@ -372,6 +372,7 @@ Blockly.Msg["TEXT_PRINT_TOOLTIP"] = "Skriv den angivne tekst, tal eller anden v�
 Blockly.Msg["TEXT_PROMPT_HELPURL"] = "https://github.com/google/blockly/wiki/Text#getting-input-from-the-user";  // untranslated
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_NUMBER"] = "Spørg brugeren efter et tal";
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_TEXT"] = "Spørg brugeren efter en tekst";
+Blockly.Msg["TEXT_PROMPT_TYPE_INTEGER"] = "get integer input from user with message";  // untranslated
 Blockly.Msg["TEXT_PROMPT_TYPE_NUMBER"] = "spørg efter et tal med meddelelsen";
 Blockly.Msg["TEXT_PROMPT_TYPE_TEXT"] = "spørg efter tekst med meddelelsen";
 Blockly.Msg["TEXT_REPLACE_HELPURL"] = "https://github.com/google/blockly/wiki/Text#replacing-substrings";  // untranslated

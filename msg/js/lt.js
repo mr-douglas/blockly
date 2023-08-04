@@ -372,6 +372,7 @@ Blockly.Msg["TEXT_PRINT_TOOLTIP"] = "Spausdinti nurodytą tekstą, skaičių ar 
 Blockly.Msg["TEXT_PROMPT_HELPURL"] = "https://github.com/google/blockly/wiki/Text#getting-input-from-the-user";  // untranslated
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_NUMBER"] = "Prašyti vartotoją įvesti skaičių.";
 Blockly.Msg["TEXT_PROMPT_TOOLTIP_TEXT"] = "Prašyti vartotoją įvesti tekstą.";
+Blockly.Msg["TEXT_PROMPT_TYPE_INTEGER"] = "get integer input from user with message";  // untranslated
 Blockly.Msg["TEXT_PROMPT_TYPE_NUMBER"] = "paprašyk įvesti skaičių :";
 Blockly.Msg["TEXT_PROMPT_TYPE_TEXT"] = "paprašyk įvesti tekstą :";
 Blockly.Msg["TEXT_REPLACE_HELPURL"] = "https://github.com/google/blockly/wiki/Text#replacing-substrings";
