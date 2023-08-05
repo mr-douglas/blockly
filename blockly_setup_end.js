@@ -244,6 +244,7 @@ workspace.registerToolboxCategoryCallback('EV3_SENSORS', function(workspace){
                                                                                     }
                                                                                     xmlList.push(Blockly.Xml.textToDom('<label text="Color Sensor"></label>'));
                                                                                     xmlList.push(Blockly.Xml.textToDom('<block type="ev3_color_sensor_color"></block>'));
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="ev3_color"></block>'));
                                                                                     xmlList.push(Blockly.Xml.textToDom('<block type="ev3_color_sensor_ambient"></block>'));
                                                                                     xmlList.push(Blockly.Xml.textToDom('<block type="ev3_color_sensor_reflection"></block>'));
                                                                                     xmlList.push(Blockly.Xml.textToDom('<label text="Touch Sensor"></label>'));
