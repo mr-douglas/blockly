@@ -922,7 +922,6 @@ workspace.registerToolboxCategoryCallback('RPi_Light_Sensor', function(workspace
                                          
 workspace.registerButtonCallback('addRPiLightSensorPressed', function(button){
                                                                               Blockly.Variables.createVariableButtonHandler(button.getTargetWorkspace(), null, 'RPi_Light_Sensor');
-                                                                              console.log("Got here!")
                                                                              }
                                 );
 
