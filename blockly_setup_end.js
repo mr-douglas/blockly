@@ -365,6 +365,7 @@ workspace.registerToolboxCategoryCallback('BHT_Color_Sensors', function(workspac
                                                                                     }
                                                                                     xmlList.push(Blockly.Xml.textToDom('<block type="bht_new_color_sensor"></block>'));
                                                                                     xmlList.push(Blockly.Xml.textToDom('<block type="bht_color_sensor_get_colour"></block>'));
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="bht_colour"></block>'));
                                                                                     xmlList.push(Blockly.Xml.textToDom('<block type="bht_color_sensor_get_reflected_light"></block>'));
                                                                                     xmlList.push(Blockly.Xml.textToDom('<block type="bht_color_sensor_get_ambient_light"></block>'));
                                                                                     return xmlList;

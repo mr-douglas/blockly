@@ -356,8 +356,42 @@ Blockly.Python['bht_color_sensor_get_reflected_light'] = function(block) {
 
 
 
-
-
+Blockly.Python['bht_colour'] = function(block) {
+  Blockly.Python.definitions_['import_buildhat'] = bht_imports;
+  var colour_color = block.getFieldValue('COLOR');
+  var code = '';
+  if(colour_color=='#7f7f7f') {
+    code = 'None';
+  } else {
+    switch (colour_color) {
+      case '#000000':
+        code = '"black"';
+        break;
+      case '#ff00ff':
+        code = '"violet"';
+        break;
+      case '#0000ff':
+        code = '"blue"';
+        break;
+      case '#00ffff':
+        code = '"cyan"';
+        break;
+      case '#00cc00':
+        code = '"green"';
+        break;
+      case '#ffff00':
+        code = '"yellow"';
+        break;
+      case '#ff0000':
+        code = '"red"';
+        break;
+      case '#ffffff':
+        code = '"white"';
+        break;
+      }
+    }
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};
 
 
 

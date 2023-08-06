@@ -1329,3 +1329,20 @@ Blockly.Blocks['bht_motor_pair_run_for_seconds'] = {
  this.setHelpUrl("");
   }
 };
+
+Blockly.Blocks['bht_colour'] = {
+  init: function() {
+    var colorField = new Blockly.FieldColour("#ff0000");
+    colorField.setColours(
+        ['#000000','#ff00ff','#0000ff','#00ffff', '#00cc00','#ffff00', '#ff0000', '#ffffff', '#7f7f7f'],
+        ['Black','Violet','Blue','Cyan','Green', 'Yellow', 'Red', 'White', 'None']);
+    colorField.setColumns(3);
+    this.appendDummyInput()
+        .appendField(colorField, "COLOR");
+    this.setInputsInline(true);
+    this.setOutput(true, "BHTColor");
+    this.setColour(55);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
