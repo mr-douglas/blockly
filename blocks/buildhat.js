@@ -1340,7 +1340,7 @@ Blockly.Blocks['bht_colour'] = {
     this.appendDummyInput()
         .appendField(colorField, "COLOR");
     this.setInputsInline(true);
-    this.setOutput(true, "BHTColor");
+    this.setOutput(true, "String");
     this.setColour(55);
  this.setTooltip("");
  this.setHelpUrl("");
