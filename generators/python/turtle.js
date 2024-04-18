@@ -208,3 +208,14 @@ Blockly.Python['turtle_hide'] = function(block) {
   var code = 'turtle.hideturtle()\n';
   return code;
 };
+
+Blockly.Python['turtle_setworldcoordinates'] = function(block) {
+  Blockly.Python.definitions_['import_turtle'] = 'import turtle';
+  var value_x_min = Blockly.Python.valueToCode(block, 'X_MIN', Blockly.Python.ORDER_ATOMIC) || '0';
+  var value_y_min = Blockly.Python.valueToCode(block, 'Y_MIN', Blockly.Python.ORDER_ATOMIC) || '0';
+  var value_x_max = Blockly.Python.valueToCode(block, 'X_MAX', Blockly.Python.ORDER_ATOMIC) || '0';
+  var value_y_max = Blockly.Python.valueToCode(block, 'Y_MAX', Blockly.Python.ORDER_ATOMIC) || '0';
+
+  var code = 'turtle.Screen().setworldcoordinates(' + value_x_min + ', ' + value_y_min + ', ' + value_x_max + ', ' + value_y_max + ')\n';
+  return code;
+};

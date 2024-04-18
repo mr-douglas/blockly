@@ -105,6 +105,7 @@ toolboxString += '<block type="turtle_turn_left"></block>';
 toolboxString += '<block type="turtle_turn_right"></block>'; 
 toolboxString += '<block type="turtle_goto"><value name="X"><shadow type="math_number"><field name="NUM">0</field></shadow></value><value name="Y"><shadow type="math_number"><field name="NUM">0</field></shadow></value></block>'; 
 toolboxString += '<block type="turtle_set_speed"></block>'; 
+toolboxString += '<block type="turtle_setworldcoordinates"><value name="X_MIN"><shadow type="math_number"><field name="NUM">-200</field></shadow></value><value name="Y_MIN"><shadow type="math_number"><field name="NUM">-200</field></shadow></value><value name="X_MAX"><shadow type="math_number"><field name="NUM">200</field></shadow></value><value name="Y_MAX"><shadow type="math_number"><field name="NUM">200</field></shadow></value></block>';
 toolboxString += '<block type="turtle_pen_up_down"></block>'; 
 toolboxString += '<block type="turtle_pen_colour"></block>'; 
 toolboxString += '<block type="turtle_fill_colour"></block>'; 
