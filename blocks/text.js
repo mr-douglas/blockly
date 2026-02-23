@@ -49,6 +49,14 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
     ]
   },
   {
+    "type": "text_newline",
+    "message0": "new line",
+    "output": "String",
+    "style": "text_blocks",
+    "helpUrl": "",
+    "tooltip": "A newline character '\\n'"
+  },
+  {
     "type": "text_multiline",
     "message0": "%1 %2",
     "args0": [{

@@ -400,6 +400,71 @@ Blockly.Blocks['procedures_defnoreturn'] = {
   callType_: 'procedures_callnoreturn'
 };
 
+/**
+ * Block for getting a procedure's name as a value (for use as a callback or
+ * reference).
+ */
+Blockly.Blocks['procedures_get_name'] = {
+  init: function() {
+    this.setOutput(true, 'PROCEDURE');
+    this.setStyle('procedure_blocks');
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldDropdown(this.dropdownProcedureNames_.bind(this)), 'NAME');
+    this.setTooltip('Get a reference to the named procedure.');
+  },
+
+  /**
+   * Create a list of procedure names for the dropdown.
+   * @return {!Array.<Array>} Array of [name, name] pairs.
+   * @private
+   */
+   dropdownProcedureNames_: function() {
+   // Use the real (target) workspace when running inside the flyout.
+   var ws = (this.workspace && this.workspace.isFlyout) ? this.workspace.targetWorkspace : this.workspace;
+   var tuple = Blockly.Procedures.allProcedures(ws);
+   var procedures = (tuple[0] || []).concat(tuple[1] || []);
+   var options = procedures.map(function(p) {
+     var name = Array.isArray(p) ? p[0] : p;
+     return [name, name];
+   });
+   // Ensure the current value is present so the shadow can set it without errors.
+   var current = this.getFieldValue('NAME') || '';
+   if (current && !options.some(function(o){ return o[1] === current; })) {
+     options.unshift([current, current]);
+   }
+   if (options.length === 0) {
+     options.push([Blockly.Msg['UNNAMED_KEY'] || 'unnamed', '']);
+   }
+   return options;
+   },
+
+  /**
+   * Refresh the dropdown when procedures change.
+   * @param {!Blockly.Events.Abstract} event Change event.
+   */
+  onchange: function(event) {
+    if (!this.workspace || this.workspace.isFlyout) {
+      return;
+    }
+    if (event.type == Blockly.Events.BLOCK_CREATE ||
+        event.type == Blockly.Events.BLOCK_DELETE ||
+        (event.type == Blockly.Events.CHANGE && event.element == 'field')) {
+      var field = this.getField('NAME');
+      if (field) {
+        // Update the menu generator so the dropdown shows current procedures.
+        field.menuGenerator_ = this.dropdownProcedureNames_.bind(this);
+      }
+      var name = this.getFieldValue('NAME') || '';
+      if (!name) return;
+      var def = Blockly.Procedures.getDefinition(name, this.workspace);
+      if (!def) {
+          // Remove this reference block when its procedure is deleted.
+          this.dispose(true);
+      }
+    }
+  }
+};
+
 Blockly.Blocks['procedures_defreturn'] = {
   /**
    * Block for defining a procedure with a return value.

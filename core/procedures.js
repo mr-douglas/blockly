@@ -259,6 +259,13 @@ Blockly.Procedures.flyoutCategory = function(workspace) {
   var tuple = Blockly.Procedures.allProcedures(workspace);
   populateProcedures(tuple[0], 'procedures_callnoreturn');
   populateProcedures(tuple[1], 'procedures_callreturn');
+  if (tuple[0].length>0) {
+      xmlList.push(Blockly.Xml.textToDom('<label text="Use the block below with GUI buttons"></label>'));
+      var procNameBlock = Blockly.utils.xml.createElement('block');
+      procNameBlock.setAttribute('type', 'procedures_get_name');
+      procNameBlock.setAttribute('gap', 16);
+      xmlList.push(procNameBlock);
+  }
   return xmlList;
 };
 

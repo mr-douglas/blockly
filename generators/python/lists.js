@@ -20,6 +20,27 @@ Blockly.Python['lists_create_empty'] = function(block) {
   return ['[]', Blockly.Python.ORDER_ATOMIC];
 };
 
+Blockly.Python['lists_append'] = function(block) {
+  var item = Blockly.Python.valueToCode(block, 'ITEM', Blockly.Python.ORDER_NONE) || 'None';
+  var list = Blockly.Python.valueToCode(block, 'LIST', Blockly.Python.ORDER_MEMBER) || '[]';
+  return list + '.append(' + item + ')\n';
+};
+
+Blockly.Python['lists_remove'] = function(block) {
+  var item = Blockly.Python.valueToCode(block, 'ITEM', Blockly.Python.ORDER_NONE) || 'None';
+  var list = Blockly.Python.valueToCode(block, 'LIST', Blockly.Python.ORDER_MEMBER) || '[]';
+  return list + '.remove(' + item + ')\n';
+};
+
+Blockly.Python['lists_pop'] = function(block) {
+  var list = Blockly.Python.valueToCode(block, 'LIST', Blockly.Python.ORDER_MEMBER) || '[]';
+  var at = Blockly.Python.valueToCode(block, 'AT', Blockly.Python.ORDER_NONE);
+  if (!at) {
+    return list + '.pop()\n';
+  }
+  return list + '.pop(' + at + ')\n';
+};
+
 Blockly.Python['lists_create_with'] = function(block) {
   // Create a list with any number of elements of any type.
   var elements = new Array(block.itemCount_);

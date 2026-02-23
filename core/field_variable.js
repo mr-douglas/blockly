@@ -132,11 +132,12 @@ Blockly.FieldVariable.prototype.initModel = function() {
     return; // Initialization already happened.
   }
   var variable = Blockly.Variables.getOrCreateVariablePackage(
-      this.sourceBlock_.workspace, null,
-      this.defaultVariableName, this.defaultType_);
+      workspace, null, this.defaultVariableName, this.defaultType_);
 
   // Don't call setValue because we don't want to cause a rerender.
-  this.doValueUpdate_(variable.getId());
+  if (variable) {
+    this.doValueUpdate_(variable.getId());
+  }
 };
 
 /**
