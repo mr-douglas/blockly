@@ -276,8 +276,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   ,
   {
     "type": "tkinter_messagebox",
-    "message0": "show a %1 message box with title %2 and message %3",
-    "inputsInline": true,
+    "message0": "make a %1 box appear with title %2 and message %3",
     "args0": [
       {
         "type": "field_dropdown",
