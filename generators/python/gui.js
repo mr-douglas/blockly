@@ -97,6 +97,30 @@ Blockly.Python['tkinter_variables_get_entry'] = function(block) {
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
+Blockly.Python['tkinter_variables_get_checkbutton'] = function(block) {
+  Blockly.Python.definitions_['tkinter_imports'] = tkinter_imports;
+  var code = Blockly.Python.variableDB_.getName(block.getFieldValue('VAR'),Blockly.VARIABLE_CATEGORY_NAME);
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python['tkinter_variables_get_radiobutton'] = function(block) {
+  Blockly.Python.definitions_['tkinter_imports'] = tkinter_imports;
+  var code = Blockly.Python.variableDB_.getName(block.getFieldValue('VAR'),Blockly.VARIABLE_CATEGORY_NAME);
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python['tkinter_variables_get_combobox'] = function(block) {
+  Blockly.Python.definitions_['tkinter_imports'] = tkinter_imports;
+  var code = Blockly.Python.variableDB_.getName(block.getFieldValue('VAR'),Blockly.VARIABLE_CATEGORY_NAME);
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python['tkinter_variables_get_progressbar'] = function(block) {
+  Blockly.Python.definitions_['tkinter_imports'] = tkinter_imports;
+  var code = Blockly.Python.variableDB_.getName(block.getFieldValue('VAR'),Blockly.VARIABLE_CATEGORY_NAME);
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
 // --- BEGIN: tkinter_add_widget_to_window (Python generator)
 Blockly.Python['tkinter_add_widget_to_window'] = function(block) {
   Blockly.Python.definitions_['tkinter_imports'] = tkinter_imports;
@@ -114,6 +138,10 @@ Blockly.Python['tkinter_add_widget_to_window'] = function(block) {
   if (widgetGetter.type == 'tkinter_variables_get_label') code += `${value_widget} = tkinter.ttk.Label(${value_window})\n`;
   if (widgetGetter.type == 'tkinter_variables_get_button') code += `${value_widget} = tkinter.ttk.Button(${value_window})\n`;
   if (widgetGetter.type == 'tkinter_variables_get_entry') code += `${value_widget} = tkinter.ttk.Entry(${value_window})\n`;
+  if (widgetGetter.type == 'tkinter_variables_get_checkbutton') code += `${value_widget} = tkinter.ttk.Checkbutton(${value_window})\n`;
+  if (widgetGetter.type == 'tkinter_variables_get_radiobutton') code += `${value_widget} = tkinter.ttk.Radiobutton(${value_window})\n`;
+  if (widgetGetter.type == 'tkinter_variables_get_combobox') code += `${value_widget} = tkinter.ttk.Combobox(${value_window})\n`;
+  if (widgetGetter.type == 'tkinter_variables_get_progressbar') code += `${value_widget} = tkinter.ttk.Progressbar(${value_window})\n`;
 
   // Handle config blocks connected
   const first = block.getInputTargetBlock && block.getInputTargetBlock('DO');
@@ -207,13 +235,102 @@ Blockly.Python['tkinter_entry_delete_from_start'] = function(block) {
 
 Blockly.Python['tkinter_messagebox'] = function(block) {
   Blockly.Python.definitions_['tkinter_imports'] = tkinter_imports;
-  // messagebox is in tkinter.messagebox
   Blockly.Python.definitions_['tkinter_messagebox'] = 'import tkinter.messagebox as messagebox';
+  var title = Blockly.Python.valueToCode(block, 'TITLE', Blockly.Python.ORDER_NONE) || "'Message Box'";
   var text = Blockly.Python.valueToCode(block, 'TEXT', Blockly.Python.ORDER_NONE) || "''";
   var mode = block.getFieldValue('MODE') || 'INFO';
   var fn = 'showinfo';
   if (mode == 'WARNING') fn = 'showwarning';
   if (mode == 'ERROR') fn = 'showerror';
-  var code = 'messagebox.' + fn + '(message=' + text + ')\n';
+  var code = 'messagebox.' + fn + '(title=' + title + ', message=' + text + ')\n';
   return code;
+};
+
+Blockly.Python['tkinter_ask_dialog'] = function(block) {
+  Blockly.Python.definitions_['tkinter_imports'] = tkinter_imports;
+  Blockly.Python.definitions_['tkinter_messagebox'] = 'import tkinter.messagebox as messagebox';
+  var title = Blockly.Python.valueToCode(block, 'TITLE', Blockly.Python.ORDER_NONE) || "'Message Box'";
+  var text = Blockly.Python.valueToCode(block, 'TEXT', Blockly.Python.ORDER_NONE) || "''";
+  var mode = block.getFieldValue('MODE') || 'ASK_YES_NO';
+  var fn = 'askyesno';
+  if (mode == 'ASK_OK_CANCEL') fn = 'askokcancel';
+  if (mode == 'ASK_RETRY_CANCEL') fn = 'askretrycancel';
+  if (mode == 'ASK_YES_NO_CANCEL') fn = 'askyesnocancel';
+  if (mode == 'ASK_QUESTION') fn = 'askquestion';
+  var code = 'messagebox.' + fn + '(title=' + title + ', message=' + text + ')';
+  return [code, Blockly.Python.ORDER_FUNCTION_CALL];
+};
+
+Blockly.Python['tkinter_simpledialog'] = function(block) {
+  Blockly.Python.definitions_['tkinter_imports'] = tkinter_imports;
+  Blockly.Python.definitions_['tkinter_simpledialog'] = 'import tkinter.simpledialog as simpledialog';
+  var title = Blockly.Python.valueToCode(block, 'TITLE', Blockly.Python.ORDER_NONE) || "'Input'";
+  var prompt = Blockly.Python.valueToCode(block, 'PROMPT', Blockly.Python.ORDER_NONE) || "''";
+  var mode = block.getFieldValue('MODE') || 'STRING';
+  var fn = 'askstring';
+  if (mode == 'INTEGER') fn = 'askinteger';
+  if (mode == 'FLOAT') fn = 'askfloat';
+  var code = 'simpledialog.' + fn + '(title=' + title + ', prompt=' + prompt + ')';
+  return [code, Blockly.Python.ORDER_FUNCTION_CALL];
+};
+
+Blockly.Python['tkinter_filedialog'] = function(block) {
+  Blockly.Python.definitions_['tkinter_imports'] = tkinter_imports;
+  Blockly.Python.definitions_['tkinter_filedialog'] = 'import tkinter.filedialog as filedialog';
+  var title = Blockly.Python.valueToCode(block, 'TITLE', Blockly.Python.ORDER_NONE) || "'Select a file'";
+  var mode = block.getFieldValue('MODE') || 'OPEN';
+  var fn = 'askopenfilename';
+  if (mode == 'SAVE') fn = 'asksaveasfilename';
+  var code = 'filedialog.' + fn + '(title=' + title + ')';
+  return [code, Blockly.Python.ORDER_FUNCTION_CALL];
+};
+
+Blockly.Python['tkinter_colorchooser'] = function(block) {
+  Blockly.Python.definitions_['tkinter_imports'] = tkinter_imports;
+  Blockly.Python.definitions_['tkinter_colorchooser'] = 'import tkinter.colorchooser as colorchooser';
+  var title = Blockly.Python.valueToCode(block, 'TITLE', Blockly.Python.ORDER_NONE) || "'Choose a colour'";
+  var code = 'colorchooser.askcolor(title=' + title + ')[1]';
+  return [code, Blockly.Python.ORDER_FUNCTION_CALL];
+};
+
+Blockly.Python['tkinter_button_set_enabled'] = function(block) {
+  Blockly.Python.definitions_['tkinter_imports'] = tkinter_imports;
+  var value_button = Blockly.Python.valueToCode(block, 'BUTTON', Blockly.Python.ORDER_ATOMIC);
+  var state = block.getFieldValue('STATE') || 'ENABLED';
+  var value_state = state == 'DISABLED' ? "'disabled'" : "'normal'";
+  var code = '';
+  if (value_button == '') {
+    code = '#';
+  }
+  code = code + value_button + '.config(state=' + value_state + ')\n';
+  return code;
+};
+
+Blockly.Python['tkinter_combobox_set_values'] = function(block) {
+  Blockly.Python.definitions_['tkinter_imports'] = tkinter_imports;
+  var value_combobox = Blockly.Python.valueToCode(block, 'COMBOBOX', Blockly.Python.ORDER_MEMBER) || '[]';
+  var value_values = Blockly.Python.valueToCode(block, 'VALUES', Blockly.Python.ORDER_NONE) || '[]';
+  return value_combobox + '["values"] = ' + value_values + '\n';
+};
+
+Blockly.Python['tkinter_combobox_get_text'] = function(block) {
+  Blockly.Python.definitions_['tkinter_imports'] = tkinter_imports;
+  var value_combobox = Blockly.Python.valueToCode(block, 'COMBOBOX', Blockly.Python.ORDER_ATOMIC);
+  var code = value_combobox + '.get()';
+  return [code, Blockly.Python.ORDER_FUNCTION_CALL];
+};
+
+Blockly.Python['tkinter_progressbar_set_value'] = function(block) {
+  Blockly.Python.definitions_['tkinter_imports'] = tkinter_imports;
+  var value_progressbar = Blockly.Python.valueToCode(block, 'PROGRESSBAR', Blockly.Python.ORDER_MEMBER) || '[]';
+  var value_value = Blockly.Python.valueToCode(block, 'VALUE', Blockly.Python.ORDER_NONE) || '0';
+  return value_progressbar + '["value"] = ' + value_value + '\n';
+};
+
+Blockly.Python['tkinter_progressbar_start_stop'] = function(block) {
+  Blockly.Python.definitions_['tkinter_imports'] = tkinter_imports;
+  var value_progressbar = Blockly.Python.valueToCode(block, 'PROGRESSBAR', Blockly.Python.ORDER_MEMBER) || '[]';
+  var mode = block.getFieldValue('MODE') || 'START';
+  if (mode == 'STOP') return value_progressbar + '.stop()\n';
+  return value_progressbar + '.start()\n';
 };

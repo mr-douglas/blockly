@@ -141,6 +141,14 @@ toolboxString += '<category name="Entry" colour="#555555" custom="GUI_Entries">'
 toolboxString += '</category>';
 toolboxString += '<category name="Dialog" colour="#555555" custom="GUI_Dialog">';
 toolboxString += '</category>';
+toolboxString += '<category name="Checkbutton" colour="#555555" custom="GUI_Checkbuttons">';
+toolboxString += '</category>';
+toolboxString += '<category name="Radiobutton" colour="#555555" custom="GUI_Radiobuttons">';
+toolboxString += '</category>';
+toolboxString += '<category name="Combobox" colour="#555555" custom="GUI_Comboboxes">';
+toolboxString += '</category>';
+toolboxString += '<category name="Progress Bar" colour="#555555" custom="GUI_Progressbars">';
+toolboxString += '</category>';
 toolboxString += '</category>';
 toolboxString += '<category colour="90" name="EV3">'; 
 toolboxString += '<category colour="90" name="Brick">';   
@@ -310,6 +318,7 @@ workspace.registerToolboxCategoryCallback('GUI_Buttons', function(workspace){
                                                                                     
 
                                                                                     xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_set_button_command"></block>'));
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_button_set_enabled"></block>'));
                                                                                     return xmlList;
                                                                                    }
                                          );
@@ -342,10 +351,112 @@ workspace.registerToolboxCategoryCallback('GUI_Entries', function(workspace){
 
 workspace.registerToolboxCategoryCallback('GUI_Dialog', function(workspace){
                                                                                     var xmlList = [];
-                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_messagebox"><value name="TEXT"><shadow type="text"><field name="TEXT">Hello</field></shadow></value></block>'));
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_messagebox"><value name="TITLE"><shadow type="text"><field name="TEXT">Message Box</field></shadow></value><value name="TEXT"><shadow type="text"><field name="TEXT">Hello</field></shadow></value></block>'));
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_ask_dialog"><value name="TITLE"><shadow type="text"><field name="TEXT">Question</field></shadow></value><value name="TEXT"><shadow type="text"><field name="TEXT">Do you want to continue?</field></shadow></value></block>'));
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_simpledialog"><value name="TITLE"><shadow type="text"><field name="TEXT">Input</field></shadow></value><value name="PROMPT"><shadow type="text"><field name="TEXT">What is your name?</field></shadow></value></block>'));
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_filedialog"><value name="TITLE"><shadow type="text"><field name="TEXT">Select a file</field></shadow></value></block>'));
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_colorchooser"><value name="TITLE"><shadow type="text"><field name="TEXT">Choose a colour</field></shadow></value></block>'));
                                                                                     return xmlList;
                                                                                    }
                                          );
+
+workspace.registerToolboxCategoryCallback('GUI_Checkbuttons', function(workspace){
+                                                                                    var xmlList = [];
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<button text="Create checkbutton..." callbackKey="createGUICheckbuttonButtonPressed"></button>'));
+                                                                                    var variableModelList = workspace.getVariablesOfType('GUI_Checkbutton');
+                                                                                    if(variableModelList.length>0){
+                                                                                      for (var i = 0, variable; (variable = variableModelList[i]); i++) {
+                                                                                        var block = Blockly.utils.xml.createElement('block');
+                                                                                        block.setAttribute('type', 'tkinter_variables_get_checkbutton');
+                                                                                        block.setAttribute('gap', 8);
+                                                                                        block.appendChild(Blockly.Variables.generateVariableFieldDom(variable));
+                                                                                        xmlList.push(block);
+                                                                                      }
+                                                                                    }
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_add_widget_to_window"></block>'));
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_set_widget_text"><value name="TEXT"><shadow type="text"><field name="TEXT">I agree</field></shadow></value></block>'));
+                                                                                    return xmlList;
+                                                                                   }
+                                         );
+
+workspace.registerToolboxCategoryCallback('GUI_Radiobuttons', function(workspace){
+                                                                                    var xmlList = [];
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<button text="Create radiobutton..." callbackKey="createGUIRadiobuttonButtonPressed"></button>'));
+                                                                                    var variableModelList = workspace.getVariablesOfType('GUI_Radiobutton');
+                                                                                    if(variableModelList.length>0){
+                                                                                      for (var i = 0, variable; (variable = variableModelList[i]); i++) {
+                                                                                        var block = Blockly.utils.xml.createElement('block');
+                                                                                        block.setAttribute('type', 'tkinter_variables_get_radiobutton');
+                                                                                        block.setAttribute('gap', 8);
+                                                                                        block.appendChild(Blockly.Variables.generateVariableFieldDom(variable));
+                                                                                        xmlList.push(block);
+                                                                                      }
+                                                                                    }
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_add_widget_to_window"></block>'));
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_set_widget_text"><value name="TEXT"><shadow type="text"><field name="TEXT">Option A</field></shadow></value></block>'));
+                                                                                    return xmlList;
+                                                                                   }
+                                         );
+
+workspace.registerToolboxCategoryCallback('GUI_Comboboxes', function(workspace){
+                                                                                    var xmlList = [];
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<button text="Create combobox..." callbackKey="createGUIComboboxButtonPressed"></button>'));
+                                                                                    var variableModelList = workspace.getVariablesOfType('GUI_Combobox');
+                                                                                    if(variableModelList.length>0){
+                                                                                      for (var i = 0, variable; (variable = variableModelList[i]); i++) {
+                                                                                        var block = Blockly.utils.xml.createElement('block');
+                                                                                        block.setAttribute('type', 'tkinter_variables_get_combobox');
+                                                                                        block.setAttribute('gap', 8);
+                                                                                        block.appendChild(Blockly.Variables.generateVariableFieldDom(variable));
+                                                                                        xmlList.push(block);
+                                                                                      }
+                                                                                    }
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_add_widget_to_window"></block>'));
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_combobox_set_values"><value name="VALUES"><shadow type="lists_create_with"><mutation items="3"></mutation></shadow></value></block>'));
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_combobox_get_text"></block>'));
+                                                                                    return xmlList;
+                                                                                   }
+                                         );
+
+workspace.registerToolboxCategoryCallback('GUI_Progressbars', function(workspace){
+                                                                                    var xmlList = [];
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<button text="Create progress bar..." callbackKey="createGUIProgressbarButtonPressed"></button>'));
+                                                                                    var variableModelList = workspace.getVariablesOfType('GUI_Progressbar');
+                                                                                    if(variableModelList.length>0){
+                                                                                      for (var i = 0, variable; (variable = variableModelList[i]); i++) {
+                                                                                        var block = Blockly.utils.xml.createElement('block');
+                                                                                        block.setAttribute('type', 'tkinter_variables_get_progressbar');
+                                                                                        block.setAttribute('gap', 8);
+                                                                                        block.appendChild(Blockly.Variables.generateVariableFieldDom(variable));
+                                                                                        xmlList.push(block);
+                                                                                      }
+                                                                                    }
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_add_widget_to_window"></block>'));
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_progressbar_set_value"><value name="VALUE"><shadow type="math_number"><field name="NUM">50</field></shadow></value></block>'));
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_progressbar_start_stop"></block>'));
+                                                                                    return xmlList;
+                                                                                   }
+                                         );
+
+workspace.registerButtonCallback('createGUICheckbuttonButtonPressed', function(button){
+                                                                           Blockly.Variables.createVariableButtonHandler(button.getTargetWorkspace(), null, 'GUI_Checkbutton');
+                                                                          }
+                                );
+
+workspace.registerButtonCallback('createGUIRadiobuttonButtonPressed', function(button){
+                                                                           Blockly.Variables.createVariableButtonHandler(button.getTargetWorkspace(), null, 'GUI_Radiobutton');
+                                                                          }
+                                );
+
+workspace.registerButtonCallback('createGUIComboboxButtonPressed', function(button){
+                                                                           Blockly.Variables.createVariableButtonHandler(button.getTargetWorkspace(), null, 'GUI_Combobox');
+                                                                          }
+                                );
+
+workspace.registerButtonCallback('createGUIProgressbarButtonPressed', function(button){
+                                                                           Blockly.Variables.createVariableButtonHandler(button.getTargetWorkspace(), null, 'GUI_Progressbar');
+                                                                          }
+                                );
 
 workspace.registerButtonCallback('createGUIEntryButtonPressed', function(button){
                                                                            Blockly.Variables.createVariableButtonHandler(button.getTargetWorkspace(), null, 'GUI_Entry');

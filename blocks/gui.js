@@ -99,8 +99,81 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
     "helpUrl": ""
   },
   {
+    "type": "tkinter_variables_get_checkbutton",
+    "message0": "%1",
+    "args0": [
+      {
+        "type": "field_variable",
+        "name": "VAR",
+        "variable": "%{BKY_VARIABLES_DEFAULT_NAME}",
+        "variableTypes": ["GUI_Checkbutton"],
+        "defaultType": "GUI_Checkbutton"
+      }
+    ],
+    "output": "GUI_Checkbutton",
+    "inputsInline": true,
+    "colour": "#555555",
+    "tooltip": "Get the checkbutton variable",
+    "helpUrl": ""
+  },
+  {
+    "type": "tkinter_variables_get_radiobutton",
+    "message0": "%1",
+    "args0": [
+      {
+        "type": "field_variable",
+        "name": "VAR",
+        "variable": "%{BKY_VARIABLES_DEFAULT_NAME}",
+        "variableTypes": ["GUI_Radiobutton"],
+        "defaultType": "GUI_Radiobutton"
+      }
+    ],
+    "output": "GUI_Radiobutton",
+    "inputsInline": true,
+    "colour": "#555555",
+    "tooltip": "Get the radiobutton variable",
+    "helpUrl": ""
+  },
+  {
+    "type": "tkinter_variables_get_combobox",
+    "message0": "%1",
+    "args0": [
+      {
+        "type": "field_variable",
+        "name": "VAR",
+        "variable": "%{BKY_VARIABLES_DEFAULT_NAME}",
+        "variableTypes": ["GUI_Combobox"],
+        "defaultType": "GUI_Combobox"
+      }
+    ],
+    "output": "GUI_Combobox",
+    "inputsInline": true,
+    "colour": "#555555",
+    "tooltip": "Get the combobox variable",
+    "helpUrl": ""
+  },
+  {
+    "type": "tkinter_variables_get_progressbar",
+    "message0": "%1",
+    "args0": [
+      {
+        "type": "field_variable",
+        "name": "VAR",
+        "variable": "%{BKY_VARIABLES_DEFAULT_NAME}",
+        "variableTypes": ["GUI_Progressbar"],
+        "defaultType": "GUI_Progressbar"
+      }
+    ],
+    "output": "GUI_Progressbar",
+    "inputsInline": true,
+    "colour": "#555555",
+    "tooltip": "Get the progressbar variable",
+    "helpUrl": ""
+  },
+  {
     "type": "tkinter_set_window_as_root",
     "message0": "set %1 to main window",
+    "inputsInline": true,
     "args0": [
       {
         "type": "input_value",
@@ -117,6 +190,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   {
     "type": "tkinter_set_window_as_secondary",
     "message0": "set %1 as a secondary window",
+    "inputsInline": true,
     "args0": [
       {
         "type": "input_value",
@@ -149,6 +223,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   {
     "type": "tkinter_window_set_dimensions",
     "message0": "set size of window %1 width %2 height %3",
+    "inputsInline": true,
     "args0": [
       {
         "type": "input_value",
@@ -201,7 +276,8 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   ,
   {
     "type": "tkinter_messagebox",
-    "message0": "make a %1 box appear with message %2",
+    "message0": "show a %1 message box with title %2 and message %3",
+    "inputsInline": true,
     "args0": [
       {
         "type": "field_dropdown",
@@ -214,6 +290,11 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
       },
       {
         "type": "input_value",
+        "name": "TITLE",
+        "check": "String"
+      },
+      {
+        "type": "input_value",
         "name": "TEXT",
         "check": "String"
       }
@@ -222,6 +303,39 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
     "nextStatement": null,
     "colour": "#555555",
     "tooltip": "Show a messagebox (info, warning or error) with the given text",
+    "helpUrl": ""
+  },
+  {
+    "type": "tkinter_ask_dialog",
+    "message0": "ask %1 with title %2 and message %3",
+    "inputsInline": true,
+    "args0": [
+      {
+        "type": "field_dropdown",
+        "name": "MODE",
+        "options": [
+          ["yes/no", "ASK_YES_NO"],
+          ["ok/cancel", "ASK_OK_CANCEL"],
+          ["retry/cancel", "ASK_RETRY_CANCEL"],
+          ["yes/no/cancel", "ASK_YES_NO_CANCEL"],
+          ["question", "ASK_QUESTION"]
+        ]
+      },
+      {
+        "type": "input_value",
+        "name": "TITLE",
+        "check": "String"
+      },
+      {
+        "type": "input_value",
+        "name": "TEXT",
+        "check": "String"
+      }
+    ],
+    "output": null,
+    "inputsInline": true,
+    "colour": "#555555",
+    "tooltip": "Show a question dialog and return the user's choice",
     "helpUrl": ""
   }
 
@@ -264,6 +378,163 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
     "colour": "#555555",
     "tooltip": "Delete from index 0 to tkinter.END for the Entry widget",
     "helpUrl": ""
+  },
+  {
+    "type": "tkinter_combobox_set_values",
+    "message0": "set choices in %1 to %2",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "COMBOBOX",
+        "check": "GUI_Combobox"
+      },
+      {
+        "type": "input_value",
+        "name": "VALUES"
+      }
+    ],
+    "inputsInline": true,
+    "previousStatement": null,
+    "nextStatement": null,
+    "colour": "#555555",
+    "tooltip": "Set the options available in a Combobox",
+    "helpUrl": ""
+  },
+  {
+    "type": "tkinter_combobox_get_text",
+    "message0": "the selected text in %1",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "COMBOBOX",
+        "check": "GUI_Combobox"
+      }
+    ],
+    "output": "String",
+    "inputsInline": true,
+    "colour": "#555555",
+    "tooltip": "Get the currently selected text from the Combobox",
+    "helpUrl": ""
+  },
+  {
+    "type": "tkinter_progressbar_set_value",
+    "message0": "set progress of %1 to %2",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "PROGRESSBAR",
+        "check": "GUI_Progressbar"
+      },
+      {
+        "type": "input_value",
+        "name": "VALUE",
+        "check": "Number"
+      }
+    ],
+    "inputsInline": true,
+    "previousStatement": null,
+    "nextStatement": null,
+    "colour": "#555555",
+    "tooltip": "Set the current value of the Progressbar",
+    "helpUrl": ""
+  },
+  {
+    "type": "tkinter_progressbar_start_stop",
+    "message0": "%1 indeterminate animation for %2",
+    "args0": [
+      {
+        "type": "field_dropdown",
+        "name": "MODE",
+        "options": [
+          ["start", "START"],
+          ["stop", "STOP"]
+        ]
+      },
+      {
+        "type": "input_value",
+        "name": "PROGRESSBAR",
+        "check": "GUI_Progressbar"
+      }
+    ],
+    "inputsInline": true,
+    "previousStatement": null,
+    "nextStatement": null,
+    "colour": "#555555",
+    "tooltip": "Start or stop the indeterminate animation",
+    "helpUrl": ""
+  },
+  {
+    "type": "tkinter_simpledialog",
+    "message0": "ask for %1 with title %2 and question %3",
+    "inputsInline": true,
+    "args0": [
+      {
+        "type": "field_dropdown",
+        "name": "MODE",
+        "options": [
+          ["text", "STRING"],
+          ["whole number", "INTEGER"],
+          ["decimal number", "FLOAT"]
+        ]
+      },
+      {
+        "type": "input_value",
+        "name": "TITLE",
+        "check": "String"
+      },
+      {
+        "type": "input_value",
+        "name": "PROMPT",
+        "check": "String"
+      }
+    ],
+    "output": null,
+    "inputsInline": true,
+    "colour": "#555555",
+    "tooltip": "Show a simple input dialog and return what the user entered",
+    "helpUrl": ""
+  },
+  {
+    "type": "tkinter_filedialog",
+    "message0": "choose a file path to %1 with title %2",
+    "inputsInline": true,
+    "args0": [
+      {
+        "type": "field_dropdown",
+        "name": "MODE",
+        "options": [
+          ["open", "OPEN"],
+          ["save", "SAVE"]
+        ]
+      },
+      {
+        "type": "input_value",
+        "name": "TITLE",
+        "check": "String"
+      }
+    ],
+    "output": "String",
+    "inputsInline": true,
+    "colour": "#555555",
+    "tooltip": "Show a file-open or file-save dialog and return the chosen path",
+    "helpUrl": ""
+  },
+  {
+    "type": "tkinter_colorchooser",
+    "message0": "choose a colour with title %1",
+    "inputsInline": true,
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "TITLE",
+        "check": "String"
+      }
+    ],
+    "output": "String",
+    "inputsInline": true,
+    "colour": "#555555",
+    "tooltip": "Show a colour picker dialog and return a hex colour string",
+    "helpUrl": ""
   }
 
  ]);  // END JSON EXTRACT (Do not delete this comment.)
@@ -274,7 +545,7 @@ Blockly.Blocks['tkinter_add_widget_to_window'] = {
     // Header
     this.appendDummyInput()
         .appendField("Add");
-    this.appendValueInput("WIDGET").setCheck(["GUI_Label","GUI_Button","GUI_Entry"]);
+    this.appendValueInput("WIDGET").setCheck(["GUI_Label","GUI_Button","GUI_Entry","GUI_Checkbutton","GUI_Radiobutton","GUI_Combobox","GUI_Progressbar"]);
     this.appendDummyInput().appendField("to window");
     this.appendValueInput("WINDOW").setCheck("GUI_Window");
 
@@ -297,7 +568,7 @@ Blockly.Blocks['tkinter_add_widget_to_window'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour("#555555");
-    this.setTooltip("Create ttk.Label, run configuration statements, then apply a layout manager.");
+    this.setTooltip("Create a ttk widget, run configuration statements, then apply a layout manager.");
     this.setHelpUrl("");
 
     this.updateShape_();
@@ -372,14 +643,70 @@ Blockly.Blocks['tkinter_add_widget_to_window'] = {
 };
 // --- END: tkinter_add_widget_to_window (block definition)
 
+// --- BEGIN: shared tkinter prefill helpers
+Blockly.Blocks._tkinterPrefillValueInputFromParent = function(block, inputName, getterTypeByVariableType) {
+  if (!block.workspace || block.isInFlyout) return;
+  if (block._tkinterPrefilled) return;
+
+  const input = block.getInput(inputName);
+  if (!input || input.connection.targetBlock()) return;
+
+  const parent = block.getSurroundParent();
+  if (!parent || parent.type !== 'tkinter_add_widget_to_window') return;
+
+  const parentWidgetBlock = parent.getInputTargetBlock('WIDGET');
+  if (!parentWidgetBlock) return;
+
+  let newGetter = null;
+  const varField = parentWidgetBlock.getField('VAR');
+  if (varField && typeof varField.getVariable === 'function') {
+    const model = varField.getVariable();
+    if (model) {
+      const varId = model.getId();
+      const getterType = getterTypeByVariableType[model.type];
+      if (varId && getterType) {
+        newGetter = block.workspace.newBlock(getterType);
+        newGetter.setFieldValue(varId, 'VAR');
+      } else {
+        const xml = Blockly.Xml.blockToDom(parentWidgetBlock, true);
+        newGetter = Blockly.Xml.domToBlock(xml, block.workspace);
+      }
+    }
+  }
+
+  if (newGetter) {
+    newGetter.initSvg && newGetter.initSvg();
+    newGetter.render && newGetter.render();
+    input.connection.connect(newGetter.outputConnection);
+    block._tkinterPrefilled = true;
+  }
+}
+
+Blockly.Blocks._tkinterOnChangePrefillFromParent = function(block, e, prefillFn) {
+  if (!block.workspace || block.isInFlyout || !e) return;
+
+  const typesToWatch = new Set([
+    Blockly.Events.BLOCK_CREATE,
+    Blockly.Events.BLOCK_MOVE,
+    Blockly.Events.CHANGE
+  ]);
+  if (!typesToWatch.has(e.type)) return;
+
+  setTimeout(function() {
+    try { prefillFn(); } catch (err) { /* no-op */ }
+  }, 0);
+}
+// --- END: shared tkinter prefill helpers
+
 // --- BEGIN: tkinter_set_widget_text (block definition)
 Blockly.Blocks['tkinter_set_widget_text'] = {
   init: function() {
     this.appendDummyInput().appendField("Set");
-    this.appendValueInput("WIDGET").setCheck(["GUI_Label","GUI_Button"]);
+    this.appendValueInput("WIDGET").setCheck(["GUI_Label","GUI_Button","GUI_Checkbutton","GUI_Radiobutton"]);
     this.appendDummyInput().appendField("text to");
     this.appendValueInput("TEXT").setCheck("String");
 
+    this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour("#555555");
@@ -387,77 +714,20 @@ Blockly.Blocks['tkinter_set_widget_text'] = {
     this.setHelpUrl("");
   },
 
-  /**
-   * Try to prefill WIDGET from the nearest surrounding parent
-   * 'tkinter_add_widget_to_window' if WIDGET is empty.
-   */
-  _prefillLabelFromParent_: function() {
-    if (!this.workspace || this.isInFlyout) return;
-    if (this._labelPrefilled) return; // guard: do once
-
-    const myLabelInput = this.getInput('WIDGET');
-    if (!myLabelInput || myLabelInput.connection.targetBlock()) return; // already filled
-
-    // Is this block inside our target parent?
-    const parent = this.getSurroundParent();
-    if (!parent || parent.type !== 'tkinter_add_widget_to_window') return;
-
-    // What is the parent's label value block?
-    const parentWidgetBlock = parent.getInputTargetBlock('WIDGET');
-    if (!parentWidgetBlock) return;
-
-    // If the parent carries a GUI_Label variable getter, copy its variable id.
-    // Your getter block type is 'tkinter_variables_get_label' with field 'VAR'.
-    let varId = null;
-    let newGetter = null;
-    const varField = parentWidgetBlock.getField('VAR');
-    if (varField && typeof varField.getVariable === 'function') {
-      const model = varField.getVariable();
-      if (model) {
-          varId = model.getId();
-        if (varId) {
-          // Create a *real* getter block bound to the same variable id.
-          if (model.type == "GUI_Label") newGetter = this.workspace.newBlock('tkinter_variables_get_label');
-          if (model.type == "GUI_Button") newGetter = this.workspace.newBlock('tkinter_variables_get_button');
-          newGetter.setFieldValue(varId, 'VAR');   // set by id to keep it robust
-        } else {
-          // Fallback: shallow-clone the parent's value block (covers rare cases).
-          const xml = Blockly.Xml.blockToDom(parentWidgetBlock, /*opt_noId*/ true);
-          newGetter = Blockly.Xml.domToBlock(xml, this.workspace);
-        }
-      }
-    }
-
-
-    // Render and connect into our WIDGET input.
-    if (newGetter) {
-      newGetter.initSvg && newGetter.initSvg();
-      newGetter.render && newGetter.render();
-      myLabelInput.connection.connect(newGetter.outputConnection);
-      this._labelPrefilled = true;
-    }
+  _prefillWidgetFromParent_: function() {
+    Blockly.Blocks._tkinterPrefillValueInputFromParent(this, 'WIDGET', {
+      'GUI_Label': 'tkinter_variables_get_label',
+      'GUI_Button': 'tkinter_variables_get_button',
+      'GUI_Checkbutton': 'tkinter_variables_get_checkbutton',
+      'GUI_Radiobutton': 'tkinter_variables_get_radiobutton'
+    });
   },
 
-  /**
-   * Listen for create/move/parent changes and prefill once.
-   */
   onchange: function(e) {
-    if (!this.workspace || this.isInFlyout || !e) return;
-
-    // Only react to events that affect parentage/placement of this block.
-    const typesToWatch = new Set([
-      Blockly.Events.BLOCK_CREATE,
-      Blockly.Events.BLOCK_MOVE,
-      Blockly.Events.CHANGE
-    ]);
-    if (!typesToWatch.has(e.type)) return;
-
-    // Small debounce: run after Blockly finishes any sync updates.
-    // This avoids running too early while connections are still changing.
     const self = this;
-    setTimeout(function() {
-      try { self._prefillLabelFromParent_(); } catch (err) { /* no-op */ }
-    }, 0);
+    Blockly.Blocks._tkinterOnChangePrefillFromParent(this, e, function() {
+      self._prefillWidgetFromParent_();
+    });
   }
 };
 
@@ -469,6 +739,7 @@ Blockly.Blocks['tkinter_set_button_command'] = {
     this.appendDummyInput().appendField("is clicked");
     this.appendValueInput("COMMAND").setCheck("PROCEDURE");
 
+    this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour("#555555");
@@ -476,76 +747,49 @@ Blockly.Blocks['tkinter_set_button_command'] = {
     this.setHelpUrl("");
   },
 
-  /**
-   * Try to prefill BUTTON from the nearest surrounding parent
-   * 'tkinter_add_widget_to_window' if BUTTON is empty.
-   */
   _prefillButtonFromParent_: function() {
-    if (!this.workspace || this.isInFlyout) return;
-    if (this._labelPrefilled) return; // guard: do once
-
-    const myButtonInput = this.getInput('BUTTON');
-    if (!myButtonInput || myButtonInput.connection.targetBlock()) return; // already filled
-
-    // Is this block inside our target parent?
-    const parent = this.getSurroundParent();
-    if (!parent || parent.type !== 'tkinter_add_widget_to_window') return;
-
-    // What is the parent's label value block?
-    const parentWidgetBlock = parent.getInputTargetBlock('WIDGET');
-    if (!parentWidgetBlock) return;
-
-    // If the parent carries a GUI_Button variable getter, copy its variable id.
-    // Your getter block type is 'tkinter_variables_get_label' with field 'VAR'.
-    let varId = null;
-    let newGetter = null;
-    const varField = parentWidgetBlock.getField('VAR');
-    if (varField && typeof varField.getVariable === 'function') {
-      const model = varField.getVariable();
-      if (model) {
-          varId = model.getId();
-        if (varId) {
-          // Create a *real* getter block bound to the same variable id.
-          if (model.type == "GUI_Button") newGetter = this.workspace.newBlock('tkinter_variables_get_button');
-          if (model.type == "GUI_Entry") newGetter = this.workspace.newBlock('tkinter_variables_get_entry');
-          newGetter.setFieldValue(varId, 'VAR');   // set by id to keep it robust
-        } else {
-          // Fallback: shallow-clone the parent's value block (covers rare cases).
-          const xml = Blockly.Xml.blockToDom(parentWidgetBlock, /*opt_noId*/ true);
-          newGetter = Blockly.Xml.domToBlock(xml, this.workspace);
-        }
-      }
-    }
-
-
-    // Render and connect into our BUTTON input.
-    if (newGetter) {
-      newGetter.initSvg && newGetter.initSvg();
-      newGetter.render && newGetter.render();
-      myButtonInput.connection.connect(newGetter.outputConnection);
-      this._labelPrefilled = true;
-    }
+    Blockly.Blocks._tkinterPrefillValueInputFromParent(this, 'BUTTON', {
+      'GUI_Button': 'tkinter_variables_get_button'
+    });
   },
 
-  /**
-   * Listen for create/move/parent changes and prefill once.
-   */
   onchange: function(e) {
-    if (!this.workspace || this.isInFlyout || !e) return;
-
-    // Only react to events that affect parentage/placement of this block.
-    const typesToWatch = new Set([
-      Blockly.Events.BLOCK_CREATE,
-      Blockly.Events.BLOCK_MOVE,
-      Blockly.Events.CHANGE
-    ]);
-    if (!typesToWatch.has(e.type)) return;
-
-    // Small debounce: run after Blockly finishes any sync updates.
-    // This avoids running too early while connections are still changing.
     const self = this;
-    setTimeout(function() {
-      try { self._prefillButtonFromParent_(); } catch (err) { /* no-op */ }
-    }, 0);
+    Blockly.Blocks._tkinterOnChangePrefillFromParent(this, e, function() {
+      self._prefillButtonFromParent_();
+    });
+  }
+};
+
+// --- BEGIN: tkinter_button_set_enabled (block definition)
+Blockly.Blocks['tkinter_button_set_enabled'] = {
+  init: function() {
+    this.appendDummyInput().appendField("set");
+    this.appendValueInput("BUTTON").setCheck("GUI_Button");
+    this.appendDummyInput().appendField("to");
+    this.appendDummyInput().appendField(new Blockly.FieldDropdown([
+      ["enabled", "ENABLED"],
+      ["disabled", "DISABLED"]
+    ]), "STATE");
+
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour("#555555");
+    this.setTooltip("Enable or disable the specified button.");
+    this.setHelpUrl("");
+  },
+
+  _prefillButtonFromParent_: function() {
+    Blockly.Blocks._tkinterPrefillValueInputFromParent(this, 'BUTTON', {
+      'GUI_Button': 'tkinter_variables_get_button'
+    });
+  },
+
+  onchange: function(e) {
+    const self = this;
+    Blockly.Blocks._tkinterOnChangePrefillFromParent(this, e, function() {
+      self._prefillButtonFromParent_();
+    });
   }
 };
