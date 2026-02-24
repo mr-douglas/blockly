@@ -173,6 +173,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   {
     "type": "tkinter_set_window_as_root",
     "message0": "set %1 to main window",
+    "inputsInline": true,
     "args0": [
       {
         "type": "input_value",
@@ -189,6 +190,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   {
     "type": "tkinter_set_window_as_secondary",
     "message0": "set %1 as a secondary window",
+    "inputsInline": true,
     "args0": [
       {
         "type": "input_value",
@@ -221,6 +223,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   {
     "type": "tkinter_window_set_dimensions",
     "message0": "set size of window %1 width %2 height %3",
+    "inputsInline": true,
     "args0": [
       {
         "type": "input_value",
@@ -303,7 +306,8 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   },
   {
     "type": "tkinter_ask_dialog",
-    "message0": "ask with %1 title %2 and message %3",
+    "message0": "ask %1 with title %2 and message %3",
+    "inputsInline": true,
     "args0": [
       {
         "type": "field_dropdown",
@@ -460,7 +464,8 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   },
   {
     "type": "tkinter_simpledialog",
-    "message0": "ask for %1 with title %2 and prompt %3",
+    "message0": "ask for %1 with title %2 and question %3",
+    "inputsInline": true,
     "args0": [
       {
         "type": "field_dropdown",
@@ -490,7 +495,8 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   },
   {
     "type": "tkinter_filedialog",
-    "message0": "ask for a file path to %1 with title %2",
+    "message0": "choose a file path to %1 with title %2",
+    "inputsInline": true,
     "args0": [
       {
         "type": "field_dropdown",
@@ -514,7 +520,8 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   },
   {
     "type": "tkinter_colorchooser",
-    "message0": "ask for a colour with title %1",
+    "message0": "choose a colour with title %1",
+    "inputsInline": true,
     "args0": [
       {
         "type": "input_value",
@@ -636,7 +643,7 @@ Blockly.Blocks['tkinter_add_widget_to_window'] = {
 // --- END: tkinter_add_widget_to_window (block definition)
 
 // --- BEGIN: shared tkinter prefill helpers
-function tkinterPrefillValueInputFromParent(block, inputName, getterTypeByVariableType) {
+Blockly.Blocks._tkinterPrefillValueInputFromParent = function(block, inputName, getterTypeByVariableType) {
   if (!block.workspace || block.isInFlyout) return;
   if (block._tkinterPrefilled) return;
 
@@ -674,7 +681,7 @@ function tkinterPrefillValueInputFromParent(block, inputName, getterTypeByVariab
   }
 }
 
-function tkinterOnChangePrefillFromParent(block, e, prefillFn) {
+Blockly.Blocks._tkinterOnChangePrefillFromParent = function(block, e, prefillFn) {
   if (!block.workspace || block.isInFlyout || !e) return;
 
   const typesToWatch = new Set([
@@ -698,6 +705,7 @@ Blockly.Blocks['tkinter_set_widget_text'] = {
     this.appendDummyInput().appendField("text to");
     this.appendValueInput("TEXT").setCheck("String");
 
+    this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour("#555555");
@@ -706,7 +714,7 @@ Blockly.Blocks['tkinter_set_widget_text'] = {
   },
 
   _prefillWidgetFromParent_: function() {
-    tkinterPrefillValueInputFromParent(this, 'WIDGET', {
+    Blockly.Blocks._tkinterPrefillValueInputFromParent(this, 'WIDGET', {
       'GUI_Label': 'tkinter_variables_get_label',
       'GUI_Button': 'tkinter_variables_get_button',
       'GUI_Checkbutton': 'tkinter_variables_get_checkbutton',
@@ -716,7 +724,7 @@ Blockly.Blocks['tkinter_set_widget_text'] = {
 
   onchange: function(e) {
     const self = this;
-    tkinterOnChangePrefillFromParent(this, e, function() {
+    Blockly.Blocks._tkinterOnChangePrefillFromParent(this, e, function() {
       self._prefillWidgetFromParent_();
     });
   }
@@ -730,6 +738,7 @@ Blockly.Blocks['tkinter_set_button_command'] = {
     this.appendDummyInput().appendField("is clicked");
     this.appendValueInput("COMMAND").setCheck("PROCEDURE");
 
+    this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour("#555555");
@@ -738,14 +747,14 @@ Blockly.Blocks['tkinter_set_button_command'] = {
   },
 
   _prefillButtonFromParent_: function() {
-    tkinterPrefillValueInputFromParent(this, 'BUTTON', {
+    Blockly.Blocks._tkinterPrefillValueInputFromParent(this, 'BUTTON', {
       'GUI_Button': 'tkinter_variables_get_button'
     });
   },
 
   onchange: function(e) {
     const self = this;
-    tkinterOnChangePrefillFromParent(this, e, function() {
+    Blockly.Blocks._tkinterOnChangePrefillFromParent(this, e, function() {
       self._prefillButtonFromParent_();
     });
   }
@@ -771,14 +780,14 @@ Blockly.Blocks['tkinter_button_set_enabled'] = {
   },
 
   _prefillButtonFromParent_: function() {
-    tkinterPrefillValueInputFromParent(this, 'BUTTON', {
+    Blockly.Blocks._tkinterPrefillValueInputFromParent(this, 'BUTTON', {
       'GUI_Button': 'tkinter_variables_get_button'
     });
   },
 
   onchange: function(e) {
     const self = this;
-    tkinterOnChangePrefillFromParent(this, e, function() {
+    Blockly.Blocks._tkinterOnChangePrefillFromParent(this, e, function() {
       self._prefillButtonFromParent_();
     });
   }

@@ -147,7 +147,7 @@ toolboxString += '<category name="Radiobutton" colour="#555555" custom="GUI_Radi
 toolboxString += '</category>';
 toolboxString += '<category name="Combobox" colour="#555555" custom="GUI_Comboboxes">';
 toolboxString += '</category>';
-toolboxString += '<category name="Progressbar" colour="#555555" custom="GUI_Progressbars">';
+toolboxString += '<category name="Progress Bar" colour="#555555" custom="GUI_Progressbars">';
 toolboxString += '</category>';
 toolboxString += '</category>';
 toolboxString += '<category colour="90" name="EV3">'; 
@@ -420,7 +420,7 @@ workspace.registerToolboxCategoryCallback('GUI_Comboboxes', function(workspace){
 
 workspace.registerToolboxCategoryCallback('GUI_Progressbars', function(workspace){
                                                                                     var xmlList = [];
-                                                                                    xmlList.push(Blockly.Xml.textToDom('<button text="Create progressbar..." callbackKey="createGUIProgressbarButtonPressed"></button>'));
+                                                                                    xmlList.push(Blockly.Xml.textToDom('<button text="Create progress bar..." callbackKey="createGUIProgressbarButtonPressed"></button>'));
                                                                                     var variableModelList = workspace.getVariablesOfType('GUI_Progressbar');
                                                                                     if(variableModelList.length>0){
                                                                                       for (var i = 0, variable; (variable = variableModelList[i]); i++) {

@@ -830,7 +830,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
 },
 {
   "type": "bht_motor_get_aposition",
-  "message0": "get position of motor %1",
+  "message0": "the current position of motor %1",
   "args0": [
     {
       "type": "input_value",
@@ -846,7 +846,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
 },
 {
   "type": "bht_motor_get_speed",
-  "message0": "get speed of motor %1",
+  "message0": "the current speed of motor %1",
   "args0": [
     {
       "type": "input_value",
@@ -906,7 +906,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
 },
 {
   "type": "bht_color_sensor_get_colour",
-  "message0": "get colour from colour sensor %1",
+  "message0": "the current colour from colour sensor %1",
   "args0": [
     {
       "type": "input_value",
@@ -922,7 +922,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
 },
 {
   "type": "bht_color_sensor_get_ambient_light",
-  "message0": "get ambient light from colour sensor %1",
+  "message0": "the current ambient light from colour sensor %1",
   "args0": [
     {
       "type": "input_value",
@@ -938,7 +938,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
 },
 {
   "type": "bht_color_sensor_get_reflected_light",
-  "message0": "get reflected light from colour sensor %1",
+  "message0": "the current reflected light from colour sensor %1",
   "args0": [
     {
       "type": "input_value",
@@ -954,7 +954,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
 },
 {
   "type": "bht_color_distance_sensor_get_colour",
-  "message0": "get colour from colour/distance sensor %1",
+  "message0": "the current colour from colour/distance sensor %1",
   "args0": [
     {
       "type": "input_value",
@@ -970,7 +970,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
 },
 {
   "type": "bht_color_distance_sensor_get_distance",
-  "message0": "get distance from colour/distance sensor %1",
+  "message0": "the current distance from colour/distance sensor %1",
   "args0": [
     {
       "type": "input_value",
@@ -986,7 +986,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
 },
 {
   "type": "bht_color_distance_sensor_get_ambient_light",
-  "message0": "get ambient light from colour/distance sensor %1",
+  "message0": "the current ambient light from colour/distance sensor %1",
   "args0": [
     {
       "type": "input_value",
@@ -1002,7 +1002,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
 },
 {
   "type": "bht_color_distance_sensor_get_reflected_light",
-  "message0": "get reflected light from colour/distance sensor %1",
+  "message0": "the current reflected light from colour/distance sensor %1",
   "args0": [
     {
       "type": "input_value",
@@ -1018,7 +1018,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
 },
 {
   "type": "bht_distance_sensor_get_distance",
-  "message0": "get distance from distance sensor %1",
+  "message0": "the current distance from distance sensor %1",
   "args0": [
     {
       "type": "input_value",
@@ -1034,7 +1034,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
 },
 {
   "type": "bht_force_sensor_get_force",
-  "message0": "get force from force sensor %1",
+  "message0": "the current force from force sensor %1",
   "args0": [
     {
       "type": "input_value",
@@ -1050,7 +1050,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
 },
 {
   "type": "bht_motion_sensor_get_distance",
-  "message0": "get distance from motion sensor %1",
+  "message0": "the current distance from motion sensor %1",
   "args0": [
     {
       "type": "input_value",
@@ -1066,7 +1066,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
 },
 {
   "type": "bht_tilt_sensor_get_tilt",
-  "message0": "get tilt from tilt sensor %1",
+  "message0": "the current tilt from tilt sensor %1",
   "args0": [
     {
       "type": "input_value",
