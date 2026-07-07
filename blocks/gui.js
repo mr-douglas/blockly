@@ -792,3 +792,68 @@ Blockly.Blocks['tkinter_button_set_enabled'] = {
     });
   }
 };
+
+Blockly.Blocks['tkinter_entry_insert_at_end']._prefillEntryFromParent_ = function() {
+  Blockly.Blocks._tkinterPrefillValueInputFromParent(this, 'ENTRY', {
+    'GUI_Entry': 'tkinter_variables_get_entry'
+  });
+};
+
+Blockly.Blocks['tkinter_entry_insert_at_end'].onchange = function(e) {
+  const self = this;
+  Blockly.Blocks._tkinterOnChangePrefillFromParent(this, e, function() {
+    self._prefillEntryFromParent_();
+  });
+};
+
+Blockly.Blocks['tkinter_entry_delete_from_start']._prefillEntryFromParent_ = function() {
+  Blockly.Blocks._tkinterPrefillValueInputFromParent(this, 'ENTRY', {
+    'GUI_Entry': 'tkinter_variables_get_entry'
+  });
+};
+
+Blockly.Blocks['tkinter_entry_delete_from_start'].onchange = function(e) {
+  const self = this;
+  Blockly.Blocks._tkinterOnChangePrefillFromParent(this, e, function() {
+    self._prefillEntryFromParent_();
+  });
+};
+
+Blockly.Blocks['tkinter_combobox_set_values']._prefillComboboxFromParent_ = function() {
+  Blockly.Blocks._tkinterPrefillValueInputFromParent(this, 'COMBOBOX', {
+    'GUI_Combobox': 'tkinter_variables_get_combobox'
+  });
+};
+
+Blockly.Blocks['tkinter_combobox_set_values'].onchange = function(e) {
+  const self = this;
+  Blockly.Blocks._tkinterOnChangePrefillFromParent(this, e, function() {
+    self._prefillComboboxFromParent_();
+  });
+};
+
+Blockly.Blocks['tkinter_progressbar_set_value']._prefillProgressbarFromParent_ = function() {
+  Blockly.Blocks._tkinterPrefillValueInputFromParent(this, 'PROGRESSBAR', {
+    'GUI_Progressbar': 'tkinter_variables_get_progressbar'
+  });
+};
+
+Blockly.Blocks['tkinter_progressbar_set_value'].onchange = function(e) {
+  const self = this;
+  Blockly.Blocks._tkinterOnChangePrefillFromParent(this, e, function() {
+    self._prefillProgressbarFromParent_();
+  });
+};
+
+Blockly.Blocks['tkinter_progressbar_start_stop']._prefillProgressbarFromParent_ = function() {
+  Blockly.Blocks._tkinterPrefillValueInputFromParent(this, 'PROGRESSBAR', {
+    'GUI_Progressbar': 'tkinter_variables_get_progressbar'
+  });
+};
+
+Blockly.Blocks['tkinter_progressbar_start_stop'].onchange = function(e) {
+  const self = this;
+  Blockly.Blocks._tkinterOnChangePrefillFromParent(this, e, function() {
+    self._prefillProgressbarFromParent_();
+  });
+};

@@ -45,11 +45,11 @@ Blockly.Python['tkinter_set_window_as_secondary'] = function(block) {
 
 Blockly.Python['tkinter_window_set_dimensions'] = function(block) {
   var value_window = Blockly.Python.valueToCode(block, 'WINDOW', Blockly.Python.ORDER_ATOMIC);
-  var value_width = Blockly.Python.valueToCode(block, 'WIDTH', Blockly.Python.ORDER_ATOMIC) || '200';
-  var value_height = Blockly.Python.valueToCode(block, 'HEIGHT', Blockly.Python.ORDER_ATOMIC) || '200';
+  var value_width = Blockly.Python.valueToCode(block, 'WIDTH', Blockly.Python.ORDER_ATOMIC);
+  var value_height = Blockly.Python.valueToCode(block, 'HEIGHT', Blockly.Python.ORDER_ATOMIC);
   Blockly.Python.definitions_['tkinter_imports'] = tkinter_imports;
   var code = "";
-  if(value_window==""){
+  if(value_window=="" || value_width=="" ||  value_height==""){
     code = "#";
   }
   code = code + value_window + '.geometry(str(' + value_width + ') + "x" + str(' + value_height + '))\n';
@@ -61,7 +61,7 @@ Blockly.Python['tkinter_window_set_title'] = function(block) {
   var value_title = Blockly.Python.valueToCode(block, 'TITLE', Blockly.Python.ORDER_ATOMIC);
   Blockly.Python.definitions_['tkinter_imports'] = tkinter_imports;
   var code = "";
-  if(value_window==""){
+  if(value_window==""||value_title==""){
     code = "#";
   }
   code = code + value_window + '.title(' + value_title + ')\n';
@@ -138,7 +138,7 @@ Blockly.Python['tkinter_add_widget_to_window'] = function(block) {
   if (widgetGetter.type == 'tkinter_variables_get_label') code += `${value_widget} = tkinter.ttk.Label(${value_window})\n`;
   if (widgetGetter.type == 'tkinter_variables_get_button') code += `${value_widget} = tkinter.ttk.Button(${value_window})\n`;
   if (widgetGetter.type == 'tkinter_variables_get_entry') code += `${value_widget} = tkinter.ttk.Entry(${value_window})\n`;
-  if (widgetGetter.type == 'tkinter_variables_get_checkbutton') code += `${value_widget} = tkinter.ttk.Checkbutton(${value_window})\n`;
+  if (widgetGetter.type == 'tkinter_variables_get_checkbutton') code += `${value_widget} = tkinter.ttk.Checkbutton(${value_window})\n${value_widget}.set(False)\n`;
   if (widgetGetter.type == 'tkinter_variables_get_radiobutton') code += `${value_widget} = tkinter.ttk.Radiobutton(${value_window})\n`;
   if (widgetGetter.type == 'tkinter_variables_get_combobox') code += `${value_widget} = tkinter.ttk.Combobox(${value_window})\n`;
   if (widgetGetter.type == 'tkinter_variables_get_progressbar') code += `${value_widget} = tkinter.ttk.Progressbar(${value_window})\n`;
@@ -214,7 +214,11 @@ Blockly.Python['tkinter_set_button_command'] = function(block) {
 Blockly.Python['tkinter_entry_get_text'] = function(block) {
   Blockly.Python.definitions_['tkinter_imports'] = tkinter_imports;
   var value_entry = Blockly.Python.valueToCode(block, 'ENTRY', Blockly.Python.ORDER_ATOMIC);
-  var code = value_entry + '.get()';
+  var code = '';
+  if (value_entry == '') {
+	  code = '#';
+  }
+  code = value_entry + '.get()';
   return [code, Blockly.Python.ORDER_FUNCTION_CALL];
 };
 // --- END: tkinter_entry_get_text (Python generator)
@@ -222,27 +226,40 @@ Blockly.Python['tkinter_entry_get_text'] = function(block) {
 Blockly.Python['tkinter_entry_insert_at_end'] = function(block) {
   Blockly.Python.definitions_['tkinter_imports'] = tkinter_imports;
   var value_text = Blockly.Python.valueToCode(block, 'TEXT', Blockly.Python.ORDER_NONE) || "''";
-  var value_entry = Blockly.Python.valueToCode(block, 'ENTRY', Blockly.Python.ORDER_MEMBER) || '[]';
-  // Hardcoded to insert at index 0
-  return value_entry + '.insert(tkinter.END, ' + value_text + ')\n';
+  var value_entry = Blockly.Python.valueToCode(block, 'ENTRY', Blockly.Python.ORDER_MEMBER);
+  var code = '';
+  if (value_entry == "") {
+    code = '#';
+  }
+  code = code + value_entry + '.insert(tkinter.END, ' + value_text + ')\n';
+  return code;
 };
 
 Blockly.Python['tkinter_entry_delete_from_start'] = function(block) {
   Blockly.Python.definitions_['tkinter_imports'] = tkinter_imports;
-  var value_entry = Blockly.Python.valueToCode(block, 'ENTRY', Blockly.Python.ORDER_MEMBER) || '[]';
-  return value_entry + '.delete(0, tkinter.END)\n';
+  var value_entry = Blockly.Python.valueToCode(block, 'ENTRY', Blockly.Python.ORDER_MEMBER);
+  var code = '';
+  if (value_entry == "") {
+    code = '#';
+  }
+  code = code + value_entry + '.delete(0, tkinter.END)\n';
+  return code;
 };
 
 Blockly.Python['tkinter_messagebox'] = function(block) {
   Blockly.Python.definitions_['tkinter_imports'] = tkinter_imports;
   Blockly.Python.definitions_['tkinter_messagebox'] = 'import tkinter.messagebox as messagebox';
-  var title = Blockly.Python.valueToCode(block, 'TITLE', Blockly.Python.ORDER_NONE) || "'Message Box'";
-  var text = Blockly.Python.valueToCode(block, 'TEXT', Blockly.Python.ORDER_NONE) || "''";
+  var title = Blockly.Python.valueToCode(block, 'TITLE', Blockly.Python.ORDER_NONE);
+  var text = Blockly.Python.valueToCode(block, 'TEXT', Blockly.Python.ORDER_NONE);
   var mode = block.getFieldValue('MODE') || 'INFO';
   var fn = 'showinfo';
   if (mode == 'WARNING') fn = 'showwarning';
   if (mode == 'ERROR') fn = 'showerror';
-  var code = 'messagebox.' + fn + '(title=' + title + ', message=' + text + ')\n';
+  var code = '';
+  if (title == '' || text == '') {
+	  code = '#'
+  }
+  code = code + 'messagebox.' + fn + '(title=' + title + ', message=' + text + ')\n';
   return code;
 };
 
@@ -308,9 +325,15 @@ Blockly.Python['tkinter_button_set_enabled'] = function(block) {
 
 Blockly.Python['tkinter_combobox_set_values'] = function(block) {
   Blockly.Python.definitions_['tkinter_imports'] = tkinter_imports;
-  var value_combobox = Blockly.Python.valueToCode(block, 'COMBOBOX', Blockly.Python.ORDER_MEMBER) || '[]';
-  var value_values = Blockly.Python.valueToCode(block, 'VALUES', Blockly.Python.ORDER_NONE) || '[]';
-  return value_combobox + '["values"] = ' + value_values + '\n';
+  var value_combobox = Blockly.Python.valueToCode(block, 'COMBOBOX', Blockly.Python.ORDER_MEMBER);
+  var value_values = Blockly.Python.valueToCode(block, 'VALUES', Blockly.Python.ORDER_NONE);
+  var code = '';
+  if (value_combobox == '' || value_values == '') {
+	  code = '#';
+  }
+  code = code + value_combobox + '["values"] = ' + value_values + '\n';
+  code = code + value_combobox + '.current(0)\n';
+  return code;
 };
 
 Blockly.Python['tkinter_combobox_get_text'] = function(block) {
@@ -322,15 +345,29 @@ Blockly.Python['tkinter_combobox_get_text'] = function(block) {
 
 Blockly.Python['tkinter_progressbar_set_value'] = function(block) {
   Blockly.Python.definitions_['tkinter_imports'] = tkinter_imports;
-  var value_progressbar = Blockly.Python.valueToCode(block, 'PROGRESSBAR', Blockly.Python.ORDER_MEMBER) || '[]';
-  var value_value = Blockly.Python.valueToCode(block, 'VALUE', Blockly.Python.ORDER_NONE) || '0';
-  return value_progressbar + '["value"] = ' + value_value + '\n';
+  var value_progressbar = Blockly.Python.valueToCode(block, 'PROGRESSBAR', Blockly.Python.ORDER_MEMBER);
+  var value_value = Blockly.Python.valueToCode(block, 'VALUE', Blockly.Python.ORDER_NONE);
+  var code = '';
+  if (value_progressbar == '' || value_value == '') {
+	  code = '#';
+  }
+  code = code + value_progressbar + '["value"] = ' + value_value + '\n';
+  return code;
 };
 
 Blockly.Python['tkinter_progressbar_start_stop'] = function(block) {
   Blockly.Python.definitions_['tkinter_imports'] = tkinter_imports;
-  var value_progressbar = Blockly.Python.valueToCode(block, 'PROGRESSBAR', Blockly.Python.ORDER_MEMBER) || '[]';
+  var value_progressbar = Blockly.Python.valueToCode(block, 'PROGRESSBAR', Blockly.Python.ORDER_MEMBER);
   var mode = block.getFieldValue('MODE') || 'START';
-  if (mode == 'STOP') return value_progressbar + '.stop()\n';
-  return value_progressbar + '.start()\n';
+  var code = '';
+  if (value_progressbar == '') {
+	  code = '#';
+  }
+  if (mode == 'START'){
+	  code = code + value_progressbar + '.start()\n';
+  }
+  else if (mode == 'STOP'){
+	  code = code + value_progressbar + '.stop()\n';
+  }
+  return code;
 };
