@@ -147,8 +147,8 @@ toolboxString += '</category>';*/
 toolboxString += '</category>';*/
 toolboxString += '<category name="Combobox" colour="#555555" custom="GUI_Comboboxes">';
 toolboxString += '</category>';
-toolboxString += '<category name="Progress Bar" colour="#555555" custom="GUI_Progressbars">';
-toolboxString += '</category>';
+/*toolboxString += '<category name="Progress Bar" colour="#555555" custom="GUI_Progressbars">';
+toolboxString += '</category>';*/
 toolboxString += '</category>';
 toolboxString += '<category colour="90" name="EV3">'; 
 toolboxString += '<category colour="90" name="Brick">';   
@@ -229,12 +229,13 @@ workspace.registerToolboxCategoryCallback('GUI_Windows', function(workspace){
                                                                                       }
                                                                                       xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_set_window_as_root"></block>'));
                                                                                       if (variableModelList.length>1) {
-                                                                                        xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_set_window_as_secondary"></block>'));
+                                                                                        xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_set_additional_window"></block>'));
                                                                                       }
+																						xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_window_mainloop"></block>'));
+																						xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_window_set_title"><value name="TITLE"><shadow type="text"><field name="TEXT">My Window</field></shadow></value></block>'));
+																						xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_window_set_dimensions"><value name="WIDTH"><shadow type="math_number"><field name="NUM">400</field></shadow></value><value name="HEIGHT"><shadow type="math_number"><field name="NUM">400</field></shadow></value></block>'));
+																						xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_window_set_resizable"></block>'));
                                                                                     }
-                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_window_mainloop"></block>'));
-                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_window_set_title"><value name="TITLE"><shadow type="text"><field name="TEXT">My Window</field></shadow></value></block>'));
-                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_window_set_dimensions"><value name="WIDTH"><shadow type="math_number"><field name="NUM">400</field></shadow></value><value name="HEIGHT"><shadow type="math_number"><field name="NUM">400</field></shadow></value></block>'));
                                                                                     return xmlList;
                                                                                    }
                                          );
@@ -259,9 +260,9 @@ workspace.registerToolboxCategoryCallback('GUI_Labels', function(workspace){
                                                                                         block.appendChild(Blockly.Variables.generateVariableFieldDom(variable));
                                                                                         xmlList.push(block);
                                                                                       }
+																						xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_add_widget_to_window"></block>'));
+																						xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_set_widget_text"><value name="TEXT"><shadow type="text"><field name="TEXT">abc</field></shadow></value></block>'));
                                                                                     }
-                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_add_widget_to_window"></block>'));
-                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_set_widget_text"><value name="TEXT"><shadow type="text"><field name="TEXT">abc</field></shadow></value></block>'));
                                                                                     return xmlList;
                                                                                    }
                                          );
@@ -286,39 +287,39 @@ workspace.registerToolboxCategoryCallback('GUI_Buttons', function(workspace){
                                                                                         block.appendChild(Blockly.Variables.generateVariableFieldDom(variable));
                                                                                         xmlList.push(block);
                                                                                       }
+																						xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_add_widget_to_window"></block>'));
+																						xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_set_widget_text"><value name="TEXT"><shadow type="text"><field name="TEXT">Click here</field></shadow></value></block>'));
+                                                                                    
+                                                                                    
+																						const tuple = Blockly.Procedures.allProcedures(workspace);
+																						const procedureList = tuple[0];
+																						if(procedureList.length>0){
+																						  for (var i = 0, procedure; (procedure= procedureList[i]); i++) {
+																							var block = Blockly.utils.xml.createElement('block');
+																							block.setAttribute('type', 'tkinter_set_button_command');
+																							block.setAttribute('gap', 8);
+																							
+																							var value = Blockly.utils.xml.createElement('value');
+																							value.setAttribute('name', 'COMMAND');
+																							var name = procedure[0];
+																							shadow = Blockly.utils.xml.createElement('shadow');
+																							shadow.setAttribute('type', 'procedures_get_name');
+																							var field = Blockly.utils.xml.createElement('field');
+																							field.setAttribute('name', 'NAME');
+																							field.appendChild(document.createTextNode(name));
+																							shadow.appendChild(field);
+																							value.appendChild(shadow);
+																							block.appendChild(value);
+
+
+																							xmlList.push(block);
+																						  }
+																						}
+																						
+
+																						xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_set_button_command"></block>'));
+																						xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_button_set_enabled"></block>'));
                                                                                     }
-                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_add_widget_to_window"></block>'));
-                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_set_widget_text"><value name="TEXT"><shadow type="text"><field name="TEXT">Click here</field></shadow></value></block>'));
-                                                                                    
-                                                                                    
-                                                                                    const tuple = Blockly.Procedures.allProcedures(workspace);
-                                                                                    const procedureList = tuple[0];
-                                                                                    if(procedureList.length>0){
-                                                                                      for (var i = 0, procedure; (procedure= procedureList[i]); i++) {
-                                                                                        var block = Blockly.utils.xml.createElement('block');
-                                                                                        block.setAttribute('type', 'tkinter_set_button_command');
-                                                                                        block.setAttribute('gap', 8);
-                                                                                        
-                                                                                        var value = Blockly.utils.xml.createElement('value');
-                                                                                        value.setAttribute('name', 'COMMAND');
-                                                                                        var name = procedure[0];
-                                                                                        shadow = Blockly.utils.xml.createElement('shadow');
-                                                                                        shadow.setAttribute('type', 'procedures_get_name');
-                                                                                        var field = Blockly.utils.xml.createElement('field');
-                                                                                        field.setAttribute('name', 'NAME');
-                                                                                        field.appendChild(document.createTextNode(name));
-                                                                                        shadow.appendChild(field);
-                                                                                        value.appendChild(shadow);
-                                                                                        block.appendChild(value);
-
-
-                                                                                        xmlList.push(block);
-                                                                                      }
-                                                                                    }
-                                                                                    
-
-                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_set_button_command"></block>'));
-                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_button_set_enabled"></block>'));
                                                                                     return xmlList;
                                                                                    }
                                          );
@@ -329,35 +330,35 @@ workspace.registerButtonCallback('createGUIButtonButtonPressed', function(button
                                 );
 
 workspace.registerToolboxCategoryCallback('GUI_Entries', function(workspace){
-                                                                                    var xmlList = [];
-                                                                                    xmlList.push(Blockly.Xml.textToDom('<button text="Create entry..." callbackKey="createGUIEntryButtonPressed"></button>'));
-                                                                                    var variableModelList = workspace.getVariablesOfType('GUI_Entry');
-                                                                                    if(variableModelList.length>0){
-                                                                                      for (var i = 0, variable; (variable = variableModelList[i]); i++) {
-                                                                                        var block = Blockly.utils.xml.createElement('block');
-                                                                                        block.setAttribute('type', 'tkinter_variables_get_entry');
-                                                                                        block.setAttribute('gap', 8);
-                                                                                        block.appendChild(Blockly.Variables.generateVariableFieldDom(variable));
-                                                                                        xmlList.push(block);
-                                                                                      }
-                                                                                    }
-                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_add_widget_to_window"></block>'));
-                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_entry_get_text"></block>'));
-                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_entry_insert_at_end"><value name="TEXT"><shadow type="text"><field name="TEXT">abc</field></shadow></value></block>'));
-                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_entry_delete_from_start"></block>'));
-                                                                                    return xmlList;
-                                                                                   }
+																				var xmlList = [];
+																				xmlList.push(Blockly.Xml.textToDom('<button text="Create entry..." callbackKey="createGUIEntryButtonPressed"></button>'));
+																				var variableModelList = workspace.getVariablesOfType('GUI_Entry');
+																				if(variableModelList.length>0){
+																					for (var i = 0, variable; (variable = variableModelList[i]); i++) {
+																						var block = Blockly.utils.xml.createElement('block');
+																						block.setAttribute('type', 'tkinter_variables_get_entry');
+																						block.setAttribute('gap', 8);
+																						block.appendChild(Blockly.Variables.generateVariableFieldDom(variable));
+																						xmlList.push(block);
+																					}
+																					xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_add_widget_to_window"></block>'));
+																					xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_entry_get_text"></block>'));
+																					xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_entry_insert_at_end"><value name="TEXT"><shadow type="text"><field name="TEXT">abc</field></shadow></value></block>'));
+																					xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_entry_delete_from_start"></block>'));
+																				}
+																				return xmlList;
+                                                                            }
                                         );
 
 workspace.registerToolboxCategoryCallback('GUI_Dialog', function(workspace){
-                                                                                    var xmlList = [];
-                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_messagebox"><value name="TITLE"><shadow type="text"><field name="TEXT">Message Box</field></shadow></value><value name="TEXT"><shadow type="text"><field name="TEXT">Hello</field></shadow></value></block>'));
-                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_ask_dialog"><value name="TITLE"><shadow type="text"><field name="TEXT">Question</field></shadow></value><value name="TEXT"><shadow type="text"><field name="TEXT">Do you want to continue?</field></shadow></value></block>'));
-                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_simpledialog"><value name="TITLE"><shadow type="text"><field name="TEXT">Input</field></shadow></value><value name="PROMPT"><shadow type="text"><field name="TEXT">What is your name?</field></shadow></value></block>'));
-                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_filedialog"><value name="TITLE"><shadow type="text"><field name="TEXT">Select a file</field></shadow></value></block>'));
-                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_colorchooser"><value name="TITLE"><shadow type="text"><field name="TEXT">Choose a colour</field></shadow></value></block>'));
-                                                                                    return xmlList;
-                                                                                   }
+																				var xmlList = [];
+																				xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_messagebox"><value name="TITLE"><shadow type="text"><field name="TEXT">Message Box</field></shadow></value><value name="TEXT"><shadow type="text"><field name="TEXT">Hello</field></shadow></value></block>'));
+																				xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_ask_dialog"><value name="TITLE"><shadow type="text"><field name="TEXT">Question</field></shadow></value><value name="TEXT"><shadow type="text"><field name="TEXT">Do you want to continue?</field></shadow></value></block>'));
+																				xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_simpledialog"><value name="TITLE"><shadow type="text"><field name="TEXT">Input</field></shadow></value><value name="PROMPT"><shadow type="text"><field name="TEXT">Enter something:</field></shadow></value></block>'));
+																				xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_filedialog"><value name="TITLE"><shadow type="text"><field name="TEXT">Select a file</field></shadow></value></block>'));
+																				xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_colorchooser"><value name="TITLE"><shadow type="text"><field name="TEXT">Choose a colour</field></shadow></value></block>'));
+																				return xmlList;
+																		    }
                                          );
 
 /*workspace.registerToolboxCategoryCallback('GUI_Checkbuttons', function(workspace){
@@ -403,22 +404,23 @@ workspace.registerToolboxCategoryCallback('GUI_Comboboxes', function(workspace){
                                                                                     xmlList.push(Blockly.Xml.textToDom('<button text="Create combobox..." callbackKey="createGUIComboboxButtonPressed"></button>'));
                                                                                     var variableModelList = workspace.getVariablesOfType('GUI_Combobox');
                                                                                     if(variableModelList.length>0){
-                                                                                      for (var i = 0, variable; (variable = variableModelList[i]); i++) {
-                                                                                        var block = Blockly.utils.xml.createElement('block');
-                                                                                        block.setAttribute('type', 'tkinter_variables_get_combobox');
-                                                                                        block.setAttribute('gap', 8);
-                                                                                        block.appendChild(Blockly.Variables.generateVariableFieldDom(variable));
-                                                                                        xmlList.push(block);
-                                                                                      }
+																						for (var i = 0, variable; (variable = variableModelList[i]); i++) {
+																							var block = Blockly.utils.xml.createElement('block');
+																							block.setAttribute('type', 'tkinter_variables_get_combobox');
+																							block.setAttribute('gap', 8);
+																							block.appendChild(Blockly.Variables.generateVariableFieldDom(variable));
+																							xmlList.push(block);
+                                                                                        }
+																						xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_add_widget_to_window"></block>'));
+																						xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_combobox_set_values"><value name="VALUES"><shadow type="lists_create_with"><mutation items="2"></mutation><value name="ADD0"><shadow type="text"><field name="TEXT">Yes</field></shadow></value><value name="ADD1"><shadow type="text"><field name="TEXT">No</field></shadow></value></shadow></value><value name="DEFAULT"><shadow type="math_number"><field name="NUM">1</field></shadow></value></block>'));
+																						xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_combobox_set_current"><value name="OPTION"><shadow type="math_number"><field name="NUM">1</field></shadow></value></block>'));
+																						xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_combobox_get_value"></block>'));
                                                                                     }
-                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_add_widget_to_window"></block>'));
-                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_combobox_set_values"><value name="VALUES"><shadow type="lists_create_with"><mutation items="2"></mutation><value name="ADD0"><shadow type="text"><field name="TEXT">Yes</field></shadow></value><value name="ADD1"><shadow type="text"><field name="TEXT">No</field></shadow></value></shadow></value></block>'));
-                                                                                    xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_combobox_get_text"></block>'));
                                                                                     return xmlList;
                                                                                    }
                                          );
 
-workspace.registerToolboxCategoryCallback('GUI_Progressbars', function(workspace){
+/*workspace.registerToolboxCategoryCallback('GUI_Progressbars', function(workspace){
                                                                                     var xmlList = [];
                                                                                     xmlList.push(Blockly.Xml.textToDom('<button text="Create progress bar..." callbackKey="createGUIProgressbarButtonPressed"></button>'));
                                                                                     var variableModelList = workspace.getVariablesOfType('GUI_Progressbar');
@@ -436,7 +438,7 @@ workspace.registerToolboxCategoryCallback('GUI_Progressbars', function(workspace
                                                                                     xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_progressbar_start_stop"></block>'));
                                                                                     return xmlList;
                                                                                    }
-                                         );
+                                         );*/
 
 /*workspace.registerButtonCallback('createGUICheckbuttonButtonPressed', function(button){
                                                                            Blockly.Variables.createVariableButtonHandler(button.getTargetWorkspace(), null, 'GUI_Checkbutton');
@@ -453,10 +455,10 @@ workspace.registerButtonCallback('createGUIComboboxButtonPressed', function(butt
                                                                           }
                                 );
 
-workspace.registerButtonCallback('createGUIProgressbarButtonPressed', function(button){
+/*workspace.registerButtonCallback('createGUIProgressbarButtonPressed', function(button){
                                                                            Blockly.Variables.createVariableButtonHandler(button.getTargetWorkspace(), null, 'GUI_Progressbar');
                                                                           }
-                                );
+                                );*/
 
 workspace.registerButtonCallback('createGUIEntryButtonPressed', function(button){
                                                                            Blockly.Variables.createVariableButtonHandler(button.getTargetWorkspace(), null, 'GUI_Entry');

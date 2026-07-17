@@ -84,7 +84,7 @@ Blockly.Python['procedures_defreturn'] = function(block) {
   return null;
 };
 
-Blockly.Python['procedures_get_name'] = function(block) {
+Blockly.Python['procedures_get_name'] = function(block) {	
   // Return the procedure name as a reference (no call).
   var name = block.getFieldValue('NAME');
   var code = Blockly.Python.variableDB_.getName(name, Blockly.PROCEDURE_CATEGORY_NAME);

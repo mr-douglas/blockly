@@ -188,20 +188,24 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
     "helpUrl": ""
   },
   {
-    "type": "tkinter_set_window_as_secondary",
-    "message0": "set %1 as a secondary window",
+    "type": "tkinter_set_additional_window",
+    "message0": "set %1 to as additional window with %2 as main window",
     "inputsInline": true,
     "args0": [
       {
         "type": "input_value",
-        "name": "WINDOW",
+        "name": "ADDITIONAL_WINDOW",
+        "check": "GUI_Window"
+      },{
+        "type": "input_value",
+        "name": "MAIN_WINDOW",
         "check": "GUI_Window"
       }
     ],
     "previousStatement": null,
     "nextStatement": null,
     "colour": "#555555",
-    "tooltip": "Create a Toplevel window and assign it to the variable",
+    "tooltip": "Create an additional Tkinter.Toplevel window and assign it to the variable",
     "helpUrl": ""
   },
   {
@@ -271,9 +275,40 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
     "colour": "#555555",
     "tooltip": "Set the width and height of the specified window",
     "helpUrl": ""
-  }
-
-  ,
+  },
+  {
+    "type": "tkinter_window_set_resizable",
+    "message0": "make window %1 resizable:",
+    "message1": "%1 horizontally and/or",
+    "message2": "%1 vertically",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "WINDOW",
+        "check": "GUI_Window"
+      }
+    ],
+    "args1": [
+    {
+      "type": "field_checkbox",
+      "name": "RESIZE_X",
+      "checked": true
+    }
+	],
+	"args2": [
+    {
+      "type": "field_checkbox",
+      "name": "RESIZE_Y",
+      "checked": true
+    }
+	],
+    "inputsInline": true,
+    "previousStatement": null,
+    "nextStatement": null,
+    "colour": "#555555",
+    "tooltip": "Set whether the window can be resized horizontally and vertically",
+    "helpUrl": ""
+  },
   {
     "type": "tkinter_messagebox",
     "message0": "make a %1 box appear with title %2 and message %3",
@@ -380,7 +415,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   },
   {
     "type": "tkinter_combobox_set_values",
-    "message0": "set choices in %1 to %2",
+    "message0": "set choices in %1 to %2 and default to option %3",
     "args0": [
       {
         "type": "input_value",
@@ -390,6 +425,11 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
       {
         "type": "input_value",
         "name": "VALUES"
+      },
+      {
+        "type": "input_value",
+        "name": "DEFAULT",
+		"check": "Number"
       }
     ],
     "inputsInline": true,
@@ -400,8 +440,30 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
     "helpUrl": ""
   },
   {
-    "type": "tkinter_combobox_get_text",
-    "message0": "the selected text in %1",
+    "type": "tkinter_combobox_set_current",
+    "message0": "set selected choice in %1 to option %2",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "COMBOBOX",
+        "check": "GUI_Combobox"
+      },
+      {
+        "type": "input_value",
+        "name": "OPTION",
+		"check": "Number"
+      }
+    ],
+    "inputsInline": true,
+    "previousStatement": null,
+    "nextStatement": null,
+    "colour": "#555555",
+    "tooltip": "Set the options available in a Combobox",
+    "helpUrl": ""
+  },
+  {
+    "type": "tkinter_combobox_get_value",
+    "message0": "the selected value of %1",
     "args0": [
       {
         "type": "input_value",
@@ -412,7 +474,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
     "output": "String",
     "inputsInline": true,
     "colour": "#555555",
-    "tooltip": "Get the currently selected text from the Combobox",
+    "tooltip": "Get the currently selected value from the Combobox",
     "helpUrl": ""
   },
   {
@@ -826,6 +888,19 @@ Blockly.Blocks['tkinter_combobox_set_values']._prefillComboboxFromParent_ = func
 };
 
 Blockly.Blocks['tkinter_combobox_set_values'].onchange = function(e) {
+  const self = this;
+  Blockly.Blocks._tkinterOnChangePrefillFromParent(this, e, function() {
+    self._prefillComboboxFromParent_();
+  });
+};
+
+Blockly.Blocks['tkinter_combobox_set_current']._prefillComboboxFromParent_ = function() {
+  Blockly.Blocks._tkinterPrefillValueInputFromParent(this, 'COMBOBOX', {
+    'GUI_Combobox': 'tkinter_variables_get_combobox'
+  });
+};
+
+Blockly.Blocks['tkinter_combobox_set_current'].onchange = function(e) {
   const self = this;
   Blockly.Blocks._tkinterOnChangePrefillFromParent(this, e, function() {
     self._prefillComboboxFromParent_();

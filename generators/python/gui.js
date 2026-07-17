@@ -6,7 +6,8 @@ Blockly.Python.addReservedWords('turtle');
 // Reserve tkinter related names so they aren't used for user variables.
 // We avoid the abbreviation 'tk' and use the full module name 'tkinter'.
 Blockly.Python.addReservedWords('tkinter,ttk');
-var tkinter_imports = 'import tkinter\nimport tkinter.ttk'
+var tkinter_imports = 'import tkinter\nimport tkinter.ttk';
+var tkinter_messagebox_import = 'import tkinter.messagebox';
 
 
 
@@ -32,14 +33,15 @@ Blockly.Python['tkinter_set_window_as_root'] = function(block) {
   return code;
 };
 
-Blockly.Python['tkinter_set_window_as_secondary'] = function(block) {
+Blockly.Python['tkinter_set_additional_window'] = function(block) {
   Blockly.Python.definitions_['tkinter_imports'] = tkinter_imports;
-  var value_window = Blockly.Python.valueToCode(block, 'WINDOW', Blockly.Python.ORDER_ATOMIC);
+  var value_additional_window = Blockly.Python.valueToCode(block, 'ADDITIONAL_WINDOW', Blockly.Python.ORDER_ATOMIC);
+  var value_main_window = Blockly.Python.valueToCode(block, 'MAIN_WINDOW', Blockly.Python.ORDER_ATOMIC);
   var code = "";
-  if (value_window == "") {
+  if (value_additional_window == "" || value_main_window == "") {
     code = "#"
   }
-  code = value_window + ' = tkinter.Toplevel()\n';
+  code = value_additional_window + ' = tkinter.Toplevel(' + value_main_window + ')\n';
   return code;
 };
 
@@ -65,6 +67,27 @@ Blockly.Python['tkinter_window_set_title'] = function(block) {
     code = "#";
   }
   code = code + value_window + '.title(' + value_title + ')\n';
+  return code;
+};
+
+Blockly.Python['tkinter_window_set_resizable'] = function(block) {
+  var value_window = Blockly.Python.valueToCode(block, 'WINDOW', Blockly.Python.ORDER_ATOMIC);
+  var checkbox_resize_x = block.getFieldValue('RESIZE_X') == 'TRUE';
+  var checkbox_resize_y = block.getFieldValue('RESIZE_Y') == 'TRUE';
+  Blockly.Python.definitions_['tkinter_imports'] = tkinter_imports;
+  var code = "";
+  if(value_window==""){
+    code = "#";
+  }
+  var resize_x = 'False';
+  var resize_y = 'False';
+  if (checkbox_resize_x){
+	  resize_x = 'True';
+  }
+  if (checkbox_resize_y){
+	  resize_y = 'True';
+  }
+  code = code + value_window + '.resizable(' + resize_x + ',' + resize_y + ')\n';
   return code;
 };
 
@@ -248,7 +271,7 @@ Blockly.Python['tkinter_entry_delete_from_start'] = function(block) {
 
 Blockly.Python['tkinter_messagebox'] = function(block) {
   Blockly.Python.definitions_['tkinter_imports'] = tkinter_imports;
-  Blockly.Python.definitions_['tkinter_messagebox'] = 'import tkinter.messagebox as messagebox';
+  Blockly.Python.definitions_['tkinter_messagebox'] = tkinter_messagebox_import;
   var title = Blockly.Python.valueToCode(block, 'TITLE', Blockly.Python.ORDER_NONE);
   var text = Blockly.Python.valueToCode(block, 'TEXT', Blockly.Python.ORDER_NONE);
   var mode = block.getFieldValue('MODE') || 'INFO';
@@ -259,13 +282,13 @@ Blockly.Python['tkinter_messagebox'] = function(block) {
   if (title == '' || text == '') {
 	  code = '#'
   }
-  code = code + 'messagebox.' + fn + '(title=' + title + ', message=' + text + ')\n';
+  code = code + 'tkinter.messagebox.' + fn + '(title=' + title + ', message=' + text + ')\n';
   return code;
 };
 
 Blockly.Python['tkinter_ask_dialog'] = function(block) {
   Blockly.Python.definitions_['tkinter_imports'] = tkinter_imports;
-  Blockly.Python.definitions_['tkinter_messagebox'] = 'import tkinter.messagebox as messagebox';
+  Blockly.Python.definitions_['tkinter_messagebox'] = tkinter_messagebox_import;
   var title = Blockly.Python.valueToCode(block, 'TITLE', Blockly.Python.ORDER_NONE) || "'Message Box'";
   var text = Blockly.Python.valueToCode(block, 'TEXT', Blockly.Python.ORDER_NONE) || "''";
   var mode = block.getFieldValue('MODE') || 'ASK_YES_NO';
@@ -274,39 +297,39 @@ Blockly.Python['tkinter_ask_dialog'] = function(block) {
   if (mode == 'ASK_RETRY_CANCEL') fn = 'askretrycancel';
   if (mode == 'ASK_YES_NO_CANCEL') fn = 'askyesnocancel';
   if (mode == 'ASK_QUESTION') fn = 'askquestion';
-  var code = 'messagebox.' + fn + '(title=' + title + ', message=' + text + ')';
+  var code = 'tkinter.messagebox.' + fn + '(title=' + title + ', message=' + text + ')';
   return [code, Blockly.Python.ORDER_FUNCTION_CALL];
 };
 
 Blockly.Python['tkinter_simpledialog'] = function(block) {
   Blockly.Python.definitions_['tkinter_imports'] = tkinter_imports;
-  Blockly.Python.definitions_['tkinter_simpledialog'] = 'import tkinter.simpledialog as simpledialog';
+  Blockly.Python.definitions_['tkinter_simpledialog'] = 'import tkinter.simpledialog';
   var title = Blockly.Python.valueToCode(block, 'TITLE', Blockly.Python.ORDER_NONE) || "'Input'";
   var prompt = Blockly.Python.valueToCode(block, 'PROMPT', Blockly.Python.ORDER_NONE) || "''";
   var mode = block.getFieldValue('MODE') || 'STRING';
   var fn = 'askstring';
   if (mode == 'INTEGER') fn = 'askinteger';
   if (mode == 'FLOAT') fn = 'askfloat';
-  var code = 'simpledialog.' + fn + '(title=' + title + ', prompt=' + prompt + ')';
+  var code = 'tkinter.simpledialog.' + fn + '(title=' + title + ', prompt=' + prompt + ')';
   return [code, Blockly.Python.ORDER_FUNCTION_CALL];
 };
 
 Blockly.Python['tkinter_filedialog'] = function(block) {
   Blockly.Python.definitions_['tkinter_imports'] = tkinter_imports;
-  Blockly.Python.definitions_['tkinter_filedialog'] = 'import tkinter.filedialog as filedialog';
+  Blockly.Python.definitions_['tkinter_filedialog'] = 'import tkinter.filedialog';
   var title = Blockly.Python.valueToCode(block, 'TITLE', Blockly.Python.ORDER_NONE) || "'Select a file'";
   var mode = block.getFieldValue('MODE') || 'OPEN';
   var fn = 'askopenfilename';
   if (mode == 'SAVE') fn = 'asksaveasfilename';
-  var code = 'filedialog.' + fn + '(title=' + title + ')';
+  var code = 'tkinter.filedialog.' + fn + '(title=' + title + ')';
   return [code, Blockly.Python.ORDER_FUNCTION_CALL];
 };
 
 Blockly.Python['tkinter_colorchooser'] = function(block) {
   Blockly.Python.definitions_['tkinter_imports'] = tkinter_imports;
-  Blockly.Python.definitions_['tkinter_colorchooser'] = 'import tkinter.colorchooser as colorchooser';
+  Blockly.Python.definitions_['tkinter_colorchooser'] = 'import tkinter.colorchooser';
   var title = Blockly.Python.valueToCode(block, 'TITLE', Blockly.Python.ORDER_NONE) || "'Choose a colour'";
-  var code = 'colorchooser.askcolor(title=' + title + ')[1]';
+  var code = 'tkinter.colorchooser.askcolor(title=' + title + ')[1]';
   return [code, Blockly.Python.ORDER_FUNCTION_CALL];
 };
 
@@ -327,16 +350,29 @@ Blockly.Python['tkinter_combobox_set_values'] = function(block) {
   Blockly.Python.definitions_['tkinter_imports'] = tkinter_imports;
   var value_combobox = Blockly.Python.valueToCode(block, 'COMBOBOX', Blockly.Python.ORDER_MEMBER);
   var value_values = Blockly.Python.valueToCode(block, 'VALUES', Blockly.Python.ORDER_NONE);
+  var value_default = Blockly.Python.valueToCode(block, 'DEFAULT', Blockly.Python.ORDER_NONE);
   var code = '';
-  if (value_combobox == '' || value_values == '') {
+  if (value_combobox == '' || value_values == '' || value_default == '') {
 	  code = '#';
   }
   code = code + value_combobox + '["values"] = ' + value_values + '\n';
-  code = code + value_combobox + '.current(0)\n';
+  code = code + value_combobox + '.current(' + value_default + '-1)\n';
   return code;
 };
 
-Blockly.Python['tkinter_combobox_get_text'] = function(block) {
+Blockly.Python['tkinter_combobox_set_current'] = function(block) {
+  Blockly.Python.definitions_['tkinter_imports'] = tkinter_imports;
+  var value_combobox = Blockly.Python.valueToCode(block, 'COMBOBOX', Blockly.Python.ORDER_MEMBER);
+  var value_option = Blockly.Python.valueToCode(block, 'OPTION', Blockly.Python.ORDER_NONE);
+  var code = '';
+  if (value_combobox == '' || value_option == '') {
+	  code = '#';
+  }
+  code = code + value_combobox + '.current(' + value_option + '-1)\n';
+  return code;
+};
+
+Blockly.Python['tkinter_combobox_get_value'] = function(block) {
   Blockly.Python.definitions_['tkinter_imports'] = tkinter_imports;
   var value_combobox = Blockly.Python.valueToCode(block, 'COMBOBOX', Blockly.Python.ORDER_ATOMIC);
   var code = value_combobox + '.get()';

@@ -406,6 +406,9 @@ Blockly.Blocks['procedures_defnoreturn'] = {
  */
 Blockly.Blocks['procedures_get_name'] = {
   init: function() {
+    
+    this.procedureName_ = '';
+      
     this.setOutput(true, 'PROCEDURE');
     this.setStyle('procedure_blocks');
     this.appendDummyInput()
@@ -418,25 +421,37 @@ Blockly.Blocks['procedures_get_name'] = {
    * @return {!Array.<Array>} Array of [name, name] pairs.
    * @private
    */
-   dropdownProcedureNames_: function() {
-   // Use the real (target) workspace when running inside the flyout.
-   var ws = (this.workspace && this.workspace.isFlyout) ? this.workspace.targetWorkspace : this.workspace;
-   var tuple = Blockly.Procedures.allProcedures(ws);
-   var procedures = (tuple[0] || []).concat(tuple[1] || []);
-   var options = procedures.map(function(p) {
-     var name = Array.isArray(p) ? p[0] : p;
-     return [name, name];
-   });
-   // Ensure the current value is present so the shadow can set it without errors.
-   var current = this.getFieldValue('NAME') || '';
-   if (current && !options.some(function(o){ return o[1] === current; })) {
-     options.unshift([current, current]);
-   }
-   if (options.length === 0) {
-     options.push([Blockly.Msg['UNNAMED_KEY'] || 'unnamed', '']);
-   }
-   return options;
-   },
+  dropdownProcedureNames_: function() {
+      var options = [];
+
+      if (this.procedureName_) {
+        options.push([
+          this.procedureName_,
+          this.procedureName_
+        ]);
+      }
+      
+     
+      // Use the real (target) workspace when running inside the flyout.
+      var ws = (this.workspace && this.workspace.isFlyout) ? this.workspace.targetWorkspace : this.workspace;
+      var tuple = Blockly.Procedures.allProcedures(ws);
+      var procedures = (tuple[0] || []).concat(tuple[1] || []);
+      procedures.forEach(function(p) {
+        var name = Array.isArray(p) ? p[0] : p;
+        if (!options.some(function(o){ return o[1] === name; })) {
+          options.push([name, name]);
+        }
+      });
+      // Ensure the current value is present so the shadow can set it without errors.
+      var current = this.getFieldValue('NAME') || '';
+      if (current && !options.some(function(o){ return o[1] === current; })) {
+        options.unshift([current, current]);
+      }
+      if (options.length === 0) {
+        options.push([Blockly.Msg['UNNAMED_KEY'] || 'unnamed', '']);
+      }
+      return options;
+  },
 
   /**
    * Refresh the dropdown when procedures change.
@@ -445,6 +460,17 @@ Blockly.Blocks['procedures_get_name'] = {
   onchange: function(event) {
     if (!this.workspace || this.workspace.isFlyout) {
       return;
+    }
+    if (!this.restored_) {
+      this.refreshProcedureName_();
+      if (this.getFieldValue('NAME') === this.procedureName_) {
+        this.restored_ = true;
+      }
+    }
+    var current = this.getFieldValue('NAME');
+
+    if (current && current !== 'unnamed') {
+      this.procedureName_ = current;
     }
     if (event.type == Blockly.Events.BLOCK_CREATE ||
         event.type == Blockly.Events.BLOCK_DELETE ||
@@ -462,7 +488,36 @@ Blockly.Blocks['procedures_get_name'] = {
           this.dispose(true);
       }
     }
-  }
+  },
+  
+  mutationToDom: function() {
+    var container = Blockly.utils.xml.createElement('mutation');
+    container.setAttribute('name', this.procedureName_ || '');
+    return container;
+  },
+
+  domToMutation: function(xmlElement) {
+    this.procedureName_ = xmlElement.getAttribute('name') || '';
+    var field = this.getField('NAME');
+    if (field && this.procedureName_) {
+      field.setValue(this.procedureName_);
+    }
+  },
+
+  refreshProcedureName_: function() {
+    if (!this.procedureName_) {
+      return;
+	}
+	var field = this.getField('NAME');
+	if (!field) {
+	  return;
+	}
+	try {
+	  field.setValue(this.procedureName_);
+	} catch (e) {
+	  console.log('Could not yet restore:',this.procedureName_);
+	}
+  },
 };
 
 Blockly.Blocks['procedures_defreturn'] = {
