@@ -116,8 +116,8 @@ function compile(compilerOptions, opt_verbose, opt_warnings_as_error,
   const options = {};
   options.compilation_level = 'SIMPLE_OPTIMIZATIONS';
   options.warning_level = opt_verbose ? 'VERBOSE' : 'DEFAULT';
-  options.language_in = 'ECMASCRIPT5_STRICT';
-  options.language_out = 'ECMASCRIPT5_STRICT';
+  options.language_in = 'ECMASCRIPT_2020';
+  options.language_out = 'ECMASCRIPT5';
   options.rewrite_polyfills = false;
   options.hide_warnings_for = 'node_modules';
   if (opt_warnings_as_error || opt_strict_typechecker) {
@@ -209,8 +209,8 @@ function buildCompressed() {
       js_output_file: 'blockly_compressed.js',
       externs: ['./externs/svg-externs.js', './externs/goog-externs.js'],
       define: defines,
-      language_in:
-        argv.closureLibrary ? 'ECMASCRIPT_2015' : 'ECMASCRIPT5_STRICT',
+      language_in: 
+        'ECMASCRIPT_2020',
       output_wrapper: outputWrapperUMD('Blockly', [])
     }, argv.verbose, argv.debug, argv.strict))
     .pipe(gulp.sourcemaps.mapSources(function (sourcePath, file) {
@@ -475,7 +475,7 @@ function buildAdvancedCompilationTest() {
       js_output_file: 'main_compressed.js',
       externs: ['./externs/svg-externs.js', './externs/goog-externs.js'],
       language_in:
-        argv.closureLibrary ? 'ECMASCRIPT_2015' : 'ECMASCRIPT5_STRICT'
+        'ECMASCRIPT_2020'
     }, argv.verbose, argv.strict))
     .pipe(gulp.sourcemaps.mapSources(function (sourcePath, file) {
       return sourcePath.replace(/-/g, '/');

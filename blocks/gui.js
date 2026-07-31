@@ -6,7 +6,7 @@ goog.require('Blockly.FieldDropdown');
 goog.require('Blockly.FieldLabel');
 goog.require('Blockly.FieldNumber');
 goog.require('Blockly.FieldVariable');
-goog.require('Blockly.Xml');
+//goog.require('Blockly.Xml');
 
 Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   // Tkinter GUI blocks
@@ -342,7 +342,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   {
     "type": "tkinter_ask_dialog",
     "message0": "ask %1 with title %2 and message %3",
-    "inputsInline": true,
+    //"inputsInline": true,
     "args0": [
       {
         "type": "field_dropdown",
@@ -527,7 +527,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   {
     "type": "tkinter_simpledialog",
     "message0": "ask for %1 with title %2 and question %3",
-    "inputsInline": true,
+    //"inputsInline": true,
     "args0": [
       {
         "type": "field_dropdown",
@@ -558,7 +558,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   {
     "type": "tkinter_filedialog",
     "message0": "choose a file path to %1 with title %2",
-    "inputsInline": true,
+    //"inputsInline": true,
     "args0": [
       {
         "type": "field_dropdown",
@@ -583,7 +583,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   {
     "type": "tkinter_colorchooser",
     "message0": "choose a colour with title %1",
-    "inputsInline": true,
+    //"inputsInline": true,
     "args0": [
       {
         "type": "input_value",
