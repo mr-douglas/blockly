@@ -792,6 +792,37 @@ Blockly.Blocks['tkinter_set_widget_text'] = {
   }
 };
 
+// --- BEGIN: tkinter_set_widget_width (block definition)
+Blockly.Blocks['tkinter_set_widget_width'] = {
+  init: function() {
+    this.appendDummyInput().appendField("Set");
+    this.appendValueInput("WIDGET").setCheck(["GUI_Label","GUI_Button","GUI_Entry","GUI_Combobox"]);
+    this.appendDummyInput().appendField("width to");
+    this.appendValueInput("WIDTH").setCheck("Number");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour("#555555");
+    this.setTooltip("Set the width of the specified widget.");
+    this.setHelpUrl("");
+  },
+  _prefillWidgetFromParent_: function() {
+    Blockly.Blocks._tkinterPrefillValueInputFromParent(this, 'WIDGET', {
+      'GUI_Label': 'tkinter_variables_get_label',
+      'GUI_Button': 'tkinter_variables_get_button',
+      'GUI_Entry': 'tkinter_variables_get_entry',
+      'GUI_Combobox': 'tkinter_variables_get_combobox'
+    });
+  },
+  onchange: function(e) {
+    const self = this;
+    Blockly.Blocks._tkinterOnChangePrefillFromParent(this, e, function() {
+      self._prefillWidgetFromParent_();
+    });
+  }
+};
+// --- END: tkinter_set_widget_width (block definition)
+
 // --- BEGIN: tkinter_set_button_command (block definition)
 Blockly.Blocks['tkinter_set_button_command'] = {
   init: function() {

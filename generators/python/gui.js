@@ -219,6 +219,20 @@ Blockly.Python['tkinter_set_widget_text'] = function(block) {
 };
 // --- END: tkinter_set_widget_text (Python generator)
 
+// --- BEGIN: tkinter_set_widget_width (Python generator)
+Blockly.Python['tkinter_set_widget_width'] = function(block) {
+  Blockly.Python.definitions_['tkinter_imports'] = tkinter_imports;
+  var value_widget = Blockly.Python.valueToCode(block, 'WIDGET', Blockly.Python.ORDER_ATOMIC);
+  var value_width = Blockly.Python.valueToCode(block, 'WIDTH', Blockly.Python.ORDER_ATOMIC);
+  var code = '';
+  if (value_widget == "" || value_width == "") {
+    code = '#';
+  }
+  code = code + value_widget + '.config(width=' + value_width + ')\n';
+  return code;
+};
+// --- END: tkinter_set_widget_width (Python generator)
+
 // --- BEGIN: tkinter_set_button_command (Python generator)
 Blockly.Python['tkinter_set_button_command'] = function(block) {
   Blockly.Python.definitions_['tkinter_imports'] = tkinter_imports;
