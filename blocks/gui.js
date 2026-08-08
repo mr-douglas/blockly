@@ -351,8 +351,8 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
           ["yes/no", "ASK_YES_NO"],
           ["ok/cancel", "ASK_OK_CANCEL"],
           ["retry/cancel", "ASK_RETRY_CANCEL"],
-          ["yes/no/cancel", "ASK_YES_NO_CANCEL"],
-          ["question", "ASK_QUESTION"]
+          ["yes/no/cancel", "ASK_YES_NO_CANCEL"]/*,
+          ["question", "ASK_QUESTION"]*/
         ]
       },
       {
@@ -534,8 +534,8 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
         "name": "MODE",
         "options": [
           ["text", "STRING"],
-          ["whole number", "INTEGER"],
-          ["decimal number", "FLOAT"]
+          ["integer", "INTEGER"],
+          ["number", "FLOAT"]
         ]
       },
       {
@@ -596,7 +596,46 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
     "colour": "#555555",
     "tooltip": "Show a colour picker dialog and return a hex colour string",
     "helpUrl": ""
-  }
+  },
+  {
+  "type": "tkinter_window_set_close_command",
+  "message0": "when the user tries to close %1, run the function %2",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "WINDOW",
+      "check": "GUI_Window"
+    },
+    {
+      "type": "input_value",
+      "name": "COMMAND",
+      "check": "PROCEDURE"
+    }
+  ],
+  "inputsInline": true,
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": "#555555",
+  "tooltip": "Call a procedure when the user closes the window.",
+  "helpUrl": ""
+},
+{
+  "type": "tkinter_window_destroy",
+  "message0": "close window %1",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "WINDOW",
+      "check": "GUI_Window"
+    }
+  ],
+  "inputsInline": true,
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": "#555555",
+  "tooltip": "Close and destroy the specified window.",
+  "helpUrl": ""
+}
 
  ]);  // END JSON EXTRACT (Do not delete this comment.)
 
@@ -638,13 +677,14 @@ Blockly.Blocks['tkinter_add_widget_to_window'] = {
   // Add/remove geometry-specific inputs dynamically (per your rule set)
   updateShape_: function() {
     // Remove any existing geometry inputs
-    ["GRID_ROW", "GRID_COLUMN", "PLACE_X", "PLACE_Y", "CLOSE_PARENTHESIS"].forEach((name) => {
+    // ["GRID_ROW", "GRID_COLUMN", "PLACE_X", "PLACE_Y", "END"].forEach((name) => {
+    ["GRID_ROW", "GRID_COLUMN", "GRID_ROWSPAN", "GRID_COLSPAN", "PLACE_X", "PLACE_Y", "END"].forEach((name) => {
       if (this.getInput(name)) this.removeInput(name);
     });
 
     const mode = this.getFieldValue("GEOM") || "PACK";
 
-    if (mode === "GRID") {
+    /*if (mode === "GRID") {
       this.appendValueInput("GRID_ROW").setCheck("Number").appendField("(row");
       this.appendValueInput("GRID_COLUMN").setCheck("Number").appendField(", column");
       const rowInput = this.getInput("GRID_ROW");
@@ -652,14 +692,44 @@ Blockly.Blocks['tkinter_add_widget_to_window'] = {
       if (rowInput?.connection) {
         const shadowRowXml = Blockly.Xml.textToDom('<shadow type="math_number"><field name="NUM">0</field></shadow>');
         rowInput.connection.setShadowDom(shadowRowXml);
-        //rowInput.connection.setShadowState(Blockly.serialization.blocks.save(shadowRowXml));
+        // rowInput.connection.setShadowState(Blockly.serialization.blocks.save(shadowRowXml));
       }
       if (colInput?.connection) {
         const shadowColXml = Blockly.Xml.textToDom('<shadow type="math_number"><field name="NUM">0</field></shadow>');
         colInput.connection.setShadowDom(shadowColXml);
-        //colInput.connection.setShadowState(Blockly.serialization.blocks.save(shadowColXml));
+        // colInput.connection.setShadowState(Blockly.serialization.blocks.save(shadowColXml));
       }
-    } else if (mode === "PLACE") {
+    }*/
+	if (mode === "GRID") {
+      this.appendValueInput("GRID_ROW").setCheck("Number").appendField("(row");
+	  this.appendValueInput("GRID_COLUMN").setCheck("Number").appendField(", column");
+	  this.appendValueInput("GRID_ROWSPAN").setCheck("Number").appendField(") spanning ");
+	  this.appendValueInput("GRID_COLSPAN").setCheck("Number").appendField("row(s) and ");
+	  const rowInput = this.getInput("GRID_ROW");
+	  const colInput = this.getInput("GRID_COLUMN");
+	  const rowspanInput = this.getInput("GRID_ROWSPAN");
+	  const colspanInput = this.getInput("GRID_COLSPAN");
+	  if (rowInput?.connection) {
+        const shadowRowXml = Blockly.Xml.textToDom('<shadow type="math_number"><field name="NUM">0</field></shadow>');
+		rowInput.connection.setShadowDom(shadowRowXml);
+		//rowInput.connection.setShadowState(Blockly.serialization.blocks.save(shadowRowXml));
+	  }
+	  if (colInput?.connection) {
+        const shadowColXml = Blockly.Xml.textToDom('<shadow type="math_number"><field name="NUM">0</field></shadow>');
+		colInput.connection.setShadowDom(shadowColXml);
+		//colInput.connection.setShadowState(Blockly.serialization.blocks.save(shadowColXml));
+      }
+	  if (rowspanInput?.connection) {
+        const shadowRowspanXml = Blockly.Xml.textToDom('<shadow type="math_number"><field name="NUM">1</field></shadow>');
+		rowspanInput.connection.setShadowDom(shadowRowspanXml);
+		//colspanInput.connection.setShadowState(Blockly.serialization.blocks.save(shadowColspanXml));
+      }
+	  if (colspanInput?.connection) {
+        const shadowColspanXml = Blockly.Xml.textToDom('<shadow type="math_number"><field name="NUM">1</field></shadow>');
+		colspanInput.connection.setShadowDom(shadowColspanXml);
+		//colspanInput.connection.setShadowState(Blockly.serialization.blocks.save(shadowColspanXml));
+      }
+	} else if (mode === "PLACE") {
       this.appendValueInput("PLACE_X").setCheck("Number").appendField("(x");
       this.appendValueInput("PLACE_Y").setCheck("Number").appendField(", y");
       const xInput = this.getInput("PLACE_X");
@@ -675,8 +745,10 @@ Blockly.Blocks['tkinter_add_widget_to_window'] = {
         //yInput.connection.setShadowState(Blockly.serialization.blocks.save(shadowYXml));
       }
     }
-    if (mode === "GRID" || mode === "PLACE") {
-        this.appendDummyInput("CLOSE_PARENTHESIS").appendField(")");
+    if (mode === "PLACE") {
+        this.appendDummyInput("END").appendField(")");
+    } else if (mode === "GRID") {
+        this.appendDummyInput("END").appendField(" column(s)");
     }
     // PACK: no extra inputs
   },
@@ -726,8 +798,13 @@ Blockly.Blocks._tkinterPrefillValueInputFromParent = function(block, inputName, 
       const varId = model.getId();
       const getterType = getterTypeByVariableType[model.type];
       if (varId && getterType) {
-        newGetter = block.workspace.newBlock(getterType);
-        newGetter.setFieldValue(varId, 'VAR');
+		newGetter = block.workspace.newBlock(getterType);
+		const tempVar = newGetter.getField('VAR').getVariable();
+		const tempVarId = tempVar ? tempVar.getId() : null;
+		newGetter.setFieldValue(varId, 'VAR');
+		if (tempVarId && tempVarId !== varId) {
+		  block.workspace.deleteVariableById(tempVarId);
+		}
       } else {
         const xml = Blockly.Xml.blockToDom(parentWidgetBlock, true);
         newGetter = Blockly.Xml.domToBlock(xml, block.workspace);
@@ -787,7 +864,7 @@ Blockly.Blocks['tkinter_set_widget_text'] = {
   onchange: function(e) {
     const self = this;
     Blockly.Blocks._tkinterOnChangePrefillFromParent(this, e, function() {
-      self._prefillWidgetFromParent_();
+	  self._prefillWidgetFromParent_();
     });
   }
 };
@@ -799,6 +876,7 @@ Blockly.Blocks['tkinter_set_widget_width'] = {
     this.appendValueInput("WIDGET").setCheck(["GUI_Label","GUI_Button","GUI_Entry","GUI_Combobox"]);
     this.appendDummyInput().appendField("width to");
     this.appendValueInput("WIDTH").setCheck("Number");
+    this.appendDummyInput().appendField("characters");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -822,6 +900,162 @@ Blockly.Blocks['tkinter_set_widget_width'] = {
   }
 };
 // --- END: tkinter_set_widget_width (block definition)
+
+// --- BEGIN: tkinter_set_widget_anchor (block definition)
+Blockly.Blocks['tkinter_set_widget_anchor'] = {
+  init: function() {
+    this.appendDummyInput().appendField("Set");
+    this.appendValueInput("WIDGET").setCheck("GUI_Label");
+    this.appendDummyInput().appendField("content position to").appendField(new Blockly.FieldDropdown([
+      ["left", "w"],
+      ["centre", "center"],
+      ["right", "e"]
+    ]), "ANCHOR");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour("#555555");
+    this.setTooltip("Set where the label content appears when the label is wider than its text.");
+    this.setHelpUrl("");
+  },
+  _prefillWidgetFromParent_: function() {
+    Blockly.Blocks._tkinterPrefillValueInputFromParent(this, 'WIDGET', {
+      'GUI_Label': 'tkinter_variables_get_label'
+    });
+  },
+  onchange: function(e) {
+    const self = this;
+    Blockly.Blocks._tkinterOnChangePrefillFromParent(this, e, function() {
+      self._prefillWidgetFromParent_();
+    });
+  }
+};
+// --- END: tkinter_set_widget_anchor (block definition)
+
+// --- BEGIN: tkinter_set_widget_justify (block definition)
+Blockly.Blocks['tkinter_set_widget_justify'] = {
+  init: function() {
+    this.appendDummyInput().appendField("Set");
+    this.appendValueInput("WIDGET").setCheck(["GUI_Label","GUI_Entry","GUI_Combobox"]);
+    this.appendDummyInput().appendField("text alignment to").appendField(new Blockly.FieldDropdown([
+      ["left", "left"],
+      ["centre", "center"],
+      ["right", "right"]
+    ]), "JUSTIFY");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour("#555555");
+    this.setTooltip("Set how text is aligned inside the widget.");
+    this.setHelpUrl("");
+  },
+  _prefillWidgetFromParent_: function() {
+    Blockly.Blocks._tkinterPrefillValueInputFromParent(this, 'WIDGET', {
+      'GUI_Label': 'tkinter_variables_get_label',
+      'GUI_Entry': 'tkinter_variables_get_entry',
+      'GUI_Combobox': 'tkinter_variables_get_combobox'
+    });
+  },
+  onchange: function(e) {
+    const self = this;
+    Blockly.Blocks._tkinterOnChangePrefillFromParent(this, e, function() {
+      self._prefillWidgetFromParent_();
+    });
+  }
+};
+// --- END: tkinter_set_widget_justify (block definition)
+
+// --- BEGIN: tkinter_set_widget_font (block definition)
+Blockly.Blocks['tkinter_set_widget_font'] = {
+  init: function() {
+    this.appendDummyInput().appendField("Set");
+    this.appendValueInput("WIDGET").setCheck(["GUI_Label","GUI_Entry","GUI_Combobox"]);
+    this.appendDummyInput().appendField("font to");
+    this.appendValueInput("FACE").setCheck("String");
+    this.appendDummyInput().appendField("size");
+    this.appendValueInput("SIZE").setCheck("Number");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour("#555555");
+    this.setTooltip("Set the font face and size of the specified widget.");
+    this.setHelpUrl("");
+  },
+  _prefillWidgetFromParent_: function() {
+    Blockly.Blocks._tkinterPrefillValueInputFromParent(this, 'WIDGET', {
+      'GUI_Label': 'tkinter_variables_get_label',
+      'GUI_Entry': 'tkinter_variables_get_entry',
+      'GUI_Combobox': 'tkinter_variables_get_combobox'
+    });
+  },
+  onchange: function(e) {
+    const self = this;
+    Blockly.Blocks._tkinterOnChangePrefillFromParent(this, e, function() {
+      self._prefillWidgetFromParent_();
+    });
+  }
+};
+// --- END: tkinter_set_widget_font (block definition)
+
+// --- BEGIN: tkinter_set_label_wraplength (block definition)
+Blockly.Blocks['tkinter_set_label_wraplength'] = {
+  init: function() {
+    this.appendDummyInput().appendField("Set");
+    this.appendValueInput("LABEL").setCheck("GUI_Label");
+    this.appendDummyInput().appendField("wrap length to");
+    this.appendValueInput("WRAPLENGTH").setCheck("Number");
+    this.appendDummyInput().appendField("pixels");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour("#555555");
+    this.setTooltip("Set the maximum line length in pixels before label text wraps.");
+    this.setHelpUrl("");
+  },
+  _prefillLabelFromParent_: function() {
+    Blockly.Blocks._tkinterPrefillValueInputFromParent(this, 'LABEL', {
+      'GUI_Label': 'tkinter_variables_get_label'
+    });
+  },
+  onchange: function(e) {
+    const self = this;
+    Blockly.Blocks._tkinterOnChangePrefillFromParent(this, e, function() {
+      self._prefillLabelFromParent_();
+    });
+  }
+};
+// --- END: tkinter_set_label_wraplength (block definition)
+
+// --- BEGIN: tkinter_set_entry_combobox_readonly (block definition)
+Blockly.Blocks['tkinter_set_entry_combobox_readonly'] = {
+  init: function() {
+    this.appendDummyInput().appendField("Set");
+    this.appendValueInput("WIDGET").setCheck(["GUI_Entry","GUI_Combobox"]);
+    this.appendDummyInput().appendField("to").appendField(new Blockly.FieldDropdown([
+      ["read only", "READONLY"],
+      ["normal", "NORMAL"]
+    ]), "STATE");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour("#555555");
+    this.setTooltip("Set an Entry or Combobox to readonly or normal.");
+    this.setHelpUrl("");
+  },
+  _prefillWidgetFromParent_: function() {
+    Blockly.Blocks._tkinterPrefillValueInputFromParent(this, 'WIDGET', {
+      'GUI_Entry': 'tkinter_variables_get_entry',
+      'GUI_Combobox': 'tkinter_variables_get_combobox'
+    });
+  },
+  onchange: function(e) {
+    const self = this;
+    Blockly.Blocks._tkinterOnChangePrefillFromParent(this, e, function() {
+      self._prefillWidgetFromParent_();
+    });
+  }
+};
+// --- END: tkinter_set_entry_combobox_readonly (block definition)
 
 // --- BEGIN: tkinter_set_button_command (block definition)
 Blockly.Blocks['tkinter_set_button_command'] = {

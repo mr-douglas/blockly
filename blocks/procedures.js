@@ -452,7 +452,30 @@ Blockly.Blocks['procedures_get_name'] = {
       }
       return options;
   },
-
+  renameProcedure: function(oldName, newName) {
+    if (Blockly.Names.equals(oldName, this.procedureName_)) {
+  
+      this.procedureName_ = newName;
+  
+      var field = this.getField('NAME');
+  
+      if (field) {
+  
+        // Update cached options.
+        field.menuGenerator_ =
+            this.dropdownProcedureNames_.bind(this);
+  
+        field.generatedOptions_ = null;
+  
+        Blockly.Events.disable();
+        try {
+          field.setValue(newName);
+        } finally {
+          Blockly.Events.enable();
+        }
+      }
+    }
+  },
   /**
    * Refresh the dropdown when procedures change.
    * @param {!Blockly.Events.Abstract} event Change event.
@@ -461,31 +484,68 @@ Blockly.Blocks['procedures_get_name'] = {
     if (!this.workspace || this.workspace.isFlyout) {
       return;
     }
+  
     if (!this.restored_) {
       this.refreshProcedureName_();
       if (this.getFieldValue('NAME') === this.procedureName_) {
         this.restored_ = true;
       }
     }
+  
     var current = this.getFieldValue('NAME');
-
+  
     if (current && current !== 'unnamed') {
       this.procedureName_ = current;
     }
+  
+    // Refresh the dropdown whenever procedures change.
     if (event.type == Blockly.Events.BLOCK_CREATE ||
         event.type == Blockly.Events.BLOCK_DELETE ||
-        (event.type == Blockly.Events.CHANGE && event.element == 'field')) {
+        (event.type == Blockly.Events.CHANGE &&
+         event.element == 'field')) {
+  
       var field = this.getField('NAME');
       if (field) {
-        // Update the menu generator so the dropdown shows current procedures.
         field.menuGenerator_ = this.dropdownProcedureNames_.bind(this);
       }
-      var name = this.getFieldValue('NAME') || '';
-      if (!name) return;
-      var def = Blockly.Procedures.getDefinition(name, this.workspace);
-      if (!def) {
-          // Remove this reference block when its procedure is deleted.
+  
+      // If we don't yet know the procedure ID, try to discover it.
+      if (!this.procedureId_) {
+        var def = Blockly.Procedures.getDefinition(
+          this.procedureName_,
+          this.workspace
+        );
+        if (def) {
+          this.procedureId_ = def.id;
+        }
+      }
+  
+      // If we know the ID, use that instead of the name.
+      if (this.procedureId_) {
+        var defById = this.workspace.getBlockById(this.procedureId_);
+  
+        if (!defById) {
+          console.log(
+            'disposing procedure reference',
+            this.procedureName_,
+            this.procedureId_
+          );
           this.dispose(true);
+          return;
+        }
+  
+        var actualName = defById.getFieldValue('NAME');
+  
+        if (actualName && actualName !== this.procedureName_) {
+          this.procedureName_ = actualName;
+  
+          Blockly.Events.disable();
+          try {
+            this.setFieldValue(actualName, 'NAME');
+          } finally {
+            Blockly.Events.enable();
+          }
+        }
       }
     }
   },

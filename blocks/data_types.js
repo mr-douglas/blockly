@@ -16,7 +16,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
     {
       "type": "input_value",
       "name": "NAME",
-      "check": "Number"
+      "check": ["Number", "String"]
     }
   ],
   "output": null,
@@ -31,7 +31,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
     {
       "type": "input_value",
       "name": "NAME",
-      "check": "Number"
+      "check": ["Number", "String"]
     }
   ],
   "output": null,

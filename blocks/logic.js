@@ -189,7 +189,8 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   // Block for null data type.
   {
     "type": "logic_null",
-    "message0": "%{BKY_LOGIC_NULL}",
+    // "message0": "%{BKY_LOGIC_NULL}",
+    "message0": "None/null",
     "output": null,
     "style": "logic_blocks",
     "tooltip": "%{BKY_LOGIC_NULL_TOOLTIP}",
