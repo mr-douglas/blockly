@@ -150,7 +150,9 @@ toolboxString += '</category>';
 /*toolboxString += '<category name="Progress Bar" colour="#555555" custom="GUI_Progressbars">';
 toolboxString += '</category>';*/
 toolboxString += '</category>';
-/*toolboxString += '<category colour="90" name="EV3">'; 
+/*
+*/
+toolboxString += '<category colour="90" name="EV3">'; 
 toolboxString += '<category colour="90" name="Brick">';   
 toolboxString += '<block type="ev3_set_up"></block>';   
 toolboxString += '<block type="ev3_beep"><value name="FREQUENCY"><shadow type="math_number"><field name="NUM">500</field></shadow></value><value name="DURATION"><shadow type="math_number"><field name="NUM">1</field></shadow></value></block>';   
@@ -167,7 +169,9 @@ toolboxString += '<category colour="90" name="Motors" custom="EV3_MOTORS"></cate
 toolboxString += '<category colour="90" name="Sensors" custom="EV3_SENSORS"></category>'; 
 toolboxString += '<block type="ev3_set_up"></block>'; 
 toolboxString += '<block type="ev3_color"></block>';
-toolboxString += '</category>';*/
+toolboxString += '</category>';
+/*
+*/
 toolboxString += '<category colour="55" name="BuildHAT">'; 
 toolboxString += '<category colour="55" name="Motors" custom="BHT_Motors"></category>';
 toolboxString += '<category colour="55" name="Sensors">';
@@ -227,17 +231,19 @@ workspace.registerToolboxCategoryCallback('GUI_Windows', function(workspace){
                                                                                         block.appendChild(Blockly.Variables.generateVariableFieldDom(variable));
                                                                                         xmlList.push(block);
                                                                                       }
+																					}
                                                                                       xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_set_window_as_root"></block>'));
                                                                                       if (variableModelList.length>1) {
-                                                                                        xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_set_additional_window"></block>'));
                                                                                       }
+                                                                                        xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_set_additional_window"></block>'));
+                                                                                      // }
 																					  xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_window_mainloop"></block>'));
 																					  xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_window_set_title"><value name="TITLE"><shadow type="text"><field name="TEXT">My Window</field></shadow></value></block>'));
 																					  xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_window_set_dimensions"><value name="WIDTH"><shadow type="math_number"><field name="NUM">400</field></shadow></value><value name="HEIGHT"><shadow type="math_number"><field name="NUM">400</field></shadow></value></block>'));
 																					  xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_window_set_resizable"></block>'));
 																					  xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_window_set_close_command"></block>'));
 																					  xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_window_destroy"></block>'));
-                                                                                    }
+                                                                                    // }
                                                                                     return xmlList;
                                                                                    }
                                          );
@@ -262,6 +268,7 @@ workspace.registerToolboxCategoryCallback('GUI_Labels', function(workspace){
                                                                                         block.appendChild(Blockly.Variables.generateVariableFieldDom(variable));
                                                                                         xmlList.push(block);
                                                                                       }
+																					}
 																						xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_add_widget_to_window"></block>'));
 																						xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_set_widget_text"><value name="TEXT"><shadow type="text"><field name="TEXT">abc</field></shadow></value></block>'));
 																						xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_set_widget_width"><value name="WIDTH"><shadow type="math_number"><field name="NUM">20</field></shadow></value></block>'));
@@ -269,7 +276,7 @@ workspace.registerToolboxCategoryCallback('GUI_Labels', function(workspace){
 																						xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_set_widget_font"><value name="FACE"><shadow type="text"><field name="TEXT">Arial</field></shadow></value><value name="SIZE"><shadow type="math_number"><field name="NUM">12</field></shadow></value></block>'));
 																						xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_set_label_wraplength"><value name="WRAPLENGTH"><shadow type="math_number"><field name="NUM">200</field></shadow></value></block>'));
 																						// xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_set_widget_anchor"></block>'));
-																					}
+																					// }
                                                                                     return xmlList;
                                                                                    }
                                          );
@@ -296,7 +303,7 @@ workspace.registerToolboxCategoryCallback('GUI_Buttons', function(workspace){
                                                                                       }
 																						xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_add_widget_to_window"></block>'));
 																						xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_set_widget_text"><value name="TEXT"><shadow type="text"><field name="TEXT">Click here</field></shadow></value></block>'));
-                                                                                    
+                                                                                    }
                                                                                     
 																						const tuple = Blockly.Procedures.allProcedures(workspace);
 																						const procedureList = tuple[0];
@@ -327,7 +334,7 @@ workspace.registerToolboxCategoryCallback('GUI_Buttons', function(workspace){
 																						xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_set_button_command"></block>'));
 																						xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_set_widget_width"><value name="WIDTH"><shadow type="math_number"><field name="NUM">20</field></shadow></value></block>'));
 																						xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_button_set_enabled"></block>'));
-																					}
+																					// }
                                                                                     return xmlList;
                                                                                    }
                                          );
@@ -349,6 +356,7 @@ workspace.registerToolboxCategoryCallback('GUI_Entries', function(workspace){
 																						block.appendChild(Blockly.Variables.generateVariableFieldDom(variable));
 																						xmlList.push(block);
 																					}
+																				}
 																					xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_add_widget_to_window"></block>'));
 																					xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_set_widget_width"><value name="WIDTH"><shadow type="math_number"><field name="NUM">20</field></shadow></value></block>'));
 																					xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_entry_get_text"></block>'));
@@ -357,7 +365,7 @@ workspace.registerToolboxCategoryCallback('GUI_Entries', function(workspace){
 																					xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_set_widget_justify"></block>'));
 																					xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_set_widget_font"><value name="FACE"><shadow type="text"><field name="TEXT">Arial</field></shadow></value><value name="SIZE"><shadow type="math_number"><field name="NUM">12</field></shadow></value></block>'));
 																					xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_set_entry_combobox_readonly"></block>'));
-																				}
+																				// }
 																				return xmlList;
                                                                             }
                                         );
@@ -423,6 +431,7 @@ workspace.registerToolboxCategoryCallback('GUI_Comboboxes', function(workspace){
 																							block.appendChild(Blockly.Variables.generateVariableFieldDom(variable));
 																							xmlList.push(block);
                                                                                         }
+																					}
 																						xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_add_widget_to_window"></block>'));
 																						xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_set_widget_width"><value name="WIDTH"><shadow type="math_number"><field name="NUM">20</field></shadow></value></block>'));
 																						xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_combobox_set_values"><value name="VALUES"><shadow type="lists_create_with"><mutation items="2"></mutation><value name="ADD0"><shadow type="text"><field name="TEXT">Yes</field></shadow></value><value name="ADD1"><shadow type="text"><field name="TEXT">No</field></shadow></value></shadow></value><value name="DEFAULT"><shadow type="math_number"><field name="NUM">0</field></shadow></value></block>'));
@@ -431,7 +440,7 @@ workspace.registerToolboxCategoryCallback('GUI_Comboboxes', function(workspace){
 																						xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_set_widget_justify"></block>'));
 																						xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_set_widget_font"><value name="FACE"><shadow type="text"><field name="TEXT">Arial</field></shadow></value><value name="SIZE"><shadow type="math_number"><field name="NUM">12</field></shadow></value></block>'));
 																						xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_set_entry_combobox_readonly"></block>'));
-																					}
+																					// }
                                                                                     return xmlList;
                                                                                    }
                                          );
