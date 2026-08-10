@@ -301,10 +301,9 @@ workspace.registerToolboxCategoryCallback('GUI_Buttons', function(workspace){
                                                                                         block.appendChild(Blockly.Variables.generateVariableFieldDom(variable));
                                                                                         xmlList.push(block);
                                                                                       }
+                                                                                    }
 																						xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_add_widget_to_window"></block>'));
 																						xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_set_widget_text"><value name="TEXT"><shadow type="text"><field name="TEXT">Click here</field></shadow></value></block>'));
-                                                                                    }
-                                                                                    
 																						const tuple = Blockly.Procedures.allProcedures(workspace);
 																						const procedureList = tuple[0];
 																						if(procedureList.length>0){
