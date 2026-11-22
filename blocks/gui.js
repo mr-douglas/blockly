@@ -12,7 +12,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   // Tkinter GUI blocks
   {
     "type": "tkinter_window_after",
-    "message0": "after %1 seconds in %2 run %3",
+    "message0": "after %1 seconds, %2 (using window %3)",
     "args0": [
       {
         "type": "input_value",
@@ -21,13 +21,13 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
       },
       {
         "type": "input_value",
-        "name": "WINDOW",
-        "check": "GUI_Window"
+        "name": "FUNCTION",
+        "check": "PROCEDURE"
       },
       {
         "type": "input_value",
-        "name": "FUNCTION",
-        "check": "PROCEDURE"
+        "name": "WINDOW",
+        "check": "GUI_Window"
       }
     ],
     "inputsInline": true,
