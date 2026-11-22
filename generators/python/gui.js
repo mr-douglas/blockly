@@ -14,6 +14,45 @@ var tkinter_messagebox_import = 'import tkinter.messagebox';
 
 // --- Tkinter GUI generators ---
 
+Blockly.Python['tkinter_window_after'] = function(block) {
+  Blockly.Python.definitions_['tkinter_imports'] = tkinter_imports;
+  var valueTime = Blockly.Python.valueToCode(
+      block, 'TIME', Blockly.Python.ORDER_MULTIPLICATIVE);
+  var valueWindow = Blockly.Python.valueToCode(
+      block, 'WINDOW', Blockly.Python.ORDER_ATOMIC);
+  var valueFunction = Blockly.Python.valueToCode(
+      block, 'FUNCTION', Blockly.Python.ORDER_NONE);
+  var comment = valueTime && valueWindow && valueFunction ? '' : '#';
+  return comment + valueWindow + '.after(' + valueTime +
+      ' * 1000, ' + valueFunction + ')\n';
+};
+
+Blockly.Python['tkinter_set_label_image'] = function(block) {
+  Blockly.Python.definitions_['tkinter_imports'] = tkinter_imports;
+  var valueLabel = Blockly.Python.valueToCode(
+      block, 'LABEL', Blockly.Python.ORDER_ATOMIC);
+  var valueFile = Blockly.Python.valueToCode(
+      block, 'FILE', Blockly.Python.ORDER_NONE);
+  var comment = valueLabel && valueFile ? '' : '#';
+  return comment + valueLabel + '.image = tkinter.PhotoImage(file=' +
+      valueFile + ')\n' + comment + valueLabel + '.config(image=' +
+      valueLabel + '.image)\n';
+};
+
+Blockly.Python['tkinter_set_label_image_pillow'] = function(block) {
+  Blockly.Python.definitions_['tkinter_imports'] = tkinter_imports;
+  Blockly.Python.definitions_['import_pillow_image'] =
+      'from PIL import Image, ImageTk';
+  var valueLabel = Blockly.Python.valueToCode(
+      block, 'LABEL', Blockly.Python.ORDER_ATOMIC);
+  var valueFile = Blockly.Python.valueToCode(
+      block, 'FILE', Blockly.Python.ORDER_NONE);
+  var comment = valueLabel && valueFile ? '' : '#';
+  return comment + valueLabel + '.image = ImageTk.PhotoImage(' +
+      'Image.open(' + valueFile + '))\n' + comment + valueLabel +
+      '.config(image=' + valueLabel + '.image)\n';
+};
+
 
 
 Blockly.Python['tkinter_variables_get_window'] = function(block) {

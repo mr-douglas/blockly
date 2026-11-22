@@ -9,6 +9,22 @@ goog.require('Blockly.FieldVariable');
 
 Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   {
+    "type": "import_user_library",
+    "message0": "import %1",
+    "args0": [
+      {
+        "type": "field_input",
+        "name": "LIBRARY",
+        "text": "library_name"
+      }
+    ],
+    "previousStatement": null,
+    "nextStatement": null,
+    "colour": "#000000",
+    "tooltip": "Import a Python library at the start of the generated code",
+    "helpUrl": ""
+  },
+  {
     "type": "insert_user_code",
     "message0": "insert code: %1",
     "args0": [

@@ -20,6 +20,13 @@ Blockly.Python['lists_create_empty'] = function(block) {
   return ['[]', Blockly.Python.ORDER_ATOMIC];
 };
 
+Blockly.Python['lists_shuffle'] = function(block) {
+  Blockly.Python.definitions_['import_random'] = 'import random';
+  var list = Blockly.Python.valueToCode(
+      block, 'LIST', Blockly.Python.ORDER_NONE) || '[]';
+  return 'random.shuffle(' + list + ')\n';
+};
+
 Blockly.Python['lists_append'] = function(block) {
   var item = Blockly.Python.valueToCode(block, 'ITEM', Blockly.Python.ORDER_NONE) || 'None';
   var list = Blockly.Python.valueToCode(block, 'LIST', Blockly.Python.ORDER_MEMBER) || '[]';

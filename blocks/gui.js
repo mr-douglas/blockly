@@ -11,6 +11,77 @@ goog.require('Blockly.FieldVariable');
 Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
   // Tkinter GUI blocks
   {
+    "type": "tkinter_window_after",
+    "message0": "after %1 seconds in %2 run %3",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "TIME",
+        "check": "Number"
+      },
+      {
+        "type": "input_value",
+        "name": "WINDOW",
+        "check": "GUI_Window"
+      },
+      {
+        "type": "input_value",
+        "name": "FUNCTION",
+        "check": "PROCEDURE"
+      }
+    ],
+    "inputsInline": true,
+    "previousStatement": null,
+    "nextStatement": null,
+    "colour": "#555555",
+    "tooltip": "Run a function after a delay (the delay is converted from seconds to milliseconds)",
+    "helpUrl": "https://www.tcl.tk/man/tcl8.6/TkCmd/after.htm"
+  },
+  {
+    "type": "tkinter_set_label_image",
+    "message0": "set image in label %1 from file %2",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "LABEL",
+        "check": "GUI_Label"
+      },
+      {
+        "type": "input_value",
+        "name": "FILE",
+        "check": "String"
+      }
+    ],
+    "inputsInline": true,
+    "previousStatement": null,
+    "nextStatement": null,
+    "colour": "#555555",
+    "tooltip": "Show a PNG, GIF, PGM, or PPM image in a ttk Label",
+    "helpUrl": "https://docs.python.org/3/library/tkinter.html#images"
+  },
+  {
+    "type": "tkinter_set_label_image_pillow",
+    "message0": "set image in label %1 from file %2 using Pillow",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "LABEL",
+        "check": "GUI_Label"
+      },
+      {
+        "type": "input_value",
+        "name": "FILE",
+        "check": "String"
+      }
+    ],
+    "inputsInline": true,
+    "previousStatement": null,
+    "nextStatement": null,
+    "colour": "#555555",
+    "tooltip": "Show an image supported by Pillow (including PNG, JPEG, BMP, GIF, TIFF, and WebP) in a ttk Label",
+    "helpUrl": "https://pillow.readthedocs.io/en/stable/reference/ImageTk.html"
+  },
+  {
     "type": "tkinter_variables_get_window",
     "message0": "%1",
     "args0": [

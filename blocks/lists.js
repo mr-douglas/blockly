@@ -32,6 +32,22 @@ goog.require('Blockly.Mutator');
 Blockly.Constants.Lists.HUE = 260;
 
 Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
+  {
+    "type": "lists_shuffle",
+    "message0": "shuffle %1",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "LIST",
+        "check": "Array"
+      }
+    ],
+    "previousStatement": null,
+    "nextStatement": null,
+    "style": "list_blocks",
+    "tooltip": "Shuffle a list in place",
+    "helpUrl": "https://docs.python.org/3/library/random.html#random.shuffle"
+  },
   // Block for creating an empty list
   // The 'list_create_with' block is preferred as it is more flexible.
   // <block type="lists_create_with">

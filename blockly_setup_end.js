@@ -99,6 +99,7 @@ toolboxString += '<block type="lists_sort"></block>';
 toolboxString += '<block type="lists_append"><value name="ITEM"><shadow type="text"><field name="TEXT">item</field></shadow></value><value name="LIST"><block type="variables_get"><field name="VAR">list</field></block></value></block>';
 toolboxString += '<block type="lists_remove"><value name="ITEM"><shadow type="text"><field name="TEXT">item</field></shadow></value><value name="LIST"><block type="variables_get"><field name="VAR">list</field></block></value></block>';
 toolboxString += '<block type="lists_pop"><value name="LIST"><block type="variables_get"><field name="VAR">list</field></block></value><value name="AT"><shadow type="math_number"><field name="NUM">0</field></shadow></value></block>';
+toolboxString += '<block type="lists_shuffle"><value name="LIST"><block type="variables_get"><field name="VAR">list</field></block></value></block>';
 toolboxString += '</category>';
 toolboxString += '<category colour="%{BKY_VARIABLES_HUE}" custom="VARIABLE" name="Variables"></category>';
 toolboxString += '<category colour="%{BKY_PROCEDURES_HUE}" custom="PROCEDURE" name="Functions"></category>';
@@ -203,6 +204,7 @@ toolboxString += '<category colour="270" name="PWM Output" custom="RPi_PWM_Outpu
 toolboxString += '</category>';
 toolboxString += '<sep></sep>';
 toolboxString += '<category colour="black" name="Insert Your Own Code">'; 
+toolboxString += '<block type="import_user_library"></block>';
 toolboxString += '<block type="insert_user_code"></block>';
 toolboxString += '</category>';
 toolboxString += '</xml>';
@@ -241,6 +243,7 @@ workspace.registerToolboxCategoryCallback('GUI_Windows', function(workspace){
 																					  xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_window_set_title"><value name="TITLE"><shadow type="text"><field name="TEXT">My Window</field></shadow></value></block>'));
 																					  xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_window_set_dimensions"><value name="WIDTH"><shadow type="math_number"><field name="NUM">400</field></shadow></value><value name="HEIGHT"><shadow type="math_number"><field name="NUM">400</field></shadow></value></block>'));
 																					  xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_window_set_resizable"></block>'));
+																			  xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_window_after"><value name="TIME"><shadow type="math_number"><field name="NUM">1</field></shadow></value></block>'));
 																					  xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_window_set_close_command"></block>'));
 																					  xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_window_destroy"></block>'));
                                                                                     // }
@@ -275,6 +278,8 @@ workspace.registerToolboxCategoryCallback('GUI_Labels', function(workspace){
 																						xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_set_widget_justify"></block>'));
 																						xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_set_widget_font"><value name="FACE"><shadow type="text"><field name="TEXT">Arial</field></shadow></value><value name="SIZE"><shadow type="math_number"><field name="NUM">12</field></shadow></value></block>'));
 																						xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_set_label_wraplength"><value name="WRAPLENGTH"><shadow type="math_number"><field name="NUM">200</field></shadow></value></block>'));
+																				xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_set_label_image"><value name="FILE"><shadow type="text"><field name="TEXT">image.png</field></shadow></value></block>'));
+																				xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_set_label_image_pillow"><value name="FILE"><shadow type="text"><field name="TEXT">image.jpg</field></shadow></value></block>'));
 																						// xmlList.push(Blockly.Xml.textToDom('<block type="tkinter_set_widget_anchor"></block>'));
 																					// }
                                                                                     return xmlList;
