@@ -105,6 +105,15 @@ Blockly.Python['ev3_variables_get_motor'] = function(block) {
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
+Blockly.Python['ev3_variables_set_motor'] = function(block) {
+  Blockly.Python.definitions_['import_ev3'] = ev3_imports;
+  var value_motor = Blockly.Python.valueToCode(
+      block, 'VALUE', Blockly.Python.ORDER_NONE);
+  var variable = Blockly.Python.variableDB_.getName(
+      block.getFieldValue('VAR'), Blockly.VARIABLE_CATEGORY_NAME);
+  return variable + ' = ' + value_motor + '\n';
+};
+
 Blockly.Python['ev3_motor_run'] = function(block) {
   Blockly.Python.definitions_['import_ev3'] = ev3_imports;
   var code = "";
@@ -198,6 +207,7 @@ Blockly.Python['ev3_motor_run_target'] = function(block) {
   var value_motor = Blockly.Python.valueToCode(block, 'MOTOR', Blockly.Python.ORDER_ATOMIC);
   var value_target_angle = Blockly.Python.valueToCode(block, 'TARGET_ANGLE', Blockly.Python.ORDER_ATOMIC);
   var value_speed = Blockly.Python.valueToCode(block, 'SPEED', Blockly.Python.ORDER_ATOMIC);
+  var dropdown_then = 'COAST';
   var checkbox_wait = block.getFieldValue('WAIT') == 'TRUE';
   var code = '';
   if(value_motor==""){

@@ -259,6 +259,40 @@ Blockly.Python.multiline_quote_ = function(string) {
  * @protected
  */
 Blockly.Python.scrub_ = function(block, code, opt_thisOnly) {
+  // Statement blocks with an empty value socket should still show the code
+  // they would generate, but comment out every line so incomplete programs
+  // remain valid Python.  Value blocks are deliberately exempt because their
+  // code is embedded inside another block.
+  if (block.previousConnection) {
+    var hasMissingElement = false;
+    for (var inputIndex = 0;
+         inputIndex < block.inputList.length; inputIndex++) {
+      var input = block.inputList[inputIndex];
+      if (input.type == Blockly.inputTypes.VALUE &&
+          input.connection && !input.connection.targetConnection) {
+        hasMissingElement = true;
+        break;
+      }
+      for (var fieldIndex = 0;
+           fieldIndex < input.fieldRow.length; fieldIndex++) {
+        var field = input.fieldRow[fieldIndex];
+        if (field instanceof Blockly.FieldTextInput &&
+            !String(field.getValue() || '').trim()) {
+          hasMissingElement = true;
+          break;
+        }
+      }
+    }
+    if (hasMissingElement) {
+      if (!code.trim()) {
+        code = '#\n';
+      } else {
+        // Some older generators already add a leading '#'.  Normalize those
+        // lines before applying the convention to every non-empty line.
+        code = code.replace(/^#+/gm, '').replace(/^(?=.)/gm, '#');
+      }
+    }
+  }
   var commentCode = '';
   // Only collect comments for blocks that aren't inline.
   if (!block.outputConnection || !block.outputConnection.targetConnection) {

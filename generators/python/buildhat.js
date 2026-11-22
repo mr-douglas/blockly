@@ -250,6 +250,20 @@ Blockly.Python['bht_motor_pair_run_for_rotations'] = function(block) {
   return code;
 };
 
+Blockly.Python['bht_motor_pair_run_for_seconds'] = function(block) {
+  Blockly.Python.definitions_['import_buildhat'] = bht_imports;
+  var value_motor_pair = Blockly.Python.valueToCode(
+      block, 'MOTOR_PAIR', Blockly.Python.ORDER_ATOMIC);
+  var value_time = Blockly.Python.valueToCode(
+      block, 'TIME', Blockly.Python.ORDER_ATOMIC);
+  var value_speed_l = Blockly.Python.valueToCode(
+      block, 'SPEED_L', Blockly.Python.ORDER_ATOMIC);
+  var value_speed_r = Blockly.Python.valueToCode(
+      block, 'SPEED_R', Blockly.Python.ORDER_ATOMIC);
+  return value_motor_pair + '.run_for_seconds(' + value_time +
+      ', speedl=' + value_speed_l + ', speedr=' + value_speed_r + ')\n';
+};
+
 Blockly.Python['bht_motor_pair_run_to_position'] = function(block) {
   Blockly.Python.definitions_['import_buildhat'] = bht_imports;
   var value_motor_pair = Blockly.Python.valueToCode(block, 'MOTOR_PAIR', Blockly.Python.ORDER_ATOMIC);
@@ -265,6 +279,20 @@ Blockly.Python['bht_motor_pair_run_to_position'] = function(block) {
   }
   code = code + ".run_to_position("+value_degrees_l+", "+value_degrees_r+", speed="+value_speed+", direction='"+dropdown_direction.toLowerCase()+"')\n";
   return code;
+};
+
+Blockly.Python['bht_motor_pair_run_to_position_angle'] = function(block) {
+  Blockly.Python.definitions_['import_buildhat'] = bht_imports;
+  var value_motor_pair = Blockly.Python.valueToCode(
+      block, 'MOTOR_PAIR', Blockly.Python.ORDER_ATOMIC);
+  var value_speed = Blockly.Python.valueToCode(
+      block, 'SPEED', Blockly.Python.ORDER_ATOMIC);
+  var degrees_l = block.getFieldValue('DEGREES_L');
+  var degrees_r = block.getFieldValue('DEGREES_R');
+  var direction = block.getFieldValue('DIRECTION').toLowerCase();
+  return value_motor_pair + '.run_to_position(' + degrees_l + ', ' +
+      degrees_r + ', speed=' + value_speed + ', direction=\'' + direction +
+      '\')\n';
 };
 
 Blockly.Python['bht_motor_pair_start'] = function(block) {
