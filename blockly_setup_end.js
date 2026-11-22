@@ -70,6 +70,8 @@ toolboxString += '<block type="logic_operation"></block>';
 toolboxString += '<block type="logic_negate"></block>'; 
 toolboxString += '<block type="logic_boolean"></block>'; 
 toolboxString += '<block type="logic_null"></block>';
+toolboxString += '<label text="Handling errors"></label>';
+toolboxString += '<block type="controls_try_except_finally"></block>';
 toolboxString += '</category>';
 toolboxString += '<category name="Iteration (Loops)" colour="%{BKY_LOOPS_HUE}">'; 
 toolboxString += '<block type="controls_repeat_ext"><value name="TIMES"><shadow type="math_number"><field name="NUM">10</field></shadow></value></block>'; 

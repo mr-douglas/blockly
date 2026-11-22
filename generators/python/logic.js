@@ -52,6 +52,18 @@ Blockly.Python['controls_if'] = function(block) {
 
 Blockly.Python['controls_ifelse'] = Blockly.Python['controls_if'];
 
+Blockly.Python['controls_try_except_finally'] = function(block) {
+  var tryBranch = Blockly.Python.statementToCode(block, 'TRY') ||
+      Blockly.Python.PASS;
+  var exceptBranch = Blockly.Python.statementToCode(block, 'EXCEPT') ||
+      Blockly.Python.PASS;
+  var finallyBranch = Blockly.Python.statementToCode(block, 'FINALLY') ||
+      Blockly.Python.PASS;
+  return 'try:\n' + tryBranch +
+      'except Exception:\n' + exceptBranch +
+      'finally:\n' + finallyBranch;
+};
+
 Blockly.Python['logic_compare'] = function(block) {
   // Comparison operator.
   var OPERATORS = {
