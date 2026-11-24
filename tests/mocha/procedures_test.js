@@ -63,6 +63,34 @@ suite('Procedures', function() {
     });
   });
 
+  suite('Procedure references', function() {
+    test('Selecting another procedure keeps the new selection', function() {
+      var firstDefinition = new Blockly.Block(
+          this.workspace, 'procedures_defnoreturn');
+      firstDefinition.setFieldValue('first', 'NAME');
+      var secondDefinition = new Blockly.Block(
+          this.workspace, 'procedures_defnoreturn');
+      secondDefinition.setFieldValue('second', 'NAME');
+      var reference = new Blockly.Block(
+          this.workspace, 'procedures_get_name');
+
+      reference.onchange(new Blockly.Events.Create(reference));
+      chai.assert.equal(reference.getFieldValue('NAME'), 'first');
+
+      Blockly.Events.disable();
+      try {
+        reference.setFieldValue('second', 'NAME');
+      } finally {
+        Blockly.Events.enable();
+      }
+      reference.onchange(new Blockly.Events.BlockChange(
+          reference, 'field', 'NAME', 'first', 'second'));
+
+      chai.assert.equal(reference.getFieldValue('NAME'), 'second');
+      chai.assert.equal(reference.procedureId_, secondDefinition.id);
+    });
+  });
+
   suite('isNameUsed', function() {
     test('No Blocks', function() {
       chai.assert.isFalse(

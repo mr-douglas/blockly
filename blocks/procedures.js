@@ -487,14 +487,24 @@ Blockly.Blocks['procedures_get_name'] = {
   
     if (!this.restored_) {
       this.refreshProcedureName_();
-      if (this.getFieldValue('NAME') === this.procedureName_) {
-        this.restored_ = true;
-      }
+      // The mutation has either been restored now, or this is a newly created
+      // block with nothing to restore.  Do not let a later user selection be
+      // mistaken for another restoration attempt.
+      this.restored_ = true;
     }
   
     var current = this.getFieldValue('NAME');
   
     if (current && current !== 'unnamed') {
+      // A user can repoint this reference by choosing a different procedure
+      // from the dropdown.  Keep the cached ID in sync with that choice;
+      // otherwise the rename-tracking logic below sees the old definition's
+      // name and immediately changes the dropdown back.
+      if (!Blockly.Names.equals(current, this.procedureName_)) {
+        var selectedDefinition = Blockly.Procedures.getDefinition(
+            current, this.workspace);
+        this.procedureId_ = selectedDefinition ? selectedDefinition.id : null;
+      }
       this.procedureName_ = current;
     }
   
