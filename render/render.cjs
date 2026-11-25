@@ -27,6 +27,15 @@ const log = [];
   const result = await page.evaluate((text) => {
     const report = [];
     const dom = Blockly.Xml.textToDom(text);
+    // Typed variable fields must repeat the variable's type.
+    const typed = {};
+    for (const variable of dom.querySelectorAll("variable[type]")) {
+      typed[variable.getAttribute("id")] = variable.getAttribute("type");
+    }
+    for (const field of dom.querySelectorAll("field[name='VAR']")) {
+      const type = typed[field.getAttribute("id")];
+      if (type && !field.getAttribute("variabletype")) field.setAttribute("variabletype", type);
+    }
     const types = new Set([...dom.querySelectorAll("block, shadow")].map((b) => b.getAttribute("type")));
     for (const type of types) {
       if (!Blockly.Blocks[type]) report.push(`missing block type: ${type}`);
