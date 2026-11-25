@@ -41,6 +41,8 @@ const log = [];
       if (!Blockly.Blocks[type]) report.push(`missing block type: ${type}`);
       if (!Blockly.Python[type]) report.push(`missing Python generator: ${type}`);
     }
+    // Show long "insert code" lines in full instead of cutting them off with "...".
+    Blockly.Field.prototype.maxDisplayLength = 120;
     workspace.clear();
     Blockly.Xml.domToWorkspace(dom, workspace);
     return report;
