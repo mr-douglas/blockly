@@ -1,0 +1,378 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="v_file_path">file_path</variable>
+    <variable id="v_question">question</variable>
+    <variable type="GUI_Window" id="v_main_window">main_window</variable>
+    <variable type="GUI_Label" id="v_title_label">title_label</variable>
+    <variable type="GUI_Label" id="v_file_label">file_label</variable>
+    <variable type="GUI_Label" id="v_question_label">question_label</variable>
+    <variable type="GUI_Button" id="v_upload_button">upload_button</variable>
+    <variable type="GUI_Button" id="v_generate_button">generate_button</variable>
+    <variable type="GUI_Button" id="v_submit_button">submit_button</variable>
+    <variable type="GUI_Entry" id="v_question_entry">question_entry</variable>
+  </variables>
+
+  <block type="procedures_defnoreturn" id="def_upload" x="20" y="20">
+    <field name="NAME">upload_file</field>
+    <statement name="STACK">
+      <block type="variables_set">
+        <field name="VAR" id="v_file_path">file_path</field>
+        <value name="VALUE">
+          <block type="tkinter_filedialog">
+            <field name="MODE">OPEN</field>
+            <value name="TITLE">
+              <shadow type="text"><field name="TEXT">Choose your slides or lesson video</field></shadow>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="controls_if">
+            <mutation else="1"></mutation>
+            <value name="IF0">
+              <block type="logic_compare">
+                <field name="OP">EQ</field>
+                <value name="A"><block type="variables_get"><field name="VAR" id="v_file_path">file_path</field></block></value>
+                <value name="B"><block type="text"><field name="TEXT"></field></block></value>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="tkinter_set_widget_text">
+                <value name="WIDGET"><block type="tkinter_variables_get_label"><field name="VAR" id="v_file_label">file_label</field></block></value>
+                <value name="TEXT"><shadow type="text"><field name="TEXT">No file selected</field></shadow></value>
+              </block>
+            </statement>
+            <statement name="ELSE">
+              <block type="tkinter_set_widget_text">
+                <value name="WIDGET"><block type="tkinter_variables_get_label"><field name="VAR" id="v_file_label">file_label</field></block></value>
+                <value name="TEXT">
+                  <block type="text_join">
+                    <mutation items="2"></mutation>
+                    <value name="ADD0"><block type="text"><field name="TEXT">File: </field></block></value>
+                    <value name="ADD1"><block type="variables_get"><field name="VAR" id="v_file_path">file_path</field></block></value>
+                  </block>
+                </value>
+              </block>
+            </statement>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+
+  <block type="procedures_defnoreturn" id="def_generate" x="20" y="300">
+    <field name="NAME">generate_notes</field>
+    <statement name="STACK">
+      <block type="controls_if">
+        <mutation else="1"></mutation>
+        <value name="IF0">
+          <block type="logic_compare">
+            <field name="OP">EQ</field>
+            <value name="A"><block type="variables_get"><field name="VAR" id="v_file_path">file_path</field></block></value>
+            <value name="B"><block type="text"><field name="TEXT"></field></block></value>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="tkinter_messagebox">
+            <field name="MODE">ERROR</field>
+            <value name="TITLE"><shadow type="text"><field name="TEXT">Error</field></shadow></value>
+            <value name="TEXT"><shadow type="text"><field name="TEXT">Please upload a file first.</field></shadow></value>
+          </block>
+        </statement>
+        <statement name="ELSE">
+          <block type="insert_user_code">
+            <field name="user_code"># Later: send the slide text to the LLM and show its summary here</field>
+            <next>
+          <block type="insert_user_code">
+            <field name="user_code">notes_text.config(state='normal')</field>
+            <next>
+          <block type="insert_user_code">
+            <field name="user_code">notes_text.delete('1.0', tkinter.END)</field>
+            <next>
+          <block type="insert_user_code">
+            <field name="user_code">notes_text.insert(tkinter.END, 'SUMMARY (example)\n')</field>
+            <next>
+          <block type="insert_user_code">
+            <field name="user_code">notes_text.insert(tkinter.END, '- Key point 1\n- Key point 2\n- Key point 3\n\n')</field>
+            <next>
+          <block type="insert_user_code">
+            <field name="user_code">notes_text.config(state='disabled')</field>
+          </block>
+            </next>
+          </block>
+            </next>
+          </block>
+            </next>
+          </block>
+            </next>
+          </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+
+  <block type="procedures_defnoreturn" id="def_submit" x="20" y="600">
+    <field name="NAME">submit_question</field>
+    <statement name="STACK">
+      <block type="variables_set">
+        <field name="VAR" id="v_question">question</field>
+        <value name="VALUE">
+          <block type="tkinter_entry_get_text">
+            <value name="ENTRY"><block type="tkinter_variables_get_entry"><field name="VAR" id="v_question_entry">question_entry</field></block></value>
+          </block>
+        </value>
+        <next>
+          <block type="controls_if">
+            <mutation else="1"></mutation>
+            <value name="IF0">
+              <block type="logic_compare">
+                <field name="OP">EQ</field>
+                <value name="A"><block type="variables_get"><field name="VAR" id="v_question">question</field></block></value>
+                <value name="B"><block type="text"><field name="TEXT"></field></block></value>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="tkinter_messagebox">
+                <field name="MODE">ERROR</field>
+                <value name="TITLE"><shadow type="text"><field name="TEXT">Error</field></shadow></value>
+                <value name="TEXT"><shadow type="text"><field name="TEXT">Please type a question first.</field></shadow></value>
+              </block>
+            </statement>
+            <statement name="ELSE">
+              <block type="insert_user_code">
+                <field name="user_code">notes_text.config(state='normal')</field>
+                <next>
+              <block type="insert_user_code">
+                <field name="user_code">notes_text.insert(tkinter.END, 'You: ' + question + '\n')</field>
+                <next>
+              <block type="insert_user_code">
+                <field name="user_code"># Later: send the question to the LLM and show its answer here</field>
+                <next>
+              <block type="insert_user_code">
+                <field name="user_code">notes_text.insert(tkinter.END, 'AI: (the answer will appear here)\n\n')</field>
+                <next>
+              <block type="insert_user_code">
+                <field name="user_code">notes_text.see(tkinter.END)</field>
+                <next>
+              <block type="insert_user_code">
+                <field name="user_code">notes_text.config(state='disabled')</field>
+                <next>
+              <block type="tkinter_entry_delete_from_start">
+                <value name="ENTRY"><block type="tkinter_variables_get_entry"><field name="VAR" id="v_question_entry">question_entry</field></block></value>
+              </block>
+                </next>
+              </block>
+                </next>
+              </block>
+                </next>
+              </block>
+                </next>
+              </block>
+                </next>
+              </block>
+                </next>
+              </block>
+            </statement>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+
+  <block type="variables_set" id="main_start" x="700" y="20">
+    <field name="VAR" id="v_file_path">file_path</field>
+    <value name="VALUE"><block type="text"><field name="TEXT"></field></block></value>
+    <next>
+  <block type="tkinter_set_window_as_root">
+    <value name="WINDOW"><block type="tkinter_variables_get_window"><field name="VAR" id="v_main_window">main_window</field></block></value>
+    <next>
+  <block type="tkinter_window_set_title">
+    <value name="WINDOW"><block type="tkinter_variables_get_window"><field name="VAR" id="v_main_window">main_window</field></block></value>
+    <value name="TITLE"><shadow type="text"><field name="TEXT">Lesson Notes Summariser</field></shadow></value>
+    <next>
+  <block type="tkinter_window_set_dimensions">
+    <value name="WINDOW"><block type="tkinter_variables_get_window"><field name="VAR" id="v_main_window">main_window</field></block></value>
+    <value name="WIDTH"><shadow type="math_number"><field name="NUM">700</field></shadow></value>
+    <value name="HEIGHT"><shadow type="math_number"><field name="NUM">550</field></shadow></value>
+    <next>
+  <block type="tkinter_add_widget_to_window">
+    <mutation geom="PACK"></mutation>
+    <field name="GEOM">PACK</field>
+    <value name="WIDGET"><block type="tkinter_variables_get_label"><field name="VAR" id="v_title_label">title_label</field></block></value>
+    <value name="WINDOW"><block type="tkinter_variables_get_window"><field name="VAR" id="v_main_window">main_window</field></block></value>
+    <statement name="DO">
+      <block type="tkinter_set_widget_text">
+        <value name="WIDGET"><block type="tkinter_variables_get_label"><field name="VAR" id="v_title_label">title_label</field></block></value>
+        <value name="TEXT"><shadow type="text"><field name="TEXT">Lesson Notes Summariser</field></shadow></value>
+        <next>
+          <block type="tkinter_set_widget_font">
+            <value name="WIDGET"><block type="tkinter_variables_get_label"><field name="VAR" id="v_title_label">title_label</field></block></value>
+            <value name="FACE"><shadow type="text"><field name="TEXT">Arial</field></shadow></value>
+            <value name="SIZE"><shadow type="math_number"><field name="NUM">20</field></shadow></value>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <next>
+  <block type="tkinter_add_widget_to_window">
+    <mutation geom="PACK"></mutation>
+    <field name="GEOM">PACK</field>
+    <value name="WIDGET"><block type="tkinter_variables_get_button"><field name="VAR" id="v_upload_button">upload_button</field></block></value>
+    <value name="WINDOW"><block type="tkinter_variables_get_window"><field name="VAR" id="v_main_window">main_window</field></block></value>
+    <statement name="DO">
+      <block type="tkinter_set_widget_text">
+        <value name="WIDGET"><block type="tkinter_variables_get_button"><field name="VAR" id="v_upload_button">upload_button</field></block></value>
+        <value name="TEXT"><shadow type="text"><field name="TEXT">Upload PPT/PDF/Video</field></shadow></value>
+        <next>
+          <block type="tkinter_set_button_command">
+            <value name="BUTTON"><block type="tkinter_variables_get_button"><field name="VAR" id="v_upload_button">upload_button</field></block></value>
+            <value name="COMMAND"><block type="procedures_get_name"><mutation name="upload_file"></mutation><field name="NAME">upload_file</field></block></value>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <next>
+  <block type="tkinter_add_widget_to_window">
+    <mutation geom="PACK"></mutation>
+    <field name="GEOM">PACK</field>
+    <value name="WIDGET"><block type="tkinter_variables_get_label"><field name="VAR" id="v_file_label">file_label</field></block></value>
+    <value name="WINDOW"><block type="tkinter_variables_get_window"><field name="VAR" id="v_main_window">main_window</field></block></value>
+    <statement name="DO">
+      <block type="tkinter_set_widget_text">
+        <value name="WIDGET"><block type="tkinter_variables_get_label"><field name="VAR" id="v_file_label">file_label</field></block></value>
+        <value name="TEXT"><shadow type="text"><field name="TEXT">No file selected</field></shadow></value>
+      </block>
+    </statement>
+    <next>
+  <block type="tkinter_add_widget_to_window">
+    <mutation geom="PACK"></mutation>
+    <field name="GEOM">PACK</field>
+    <value name="WIDGET"><block type="tkinter_variables_get_button"><field name="VAR" id="v_generate_button">generate_button</field></block></value>
+    <value name="WINDOW"><block type="tkinter_variables_get_window"><field name="VAR" id="v_main_window">main_window</field></block></value>
+    <statement name="DO">
+      <block type="tkinter_set_widget_text">
+        <value name="WIDGET"><block type="tkinter_variables_get_button"><field name="VAR" id="v_generate_button">generate_button</field></block></value>
+        <value name="TEXT"><shadow type="text"><field name="TEXT">Generate notes</field></shadow></value>
+        <next>
+          <block type="tkinter_set_button_command">
+            <value name="BUTTON"><block type="tkinter_variables_get_button"><field name="VAR" id="v_generate_button">generate_button</field></block></value>
+            <value name="COMMAND"><block type="procedures_get_name"><mutation name="generate_notes"></mutation><field name="NAME">generate_notes</field></block></value>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <next>
+  <block type="insert_user_code">
+    <field name="user_code"># Scrollable display area for the notes and conversation</field>
+    <next>
+  <block type="insert_user_code">
+    <field name="user_code">display_frame = tkinter.ttk.Frame(main_window)</field>
+    <next>
+  <block type="insert_user_code">
+    <field name="user_code">display_frame.pack(fill='both', expand=True, padx=10, pady=5)</field>
+    <next>
+  <block type="insert_user_code">
+    <field name="user_code">scrollbar = tkinter.ttk.Scrollbar(display_frame)</field>
+    <next>
+  <block type="insert_user_code">
+    <field name="user_code">scrollbar.pack(side='right', fill='y')</field>
+    <next>
+  <block type="insert_user_code">
+    <field name="user_code">notes_text = tkinter.Text(display_frame, wrap='word', yscrollcommand=scrollbar.set)</field>
+    <next>
+  <block type="insert_user_code">
+    <field name="user_code">notes_text.pack(side='left', fill='both', expand=True)</field>
+    <next>
+  <block type="insert_user_code">
+    <field name="user_code">scrollbar.config(command=notes_text.yview)</field>
+    <next>
+  <block type="insert_user_code">
+    <field name="user_code">notes_text.config(state='disabled')</field>
+    <next>
+  <block type="tkinter_add_widget_to_window">
+    <mutation geom="PACK"></mutation>
+    <field name="GEOM">PACK</field>
+    <value name="WIDGET"><block type="tkinter_variables_get_label"><field name="VAR" id="v_question_label">question_label</field></block></value>
+    <value name="WINDOW"><block type="tkinter_variables_get_window"><field name="VAR" id="v_main_window">main_window</field></block></value>
+    <statement name="DO">
+      <block type="tkinter_set_widget_text">
+        <value name="WIDGET"><block type="tkinter_variables_get_label"><field name="VAR" id="v_question_label">question_label</field></block></value>
+        <value name="TEXT"><shadow type="text"><field name="TEXT">Ask a follow-up question:</field></shadow></value>
+      </block>
+    </statement>
+    <next>
+  <block type="tkinter_add_widget_to_window">
+    <mutation geom="PACK"></mutation>
+    <field name="GEOM">PACK</field>
+    <value name="WIDGET"><block type="tkinter_variables_get_entry"><field name="VAR" id="v_question_entry">question_entry</field></block></value>
+    <value name="WINDOW"><block type="tkinter_variables_get_window"><field name="VAR" id="v_main_window">main_window</field></block></value>
+    <statement name="DO">
+      <block type="tkinter_set_widget_width">
+        <value name="WIDGET"><block type="tkinter_variables_get_entry"><field name="VAR" id="v_question_entry">question_entry</field></block></value>
+        <value name="WIDTH"><shadow type="math_number"><field name="NUM">60</field></shadow></value>
+      </block>
+    </statement>
+    <next>
+  <block type="tkinter_add_widget_to_window">
+    <mutation geom="PACK"></mutation>
+    <field name="GEOM">PACK</field>
+    <value name="WIDGET"><block type="tkinter_variables_get_button"><field name="VAR" id="v_submit_button">submit_button</field></block></value>
+    <value name="WINDOW"><block type="tkinter_variables_get_window"><field name="VAR" id="v_main_window">main_window</field></block></value>
+    <statement name="DO">
+      <block type="tkinter_set_widget_text">
+        <value name="WIDGET"><block type="tkinter_variables_get_button"><field name="VAR" id="v_submit_button">submit_button</field></block></value>
+        <value name="TEXT"><shadow type="text"><field name="TEXT">Submit</field></shadow></value>
+        <next>
+          <block type="tkinter_set_button_command">
+            <value name="BUTTON"><block type="tkinter_variables_get_button"><field name="VAR" id="v_submit_button">submit_button</field></block></value>
+            <value name="COMMAND"><block type="procedures_get_name"><mutation name="submit_question"></mutation><field name="NAME">submit_question</field></block></value>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <next>
+  <block type="tkinter_window_mainloop">
+    <value name="WINDOW"><block type="tkinter_variables_get_window"><field name="VAR" id="v_main_window">main_window</field></block></value>
+  </block>
+    </next>
+  </block>
+    </next>
+  </block>
+    </next>
+  </block>
+    </next>
+  </block>
+    </next>
+  </block>
+    </next>
+  </block>
+    </next>
+  </block>
+    </next>
+  </block>
+    </next>
+  </block>
+    </next>
+  </block>
+    </next>
+  </block>
+    </next>
+  </block>
+    </next>
+  </block>
+    </next>
+  </block>
+    </next>
+  </block>
+    </next>
+  </block>
+    </next>
+  </block>
+    </next>
+  </block>
+    </next>
+  </block>
+    </next>
+  </block>
+</xml>

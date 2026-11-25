@@ -1,0 +1,42 @@
+name: Render blocks
+# Renders render/*.blockly with this editor and commits a PNG of the blocks and
+# the generated Python to render/output on the same branch.
+on:
+  push:
+    branches: [render-lexi-gui]
+    paths: ["render/*.blockly", "render/render.cjs", ".github/workflows/render-blocks.yml"]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install headless Chrome
+        run: |
+          npm install --silent --prefix "$RUNNER_TEMP/pw" playwright@1.49.1
+          "$RUNNER_TEMP/pw/node_modules/.bin/playwright" install --with-deps chromium
+      - name: Render
+        env:
+          NODE_PATH: ${{ runner.temp }}/pw/node_modules
+        run: |
+          python3 -m http.server 8000 --bind 127.0.0.1 > /dev/null 2>&1 &
+          sleep 2
+          for file in render/*.blockly; do
+            node render/render.cjs "$file" render/output
+          done
+          for file in render/output/*.py; do
+            python3 -m py_compile "$file" && echo "Python compiles: $file"
+          done
+      - name: Commit the results
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add render/output
+          git commit -qm "Render blocks for ${GITHUB_SHA}" || exit 0
+          git push -q
