@@ -1,0 +1,627 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="v_file_path">file_path</variable>
+    <variable id="v_question">question</variable>
+    <variable type="GUI_Window" id="v_main_window">main_window</variable>
+    <variable type="GUI_Entry" id="v_question_entry">question_entry</variable>
+    <variable type="GUI_Label" id="v_file_label">file_label</variable>
+    <variable type="GUI_Label" id="v_title_label">title_label</variable>
+    <variable type="GUI_Button" id="v_upload_button">upload_button</variable>
+    <variable type="GUI_Button" id="v_generate_button">generate_button</variable>
+    <variable type="GUI_Label" id="v_question_label">question_label</variable>
+    <variable type="GUI_Button" id="v_submit_button">submit_button</variable>
+  </variables>
+  <block type="procedures_defnoreturn" id="def_upload" x="0" y="0">
+    <field name="NAME">upload_file</field>
+    <statement name="STACK">
+      <block type="variables_set" id="%S}HuwRj)?H6TQ52)gPH">
+        <field name="VAR" id="v_file_path">file_path</field>
+        <value name="VALUE">
+          <block type="tkinter_filedialog" id="k}StH[2L;Z;rV_BkRHB|">
+            <field name="MODE">OPEN</field>
+            <value name="TITLE">
+              <shadow type="text" id="DnNVle]]t-pdWZNASXw5">
+                <field name="TEXT">Choose your slides or lesson video</field>
+              </shadow>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="controls_if" id="-ot0nsbAv$ZYFR=va(u[">
+            <mutation else="1"></mutation>
+            <value name="IF0">
+              <block type="logic_compare" id="hM_U4Ql.k_%CP!YEjNPN">
+                <field name="OP">EQ</field>
+                <value name="A">
+                  <block type="variables_get" id="!=%CI*@hYLkJ:wk+^ULc">
+                    <field name="VAR" id="v_file_path">file_path</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="text" id="q#xJ+HjEVn?+V$BS_o3v">
+                    <field name="TEXT"></field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="tkinter_set_widget_text" id="1K%aFwj/^6)PUBY{Xk0%">
+                <value name="WIDGET">
+                  <block type="tkinter_variables_get_label" id="X[^PQaS5]j)1Z`O$^RWD">
+                    <field name="VAR" id="v_file_label" variabletype="GUI_Label">file_label</field>
+                  </block>
+                </value>
+                <value name="TEXT">
+                  <shadow type="text" id="P6$L_co1}_S|M,HUC.UT">
+                    <field name="TEXT">No file selected</field>
+                  </shadow>
+                </value>
+              </block>
+            </statement>
+            <statement name="ELSE">
+              <block type="tkinter_set_widget_text" id="hwW:[:aUBj905/)YpxX2">
+                <value name="WIDGET">
+                  <block type="tkinter_variables_get_label" id="]d+UDC/s:bRTta[c;ekm">
+                    <field name="VAR" id="v_file_label" variabletype="GUI_Label">file_label</field>
+                  </block>
+                </value>
+                <value name="TEXT">
+                  <block type="text_join" id="e.wZ4W!V~]P*EYM:t]:%">
+                    <mutation items="2"></mutation>
+                    <value name="ADD0">
+                      <block type="text" id="m1[Q:8`i7B^y_nr,8a=#">
+                        <field name="TEXT">File: </field>
+                      </block>
+                    </value>
+                    <value name="ADD1">
+                      <block type="variables_get" id="F5`Q.JkSQDk,N6$e*FgP">
+                        <field name="VAR" id="v_file_path">file_path</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </statement>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="variables_set" id="main_start" x="873" y="0">
+    <field name="VAR" id="v_file_path">file_path</field>
+    <value name="VALUE">
+      <block type="text" id="a(^X.H%b%*.wv!d9%Rkr">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <next>
+      <block type="tkinter_set_window_as_root" id="mJFa`-EH$TVodS.9W4kz">
+        <value name="WINDOW">
+          <block type="tkinter_variables_get_window" id="O=f-sj1{qO(=8,_pP/ZM">
+            <field name="VAR" id="v_main_window" variabletype="GUI_Window">main_window</field>
+          </block>
+        </value>
+        <next>
+          <block type="tkinter_window_set_title" id="59*lk*@RquP/?]M/w9Tq">
+            <value name="WINDOW">
+              <block type="tkinter_variables_get_window" id="k64+0Nz{0ztBGYz+l%ic">
+                <field name="VAR" id="v_main_window" variabletype="GUI_Window">main_window</field>
+              </block>
+            </value>
+            <value name="TITLE">
+              <shadow type="text" id="?ZV~x4!B5otH#z/V-V?H">
+                <field name="TEXT">Lesson Notes Summariser</field>
+              </shadow>
+            </value>
+            <next>
+              <block type="tkinter_window_set_dimensions" id="MJ+d)f77o4Vc:2BI`OX_">
+                <value name="WINDOW">
+                  <block type="tkinter_variables_get_window" id="z8y_1Jq=iXe:kF:Z}+ci">
+                    <field name="VAR" id="v_main_window" variabletype="GUI_Window">main_window</field>
+                  </block>
+                </value>
+                <value name="WIDTH">
+                  <shadow type="math_number" id="!{Nx8l_8vh0R2IOXWt=^">
+                    <field name="NUM">700</field>
+                  </shadow>
+                </value>
+                <value name="HEIGHT">
+                  <shadow type="math_number" id="*K5,mqX(aV0$FhCk0lYb">
+                    <field name="NUM">550</field>
+                  </shadow>
+                </value>
+                <next>
+                  <block type="tkinter_add_widget_to_window" id="Of#G%Q~O*Pfc9[Uo.7S;">
+                    <mutation xmlns="http://www.w3.org/1999/xhtml" geom="PACK"></mutation>
+                    <field name="GEOM">PACK</field>
+                    <value name="WIDGET">
+                      <block type="tkinter_variables_get_label" id="93uGGiCWL!.%C{T,aszA">
+                        <field name="VAR" id="v_title_label" variabletype="GUI_Label">title_label</field>
+                      </block>
+                    </value>
+                    <value name="WINDOW">
+                      <block type="tkinter_variables_get_window" id="nUkAJ+za/sLKYa-)lxs*">
+                        <field name="VAR" id="v_main_window" variabletype="GUI_Window">main_window</field>
+                      </block>
+                    </value>
+                    <statement name="DO">
+                      <block type="tkinter_set_widget_text" id="@]6gK*2Xt8-P*E-D/MU*">
+                        <value name="WIDGET">
+                          <block type="tkinter_variables_get_label" id="O]2el]WzH~rLR3B5nzx}">
+                            <field name="VAR" id="v_title_label" variabletype="GUI_Label">title_label</field>
+                          </block>
+                        </value>
+                        <value name="TEXT">
+                          <shadow type="text" id="}5.U/a]d=[!r1G*X(k,@">
+                            <field name="TEXT">Lesson Notes Summariser</field>
+                          </shadow>
+                        </value>
+                        <next>
+                          <block type="tkinter_set_widget_font" id="i?Jx?.Ku%VX#MlWrB]{x">
+                            <value name="WIDGET">
+                              <block type="tkinter_variables_get_label" id="?d:j}xF6gV:P7cfPrgv]">
+                                <field name="VAR" id="v_title_label" variabletype="GUI_Label">title_label</field>
+                              </block>
+                            </value>
+                            <value name="FACE">
+                              <shadow type="text" id="~?Eul0lHnP#nVr]$@-No">
+                                <field name="TEXT">Arial</field>
+                              </shadow>
+                            </value>
+                            <value name="SIZE">
+                              <shadow type="math_number" id="2T8;sIThc*J3itm.+LK3">
+                                <field name="NUM">20</field>
+                              </shadow>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </statement>
+                    <next>
+                      <block type="tkinter_add_widget_to_window" id="CqDWo@!$|;LO/B%nB|`9">
+                        <mutation xmlns="http://www.w3.org/1999/xhtml" geom="PACK"></mutation>
+                        <field name="GEOM">PACK</field>
+                        <value name="WIDGET">
+                          <block type="tkinter_variables_get_button" id="2bGDGrMo_Q?1c}Hc}8tP">
+                            <field name="VAR" id="v_upload_button" variabletype="GUI_Button">upload_button</field>
+                          </block>
+                        </value>
+                        <value name="WINDOW">
+                          <block type="tkinter_variables_get_window" id="U[@QLHnJT(A;cR,JWFIK">
+                            <field name="VAR" id="v_main_window" variabletype="GUI_Window">main_window</field>
+                          </block>
+                        </value>
+                        <statement name="DO">
+                          <block type="tkinter_set_widget_text" id="ku2Vw0`pw1mm[vvFv@}B">
+                            <value name="WIDGET">
+                              <block type="tkinter_variables_get_button" id="Fx~T/3NKoL^VFMfbHYJ+">
+                                <field name="VAR" id="v_upload_button" variabletype="GUI_Button">upload_button</field>
+                              </block>
+                            </value>
+                            <value name="TEXT">
+                              <shadow type="text" id="ZWDJU,3r$iLb!*CQl4BP">
+                                <field name="TEXT">Upload PPT/PDF/Video</field>
+                              </shadow>
+                            </value>
+                            <next>
+                              <block type="tkinter_set_button_command" id="9KUys5jMHOw8uT@6Yqx+">
+                                <value name="BUTTON">
+                                  <block type="tkinter_variables_get_button" id="[j6s.3d[.KyZWNi8rh7r">
+                                    <field name="VAR" id="v_upload_button" variabletype="GUI_Button">upload_button</field>
+                                  </block>
+                                </value>
+                                <value name="COMMAND">
+                                  <block type="procedures_get_name" id="Bi#L~Mv@Q^v$3W8BewP+">
+                                    <mutation name="upload_file"></mutation>
+                                    <field name="NAME">upload_file</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </statement>
+                        <next>
+                          <block type="tkinter_add_widget_to_window" id="2;Z0022ta4:%qK2{bYoW">
+                            <mutation xmlns="http://www.w3.org/1999/xhtml" geom="PACK"></mutation>
+                            <field name="GEOM">PACK</field>
+                            <value name="WIDGET">
+                              <block type="tkinter_variables_get_label" id="Vjq+CI_[LJ`a:HZDp^4,">
+                                <field name="VAR" id="v_file_label" variabletype="GUI_Label">file_label</field>
+                              </block>
+                            </value>
+                            <value name="WINDOW">
+                              <block type="tkinter_variables_get_window" id="{w[!{_ypqp^^3sjnI%nm">
+                                <field name="VAR" id="v_main_window" variabletype="GUI_Window">main_window</field>
+                              </block>
+                            </value>
+                            <statement name="DO">
+                              <block type="tkinter_set_widget_text" id="fz39`z]0O!%{a#F+:-2|">
+                                <value name="WIDGET">
+                                  <block type="tkinter_variables_get_label" id="jGFBCn[+{U9h-uG7Dn;2">
+                                    <field name="VAR" id="v_file_label" variabletype="GUI_Label">file_label</field>
+                                  </block>
+                                </value>
+                                <value name="TEXT">
+                                  <shadow type="text" id="L-@Lh2rB)ufdMmqC-AHu">
+                                    <field name="TEXT">No file selected</field>
+                                  </shadow>
+                                </value>
+                              </block>
+                            </statement>
+                            <next>
+                              <block type="tkinter_add_widget_to_window" id="`0@p/;{zUb3dDnlsJ`8h">
+                                <mutation xmlns="http://www.w3.org/1999/xhtml" geom="PACK"></mutation>
+                                <field name="GEOM">PACK</field>
+                                <value name="WIDGET">
+                                  <block type="tkinter_variables_get_button" id="$EB{[TnFjd=OA3sib0h1">
+                                    <field name="VAR" id="v_generate_button" variabletype="GUI_Button">generate_button</field>
+                                  </block>
+                                </value>
+                                <value name="WINDOW">
+                                  <block type="tkinter_variables_get_window" id="9Q8W**+`:wto4Tv8#ZZX">
+                                    <field name="VAR" id="v_main_window" variabletype="GUI_Window">main_window</field>
+                                  </block>
+                                </value>
+                                <statement name="DO">
+                                  <block type="tkinter_set_widget_text" id=".,wTy]TWZj#CN#^nn@|@">
+                                    <value name="WIDGET">
+                                      <block type="tkinter_variables_get_button" id="sXKcoT#OB87T$xpfeh(E">
+                                        <field name="VAR" id="v_generate_button" variabletype="GUI_Button">generate_button</field>
+                                      </block>
+                                    </value>
+                                    <value name="TEXT">
+                                      <shadow type="text" id="Y0v5KQ/5RQ/Wa:0ztK)?">
+                                        <field name="TEXT">Generate notes</field>
+                                      </shadow>
+                                    </value>
+                                    <next>
+                                      <block type="tkinter_set_button_command" id="KM0g4?WrPRy:7UWuFVCW">
+                                        <value name="BUTTON">
+                                          <block type="tkinter_variables_get_button" id="28~$^4VF!*W?S6ST;Tfn">
+                                            <field name="VAR" id="v_generate_button" variabletype="GUI_Button">generate_button</field>
+                                          </block>
+                                        </value>
+                                        <value name="COMMAND">
+                                          <block type="procedures_get_name" id="S5[}xmOa#[BdVjPi(pb-">
+                                            <mutation name="generate_notes"></mutation>
+                                            <field name="NAME">generate_notes</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </statement>
+                                <next>
+                                  <block type="insert_user_code" id="zCzfUXf=xbfB+R:ne#aB">
+                                    <field name="user_code"># Scrollable display area for the notes and conversation</field>
+                                    <next>
+                                      <block type="insert_user_code" id="LzE^(a2$XP:B3bRq*y_(">
+                                        <field name="user_code">display_frame = tkinter.ttk.Frame(main_window)</field>
+                                        <next>
+                                          <block type="insert_user_code" id="!ji5QOlEU=t,kXqM@#?,">
+                                            <field name="user_code">display_frame.pack(fill='both', expand=True, padx=10, pady=5)</field>
+                                            <next>
+                                              <block type="insert_user_code" id="zoLzDY/-JGUuBSalDH[Z">
+                                                <field name="user_code">scrollbar = tkinter.ttk.Scrollbar(display_frame)</field>
+                                                <next>
+                                                  <block type="insert_user_code" id="[-=N58f_QvjN:?gO?t0y">
+                                                    <field name="user_code">scrollbar.pack(side='right', fill='y')</field>
+                                                    <next>
+                                                      <block type="insert_user_code" id="};|Y`fZ[N-vp^JVre+{z">
+                                                        <field name="user_code">notes_text = tkinter.Text(display_frame, wrap='word', yscrollcommand=scrollbar.set)</field>
+                                                        <next>
+                                                          <block type="insert_user_code" id="%M.vDCU4|,sg3lcr!F?b">
+                                                            <field name="user_code">notes_text.pack(side='left', fill='both', expand=True)</field>
+                                                            <next>
+                                                              <block type="insert_user_code" id="=+,zRg*(-_p2tV`^akV.">
+                                                                <field name="user_code">scrollbar.config(command=notes_text.yview)</field>
+                                                                <next>
+                                                                  <block type="insert_user_code" id="wYf?~|h%x)F6NIs{Q{nn">
+                                                                    <field name="user_code">notes_text.config(state='disabled')</field>
+                                                                    <next>
+                                                                      <block type="tkinter_add_widget_to_window" id="05+OSHd[I!LncMv6cp$X">
+                                                                        <mutation xmlns="http://www.w3.org/1999/xhtml" geom="PACK"></mutation>
+                                                                        <field name="GEOM">PACK</field>
+                                                                        <value name="WIDGET">
+                                                                          <block type="tkinter_variables_get_label" id="p=USA%3_:8HtdPKlKIiE">
+                                                                            <field name="VAR" id="v_question_label" variabletype="GUI_Label">question_label</field>
+                                                                          </block>
+                                                                        </value>
+                                                                        <value name="WINDOW">
+                                                                          <block type="tkinter_variables_get_window" id="Ayex_GID*y@T5LGyC$I;">
+                                                                            <field name="VAR" id="v_main_window" variabletype="GUI_Window">main_window</field>
+                                                                          </block>
+                                                                        </value>
+                                                                        <statement name="DO">
+                                                                          <block type="tkinter_set_widget_text" id="m^k8Ur*4Uqst-v]M}C)o">
+                                                                            <value name="WIDGET">
+                                                                              <block type="tkinter_variables_get_label" id="_ODxg).=h{/1nTkwbt{-">
+                                                                                <field name="VAR" id="v_question_label" variabletype="GUI_Label">question_label</field>
+                                                                              </block>
+                                                                            </value>
+                                                                            <value name="TEXT">
+                                                                              <shadow type="text" id="m(!QZnX1`JN0NGVx/i+C">
+                                                                                <field name="TEXT">Ask a follow-up question:</field>
+                                                                              </shadow>
+                                                                            </value>
+                                                                          </block>
+                                                                        </statement>
+                                                                        <next>
+                                                                          <block type="tkinter_add_widget_to_window" id="^VM~.b;#b`O$P[`XcYKr">
+                                                                            <mutation xmlns="http://www.w3.org/1999/xhtml" geom="PACK"></mutation>
+                                                                            <field name="GEOM">PACK</field>
+                                                                            <value name="WIDGET">
+                                                                              <block type="tkinter_variables_get_entry" id=";Q*h;5BgUNo=h5,(Sk*-">
+                                                                                <field name="VAR" id="v_question_entry" variabletype="GUI_Entry">question_entry</field>
+                                                                              </block>
+                                                                            </value>
+                                                                            <value name="WINDOW">
+                                                                              <block type="tkinter_variables_get_window" id="WfKb[kag!hQQf}u=S=y]">
+                                                                                <field name="VAR" id="v_main_window" variabletype="GUI_Window">main_window</field>
+                                                                              </block>
+                                                                            </value>
+                                                                            <statement name="DO">
+                                                                              <block type="tkinter_set_widget_width" id="bbh0fqA4J-j;7hJ:{(n.">
+                                                                                <value name="WIDGET">
+                                                                                  <block type="tkinter_variables_get_entry" id="q4pdUhwyH.mF3+/O%MUN">
+                                                                                    <field name="VAR" id="v_question_entry" variabletype="GUI_Entry">question_entry</field>
+                                                                                  </block>
+                                                                                </value>
+                                                                                <value name="WIDTH">
+                                                                                  <shadow type="math_number" id="pw|QQRcri~eRxV/}9}on">
+                                                                                    <field name="NUM">60</field>
+                                                                                  </shadow>
+                                                                                </value>
+                                                                              </block>
+                                                                            </statement>
+                                                                            <next>
+                                                                              <block type="tkinter_add_widget_to_window" id="+Bd7M.F$n-p(6ZfJ+W2+">
+                                                                                <mutation xmlns="http://www.w3.org/1999/xhtml" geom="PACK"></mutation>
+                                                                                <field name="GEOM">PACK</field>
+                                                                                <value name="WIDGET">
+                                                                                  <block type="tkinter_variables_get_button" id="A.u_]$6HeZb!.+SYs_M~">
+                                                                                    <field name="VAR" id="v_submit_button" variabletype="GUI_Button">submit_button</field>
+                                                                                  </block>
+                                                                                </value>
+                                                                                <value name="WINDOW">
+                                                                                  <block type="tkinter_variables_get_window" id="Q2Nqs@+}4t}(c??2T|Wz">
+                                                                                    <field name="VAR" id="v_main_window" variabletype="GUI_Window">main_window</field>
+                                                                                  </block>
+                                                                                </value>
+                                                                                <statement name="DO">
+                                                                                  <block type="tkinter_set_widget_text" id="X(sVk_8wioOA0IIQq%iH">
+                                                                                    <value name="WIDGET">
+                                                                                      <block type="tkinter_variables_get_button" id="!!M(dzD@W;*?]$HiTvAz">
+                                                                                        <field name="VAR" id="v_submit_button" variabletype="GUI_Button">submit_button</field>
+                                                                                      </block>
+                                                                                    </value>
+                                                                                    <value name="TEXT">
+                                                                                      <shadow type="text" id="1+yA6%bI/-nUNBrIDW%@">
+                                                                                        <field name="TEXT">Submit</field>
+                                                                                      </shadow>
+                                                                                    </value>
+                                                                                    <next>
+                                                                                      <block type="tkinter_set_button_command" id="}|ol?IjM9G9BW.![cPK0">
+                                                                                        <value name="BUTTON">
+                                                                                          <block type="tkinter_variables_get_button" id="G0uZ{}3Sr2x@Ad$!!u!w">
+                                                                                            <field name="VAR" id="v_submit_button" variabletype="GUI_Button">submit_button</field>
+                                                                                          </block>
+                                                                                        </value>
+                                                                                        <value name="COMMAND">
+                                                                                          <block type="procedures_get_name" id="c2NTNKf-}vuxQtK0F4J,">
+                                                                                            <mutation name="submit_question"></mutation>
+                                                                                            <field name="NAME">submit_question</field>
+                                                                                          </block>
+                                                                                        </value>
+                                                                                      </block>
+                                                                                    </next>
+                                                                                  </block>
+                                                                                </statement>
+                                                                                <next>
+                                                                                  <block type="tkinter_window_mainloop" id=":-3?_NqAnwF/+~lXuz9]">
+                                                                                    <value name="WINDOW">
+                                                                                      <block type="tkinter_variables_get_window" id=")@SL0H8u2bMg~zze%:pO">
+                                                                                        <field name="VAR" id="v_main_window" variabletype="GUI_Window">main_window</field>
+                                                                                      </block>
+                                                                                    </value>
+                                                                                  </block>
+                                                                                </next>
+                                                                              </block>
+                                                                            </next>
+                                                                          </block>
+                                                                        </next>
+                                                                      </block>
+                                                                    </next>
+                                                                  </block>
+                                                                </next>
+                                                              </block>
+                                                            </next>
+                                                          </block>
+                                                        </next>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+  <block type="procedures_defnoreturn" id="def_generate" x="0" y="276">
+    <field name="NAME">generate_notes</field>
+    <statement name="STACK">
+      <block type="controls_if" id="l#~$/ks)m*|L]bcn32m}">
+        <mutation else="1"></mutation>
+        <value name="IF0">
+          <block type="logic_compare" id="pI!YT,#Y@xM6]J@lAZ]{">
+            <field name="OP">EQ</field>
+            <value name="A">
+              <block type="variables_get" id="r$h@Hj:#C6J|gFg/GG+l">
+                <field name="VAR" id="v_file_path">file_path</field>
+              </block>
+            </value>
+            <value name="B">
+              <block type="text" id="ddt-CI+47R55[*uSC.F7">
+                <field name="TEXT"></field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="tkinter_messagebox" id="sx]QE2kPIZl7.{3Xeego">
+            <field name="MODE">ERROR</field>
+            <value name="TITLE">
+              <shadow type="text" id="J+tHZqfAI3G%8-x$vv]G">
+                <field name="TEXT">Error</field>
+              </shadow>
+            </value>
+            <value name="TEXT">
+              <shadow type="text" id="Nio!H1~OLM)9l|0)oRe)">
+                <field name="TEXT">Please upload a file first.</field>
+              </shadow>
+            </value>
+          </block>
+        </statement>
+        <statement name="ELSE">
+          <block type="insert_user_code" id="F;Hc:1b:B==VuIPM:`rh">
+            <field name="user_code"># Later: send the slide text to the LLM and show its summary here</field>
+            <next>
+              <block type="insert_user_code" id="cc{h,5P`GF%YZS7ZTYaE">
+                <field name="user_code">notes_text.config(state='normal')</field>
+                <next>
+                  <block type="insert_user_code" id=".Fj|v%#6o_g`IrS,k-a/">
+                    <field name="user_code">notes_text.delete('1.0', tkinter.END)</field>
+                    <next>
+                      <block type="insert_user_code" id="Uw+yeM{#[xx~y6kT$V#G">
+                        <field name="user_code">notes_text.insert(tkinter.END, 'SUMMARY (example)\n')</field>
+                        <next>
+                          <block type="insert_user_code" id="KP8FPHY|)-(l@AB#8Ka-">
+                            <field name="user_code">notes_text.insert(tkinter.END, '- Key point 1\n- Key point 2\n- Key point 3\n\n')</field>
+                            <next>
+                              <block type="insert_user_code" id="-m^{(~f|v$P|rdXpf{uk">
+                                <field name="user_code">notes_text.config(state='disabled')</field>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+  <block type="procedures_defnoreturn" id="def_submit" x="0" y="626">
+    <field name="NAME">submit_question</field>
+    <statement name="STACK">
+      <block type="variables_set" id="@r_?M4^mGh-(+HbQ};93">
+        <field name="VAR" id="v_question">question</field>
+        <value name="VALUE">
+          <block type="tkinter_entry_get_text" id="c|x5$-j+JOHZ#}[:}7lq">
+            <value name="ENTRY">
+              <block type="tkinter_variables_get_entry" id="jAK*lI$3M{U:e-]WE_l:">
+                <field name="VAR" id="v_question_entry" variabletype="GUI_Entry">question_entry</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="controls_if" id="@2MFSJ=3SF`AULCD]{80">
+            <mutation else="1"></mutation>
+            <value name="IF0">
+              <block type="logic_compare" id="%US97#s5m~^hpm7XJh+E">
+                <field name="OP">EQ</field>
+                <value name="A">
+                  <block type="variables_get" id="_7h0]=5.JX`))a5wlo+2">
+                    <field name="VAR" id="v_question">question</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="text" id="0@06nrL.[R[R4R)P)E:Z">
+                    <field name="TEXT"></field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="tkinter_messagebox" id="z{,jcIT6P-~~CApfV-:M">
+                <field name="MODE">ERROR</field>
+                <value name="TITLE">
+                  <shadow type="text" id="MAvGpf^u^ANW{SKAmz%z">
+                    <field name="TEXT">Error</field>
+                  </shadow>
+                </value>
+                <value name="TEXT">
+                  <shadow type="text" id="Q|!-h2NoB`VcI7;nqjfw">
+                    <field name="TEXT">Please type a question first.</field>
+                  </shadow>
+                </value>
+              </block>
+            </statement>
+            <statement name="ELSE">
+              <block type="insert_user_code" id="TU1E)5YK?knWY{akHgZG">
+                <field name="user_code">notes_text.config(state='normal')</field>
+                <next>
+                  <block type="insert_user_code" id="rv_=4#WH!#69o0jLk:v3">
+                    <field name="user_code">notes_text.insert(tkinter.END, 'You: ' + question + '\n')</field>
+                    <next>
+                      <block type="insert_user_code" id="dI-pPK^C4Rb_4O~aUE/{">
+                        <field name="user_code"># Later: send the question to the LLM and show its answer here</field>
+                        <next>
+                          <block type="insert_user_code" id="!+,Dbbk^x8F_~rps$Q5g">
+                            <field name="user_code">notes_text.insert(tkinter.END, 'AI: (the answer will appear here)\n\n')</field>
+                            <next>
+                              <block type="insert_user_code" id="#Ts)V05j6KJx#|.Ezj4q">
+                                <field name="user_code">notes_text.see(tkinter.END)</field>
+                                <next>
+                                  <block type="insert_user_code" id="xa|0jrE(b^@{V2d5Ta-L">
+                                    <field name="user_code">notes_text.config(state='disabled')</field>
+                                    <next>
+                                      <block type="tkinter_entry_delete_from_start" id="}k6zg6Oi5zG`]57qbu.J">
+                                        <value name="ENTRY">
+                                          <block type="tkinter_variables_get_entry" id="DBge/cvXRL$rrWCcD[nZ">
+                                            <field name="VAR" id="v_question_entry" variabletype="GUI_Entry">question_entry</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </statement>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>

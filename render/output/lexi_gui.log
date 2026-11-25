@@ -1,12 +1,5 @@
-page.evaluate: Error: Serialized variable type with id 'v_file_label' had type GUI_Label, and does not match variable field that references it: <field xmlns="https://developers.google.com/blockly/xml" name="VAR" id="v_file_label">file_label</field>.
-    at Blockly.FieldVariable.fromXml (http://127.0.0.1:8000/blockly_compressed.js:1166:276)
-    at Blockly.Xml.domToField_ (http://127.0.0.1:8000/blockly_compressed.js:117:65)
-    at Blockly.Xml.applyFieldTagNodes_ (http://127.0.0.1:8000/blockly_compressed.js:111:114)
-    at Blockly.Xml.domToBlockHeadless_ (http://127.0.0.1:8000/blockly_compressed.js:115:211)
-    at Blockly.Xml.applyInputTagNodes_ (http://127.0.0.1:8000/blockly_compressed.js:112:336)
-    at Blockly.Xml.domToBlockHeadless_ (http://127.0.0.1:8000/blockly_compressed.js:115:254)
-    at Blockly.Xml.applyInputTagNodes_ (http://127.0.0.1:8000/blockly_compressed.js:112:336)
-    at Blockly.Xml.domToBlockHeadless_ (http://127.0.0.1:8000/blockly_compressed.js:115:254)
-    at Blockly.Xml.applyNextTagNodes_ (http://127.0.0.1:8000/blockly_compressed.js:113:305)
-    at Blockly.Xml.domToBlockHeadless_ (http://127.0.0.1:8000/blockly_compressed.js:115:301)
-    at /home/runner/work/blockly/blockly/render/render.cjs:27:29
+function reference: upload_file
+function reference: generate_notes
+function reference: submit_question
+top blocks: 4 (3 functions)
+image: 1508 x 1338 CSS pixels at 2x
