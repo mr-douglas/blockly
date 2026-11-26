@@ -1,0 +1,54 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable type="RPi_Digital_Input" id="v_sound_sensor">sound_sensor</variable>
+  </variables>
+  <block type="rpi_variables_set_digital_input" id="main_start" x="20" y="20">
+    <field name="VAR" id="v_sound_sensor">sound_sensor</field>
+    <value name="COMPONENT">
+      <block type="rpi_new_digital_input">
+        <value name="PIN">
+          <shadow type="math_number"><field name="NUM">17</field></shadow>
+        </value>
+      </block>
+    </value>
+    <next>
+      <block type="text_print">
+        <value name="TEXT">
+          <shadow type="text"><field name="TEXT">Listening... clap near the microphone</field></shadow>
+        </value>
+        <next>
+          <block type="controls_whileUntil">
+            <field name="MODE">WHILE</field>
+            <value name="BOOL">
+              <block type="logic_boolean"><field name="BOOL">TRUE</field></block>
+            </value>
+            <statement name="DO">
+              <block type="rpi_digital_input_wait_until_active_inactive">
+                <field name="ACTIVE_OR_INACTIVE">ACTIVE</field>
+                <value name="DIGITAL_INPUT">
+                  <block type="rpi_variables_get_digital_input">
+                    <field name="VAR" id="v_sound_sensor">sound_sensor</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="text_print">
+                    <value name="TEXT">
+                      <shadow type="text"><field name="TEXT">Sound detected!</field></shadow>
+                    </value>
+                    <next>
+                      <block type="time_sleep">
+                        <value name="SECS">
+                          <shadow type="math_number"><field name="NUM">0.5</field></shadow>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </statement>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
