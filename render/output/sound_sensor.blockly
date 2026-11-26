@@ -1,0 +1,64 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable type="RPi_Digital_Input" id="v_sound_sensor">sound_sensor</variable>
+  </variables>
+  <block type="rpi_variables_set_digital_input" id="main_start" x="80" y="0">
+    <field name="VAR" id="v_sound_sensor" variabletype="RPi_Digital_Input">sound_sensor</field>
+    <value name="COMPONENT">
+      <block type="rpi_new_digital_input" id="1,5)n|AfLdqkmH`Af^i(">
+        <value name="PIN">
+          <shadow type="math_number" id="2{x^5@sb,nv0HUPVqqk8">
+            <field name="NUM">17</field>
+          </shadow>
+        </value>
+      </block>
+    </value>
+    <next>
+      <block type="text_print" id="pbD8m?uVxd4VJ)2wmeqz">
+        <value name="TEXT">
+          <shadow type="text" id="]G06^]sLz`u0`.R3TOo0">
+            <field name="TEXT">Listening... clap near the microphone</field>
+          </shadow>
+        </value>
+        <next>
+          <block type="controls_whileUntil" id="|U@1v11D},a(C|co5l=~">
+            <field name="MODE">WHILE</field>
+            <value name="BOOL">
+              <block type="logic_boolean" id="wbfHs#WY`(,hoQDO?tfK">
+                <field name="BOOL">TRUE</field>
+              </block>
+            </value>
+            <statement name="DO">
+              <block type="rpi_digital_input_wait_until_active_inactive" id="l;D2MM7mCMxNHK{W@I/#">
+                <field name="ACTIVE_OR_INACTIVE">ACTIVE</field>
+                <value name="DIGITAL_INPUT">
+                  <block type="rpi_variables_get_digital_input" id="CNGrM_RVW*.cF7l7U*K;">
+                    <field name="VAR" id="v_sound_sensor" variabletype="RPi_Digital_Input">sound_sensor</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="text_print" id="$tu*[o}pNGKdQBhARHXA">
+                    <value name="TEXT">
+                      <shadow type="text" id="_o`5g0xpww~A/#%,m+js">
+                        <field name="TEXT">Sound detected!</field>
+                      </shadow>
+                    </value>
+                    <next>
+                      <block type="time_sleep" id="IXqTcik,6[0NDyp*dA6G">
+                        <value name="SECS">
+                          <shadow type="math_number" id="x*(UnPM1?HK2n|VL/2Qn">
+                            <field name="NUM">0.5</field>
+                          </shadow>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </statement>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
