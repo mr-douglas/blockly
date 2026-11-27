@@ -14,6 +14,8 @@
       //For Skulpt
       var requiredConsoleText = "";
       var skulptIsRunning = false;
+      var pythonRunId = 0;                 // Goes up by 1 every time a program is run
+      var waitingForInputListener = null;  // The console's Enter key listener while input() is waiting
       
       //Blockly Functions
       function updatePython() {
@@ -92,25 +94,30 @@
       }
       
       function inputf() {
-        consoleTextArea = document.getElementById("skulpt-console")
+        var consoleTextArea = document.getElementById("skulpt-console");
+        stopWaitingForInput();
         consoleTextArea.readOnly = false;
         requiredConsoleText = consoleTextArea.value;
-        var inputText = "This shouldn't appear!";
-        inputText = new Promise(
-                                  function (resolve, reject){
-                                                             document.getElementById("skulpt-console").addEventListener("keyup", 
-                                                                                                                                function consoleEnterListener(event){
-                                                                                                                                  if(event.keyCode == 13){
-                                                                                                                                    consoleTextArea = document.getElementById("skulpt-console")
-                                                                                                                                    consoleTextArea.removeEventListener("keyup", consoleEnterListener);
-                                                                                                                                    consoleTextArea.readOnly = true;
-                                                                                                                                    resolve(consoleTextArea.value.substring(requiredConsoleText.length,consoleTextArea.value.length));
-                                                                                                                                  }
-                                                                                                                                }
-                                                                                                                      );
-                                                            }
-                               );
-        return inputText;
+        return new Promise(function (resolve, reject) {
+          waitingForInputListener = function (event) {
+            if (event.keyCode == 13) {
+              stopWaitingForInput();
+              resolve(consoleTextArea.value.substring(requiredConsoleText.length, consoleTextArea.value.length));
+            }
+          };
+          consoleTextArea.addEventListener("keyup", waitingForInputListener);
+        });
+      }
+
+      // Stops listening for the answer to an input(). Used when the answer has been typed, and when
+      // a new run starts while an old program was closed part-way through waiting for input().
+      function stopWaitingForInput() {
+        if (waitingForInputListener) {
+          var consoleTextArea = document.getElementById("skulpt-console");
+          consoleTextArea.removeEventListener("keyup", waitingForInputListener);
+          consoleTextArea.readOnly = true;
+          waitingForInputListener = null;
+        }
       }
       
       function builtinRead(x) {
@@ -157,20 +164,35 @@
           var consoleTextArea = document.getElementById("skulpt-console");
           consoleTextArea.value = "";
           Sk.pre = "skulpt-console";
-          Sk.configure({inputfun: inputf,                                           
+          // A program that was closed while it was still running (e.g. waiting for input()) is
+          // replaced by this run: stop listening for its input, and stop it if it ever carries on.
+          stopWaitingForInput();
+          pythonRunId++;
+          var thisRunId = pythonRunId;
+          // stopPython() stops programs by setting a 1ms time limit. If the program was waiting for
+          // input() it never reached that check, so the limit was left behind and made the next run
+          // fail straight away ("TimeLimitError: You exited..."). Always start with no time limit.
+          Sk.configure({inputfun: inputf,
                         output:outf,
                         read:builtinRead,
-                        __future__: Sk.python3}); 
+                        execLimit: Number.POSITIVE_INFINITY,
+                        timeoutMsg: function() { return "Program exceeded run time limit."; },
+                        __future__: Sk.python3});
           (Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = 'skulpt-canvas';
           var myPromise = Sk.misceval.asyncToPromise(function() {
             skulptIsRunning  = true;
             return Sk.importMainWithBody("<stdin>", false, prog, true);
-          });
+          }, {"*": function() {
+            // Called whenever the program pauses (input(), sleep(), etc.): end it if it's been replaced
+            if (thisRunId !== pythonRunId) { throw new Error("Replaced by a newer run"); }
+          }});
           myPromise.then(function(mod) {
             console.log('Finished running');
-            skulptIsRunning = false;
+            if (thisRunId === pythonRunId) { skulptIsRunning = false; }
           },
             function(err) {
+            if (thisRunId !== pythonRunId) { return; }  // An old program that was replaced - ignore it
+            skulptIsRunning = false;
             outf(err.toString());
             alert(err.toString());
             console.log(err.toString());
